@@ -13,6 +13,7 @@ import {useSteamLogin} from "../../hooks/steamLogin";
 import {User} from "./components/user";
 import {Login} from "./components/login";
 import {useSelector} from "react-redux";
+import {IGeneralInfo} from "../../models";
 
 interface IHeaderProps {
 

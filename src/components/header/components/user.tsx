@@ -20,23 +20,21 @@ export const User: React.FC<IUserProps> = () => {
         <div className="header__balance balance-header active">
             <div className="balance-header__body" data-da="top-mobile-header, 1, 480">
                 <div className="balance-header__bonuses bonuses-balance-header">
-                    <a href="bonuses.html" className="bonuses-balance-header__icon">
+                    <NavLink to={'/bonuses'} className="bonuses-balance-header__icon">
                         <svg>
                             <use xlinkHref="#bonuses">
 
                             </use>
                         </svg>
-                    </a>
+                    </NavLink>
                     <div className="bonuses-balance-header__message">Bonuses</div>
                 </div>
                 <div className="balance-header__top-up top-up-balance-header">
-                    <a href="profile.html" className="top-up-balance-header__icon">
+                    <NavLink to={'/profile'} className="top-up-balance-header__icon">
                         <svg>
-                            <use xlinkHref="#wallet">
-
-                            </use>
+                            <use xlinkHref="#wallet" />
                         </svg>
-                    </a>
+                    </NavLink>
                     <div className="top-up-balance-header__message">Top up your account</div>
                 </div>
                 <div className="balance-header__value">{userInfo.balance} EC</div>

@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 
 interface ISvgIconsProps {
 
 }
 
-export const SvgIcons:React.FC<ISvgIconsProps> = () => {
+export const SvgIcons: React.FC<ISvgIconsProps> = () => {
 
     return (
         <svg display="none">
+            <symbol id="check" viewBox="0 0 24 24" width="20px" height="20px">
+                <g>
+                    <path
+                        d="M 20.292969 5.2929688 L 9 16.585938 L 4.7070312 12.292969 L 3.2929688 13.707031 L 9 19.414062 L 21.707031 6.7070312 L 20.292969 5.2929688 z" fill={'white'}/>
+                </g>
+            </symbol>
             <symbol id="face" viewBox="0 0 19 15">
                 <g>
                     <path

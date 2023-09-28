@@ -3109,7 +3109,7 @@ body.product-select::after {
   stroke: #FF6C3D;
 }
 .balance-header__id span {
-  margin: 5px 0 0 3px;
+  margin: 0 0 0 3px;
 }
 .balance-header__id span svg {
   width: 24px;
@@ -3121,6 +3121,7 @@ body.product-select::after {
   -ms-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+  display: block;
 }
 @media (max-width: 1550px) {
   .balance-header__id {
@@ -10693,13 +10694,11 @@ body.product-select::after {
   display: -webkit-flex;
   display: flex;
   font-size: 0;
-  flex-wrap: wrap;
-  margin: 0 -9px;
+  gap: 9px;
 }
 .servidores__column {
-  padding: 0 9px;
-  flex: 0 1 20%;
   margin: 0 0 20px 0;
+  width: 100%;
   overflow: hidden;
 }
 @media (max-width: 1500px) {

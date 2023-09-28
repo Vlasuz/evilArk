@@ -24,7 +24,7 @@ export const News: React.FC<INewsProps> = () => {
     useEffect(() => {
         axios.get(apiLink('api/news?language=en')).then(({data}) => {
             setNews(data.data)
-            console.log(data.data)
+            console.log('news',data.data)
         })
     }, [])
 

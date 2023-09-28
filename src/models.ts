@@ -16,6 +16,7 @@ export interface ICluster {
     updated_at: string
     url: string
 }
+
 export interface IServers {
     clusters: ICluster[]
     created_at: string
@@ -79,4 +80,26 @@ export interface IAboutItems {
     icon: string
     updated_at: string
     created_at: string
+}
+
+export interface IDonateInfo {
+    icon: string
+    url: string
+    description: string
+}
+
+export interface IGeneralInfo {
+    discord_icon?: string
+    discord_url: string
+    email_icon?: string
+    email_url: string
+    twitter_icon?: string
+    twitter_url: string
+    facebook_icon?: string
+    facebook_url: string
+    instagram_icon?: string
+    instagram_url: string
+    description: string
+    footer_icon: string
+    header_icon: string
 }

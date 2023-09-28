@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {IUser} from "../models";
+import {IDonateInfo, IGeneralInfo, IUser} from "../models";
 
 
 const toolkitSlice = createSlice({
@@ -8,6 +8,8 @@ const toolkitSlice = createSlice({
         user: <IUser>{},
         category: <string>'',
         page: <string>'',
+        donateInfo: <IDonateInfo[]>[],
+        generalInfo: <IGeneralInfo>{},
     },
     reducers: {
         setUser(state, action) {
@@ -20,6 +22,13 @@ const toolkitSlice = createSlice({
         setPage(state, action) {
             state.page = action.payload
         },
+
+        setDonateInfo(state, action) {
+            state.donateInfo = action.payload
+        },
+        setGeneralInfo(state, action) {
+            state.generalInfo = action.payload
+        },
     }
 })
 
@@ -30,5 +39,8 @@ export const {
 
     setCategory,
     setPage,
+
+    setDonateInfo,
+    setGeneralInfo,
 
 } = toolkitSlice.actions;

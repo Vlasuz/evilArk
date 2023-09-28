@@ -1,45 +1,54 @@
-import React, { useEffect } from 'react'
+import React, {useEffect, useState} from 'react'
 import {useImages} from "../../../../hooks/images";
+import {useSelector} from "react-redux";
+import axios from "axios";
+import {apiLink} from "../../../../hooks/apiLink";
 
 interface IDonateProps {
 
 }
 
-export const Donate:React.FC<IDonateProps> = () => {
-    const {paypal, bizum, paysafe, donateImage} = useImages()
+export const Donate: React.FC<IDonateProps> = () => {
+    const {donateImage} = useImages()
+
+    const [pageInfo, setPageInfo] = useState<any>({})
+    const donateInfo = useSelector((state: any) => state.toolkit.donateInfo)
+
+    useEffect(() => {
+        axios.get(apiLink("api/home/donate?language=en")).then(({data}) => {
+            setPageInfo(data.data)
+        }).catch(er => {
+            console.log(er)
+        })
+    }, [])
 
     return (
         <section className="donaciones" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="donaciones">
             <div className="donaciones__container container">
                 <div className="donaciones__body">
-                    <div className="donaciones__label label">DONACIONES</div>
-                    <h3 className="donaciones__title title-h3">Métodos de pago aceptados</h3>
+                    <div className="donaciones__label label">
+                        {pageInfo.title}
+                    </div>
+                    <h3 className="donaciones__title title-h3">
+                        {pageInfo.sub_title}
+                    </h3>
                     <div className="donaciones__sibtitle">
-                        Los métodos de pago aceptados para las donaciones son Paypal, Bizum y Paysafecard, debes
-                        escribirnos un ticket para reclamar tu recompensa
+                        {pageInfo.text}
                     </div>
                     <div className="donaciones__row">
-                        <div className="donaciones__column">
-                            <div className="donaciones__item item-donaciones">
-                                <a href="" className="item-donaciones__btn">
-                                    <img src={paypal} alt="paypal"/>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="donaciones__column">
-                            <div className="donaciones__item item-donaciones">
-                                <a href="" className="item-donaciones__btn">
-                                    <img src={bizum} alt="bizum"/>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="donaciones__column">
-                            <div className="donaciones__item item-donaciones">
-                                <a href="" className="item-donaciones__btn">
-                                    <img src={paysafe} alt="paysafe"/>
-                                </a>
-                            </div>
-                        </div>
+
+                        {
+                            donateInfo.map((item: any) =>
+                                <div key={item.description} className="donaciones__column">
+                                    <div className="donaciones__item item-donaciones">
+                                        <a href={item.url} className="item-donaciones__btn">
+                                            <img src={item.icon} alt={item.description} />
+                                        </a>
+                                    </div>
+                                </div>
+                            )
+                        }
+
                     </div>
                     <a href="" className="donaciones__link link-donaciones">
                         <div className="link-donaciones__image">
