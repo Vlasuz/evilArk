@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="init">
+      <change beforePath="$PROJECT_DIR$/src/hooks/steamLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/steamLogin.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +93,7 @@
       <workItem from="1695298408377" duration="1062000" />
       <workItem from="1695301029791" duration="8545000" />
       <workItem from="1695718316507" duration="23357000" />
-      <workItem from="1695886503173" duration="3445000" />
+      <workItem from="1695886503173" duration="3559000" />
     </task>
     <servers />
   </component>
@@ -103,5 +102,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
   </component>
 </project>

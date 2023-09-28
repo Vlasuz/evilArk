@@ -14,8 +14,8 @@ export const useSteamLogin = () => {
     const auth_params = {
         'openid.ns': 'http://specs.openid.net/auth/2.0',
         'openid.mode': 'checkid_setup',
-        'openid.return_to': (window.location.href.includes('localhost') ? 'http://localhost:3000' : 'https://smallstash.gg') + location.pathname,
-        'openid.realm': (window.location.href.includes('localhost') ? 'http://localhost:3000' : 'https://smallstash.gg') + location.pathname,
+        'openid.return_to': (window.location.href.includes('localhost') ? 'http://localhost:3000' : 'https://vlasuz.github.io/evilArk') + location.pathname,
+        'openid.realm': (window.location.href.includes('localhost') ? 'http://localhost:3000' : 'https://vlasuz.github.io/evilArk') + location.pathname,
         'openid.identity': 'http://specs.openid.net/auth/2.0/identifier_select',
         'openid.claimed_id': 'http://specs.openid.net/auth/2.0/identifier_select'
     }
