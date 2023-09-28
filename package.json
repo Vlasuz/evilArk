@@ -1,6 +1,5 @@
 {
   "name": "evil_ark",
-  "homepage": "https://vlasuz.github.io/evilArk",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
