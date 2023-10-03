@@ -6,7 +6,7 @@ import {useHeaderScroll} from "../../hooks/headerScroll";
 import {IGeneralInfo} from "../../models";
 import {useSelector} from "react-redux";
 import {apiLink} from "../../hooks/apiLink";
-// import logo from './../../assets/img/logo.png'
+import logo from './../../assets/img/logo.svg'
 
 interface ISidebarProps {
 
@@ -20,7 +20,8 @@ export const Sidebar: React.FC<ISidebarProps> = () => {
     return (
         <aside className={"sidebar" + (isFixed ? " header-fixed" : "")}>
             <NavLink to={'/'} className="sidebar__logo logo" data-da="header__row, 0, 992">
-                <img src={apiLink(generalInfo.header_icon)} alt="logo"/>
+                {/*<img src={generalInfo.header_logo} alt="logo"/>*/}
+                <img src={logo} alt="logo"/>
             </NavLink>
             <div className="sidebar__body" data-da="mobile-header__body, 0, 992">
                 <Menu/>

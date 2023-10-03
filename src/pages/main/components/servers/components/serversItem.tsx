@@ -20,7 +20,7 @@ export const ServersItem: React.FC<IServersItemProps> = ({image, title, clusters
             <div className="servidores__item item-servidores">
                 <div className="item-servidores__body">
                     <div className="item-servidores__image">
-                        <img src={image ? apiLink(image) : placeholder} alt="4 MAN Cluster"/>
+                        <img src={image ?? placeholder} alt="4 MAN Cluster"/>
                     </div>
                     <div className="item-servidores__content">
                         <div className={"item-servidores__info" + (isActive ? " active" : "")} onClick={_ => setIsActive(prev => !prev)}>

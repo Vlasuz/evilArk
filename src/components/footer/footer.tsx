@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {IGeneralInfo} from "../../models";
 import {apiLink} from "../../hooks/apiLink";
+import logo from './../../assets/img/logo.svg'
 
 interface IFooterProps {
 
@@ -19,7 +20,8 @@ export const Footer: React.FC<IFooterProps> = () => {
                 <div className="footer__body">
                     <div className="footer__row">
                         <NavLink to={'/'} className="footer__logo logo">
-                            <img src={apiLink(generalInfo.footer_icon)} alt="logo"/>
+                            {/*<img src={generalInfo.footer_logo} alt="logo"/>*/}
+                            <img src={logo} alt="logo"/>
                         </NavLink>
                         <div className="footer__copyright">
                             {generalInfo.description}

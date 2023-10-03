@@ -58,6 +58,13 @@ export interface INews {
     image: string
     updated_at: string
     created_at: string
+    tags: INewsTag[]
+}
+
+export interface INewsTag {
+    id: string | number
+    name: string
+    slug: string
 }
 
 export interface IBannerInfo {
@@ -100,6 +107,11 @@ export interface IGeneralInfo {
     instagram_icon?: string
     instagram_url: string
     description: string
-    footer_icon: string
-    header_icon: string
+    footer_logo: string
+    header_logo: string
+}
+
+export interface INewsSingle {
+    isOpen?: boolean,
+    news?: INews
 }

@@ -4,26 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/api/donateInfo.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/generalInfo.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/functions/routes.tsx" afterDir="false" />
+    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/evilHtml/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/calculator/components/calculatorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculator/components/calculatorForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/footer/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/components/user.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/components/user.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/sidebar/sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/svgIcons/svgIcons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/svgIcons/svgIcons.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/contacts/contacts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/contacts/contacts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/donate/donate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/donate/donate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/components/newsItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/components/newsItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/news.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/news.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/servers/servers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/servers/servers.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/toolkitSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/toolkitSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/main.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,8 +103,18 @@
       <workItem from="1695301029791" duration="8545000" />
       <workItem from="1695718316507" duration="23357000" />
       <workItem from="1695886503173" duration="3594000" />
-      <workItem from="1695893397136" duration="10847000" />
+      <workItem from="1695893397136" duration="11139000" />
+      <workItem from="1695996377986" duration="263000" />
+      <workItem from="1696316779468" duration="4720000" />
     </task>
+    <task id="LOCAL-00001" summary="fixed">
+      <created>1695910913707</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1695910913707</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,6 +123,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed" />
   </component>
 </project>

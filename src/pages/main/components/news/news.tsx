@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 import 'swiper/css';
@@ -9,6 +9,7 @@ import axios from "axios";
 import {INews} from "../../../../models";
 import {apiLink} from "../../../../hooks/apiLink";
 import ReactHtmlParser from "html-react-parser";
+import {isOpenPopupContext} from "../../main";
 
 SwiperCore.use([Navigation]);
 
@@ -28,6 +29,15 @@ export const News: React.FC<INewsProps> = () => {
         })
     }, [])
 
+    const isOpenPopup: any = useContext(isOpenPopupContext)
+
+    const handleReadNews = () => {
+        isOpenPopup({
+            isOpen: true,
+            news: news[0]
+        })
+    }
+
     return (
         <>
             <section className="news" data-aos="fade-left" data-aos-duration="750" data-aos-offset="200">
@@ -36,11 +46,11 @@ export const News: React.FC<INewsProps> = () => {
                         <Categories/>
                         <div className="news__body">
                             <div className="news__today today-news">
-                                <div className="today-news__image news-open-btn">
-                                    <img src={news[0]?.image ? apiLink(news[0]?.image) : placeholder} alt="news"/>
+                                <div onClick={handleReadNews} className="today-news__image news-open-btn">
+                                    <img src={news[0]?.image ?? placeholder} alt="news"/>
                                 </div>
                                 <div className="today-news__body">
-                                    <div className="today-news__content">
+                                    <div onClick={handleReadNews} className="today-news__content">
                                         <h5 className="today-news__title title-h5 news-open-btn">
                                             {news[0]?.title}
                                         </h5>
@@ -49,7 +59,7 @@ export const News: React.FC<INewsProps> = () => {
                                                 ReactHtmlParser(news[0]?.text ?? '')
                                             }
                                         </div>
-                                        <a href="" className="today-news__btn news-open-btn">Read the news</a>
+                                        <button onClick={handleReadNews} className="today-news__btn news-open-btn">Read the news</button>
                                     </div>
                                     <div className="today-news__date date-today-news">
                                         <div className="date-today-news__icon">

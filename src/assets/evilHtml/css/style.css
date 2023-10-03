@@ -187,12 +187,12 @@ body.lock::before {
   background: rgba(0, 0, 0, 0.6980392157);
   z-index: 150;
 }
-body.product-select {
+.product-select {
   overflow: hidden;
   position: relative;
   min-height: 100%;
 }
-body.product-select::after {
+.product-select::after {
   position: absolute;
   content: "";
   width: 100%;
