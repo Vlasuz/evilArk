@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/evilArk/static/css/main.d148581a.css",
-    "main.js": "/evilArk/static/js/main.5329580d.js",
+    "main.css": "/evilArk/static/css/main.bc8b9bb2.css",
+    "main.js": "/evilArk/static/js/main.86bd278c.js",
     "static/media/VideoEvilArk.mp4": "/evilArk/static/media/VideoEvilArk.77323a3203bf90767907.mp4",
     "static/media/06.gif": "/evilArk/static/media/06.8ed02a3d5ecc8f14077d.gif",
     "static/media/main-img.jpg": "/evilArk/static/media/main-img.6208e5442431ae16f713.jpg",
@@ -43,11 +43,11 @@
     "static/media/arrow-up.svg": "/evilArk/static/media/arrow-up.52e3265b8bd47cd1e99ddfcb5293f2be.svg",
     "static/media/arrow-white.svg": "/evilArk/static/media/arrow-white.63d64dd4848886d640223a3a4cb960fa.svg",
     "static/media/title-o.svg": "/evilArk/static/media/title-o.ec9ea61da2da2f64fe909a7356c12046.svg",
-    "main.d148581a.css.map": "/evilArk/static/css/main.d148581a.css.map",
-    "main.5329580d.js.map": "/evilArk/static/js/main.5329580d.js.map"
+    "main.bc8b9bb2.css.map": "/evilArk/static/css/main.bc8b9bb2.css.map",
+    "main.86bd278c.js.map": "/evilArk/static/js/main.86bd278c.js.map"
   },
   "entrypoints": [
-    "static/css/main.d148581a.css",
-    "static/js/main.5329580d.js"
+    "static/css/main.bc8b9bb2.css",
+    "static/js/main.86bd278c.js"
   ]
 }
