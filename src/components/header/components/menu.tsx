@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import {NavLink} from "react-router-dom";
 
 interface IMenuProps {
 
@@ -16,13 +17,13 @@ export const Menu:React.FC<IMenuProps> = () => {
                     <a href="" className="menu-header__link">conocenos</a>
                 </li>
                 <li className="menu-header__item">
-                    <a href="#contacto" className="menu-header__link">contacto</a>
+                    <a href="/#contacto" className="menu-header__link">contacto</a>
                 </li>
                 <li className="menu-header__item">
                     <a href="" className="menu-header__link">server</a>
                 </li>
                 <li className="menu-header__item">
-                    <a href="#faq" className="menu-header__link">faq</a>
+                    <NavLink to={'/faq'} className="menu-header__link">faq</NavLink>
                 </li>
                 <li className="menu-header__item">
                     <a href="#donaciones" className="menu-header__link">donaciones</a>

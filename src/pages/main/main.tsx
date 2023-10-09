@@ -70,6 +70,7 @@ export const Main: React.FC<IMainProps> = () => {
         }
     }, [news])
 
+
     return (
         <isOpenPopupContext.Provider value={setSingleNews}>
             {singleNews?.isOpen && <div ref={newsPopup} className="news-open">

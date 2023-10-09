@@ -7,6 +7,7 @@ import {IGeneralInfo} from "../../models";
 import {useSelector} from "react-redux";
 import {apiLink} from "../../hooks/apiLink";
 import logo from './../../assets/img/logo.svg'
+import {Translate} from "../translate/Translate";
 
 interface ISidebarProps {
 
@@ -25,7 +26,8 @@ export const Sidebar: React.FC<ISidebarProps> = () => {
             <div className="sidebar__body" data-da="mobile-header__body, 0, 992">
                 <Menu/>
                 <div className="sidebar__development">
-                    Website development<br/>
+                    <Translate>website_development</Translate>
+                    <br/>
                     <a href="https://freelancehunt.com/freelancer/Vlasok.html" target={'_blank'}>Vlas Zubenko</a>
                 </div>
             </div>

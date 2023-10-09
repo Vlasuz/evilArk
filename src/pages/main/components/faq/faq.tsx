@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {useEffect, useRef} from 'react'
 import {useImages} from "../../../../hooks/images";
 
 interface IFaqProps {

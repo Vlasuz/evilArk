@@ -3,6 +3,7 @@ import {useImages} from "../../../hooks/images";
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import { setPage } from '../../../redux/toolkitSlice';
+import {Translate} from "../../translate/Translate";
 
 interface IMenuProps {
 
@@ -20,19 +21,25 @@ export const Menu:React.FC<IMenuProps> = () => {
                 <li className="menu-sidebar__item">
                     <NavLink to={'/'} className="menu-sidebar__link">
                         <img src={sidebarHome} alt="home"/>
-                        <span>Home</span>
+                        <span>
+                            <Translate>text_home</Translate>
+                        </span>
                     </NavLink>
                 </li>
                 <li className="menu-sidebar__item">
                     <NavLink to={isChosenCategory ? '/shop' : '/category'} onClick={_ => dispatch(setPage('/shop'))} className="menu-sidebar__link">
                         <img src={sidebarShop} alt="shop"/>
-                        <span>Shop</span>
+                        <span>
+                            <Translate>text_shop</Translate>
+                        </span>
                     </NavLink>
                 </li>
                 <li className="menu-sidebar__item">
                     <NavLink to={isChosenCategory ? '/roulette' : '/category'} onClick={_ => dispatch(setPage('/roulette'))} className="menu-sidebar__link">
                         <img src={sidebarRolette} alt="roulette"/>
-                        <span>Roulette</span>
+                        <span>
+                            <Translate>text_roulette</Translate>
+                        </span>
                     </NavLink>
                 </li>
             </ul>

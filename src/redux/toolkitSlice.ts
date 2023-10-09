@@ -12,6 +12,7 @@ const toolkitSlice = createSlice({
         generalInfo: <IGeneralInfo>{},
         news: <INewsSingle>[],
         servers: <IServers[]>[],
+        language: <string>'',
     },
     reducers: {
         setUser(state, action) {
@@ -38,6 +39,9 @@ const toolkitSlice = createSlice({
         setServers(state, action) {
             state.servers = action.payload
         },
+        setLanguage(state, action) {
+            state.language = action.payload
+        }
     }
 })
 
@@ -54,5 +58,6 @@ export const {
 
     setNews,
     setServers,
+    setLanguage,
 
 } = toolkitSlice.actions;
