@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/evilArk/static/css/main.bc8b9bb2.css",
-    "main.js": "/evilArk/static/js/main.86bd278c.js",
+    "main.css": "/evilArk/static/css/main.6ff612cb.css",
+    "main.js": "/evilArk/static/js/main.949e075b.js",
     "static/media/VideoEvilArk.mp4": "/evilArk/static/media/VideoEvilArk.77323a3203bf90767907.mp4",
     "static/media/06.gif": "/evilArk/static/media/06.8ed02a3d5ecc8f14077d.gif",
     "static/media/main-img.jpg": "/evilArk/static/media/main-img.6208e5442431ae16f713.jpg",
     "static/media/steam-icon.svg": "/evilArk/static/media/steam-icon.aff7f031955a5771bc7ae3ac2954ecc2.svg",
     "static/media/paypal.svg": "/evilArk/static/media/paypal.229b90b5761daa63ae9b32e769493933.svg",
     "static/media/01.jpg": "/evilArk/static/media/01.a50d7a4a908a65a3c1fb.jpg",
+    "static/media/snow-owl.svg": "/evilArk/static/media/snow-owl.a34ead2c183e79a7df9f93850542b5b1.svg",
     "static/media/04.jpg": "/evilArk/static/media/04.d4637b343e354b519773.jpg",
     "static/media/02.jpg": "/evilArk/static/media/02.e3379468075c1358f1aa.jpg",
     "static/media/03.jpg": "/evilArk/static/media/03.187e18c944bacf4e671d.jpg",
@@ -35,19 +36,21 @@
     "static/media/shop.svg": "/evilArk/static/media/shop.9a09796ff2949c3713605a46d49883d6.svg",
     "static/media/top-up-bg.svg": "/evilArk/static/media/top-up-bg.35182d385b8940f01044.svg",
     "static/media/bonuses-bg.svg": "/evilArk/static/media/bonuses-bg.18c49c6b9b0a600baebf.svg",
+    "static/media/gift.svg": "/evilArk/static/media/gift.b4d574f47552f0892b571b5e316103f5.svg",
     "static/media/email.svg": "/evilArk/static/media/email.1b83a5361c7013abeb54882d8a0fd56f.svg",
     "static/media/home.svg": "/evilArk/static/media/home.f6204b4058814ef866a4051239791f6f.svg",
+    "static/media/wallet.svg": "/evilArk/static/media/wallet.b8f9dfbe4e1bd3a93e09f7e283bfcb24.svg",
     "index.html": "/evilArk/index.html",
     "static/media/arrow-orange.svg": "/evilArk/static/media/arrow-orange.6bef7cda1aa7d676f409.svg",
     "static/media/arrow-breadcrumbs.svg": "/evilArk/static/media/arrow-breadcrumbs.108c74439da4ec0b7ae3.svg",
     "static/media/arrow-up.svg": "/evilArk/static/media/arrow-up.52e3265b8bd47cd1e99ddfcb5293f2be.svg",
     "static/media/arrow-white.svg": "/evilArk/static/media/arrow-white.63d64dd4848886d640223a3a4cb960fa.svg",
     "static/media/title-o.svg": "/evilArk/static/media/title-o.ec9ea61da2da2f64fe909a7356c12046.svg",
-    "main.bc8b9bb2.css.map": "/evilArk/static/css/main.bc8b9bb2.css.map",
-    "main.86bd278c.js.map": "/evilArk/static/js/main.86bd278c.js.map"
+    "main.6ff612cb.css.map": "/evilArk/static/css/main.6ff612cb.css.map",
+    "main.949e075b.js.map": "/evilArk/static/js/main.949e075b.js.map"
   },
   "entrypoints": [
-    "static/css/main.bc8b9bb2.css",
-    "static/js/main.86bd278c.js"
+    "static/css/main.6ff612cb.css",
+    "static/js/main.949e075b.js"
   ]
 }
