@@ -4,6 +4,7 @@ import {INews} from "../../../../../models";
 import ReactHtmlParser from "html-react-parser"
 import {apiLink} from "../../../../../hooks/apiLink";
 import { isOpenPopupContext } from '../../../main';
+import {useNavigate} from "react-router-dom";
 
 
 interface INewsItemProps {
@@ -13,11 +14,13 @@ interface INewsItemProps {
 export const NewsItem:React.FC<INewsItemProps> = ({data}) => {
     const {calendar, placeholder} = useImages()
 
+    const navigate = useNavigate()
     const [date] = useState(data.created_at.slice(0, data.created_at.indexOf(' ')))
-
     const isOpenPopup: any = useContext(isOpenPopupContext)
 
     const handleReadNews = () => {
+        navigate("?news_id="+data.id)
+
         isOpenPopup({
             isOpen: true,
             news: data

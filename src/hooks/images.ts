@@ -27,6 +27,8 @@ import contactsFace from './../assets/img/icons/face.svg'
 import arrowUp from './../assets/img/icons/arrow-up.svg'
 import placeholder from './../assets/img/placeholder.png'
 import profit from './../assets/img/icons/profit.svg'
+import wallet from './../assets/img/icons/wallet.svg'
+import gift from './../assets/img/icons/gift.svg'
 
 export const useImages = () => {
     return {
@@ -58,6 +60,8 @@ export const useImages = () => {
         contactsFace,
         arrowUp,
         placeholder,
-        profit
+        profit,
+        wallet,
+        gift
     }
 }

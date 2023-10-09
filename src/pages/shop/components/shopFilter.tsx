@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {useImages} from "../../../hooks/images";
-import {IFilterShop} from "../../../models";
+import {IFilterShop, ISort} from "../../../models";
+import axios from "axios";
+import {apiLink} from "../../../hooks/apiLink";
 
 interface IShopFilterProps {
     setFilter: any
@@ -30,26 +32,16 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
         })
     }
 
-    const categories = [
-        {
-            title: 'Dinos',
-            slug: 'dinos'
-        },
-        {
-            title: 'Kits',
-            slug: 'kits'
-        },
-        {
-            title: 'People',
-            slug: 'people'
-        },
-        {
-            title: 'Grasses',
-            slug: 'grasses'
-        },
-    ]
+    const [categories, setCategories] = useState([])
 
-    const ordersBy = ['Name', 'Price', 'Stock']
+    useEffect(() => {
+        axios.get(apiLink("api/categories")).then(({data}) => {
+            setCategories(data.data)
+        })
+    }, [])
+
+    const ordersBy = ['Price', 'Stock']
+    const [isSort, setIsSort] = useState<ISort>()
 
     const handleSearchTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitleSearch(e.target.value)
@@ -63,6 +55,24 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
         })
     }
 
+    const handleSort = (sort: string) => {
+        setIsSort({
+            isActive: !isSort?.isActive,
+            sortItem: sort
+        })
+
+        setFilter((prev: IFilterShop) => {
+            return {
+                name: prev.name,
+                orderBy: {
+                    order: sort,
+                    isFromLow: !isSort?.isActive
+                },
+                category: prev.category,
+            }
+        })
+    }
+
     return (
         <div className="cards-categories__top top-cards-categories">
             <div className="top-cards-categories__filter filter-top-cards-categories">
@@ -71,10 +81,10 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
                 <div className="filter-top-cards-categories__items">
 
                     {
-                        categories.map(item =>
-                            <div key={item.slug} onClick={_ => chooseCategory(item.slug)} className={"filter-top-cards-categories__item" + (filter.category.some(cat => cat === item.slug) ? " active" : "")}>
+                        categories?.map((item: any) =>
+                            <div key={item.id} onClick={_ => chooseCategory(item.id)} className={"filter-top-cards-categories__item" + (filter.category.some(cat => cat === item.id) ? " active" : "")}>
                                 <div className="filter-top-cards-categories__link">
-                                    {item.title}
+                                    {item.name}
                                 </div>
                             </div>
                         )
@@ -88,18 +98,17 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
 
                     {
                         ordersBy.map((item, index) =>
-                            <button
-                                key={index}
+                            <button key={index} onClick={_ => handleSort(item)}
                                 className="order-top-cards-categories__item item-order-top-cards-categories order-top-cards-categories__item_name">
                                 <div className="item-order-top-cards-categories__arrows">
-                                    <div
+                                    {!(isSort?.isActive && item === isSort?.sortItem) && <div
                                         className="item-order-top-cards-categories__arrow item-order-top-cards-categories__arrow-up">
                                         <img src={arrowUp} alt="arrow-up"/>
-                                    </div>
-                                    <div
+                                    </div>}
+                                    {!(!isSort?.isActive && item === isSort?.sortItem) && <div
                                         className="item-order-top-cards-categories__arrow item-order-top-cards-categories__arrow-down">
                                         <img src={arrowUp} alt="arrow-down"/>
-                                    </div>
+                                    </div>}
                                 </div>
                                 <div className="item-order-top-cards-categories__label">
                                     {item}

@@ -5,16 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="fixed">
+      <change afterPath="$PROJECT_DIR$/src/pages/main/components/news/components/newsItemFirst.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/evilHtml/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/servers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/servers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/footer/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/historyDonate/historyDonate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/historyDonate/historyDonate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/historyRouletteItem/historyRouletteItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/historyRouletteItem/historyRouletteItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/sidebar/sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/apiLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/apiLink.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/images.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/images.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/steamLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/steamLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/category/category.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/category/category.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/inventory/inventory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/inventory/inventory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/components/categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/components/categories.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/components/newsItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/components/newsItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/news.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/news.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/servers/servers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/servers/servers.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/main/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/purchases/purchases.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/purchases/purchases.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/roulette/roulette.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/roulette.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopAccount.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopAccount.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopTop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopTop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/shop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/toolkitSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/toolkitSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +127,11 @@
       <workItem from="1695886503173" duration="3594000" />
       <workItem from="1695893397136" duration="11139000" />
       <workItem from="1695996377986" duration="263000" />
-      <workItem from="1696316779468" duration="4720000" />
+      <workItem from="1696316779468" duration="4953000" />
+      <workItem from="1696445056543" duration="513000" />
+      <workItem from="1696606879340" duration="1420000" />
+      <workItem from="1696674130275" duration="12025000" />
+      <workItem from="1696849017925" duration="10272000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1695910913707</created>
@@ -114,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695910913707</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fixed">
+      <created>1696324579513</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1696324579513</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

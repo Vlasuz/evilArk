@@ -20,8 +20,7 @@ export const Sidebar: React.FC<ISidebarProps> = () => {
     return (
         <aside className={"sidebar" + (isFixed ? " header-fixed" : "")}>
             <NavLink to={'/'} className="sidebar__logo logo" data-da="header__row, 0, 992">
-                {/*<img src={generalInfo.header_logo} alt="logo"/>*/}
-                <img src={logo} alt="logo"/>
+                <img src={generalInfo.header_logo ? generalInfo.header_logo : logo} alt="logo"/>
             </NavLink>
             <div className="sidebar__body" data-da="mobile-header__body, 0, 992">
                 <Menu/>

@@ -3,12 +3,16 @@ import {Footer} from '../../components/footer/footer'
 import {ProfileSidebar} from "../../components/profileSidebar/profileSidebar";
 import {Product} from "../../components/product/products";
 import {HistoryRouletteItem} from "../../components/historyRouletteItem/historyRouletteItem";
+import {Grid, Pagination} from "swiper";
+import {Swiper, SwiperSlide} from "swiper/react";
 
 interface IPurchasesProps {
 
 }
 
 export const Purchases: React.FC<IPurchasesProps> = () => {
+
+    const array = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 
     return (
         <main className="purchases">
@@ -25,16 +29,68 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                             Store purchase history
                                         </div>
                                         <div className="purchases__items">
-                                            <div className="purchases__swiper swiper">
-                                                <div className="swiper-wrapper">
+
+                                            <Swiper
+                                                slidesPerView={6}
+                                                spaceBetween={37}
+                                                modules={[Grid, Pagination]}
+                                                navigation={{
+                                                    prevEl: ".purchases-slider__navigation .purchases-slider__btn_prev",
+                                                    nextEl: ".purchases-slider__navigation .purchases-slider__btn_next",
+                                                }}
+                                                pagination={{
+                                                    clickable: true,
+                                                    el: '.purchases-slider__navigation .purchases-slider__pagination'
+                                                }}
+                                                grid={{rows: 2, fill: "row"}}
+                                            >
+                                                <SwiperSlide>
                                                     <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
                                                     <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
                                                     <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
                                                     <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
                                                     <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
                                                     <Product isCanGet={false}/>
-                                                </div>
-                                            </div>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
+                                                    <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
+                                                    <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
+                                                    <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
+                                                    <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
+                                                    <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
+                                                    <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
+                                                    <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
+                                                    <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                                <SwiperSlide>
+                                                    <Product isCanGet={false}/>
+                                                </SwiperSlide>
+                                            </Swiper>
+
                                         </div>
                                     </div>
                                     <div className="purchases-slider__navigation">
@@ -46,22 +102,36 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                         <div className="replenishment-bonuses__title">
                                             roulette winning history
                                         </div>
-                                        <div className="users__swiper swiper">
-                                            <div className="users__wrapper swiper-wrapper">
-                                                <div className="swiper-slide">
-                                                    <HistoryRouletteItem/>
-                                                    <HistoryRouletteItem/>
-                                                </div>
-                                                <div className="swiper-slide">
-                                                    <HistoryRouletteItem/>
-                                                    <HistoryRouletteItem/>
-                                                </div>
-                                            </div>
-                                            <div className="users__navigation">
-                                                <div className="users__btn users__btn_prev"/>
-                                                <div className="users__pagination"/>
-                                                <div className="users__btn users__btn_next"/>
-                                            </div>
+
+
+                                        <Swiper
+                                            slidesPerView={1}
+                                            modules={[Pagination]}
+                                            navigation={{
+                                                prevEl: ".users__navigation .users__btn_prev",
+                                                nextEl: ".users__navigation .users__btn_next",
+                                            }}
+                                            pagination={{
+                                                clickable: true,
+                                                el: '.users__navigation .users__pagination'
+                                            }}
+                                        >
+                                            <SwiperSlide>
+                                                <HistoryRouletteItem />
+                                                <HistoryRouletteItem />
+                                                <HistoryRouletteItem />
+                                            </SwiperSlide>
+                                            <SwiperSlide>
+                                                <HistoryRouletteItem />
+                                                <HistoryRouletteItem />
+                                                <HistoryRouletteItem />
+                                            </SwiperSlide>
+                                        </Swiper>
+
+                                        <div className="users__navigation">
+                                            <div className="users__btn users__btn_prev"/>
+                                            <div className="users__pagination"/>
+                                            <div className="users__btn users__btn_next"/>
                                         </div>
                                     </div>
                                 </div>

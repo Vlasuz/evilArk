@@ -20,11 +20,10 @@ export const Footer: React.FC<IFooterProps> = () => {
                 <div className="footer__body">
                     <div className="footer__row">
                         <NavLink to={'/'} className="footer__logo logo">
-                            {/*<img src={generalInfo.footer_logo} alt="logo"/>*/}
-                            <img src={logo} alt="logo"/>
+                            <img src={generalInfo.footer_logo ? generalInfo.footer_logo : logo} alt="logo"/>
                         </NavLink>
                         <div className="footer__copyright">
-                            {generalInfo.description}
+                            {generalInfo.copyright}
                         </div>
                         <div className="footer__socials socials-footer">
                             <div className="socials-footer__column">

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {IDonateInfo, IGeneralInfo, IUser} from "../models";
+import {IDonateInfo, IGeneralInfo, INews, INewsSingle, IServers, IUser} from "../models";
 
 
 const toolkitSlice = createSlice({
@@ -10,6 +10,8 @@ const toolkitSlice = createSlice({
         page: <string>'',
         donateInfo: <IDonateInfo[]>[],
         generalInfo: <IGeneralInfo>{},
+        news: <INewsSingle>[],
+        servers: <IServers[]>[],
     },
     reducers: {
         setUser(state, action) {
@@ -29,6 +31,13 @@ const toolkitSlice = createSlice({
         setGeneralInfo(state, action) {
             state.generalInfo = action.payload
         },
+
+        setNews(state, action) {
+            state.news = action.payload
+        },
+        setServers(state, action) {
+            state.servers = action.payload
+        },
     }
 })
 
@@ -42,5 +51,8 @@ export const {
 
     setDonateInfo,
     setGeneralInfo,
+
+    setNews,
+    setServers,
 
 } = toolkitSlice.actions;

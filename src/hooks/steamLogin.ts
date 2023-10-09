@@ -19,20 +19,21 @@ export const useSteamLogin = () => {
         'openid.identity': 'http://specs.openid.net/auth/2.0/identifier_select',
         'openid.claimed_id': 'http://specs.openid.net/auth/2.0/identifier_select'
     }
-    const steamData = window.location.href.replace('http://localhost:3000', '').replace(location.pathname, '')
-    const urlAxios = apiLink(`api/auth/steam/handle${steamData}`);
+    const steamData = window.location.href.includes('localhost') ? window.location.href.replace('http://localhost:3000', '').replace(location.pathname, '') : window.location.href.replace('https://vlasuz.github.io/evilArk', '').replace(location.pathname, '')
+    const urlAxios = apiLink(`api/auth/steam/handle${steamData.slice(steamData.indexOf("?"))}`);
 
     useEffect(() => {
 
         if (steamData.includes('openid')) {
             axios.post(urlAxios).then(({data}) => {
                 dispatch(setUser(data.data))
-                navigate(location.pathname)
+                navigate(steamData.slice(0, steamData.indexOf("?")))
                 setCookie('access_token', data.data.access_token)
+            }).catch(er => {
+                console.log('LOGIN', er)
             })
         } else if (getCookies('access_token')) {
 
-            console.log(`Bearer ${getCookies('access_token')}`)
             axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
             axios.get(apiLink(`api/users/auth-user`)).then(({data}) => {
                 console.log(data.data)

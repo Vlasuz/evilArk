@@ -1,6 +1,7 @@
 {
   "name": "evil_ark",
   "version": "0.1.0",
+  "homepage": "https://vlasuz.github.io/evilArk",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

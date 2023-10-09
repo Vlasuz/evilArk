@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react'
 
+import photoIcon from './../../assets/img/roulette/snow-owl.svg'
+
 interface IHistoryRouletteProps {
 
 }
@@ -16,9 +18,9 @@ export const HistoryRouletteItem: React.FC<IHistoryRouletteProps> = () => {
                     </div>
                     <a href="" className="users__game game-users">
                         <span className="game-users__icon">
-                            <img src="img/roulette/snow-owl.svg" alt="snow-owl"/>
+                            <img src={photoIcon} alt="snow-owl"/>
                         </span>
-                        <span className="game-users__name">Snow Owl</span>
+                        <span className="game-users__name">123123</span>
                     </a>
                 </div>
                 <div className="users__level">

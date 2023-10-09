@@ -34,7 +34,7 @@ export const Servers:React.FC<IServersProps> = () => {
                     <div className="servidores__row">
 
                         {
-                            servers.map((server: IServers) => <ServersItem key={server.id} image={server.image} clusters={server.clusters} title={'4 Man Cluster'} />)
+                            servers.map((server: IServers) => <ServersItem key={server.id} data={server} />)
                         }
 
                     </div>

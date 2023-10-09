@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Footer} from "../../components/footer/footer";
 import mainImg from './../../assets/img/roulette/main-img.jpg'
-import axios from "axios";
-import {apiLink} from "../../hooks/apiLink";
 import {IServers} from "../../models";
 import {useImages} from "../../hooks/images";
-import placeholder from "assets/img/placeholder.png";
-import {useServers} from "../../api/servers";
 import {RouletteItem} from "./components/rouletteItem";
 import {HistoryRouletteItem} from "../../components/historyRouletteItem/historyRouletteItem";
+import {useSelector} from "react-redux";
 
 interface IRouletteProps {
 
@@ -17,7 +14,7 @@ interface IRouletteProps {
 export const Roulette: React.FC<IRouletteProps> = () => {
     const {placeholder, profit} = useImages()
 
-    const {servers} = useServers()
+    const servers: IServers[] = useSelector((state: any) => state.toolkit.servers)
 
     return (
         <main className="roulette">

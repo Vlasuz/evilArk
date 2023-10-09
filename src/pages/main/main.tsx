@@ -12,10 +12,11 @@ import {Footer} from "../../components/footer/footer";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {INews, INewsSingle} from "../../models";
 import ReactHtmlParser from "html-react-parser";
 import {useImages} from "../../hooks/images";
+import {useSelector} from "react-redux";
 
 interface IMainProps {
 
@@ -37,6 +38,9 @@ export const Main: React.FC<IMainProps> = () => {
     const newsPopupBody: any = useRef(null)
 
     const [singleNews, setSingleNews] = useState<INewsSingle>({})
+    const navigate = useNavigate()
+    const location = useLocation()
+    const news = useSelector((state: any) => state.toolkit.news)
 
     useEffect(() => {
 
@@ -44,13 +48,12 @@ export const Main: React.FC<IMainProps> = () => {
             singleNews.isOpen && newsPopup.current?.classList.add('active')
         }, 10)
 
-        console.log(singleNews)
-
     }, [singleNews])
 
     const handleCloseNews = () => {
         newsPopup.current?.classList.remove('active')
         setTimeout(() => {
+            navigate(location.pathname)
             setSingleNews({
                 isOpen: false,
                 news: undefined
@@ -58,9 +61,18 @@ export const Main: React.FC<IMainProps> = () => {
         }, 300)
     }
 
+    useEffect(() => {
+        if(window.location.href.includes("?news_id")) {
+            setSingleNews({
+                isOpen: true,
+                news: news.filter((item: INews) => +item.id === +window.location.href.slice(window.location.href.indexOf('?news_id') + 9))[0]
+            })
+        }
+    }, [news])
+
     return (
         <isOpenPopupContext.Provider value={setSingleNews}>
-            {singleNews.isOpen && <div ref={newsPopup} className="news-open">
+            {singleNews?.isOpen && <div ref={newsPopup} className="news-open">
                 <div ref={newsPopupBody} className="news-open__body">
                     <div className="news-open__top top-news-open">
                         <button onClick={handleCloseNews} className="news-open__btn">

@@ -7,23 +7,19 @@ export interface IRoutes {
 }
 
 export interface ICluster {
-    created_at: string
     description: string
     id: string | number
     image: string | null
     name: string
     server_id: string | number
-    updated_at: string
     url: string
 }
 
 export interface IServers {
     clusters: ICluster[]
-    created_at: string
     id: string | number
     image: string
     name: string
-    updated_at: string
 }
 
 export interface IUser {
@@ -58,6 +54,7 @@ export interface INews {
     image: string
     updated_at: string
     created_at: string
+    server: IServers
     tags: INewsTag[]
 }
 
@@ -96,17 +93,12 @@ export interface IDonateInfo {
 }
 
 export interface IGeneralInfo {
-    discord_icon?: string
     discord_url: string
-    email_icon?: string
     email_url: string
-    twitter_icon?: string
     twitter_url: string
-    facebook_icon?: string
     facebook_url: string
-    instagram_icon?: string
     instagram_url: string
-    description: string
+    copyright: string
     footer_logo: string
     header_logo: string
 }
@@ -114,4 +106,33 @@ export interface IGeneralInfo {
 export interface INewsSingle {
     isOpen?: boolean,
     news?: INews
+}
+
+export interface ICategory {
+    "id": number | string,
+    "name": string,
+    "type": string,
+    "discount": []
+}
+
+export interface ISort {
+    isActive: boolean
+    sortItem: string
+}
+
+export interface IProduct {
+    "id": string | number,
+    "name": string,
+    "description": string,
+    "category": ICategory[],
+    "icon": string,
+    "price": string,
+    "amount": number,
+    "sales": number,
+    "sex": string,
+    "purchase_interval": number,
+    "available": number,
+    "level": number,
+    "quality": string,
+    "server": IServers
 }

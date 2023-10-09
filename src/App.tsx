@@ -16,6 +16,7 @@ import { Header } from './components/header/header';
 import { donateInfo } from './api/donateInfo';
 import { routes } from './functions/routes';
 import {generalInfo} from "./api/generalInfo";
+import {servers} from "./api/servers";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
     useEffect(() => {
         responsiveSite()
 
+        servers({dispatch})
         generalInfo({dispatch})
         donateInfo({dispatch})
     }, [])
