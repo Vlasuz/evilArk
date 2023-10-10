@@ -26,7 +26,7 @@ export const Contacts:React.FC<IContactsProps> = () => {
     }, [])
 
     return (
-        <section className="contacto" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="contacto">
+        <section className="contacto" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="contacts">
             <div className="contacto__container container">
                 <div className="contacto__body">
                     <div className="contacto__row">

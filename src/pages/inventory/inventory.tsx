@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Footer} from '../../components/footer/footer'
 import {ProfileSidebar} from "../../components/profileSidebar/profileSidebar";
 import {Product} from "../../components/product/products";
@@ -7,12 +7,28 @@ import {SwiperSlide} from "swiper/react";
 import {Grid, Pagination} from 'swiper';
 
 import "swiper/css/grid";
+import axios from "axios";
+import {apiLink} from "../../hooks/apiLink";
+import getCookies from "../../functions/getCookie";
+import {IProduct} from "../../models";
 
 interface IInventoryProps {
 
 }
 
 export const Inventory: React.FC<IInventoryProps> = () => {
+
+    const [isLoad, setIsLoad] = useState(false)
+    const [inventory, setInventory] = useState<IProduct[]>([])
+
+    useEffect(() => {
+        axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
+        axios.get(apiLink('api/users/inventory')).then(({data}) => {
+            console.log(data)
+            setInventory(data.data)
+            setIsLoad(true)
+        }).catch(er => {console.log(er)})
+    }, [])
 
     return (
         <main className="inventory">
@@ -30,7 +46,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                         </div>
                                         <div className="purchases__items">
 
-                                            <Swiper
+                                            {isLoad && <Swiper
                                                 slidesPerView={6}
                                                 spaceBetween={37}
                                                 modules={[Grid, Pagination]}
@@ -40,59 +56,22 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                                 }}
                                                 pagination={{
                                                     clickable: true,
-                                                    el: '.purchases-slider__pagination'
+                                                    el: '.purchases-slider__navigation .purchases-slider__pagination'
                                                 }}
                                                 grid={{rows: 2, fill: "row"}}
                                             >
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={true}/>
-                                                </SwiperSlide>
-                                            </Swiper>
+                                                {
+                                                    inventory.map((item: IProduct) =>
+                                                        <SwiperSlide>
+                                                            <Product data={item} isCanGet={true}/>
+                                                        </SwiperSlide>
+                                                    )
+                                                }
+                                            </Swiper>}
 
                                         </div>
                                     </div>
+
                                     <div className="purchases-slider__navigation">
                                         <div className="purchases-slider__btn purchases-slider__btn_prev"/>
                                         <div className="purchases-slider__pagination"/>

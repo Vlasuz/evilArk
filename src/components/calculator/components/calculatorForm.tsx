@@ -1,4 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
+import {useDispatch} from "react-redux";
+import { setInfoForPay } from '../../../redux/toolkitSlice';
 
 interface ICalculatorFormProps {
 
@@ -10,6 +12,7 @@ export const CalculatorForm:React.FC<ICalculatorFormProps> = () => {
     const [currency, setCurrency] = useState("dollar")
     const [valueCurrency, setValueCurrency] = useState(0)
     const [valueEvilCoin, setValueEvilCoin] = useState(0)
+    const dispatch = useDispatch()
 
     const currencyIcon: any = {
         "dollar": {
@@ -25,14 +28,27 @@ export const CalculatorForm:React.FC<ICalculatorFormProps> = () => {
     const handleChangeCurrency = (e: ChangeEvent<HTMLInputElement>) => {
         setValueCurrency(+e.target.value)
         setValueEvilCoin(prev => +e.target.value * currencyIcon[currency].value)
+        dispatch(setInfoForPay({
+            currency: currency,
+            value: +e.target.value
+        }))
     }
     const handleChangeEvilCoin = (e: ChangeEvent<HTMLInputElement>) => {
         setValueEvilCoin(+e.target.value)
         setValueCurrency(prev => +e.target.value / currencyIcon[currency].value)
+        dispatch(setInfoForPay({
+            currency: currency,
+            value: +e.target.value / currencyIcon[currency].value
+        }))
     }
     const handleSwitchCurrency = (currency: string) => {
         setCurrency(currency)
         setIsSelectOpen(false)
+
+        dispatch(setInfoForPay({
+            currency: currency,
+            value: valueCurrency
+        }))
 
         setValueEvilCoin(valueCurrency * currencyIcon[currency].value)
     }

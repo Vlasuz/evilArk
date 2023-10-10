@@ -3836,6 +3836,25 @@ body.lock::before {
   align-items: center;
   width: 100%;
 }
+
+.item-donaciones__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.select-category__column .item-select-category {
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+.select-category__column._active .item-select-category {
+  border: 2px solid white;
+}
 @media (max-width: 1500px) {
   .select-category__column {
     flex: 0 1 25%;
@@ -6561,7 +6580,6 @@ body.lock::before {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  font-size: 0;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -6580,6 +6598,21 @@ body.lock::before {
   font-weight: 600;
   line-height: 150%;
   color: #FFFFFF;
+}
+.bottom-select-product__row .error {
+  display: block;
+  margin-top: 10px;
+  color: red;
+}
+.bottom-select-product__row {
+  color: white;
+  font-size: 14px;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.bought-success {
+  font-size: 14px;
+  color: lawngreen;
 }
 .bottom-select-product__btn:hover {
   background-color: #e76134;
@@ -8119,7 +8152,7 @@ body.lock::before {
 }
 
 .info-profile {
-  padding: 35px 0 0 0;
+  margin-top: auto;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -8145,6 +8178,15 @@ body.lock::before {
 .info-profile__id:not(:last-child) {
   margin: 0 0 10px 0;
 }
+
+.replenishment-bonuses__btn.exit-button {
+  padding: 5px 10px;
+  height: auto;
+  margin-top: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 @media (max-width: 1200px) {
   .info-profile__id {
     font-size: 15px;
@@ -9318,8 +9360,13 @@ body.lock::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 61.666%;
-  height: 61.666%;
+  width: 90%;
+  height: 90%;
+}
+.item-purchases__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .item-purchases__name {
   font-size: 18px;
@@ -9382,6 +9429,9 @@ body.lock::before {
   -ms-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+  background: transparent;
+  border: none;
+  text-align: left;
 }
 .item-purchases__btn:hover {
   text-decoration: none;

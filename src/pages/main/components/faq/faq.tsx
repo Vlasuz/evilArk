@@ -9,7 +9,7 @@ export const Faq:React.FC<IFaqProps> = () => {
     const {question} = useImages()
 
     return (
-        <section className="faq" data-aos="fade-left" data-aos-duration="750" data-aos-offset="200" id="faq">
+        <section className="faq" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="faq">
             <div className="faq__container container">
                 <div className="faq__body">
                     <div className="faq__label label">F.A.Q</div>

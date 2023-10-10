@@ -36,11 +36,12 @@ export const Shop: React.FC<IShopProps> = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
+    const category = useSelector((state: any) => state.toolkit.category)
     const isChosenCategory = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
 
-        axios.get(apiLink('api/products?server_id=1')).then(({data}) => {
+        axios.get(apiLink('api/products?server_id='+category)).then(({data}) => {
             setShop(data.data)
         }).catch(er => {
             console.log(er)

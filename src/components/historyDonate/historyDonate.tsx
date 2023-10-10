@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {HistoryDonateItem} from "./components/historyDonateItem";
 import {Grid, Pagination} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -10,13 +10,19 @@ interface IHistoryDonateProps {
 
 export const HistoryDonate: React.FC<IHistoryDonateProps> = () => {
 
+    const [isLoad, setIsLoad] = useState(false)
+
+    useEffect(() => {
+        setIsLoad(true)
+    }, [])
+
     return (
         <div className="profile__history history-profile">
             <div className="history-profile__title replenishment-bonuses__title">
                 History of donations
             </div>
 
-            <Swiper
+            {isLoad && <Swiper
                 slidesPerView={2}
                 spaceBetween={20}
                 modules={[Grid, Pagination]}
@@ -75,7 +81,7 @@ export const HistoryDonate: React.FC<IHistoryDonateProps> = () => {
                 <SwiperSlide>
                     <HistoryDonateItem/>
                 </SwiperSlide>
-            </Swiper>
+            </Swiper>}
 
             <div className="purchases-slider__navigation">
                 <div className="purchases-slider__btn purchases-slider__btn_prev"/>

@@ -13,10 +13,20 @@ const toolkitSlice = createSlice({
         news: <INewsSingle>[],
         servers: <IServers[]>[],
         language: <string>'',
+        infoForPay: {
+            value: 0,
+            currency: "dollar"
+        },
     },
     reducers: {
         setUser(state, action) {
             state.user = action.payload
+        },
+        changeUserBalance(state, action) {
+            let newUser = state.user
+            newUser.balance = state.user.balance - action.payload
+
+            state.user = newUser
         },
 
         setCategory(state, action) {
@@ -41,6 +51,9 @@ const toolkitSlice = createSlice({
         },
         setLanguage(state, action) {
             state.language = action.payload
+        },
+        setInfoForPay(state, action) {
+            state.infoForPay = action.payload
         }
     }
 })
@@ -49,6 +62,7 @@ export default toolkitSlice.reducer;
 export const {
 
     setUser,
+    changeUserBalance,
 
     setCategory,
     setPage,
@@ -59,5 +73,7 @@ export const {
     setNews,
     setServers,
     setLanguage,
+
+    setInfoForPay,
 
 } = toolkitSlice.actions;

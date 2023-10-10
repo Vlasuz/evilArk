@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {IUser} from "../../../models";
 import {Calculator} from "../../../components/calculator/calculator";
 import {HistoryDonate} from "../../../components/historyDonate/historyDonate";
+import {useNavigate} from "react-router-dom";
+import setCookie from "../../../functions/setCookie";
+import {setUser} from "../../../redux/toolkitSlice";
 
 interface IProfileUserProps {
 
@@ -11,6 +14,14 @@ interface IProfileUserProps {
 export const ProfileUser:React.FC<IProfileUserProps> = () => {
 
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const handleExit = () => {
+        setCookie("access_token", '')
+        dispatch(setUser({}))
+        navigate('/')
+    }
 
     return (
         <div className="inner__content content-inner">
@@ -35,6 +46,7 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                             <div className="balance-info-profile__text">Balance:</div>
                             <div className="balance-info-profile__value">{userInfo.balance} EC</div>
                         </div>
+                        <button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>Exit from site</button>
                     </div>
                 </div>
 

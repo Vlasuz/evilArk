@@ -49,7 +49,7 @@ export const News: React.FC<INewsProps> = () => {
 
     return (
         <>
-            <section className="news" data-aos="fade-left" data-aos-duration="750" data-aos-offset="200">
+            <section className="news" id="news" data-aos="fade" data-aos-duration="750" data-aos-offset="200">
                 <div className="news__container container">
                     <div className="news__inner">
                         <Categories setServer={setServer} server={server}/>

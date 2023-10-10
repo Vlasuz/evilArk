@@ -30,7 +30,7 @@ export const About: React.FC<IAboutProps> = () => {
     }, [])
 
     return (
-        <section className="sobre-nosotros" data-aos="fade-left" data-aos-duration="750" data-aos-offset="200">
+        <section className="sobre-nosotros" id="about" data-aos="fade" data-aos-duration="750" data-aos-offset="200">
             <div className="sobre-nosotros__container container">
                 <div className="sobre-nosotros__body">
                     <div className="sobre-nosotros__label label">

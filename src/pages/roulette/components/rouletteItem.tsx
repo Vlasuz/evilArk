@@ -2,21 +2,21 @@ import React, { useEffect } from 'react'
 import {useImages} from "../../../hooks/images";
 
 interface IRouletteItemProps {
-
+    isStart?: boolean
+    data: any
 }
 
-export const RouletteItem:React.FC<IRouletteItemProps> = () => {
-    const {servers_2} = useImages()
+export const RouletteItem:React.FC<IRouletteItemProps> = ({isStart, data}) => {
 
     return (
-        <div className="games-filter-roulette__slide slide-games-filter-roulette swiper-slide">
-            <div className="games-filter-roulette__item item-games-filter-roulette">
-                <span className="item-games-filter-roulette__image">
-                    <img src={servers_2} alt="game"/>
+        <div style={{transition: isStart ? "all 10s cubic-bezier(.9,.54,.57,.976)" : "none"}} className={"games-filter-roulette__slide slide-games-filter-roulette" + (isStart ? " is_scroll_roulette" : "")}>
+            <span className="item-games-filter-roulette__image">
+                    <img src={data.image} alt="game"/>
                 </span>
-                <div className="item-games-filter-roulette__name">
-                    <span>Lot name</span>
-                </div>
+            <div className="item-games-filter-roulette__name">
+                <span>
+                    {data.name}
+                </span>
             </div>
         </div>
     )

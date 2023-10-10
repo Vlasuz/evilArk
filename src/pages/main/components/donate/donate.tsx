@@ -9,7 +9,7 @@ interface IDonateProps {
 }
 
 export const Donate: React.FC<IDonateProps> = () => {
-    const {donateImage} = useImages()
+    const {donateImage, placeholder} = useImages()
 
     const [pageInfo, setPageInfo] = useState<any>({})
     const donateInfo = useSelector((state: any) => state.toolkit.donateInfo)
@@ -23,7 +23,7 @@ export const Donate: React.FC<IDonateProps> = () => {
     }, [])
 
     return (
-        <section className="donaciones" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="donaciones">
+        <section className="donaciones" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="donates">
             <div className="donaciones__container container">
                 <div className="donaciones__body">
                     <div className="donaciones__label label">
@@ -42,7 +42,7 @@ export const Donate: React.FC<IDonateProps> = () => {
                                 <div key={item.description} className="donaciones__column">
                                     <div className="donaciones__item item-donaciones">
                                         <a href={item.url} className="item-donaciones__btn">
-                                            <img src={item.icon} alt={item.description} />
+                                            <img src={item.icon ? item.icon : placeholder} alt={item.description} />
                                         </a>
                                     </div>
                                 </div>

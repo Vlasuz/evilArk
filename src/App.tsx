@@ -11,17 +11,19 @@ import {
     TransitionGroup,
     CSSTransition
 } from "react-transition-group";
-import {IRoutes} from "./models";
+import {IRoutes, IUser} from "./models";
 import { Header } from './components/header/header';
 import { donateInfo } from './api/donateInfo';
 import { routes } from './functions/routes';
 import {generalInfo} from "./api/generalInfo";
 import {servers} from "./api/servers";
+import {PageNotFound} from "./pages/pageNotFound/pageNotFound";
 
 
 function App() {
 
     const dispatch = useDispatch()
+    const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
 
     useEffect(() => {
         responsiveSite()
@@ -45,7 +47,7 @@ function App() {
                     <Routes location={location}>
 
                         {
-                            routes.map((item: IRoutes) => <Route key={item.path} element={item.element} path={item.path} />)
+                            routes.map((item: IRoutes) => <Route key={item.path} element={item.isPublic ? item.element : userInfo.id ? item.element : <PageNotFound/>} path={item.path} />)
                         }
 
                     </Routes>

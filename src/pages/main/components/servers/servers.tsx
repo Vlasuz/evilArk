@@ -21,7 +21,7 @@ export const Servers:React.FC<IServersProps> = () => {
     }, [])
 
     return (
-        <section className="servidores" data-aos="fade-left" data-aos-duration="750" data-aos-offset="200">
+        <section id={"servers"} className="servidores" data-aos="fade" data-aos-duration="750" data-aos-offset="200">
             <div className="servidores__container container">
                 <div className="servidores__body">
                     <div className="servidores__label label">SERVIDORES</div>

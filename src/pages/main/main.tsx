@@ -70,6 +70,14 @@ export const Main: React.FC<IMainProps> = () => {
         }
     }, [news])
 
+    useEffect(() => {
+        if(!location.hash) return;
+
+        setTimeout(() => {
+            document.querySelector(location.hash)?.scrollIntoView({ behavior: 'smooth' });
+        }, 600)
+    }, [])
+
 
     return (
         <isOpenPopupContext.Provider value={setSingleNews}>

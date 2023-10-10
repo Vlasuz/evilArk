@@ -20,7 +20,7 @@ export const Category: React.FC<ICategoryProps> = () => {
     const servers: IServers[] = useSelector((state: any) => state.toolkit.servers)
     const nextPage = useSelector((state: any) => state.toolkit.page)
 
-    const handleChoose = (e: React.MouseEvent<HTMLAnchorElement>, category: string) => {
+    const handleChoose = (e: React.MouseEvent<HTMLAnchorElement>, category: string | number) => {
         e.preventDefault()
 
         navigate(nextPage || '/shop')
@@ -49,7 +49,7 @@ export const Category: React.FC<ICategoryProps> = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="" onClick={e => handleChoose(e, item.name)}
+                                        <a href="" onClick={e => handleChoose(e, item.id)}
                                            className="select-category__btn btn btn_small">Choose</a>
                                     </div>
                                 )

@@ -29,6 +29,10 @@ import placeholder from './../assets/img/placeholder.png'
 import profit from './../assets/img/icons/profit.svg'
 import wallet from './../assets/img/icons/wallet.svg'
 import gift from './../assets/img/icons/gift.svg'
+import freeKassa from './../assets/img/free-kassa.svg'
+import stripe from './../assets/img/stripe.svg'
+import paypalTopUp from './../assets/img/paypal.svg'
+import wepay from './../assets/img/wepay.svg'
 
 export const useImages = () => {
     return {
@@ -62,6 +66,10 @@ export const useImages = () => {
         placeholder,
         profit,
         wallet,
-        gift
+        gift,
+        freeKassa,
+        stripe,
+        paypalTopUp,
+        wepay
     }
 }

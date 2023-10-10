@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Footer} from '../../components/footer/footer'
 import {ProfileSidebar} from "../../components/profileSidebar/profileSidebar";
 import {Product} from "../../components/product/products";
@@ -12,7 +12,11 @@ interface IPurchasesProps {
 
 export const Purchases: React.FC<IPurchasesProps> = () => {
 
-    const array = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    const [isLoad, setIsLoad] = useState(false)
+
+    useEffect(() => {
+        setIsLoad(true)
+    }, [])
 
     return (
         <main className="purchases">
@@ -30,7 +34,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                         </div>
                                         <div className="purchases__items">
 
-                                            <Swiper
+                                            {isLoad && <Swiper
                                                 slidesPerView={6}
                                                 spaceBetween={37}
                                                 modules={[Grid, Pagination]}
@@ -89,7 +93,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                                 <SwiperSlide>
                                                     <Product isCanGet={false}/>
                                                 </SwiperSlide>
-                                            </Swiper>
+                                            </Swiper>}
 
                                         </div>
                                     </div>
@@ -104,7 +108,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                         </div>
 
 
-                                        <Swiper
+                                        {isLoad && <Swiper
                                             slidesPerView={1}
                                             modules={[Pagination]}
                                             navigation={{
@@ -117,16 +121,16 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                             }}
                                         >
                                             <SwiperSlide>
-                                                <HistoryRouletteItem />
-                                                <HistoryRouletteItem />
-                                                <HistoryRouletteItem />
+                                                <HistoryRouletteItem/>
+                                                <HistoryRouletteItem/>
+                                                <HistoryRouletteItem/>
                                             </SwiperSlide>
                                             <SwiperSlide>
-                                                <HistoryRouletteItem />
-                                                <HistoryRouletteItem />
-                                                <HistoryRouletteItem />
+                                                <HistoryRouletteItem/>
+                                                <HistoryRouletteItem/>
+                                                <HistoryRouletteItem/>
                                             </SwiperSlide>
-                                        </Swiper>
+                                        </Swiper>}
 
                                         <div className="users__navigation">
                                             <div className="users__btn users__btn_prev"/>

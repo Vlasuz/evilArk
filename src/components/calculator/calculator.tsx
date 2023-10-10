@@ -1,11 +1,14 @@
-import React, {useEffect} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {CalculatorForm} from "./components/calculatorForm";
+import {topUpContext} from "../../context/topUpContext";
 
 interface ICalculatorProps {
 
 }
 
 export const Calculator: React.FC<ICalculatorProps> = () => {
+
+    const isPopupOpen: any = useContext(topUpContext)
 
     return (
 
@@ -16,9 +19,8 @@ export const Calculator: React.FC<ICalculatorProps> = () => {
                 balance
             </div>
             <CalculatorForm/>
-            <button type="submit" className="replenishment-bonuses__btn top-up-btn">Top
-                up
-                balance
+            <button onClick={_ => isPopupOpen(true)} type="submit" className="replenishment-bonuses__btn top-up-btn">
+                Top up balance
             </button>
         </div>
     )

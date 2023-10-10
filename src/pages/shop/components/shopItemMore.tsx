@@ -5,19 +5,27 @@ import {isOpenPopupContext} from "../shop";
 import {useImages} from "../../../hooks/images";
 import {IProduct} from "../../../models";
 import getCookies from "../../../functions/getCookie";
+import {useDispatch, useSelector} from "react-redux";
+import {changeUserBalance} from '../../../redux/toolkitSlice';
 
 interface IShopItemMoreProps {
     isActive: number | string
 }
 
-export const ShopItemMore:React.FC<IShopItemMoreProps> = ({isActive}) => {
+export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     const {arrowWhite} = useImages()
 
     const [product, setProduct] = useState<IProduct>()
     const [count, setCount] = useState(1)
+    const [isBought, setIsBought] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('')
+
+    const dispatch = useDispatch()
+    const category = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
-        isActive && axios.get(apiLink('api/products/'+isActive)).then(({data}) => {
+        isActive && axios.get(apiLink('api/products/' + isActive)).then(({data}) => {
             setProduct(data.data)
         })
     }, [isActive])
@@ -25,13 +33,34 @@ export const ShopItemMore:React.FC<IShopItemMoreProps> = ({isActive}) => {
     const isActivePopup: any = useContext(isOpenPopupContext)
 
     const handleBuy = () => {
+        setIsLoading(true)
+        setError('')
+
         axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
-        axios.post(apiLink('api/products/buy/1?server_id='+product?.id)).then(({data}) => {
-            console.log(data)
+        axios.post(apiLink('api/products/buy/' + product?.id), {
+            "server_id": category,
+            "amount": count
+        }).then(({data}) => {
+            setError(data.data.message)
+            setIsLoading(false)
+            if (!data.data.success) return;
+
+            setIsBought(true)
+            dispatch(changeUserBalance(product?.price && +product?.price * count))
         }).catch(er => {
             console.log(er)
+            setIsLoading(false)
         })
     }
+
+    useEffect(() => {
+        if (isActive) return;
+
+        setIsLoading(false)
+        setError('')
+        setCount(1)
+        setIsBought(false)
+    }, [isActive])
 
     return (
         <div className={"categories__select-product select-product" + (!!isActive ? " active" : "")}>
@@ -83,21 +112,30 @@ export const ShopItemMore:React.FC<IShopItemMoreProps> = ({isActive}) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="characteristics-select-product__column characteristics-select-product__column_quatity">
-                                <div className="characteristics-select-product__item characteristics-select-product__item_quantity">
+                            <div
+                                className="characteristics-select-product__column characteristics-select-product__column_quatity">
+                                <div
+                                    className="characteristics-select-product__item characteristics-select-product__item_quantity">
                                     <div className="characteristics-select-product__label">Quantity</div>
                                     <div className="characteristics-select-product__input-block">
-                                        <button className="characteristics-select-product__minus" onClick={_ => setCount(prev => prev > 1 ? prev - 1 : prev)}>-</button>
+                                        <button className="characteristics-select-product__minus"
+                                                onClick={_ => setCount(prev => prev > 1 ? prev - 1 : prev)}>-
+                                        </button>
                                         <input readOnly value={count} autoComplete='off' type='text'
                                                className='characteristics-select-product__input characteristics-select-product__input_quantity'/>
-                                        <button className="characteristics-select-product__plus" onClick={_ => setCount(prev => prev + 1)}>+</button>
+                                        <button className="characteristics-select-product__plus"
+                                                onClick={_ => setCount(prev => prev + 1)}>+
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                            <div className="characteristics-select-product__column characteristics-select-product__column_price">
+                            <div
+                                className="characteristics-select-product__column characteristics-select-product__column_price">
                                 <div
                                     className="characteristics-select-product__item characteristics-select-product__price">
-                                    <div className="characteristics-select-product__price">{product?.price} EC</div>
+                                    <div
+                                        className="characteristics-select-product__price">{product?.price && (+product?.price * count).toFixed(2)} EC
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +143,16 @@ export const ShopItemMore:React.FC<IShopItemMoreProps> = ({isActive}) => {
                     <div
                         className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
                         <div className="bottom-select-product__row">
-                            <button onClick={handleBuy} className='bottom-select-product__btn'>Buy</button>
+                            {
+                                !isLoading ?
+                                !isBought ?
+                                    <button onClick={handleBuy} className='bottom-select-product__btn'>Buy</button> :
+                                    <div className="bought-success">You have just bought "{product?.name}" successfully</div> : '...'
+                            }
+
+                            {
+                                <p className={'error'}>{error}</p>
+                            }
                         </div>
                     </div>
                 </div>

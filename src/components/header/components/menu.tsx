@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation, useParams} from "react-router-dom";
 
 interface IMenuProps {
 
@@ -7,36 +7,53 @@ interface IMenuProps {
 
 export const Menu:React.FC<IMenuProps> = () => {
 
+    const location = useLocation()
+
+    const menus = [
+        {
+            title: "Servers",
+            link: "#servers"
+        },
+        {
+            title: "Contacts",
+            link: "#contacts"
+        },
+        {
+            title: "Faq",
+            link: "#faq"
+        },
+        {
+            title: "Donates",
+            link: "#donates"
+        },
+        {
+            title: "News",
+            link: "#news"
+        },
+        {
+            title: "About",
+            link: "#about"
+        },
+    ]
+
     return (
         <nav className="header__menu menu-header">
             <ul className="menu-header__list">
-                <li className="menu-header__item">
-                    <a href="" className="menu-header__link">Inicio</a>
-                </li>
-                <li className="menu-header__item">
-                    <a href="" className="menu-header__link">conocenos</a>
-                </li>
-                <li className="menu-header__item">
-                    <a href="/#contacto" className="menu-header__link">contacto</a>
-                </li>
-                <li className="menu-header__item">
-                    <a href="" className="menu-header__link">server</a>
-                </li>
-                <li className="menu-header__item">
-                    <NavLink to={'/faq'} className="menu-header__link">faq</NavLink>
-                </li>
-                <li className="menu-header__item">
-                    <a href="#donaciones" className="menu-header__link">donaciones</a>
-                </li>
-                <li className="menu-header__item">
-                    <a href="" className="menu-header__link">casino</a>
-                </li>
-                <li className="menu-header__item">
-                    <a href="" className="menu-header__link">tienda</a>
-                </li>
-                <li className="menu-header__item">
-                    <a href="" className="menu-header__link">mapas</a>
-                </li>
+
+                {
+                    menus.map(item =>
+                        <li className="menu-header__item">
+                            {location.pathname === '/' ? <a href={item.link} className="menu-header__link">
+                                {item.title}
+                            </a> :
+                                <NavLink to={"/"+item.link} className="menu-header__link">
+                                    {item.title}
+                                </NavLink>
+                            }
+                        </li>
+                    )
+                }
+
             </ul>
         </nav>
     )
