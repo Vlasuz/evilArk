@@ -6,7 +6,7 @@ import {Profile} from "../pages/profile/profile";
 import {Bonuses} from "../pages/bonuses/bonuses";
 import {Purchases} from "../pages/purchases/purchases";
 import {Inventory} from "../pages/inventory/inventory";
-import {Roulette} from "../pages/roulette/roulette";
+import {Roulette} from "../pages/roulette/Roulette";
 import React from "react";
 import { PageNotFound } from "../pages/pageNotFound/pageNotFound";
 

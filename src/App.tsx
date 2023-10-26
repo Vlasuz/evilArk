@@ -18,6 +18,10 @@ import { routes } from './functions/routes';
 import {generalInfo} from "./api/generalInfo";
 import {servers} from "./api/servers";
 import {PageNotFound} from "./pages/pageNotFound/pageNotFound";
+import {setCategory} from "./redux/toolkitSlice";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 function App() {
@@ -31,6 +35,10 @@ function App() {
         servers({dispatch})
         generalInfo({dispatch})
         donateInfo({dispatch})
+
+        if(window.location.href.includes("?cluster")) {
+            dispatch(setCategory(window.location.href.slice(window.location.href.indexOf("?cluster") + 9, window.location.href.indexOf("&") > 0 ? window.location.href.indexOf("&") : undefined)))
+        }
     }, [])
 
     const location = useLocation()
@@ -54,6 +62,8 @@ function App() {
 
                 </CSSTransition>
             </TransitionGroup>
+
+            <ToastContainer />
 
         </div>
     );

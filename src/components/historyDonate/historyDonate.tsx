@@ -23,7 +23,8 @@ export const HistoryDonate: React.FC<IHistoryDonateProps> = () => {
             </div>
 
             {isLoad && <Swiper
-                slidesPerView={2}
+                slidesPerView={1}
+                grid={{rows: 3, fill: "row"}}
                 spaceBetween={20}
                 modules={[Grid, Pagination]}
                 navigation={{
@@ -34,7 +35,15 @@ export const HistoryDonate: React.FC<IHistoryDonateProps> = () => {
                     clickable: true,
                     el: '.purchases-slider__pagination'
                 }}
-                grid={{rows: 3, fill: "row"}}
+                breakpoints={{
+                    768: {
+                        slidesPerView: 2,
+                        grid: {
+                            rows: 3,
+                            fill: "row"
+                        }
+                    }
+                }}
             >
                 <SwiperSlide>
                     <HistoryDonateItem/>

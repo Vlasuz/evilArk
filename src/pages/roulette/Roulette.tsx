@@ -10,6 +10,9 @@ import { setCategory } from '../../redux/toolkitSlice';
 import {Swiper, SwiperSlide} from "swiper/react";
 import {RouletteStyled} from "./roulette.styled";
 import {Pagination} from "swiper";
+import io from 'socket.io-client';
+import getCookies from "../../functions/getCookie";
+import axios from 'axios';
 
 interface IRouletteProps {
 
@@ -38,6 +41,67 @@ export const Roulette: React.FC<IRouletteProps> = () => {
         }, 11000)
     }
 
+    // useEffect(() => {
+    //     // console.log(getCookies("access_token"))
+    //
+    //     const socket = io('http://localhost:6001', {
+    //         transportOptions: {
+    //             polling: {
+    //                 extraHeaders: {
+    //                     Authorization: `Bearer ${getCookies("access_token")}`, // Здесь yourToken - ваш JWT-токен
+    //                 },
+    //             },
+    //         },
+    //     });
+    //
+    //     socket.on('connect', () => {
+    //         console.log('WebSocket соединение установлено.');
+    //     });
+    //
+    //     return () => {
+    //         socket.disconnect();
+    //     };
+    // }, []);
+
+    // useEffect(() => {
+    //     const socket = io('http://localhost:6001');
+    //
+    //     console.log(socket)
+    //
+    //     // Выполните POST-запрос к authEndpoint для получения аутентификационных данных
+    //     axios.post('http://localhost/broadcasting/auth') // Замените на актуальный URL
+    //         .then((response) => {
+    //             const authData = {
+    //                 headers: {
+    //                     Authorization: `Bearer ${getCookies("access_token")}`, // Пример аутентификационных данных
+    //                 },
+    //             };
+    //
+    //             console.log(authData)
+    //
+    //             // @ts-ignore
+    //             socket.io.opts.extraHeaders = authData;
+    //             socket.connect();
+    //         })
+    //         .catch((error) => {
+    //             console.error('Ошибка аутентификации:', error);
+    //         });
+    //
+    //     socket.on('connect', () => {
+    //         console.log('Connected to Socket.io');
+    //     });
+    //
+    //     // Добавьте обработчики для событий, которые вам нужно отслеживать
+    //     socket.on('someEvent', (data) => {
+    //         console.log('Received data from server:', data);
+    //     });
+    //
+    //     // Когда компонент размонтируется, отключитесь от сервера
+    //     return () => {
+    //         socket.disconnect();
+    //     };
+    // }, []);
+
     return (
         <RouletteStyled className="roulette">
             <section className="roulette__main">
@@ -54,7 +118,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
                                 {
                                     servers?.map((item: IServers) =>
-                                        <div className={"select-category__column" + (category === item.id ? " _active" : "")}>
+                                        <div key={item.id} className={"select-category__column" + (category === item.id ? " _active" : "")}>
                                             <div className="select-category__item item-select-category">
                                                 <div className="item-select-category__image-block">
                                                     <div className="item-select-category__image">

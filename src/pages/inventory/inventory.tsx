@@ -49,20 +49,36 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                             {isLoad && <Swiper
                                                 slidesPerView={6}
                                                 spaceBetween={37}
+                                                slidesPerGroup={3}
                                                 modules={[Grid, Pagination]}
                                                 navigation={{
-                                                    prevEl: ".purchases-slider__btn_prev",
-                                                    nextEl: ".purchases-slider__btn_next",
+                                                    prevEl: ".purchases-slider__navigation .purchases-slider__btn_prev",
+                                                    nextEl: ".purchases-slider__navigation .purchases-slider__btn_next",
                                                 }}
                                                 pagination={{
                                                     clickable: true,
                                                     el: '.purchases-slider__navigation .purchases-slider__pagination'
                                                 }}
                                                 grid={{rows: 2, fill: "row"}}
+                                                breakpoints={{
+                                                    768: {
+                                                        slidesPerView: 5,
+                                                    },
+                                                    700: {
+                                                        slidesPerView: 4,
+                                                    },
+                                                    540: {
+                                                        slidesPerView: 3,
+                                                    },
+                                                    320: {
+                                                        spaceBetween: 15,
+                                                        slidesPerView: 2,
+                                                    }
+                                                }}
                                             >
                                                 {
-                                                    inventory.map((item: IProduct) =>
-                                                        <SwiperSlide>
+                                                    inventory.map((item: IProduct, index: number) =>
+                                                        <SwiperSlide key={index}>
                                                             <Product data={item} isCanGet={true}/>
                                                         </SwiperSlide>
                                                     )

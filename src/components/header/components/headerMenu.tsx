@@ -5,7 +5,7 @@ interface IMenuProps {
 
 }
 
-export const Menu:React.FC<IMenuProps> = () => {
+export const HeaderMenu:React.FC<IMenuProps> = () => {
 
     const location = useLocation()
 
@@ -42,7 +42,7 @@ export const Menu:React.FC<IMenuProps> = () => {
 
                 {
                     menus.map(item =>
-                        <li className="menu-header__item">
+                        <li key={item.title} className="menu-header__item">
                             {location.pathname === '/' ? <a href={item.link} className="menu-header__link">
                                 {item.title}
                             </a> :

@@ -28,8 +28,6 @@ export const News: React.FC<INewsProps> = () => {
     const navigate = useNavigate()
     const [server, setServer] = useState<IServers>()
 
-    console.log(news)
-
     useEffect(() => {
         axios.get(apiLink('api/news?language=en')).then(({data}) => {
             dispatch(setNews(data.data))

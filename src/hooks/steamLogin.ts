@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {apiLink} from "./apiLink";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import setCookie from "../functions/setCookie";
 import getCookies from "../functions/getCookie";
@@ -11,39 +11,45 @@ export const useSteamLogin = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const [token, setToken] = useState('')
+
     const auth_params = {
         'openid.ns': 'http://specs.openid.net/auth/2.0',
         'openid.mode': 'checkid_setup',
-        'openid.return_to': (window.location.href.includes('localhost') ? 'http://localhost:3000' : 'https://vlasuz.github.io/evilArk') + location.pathname,
-        'openid.realm': (window.location.href.includes('localhost') ? 'http://localhost:3000' : 'https://vlasuz.github.io/evilArk') + location.pathname,
+        'openid.return_to': window.location.origin + location.pathname + "auth-steam",
+        'openid.realm': window.location.origin + location.pathname + "auth-steam",
         'openid.identity': 'http://specs.openid.net/auth/2.0/identifier_select',
         'openid.claimed_id': 'http://specs.openid.net/auth/2.0/identifier_select'
     }
-    const steamData = window.location.href.includes('localhost') ? window.location.href.replace('http://localhost:3000', '').replace(location.pathname, '') : window.location.href.replace('https://vlasuz.github.io/evilArk', '').replace(location.pathname, '')
+    const steamData = window.location.href.replace(window.location.origin, '').replace(location.pathname, '')
     const urlAxios = apiLink(`api/auth/steam/handle${steamData.slice(steamData.indexOf("?"))}`);
+    const urlForAxios = steamData.includes('openid')
 
     useEffect(() => {
 
-        if (steamData.includes('openid')) {
+        if (urlForAxios) {
             axios.post(urlAxios).then(({data}) => {
+                setToken(data.data.access_token)
+                setCookie('access_token', data.data.access_token)
                 dispatch(setUser(data.data))
                 navigate(steamData.slice(0, steamData.indexOf("?")))
-                setCookie('access_token', data.data.access_token)
-            }).catch(er => {
-                console.log('LOGIN', er)
-            })
+            }).catch(er => {console.log('LOGIN', er)})
         } else if (getCookies('access_token')) {
-
             axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
             axios.get(apiLink(`api/users/auth-user`)).then(({data}) => {
-                console.log(data.data)
+                console.log(data)
                 dispatch(setUser(data.data))
-            }).catch(er => {
-                console.log('erLogs', er)
-            })
+            }).catch(er => {console.log('erLogs', er)})
         }
 
     }, [])
+
+    useEffect(() => {
+        if (token.length) {
+            setCookie('access_token', token)
+        }
+    }, [token])
 
     return {auth_params}
 }

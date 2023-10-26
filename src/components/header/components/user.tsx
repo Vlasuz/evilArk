@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useSelector} from "react-redux";
 import {IUser} from "../../../models";
 import {NavLink} from "react-router-dom";
+import {toast} from "react-toastify";
 
 interface IUserProps {
 
@@ -13,6 +14,7 @@ export const User: React.FC<IUserProps> = () => {
     const [isCopied, setIsCopied] = useState(false)
 
     const handleCopy = () => {
+        toast.success('Вы успешно скопировали Steam ID')
         navigator.clipboard.writeText(`${userInfo.steam_id}`).then(r => setIsCopied(true))
     }
 
@@ -37,7 +39,7 @@ export const User: React.FC<IUserProps> = () => {
                     </NavLink>
                     <div className="top-up-balance-header__message">Top up your account</div>
                 </div>
-                <div className="balance-header__value">{userInfo.balance} EC</div>
+                <div className="balance-header__value">{userInfo.balance.toFixed(2)} EC</div>
             </div>
             <div onClick={handleCopy} className="balance-header__id">
                 SteamID

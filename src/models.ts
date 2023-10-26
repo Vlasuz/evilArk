@@ -120,6 +120,13 @@ export interface ISort {
     sortItem: string
 }
 
+export interface IModule {
+    "id": number | string,
+    "name": string,
+    "products": IProduct[]
+
+}
+
 export interface IProduct {
     "id": string | number,
     "name": string,
@@ -135,4 +142,30 @@ export interface IProduct {
     "level": number,
     "quality": string,
     "server": IServers
+}
+
+export interface IProductSingle {
+    "id": 1,
+    "name": "Metal",
+    "description": "“Blueprint’/Game/PrimalEarth/CoreBlueprints/Resources/PrimalItemResource_Metal.PrimalItemResource_Metal'”",
+    "category": ICategory[]
+    "icon": "http://127.0.0.1/storage/products/2024.png",
+    "price": "29.70",
+    "amount": "71",
+    "sales": "3",
+    "sex": "none",
+    "purchase_interval": "00:02",
+    "available": "0",
+    "level": "5",
+    "quality": "6",
+    "server": IServers,
+    "modules": IModule[]
+}
+
+export interface IUserDiscount {
+    description: null | string,
+    discount: number,
+    id: number,
+    user: string,
+    user_id: number
 }

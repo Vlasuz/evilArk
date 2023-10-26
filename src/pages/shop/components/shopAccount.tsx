@@ -31,7 +31,7 @@ export const ShopAccount:React.FC<IShopAccountProps> = ({userInfo}) => {
                     <div
                         className="balance-info-panel-categories__balance-now balance-now-info-panel-categories">
                         <div className="balance-now-info-panel-categories__text">Balance:</div>
-                        <div className="balance-now-info-panel-categories__value">{userInfo.balance} EC</div>
+                        <div className="balance-now-info-panel-categories__value">{userInfo.balance.toFixed(2)} EC</div>
                     </div>
                     <NavLink to={"/profile"}
                        className="balance-info-panel-categories__top-up top-up-info-panel-categories">

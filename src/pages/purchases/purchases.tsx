@@ -5,6 +5,8 @@ import {Product} from "../../components/product/products";
 import {HistoryRouletteItem} from "../../components/historyRouletteItem/historyRouletteItem";
 import {Grid, Pagination} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
+import axios from "axios";
+import {apiLink} from "../../hooks/apiLink";
 
 interface IPurchasesProps {
 
@@ -13,9 +15,17 @@ interface IPurchasesProps {
 export const Purchases: React.FC<IPurchasesProps> = () => {
 
     const [isLoad, setIsLoad] = useState(false)
+    const [arrayPurchases, setArrayPurchases] = useState([])
 
     useEffect(() => {
         setIsLoad(true)
+    }, [])
+
+    useEffect(() => {
+        axios.get(apiLink("api/users/history")).then(({data}) => {
+            console.log('asdasd', data.data)
+            setArrayPurchases(data.data)
+        })
     }, [])
 
     return (
@@ -47,52 +57,35 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                                     el: '.purchases-slider__navigation .purchases-slider__pagination'
                                                 }}
                                                 grid={{rows: 2, fill: "row"}}
+                                                breakpoints={{
+                                                    768: {
+                                                        slidesPerView: 6,
+                                                        grid: {rows: 2, fill: "row"}
+                                                    },
+                                                    700: {
+                                                        slidesPerView: 4,
+                                                        grid: {rows: 2, fill: "row"}
+                                                    },
+                                                    540: {
+                                                        slidesPerView: 3,
+                                                        grid: {rows: 2, fill: "row"}
+                                                    },
+                                                    320: {
+                                                        spaceBetween: 15,
+                                                        slidesPerView: 2,
+                                                        grid: {rows: 2, fill: "row"}
+                                                    }
+                                                }}
                                             >
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
-                                                <SwiperSlide>
-                                                    <Product isCanGet={false}/>
-                                                </SwiperSlide>
+
+                                                {
+                                                    arrayPurchases.map(item =>
+                                                        <SwiperSlide>
+                                                            <Product data={item} isCanGet={false}/>
+                                                        </SwiperSlide>
+                                                    )
+                                                }
+
                                             </Swiper>}
 
                                         </div>

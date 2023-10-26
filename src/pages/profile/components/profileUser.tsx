@@ -6,6 +6,8 @@ import {HistoryDonate} from "../../../components/historyDonate/historyDonate";
 import {useNavigate} from "react-router-dom";
 import setCookie from "../../../functions/setCookie";
 import {setUser} from "../../../redux/toolkitSlice";
+import axios from "axios";
+import {apiLink} from "../../../hooks/apiLink";
 
 interface IProfileUserProps {
 
@@ -37,6 +39,7 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                                 Level: <span>{userInfo.level?.name ?? "Newbie"}</span>
                             </div>
                         </div>
+                        <button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>Exit from site</button>
                     </div>
                     <div className="profile__info info-profile">
                         <div className="info-profile__id" data-da="user-profile__body, 2, 600">
@@ -44,7 +47,7 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                         </div>
                         <div className="info-profile__balance balance-info-profile">
                             <div className="balance-info-profile__text">Balance:</div>
-                            <div className="balance-info-profile__value">{userInfo.balance} EC</div>
+                            <div className="balance-info-profile__value">{userInfo.balance.toFixed(2)} EC</div>
                         </div>
                         <button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>Exit from site</button>
                     </div>

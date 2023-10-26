@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useRef, useState} from 'react'
 import {topUpContext} from "../../context/topUpContext";
 import {useImages} from "../../hooks/images";
 import {useSelector} from "react-redux";
+import axios from "axios";
+import {apiLink} from "../../hooks/apiLink";
 
 interface ITopUpProps {
     isOpen: boolean
@@ -29,6 +31,23 @@ export const TopUp:React.FC<ITopUpProps> = ({isOpen}) => {
             icon: "€",
             value: 3
         },
+        "hryvna": {
+            icon: "HR",
+            value: 6
+        },
+    }
+
+    const handlePay = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault()
+
+        console.log('pay')
+
+        // axios.post(apiLink("api/deposits/create"), {
+        //     "currency": "UA",
+        //     "amount": 500
+        // }).then(({data}) => {
+        //     console.log(data)
+        // }).catch(er => {console.log(er)})
     }
 
     return (
@@ -47,14 +66,14 @@ export const TopUp:React.FC<ITopUpProps> = ({isOpen}) => {
                             </div>
                             <div className="papayment-method-inner-popup__row">
                                 <div className="papayment-method-inner-popup__column">
-                                    <a href="" className="papayment-method-inner-popup__item">
+                                    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">
                                         <div className="papayment-method-inner-popup__image">
                                             <img src={freeKassa} alt="free-kassa" />
                                         </div>
                                     </a>
                                 </div>
                                 <div className="papayment-method-inner-popup__column">
-                                    <a href="" className="papayment-method-inner-popup__item">
+                                    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">
                                         <div className="papayment-method-inner-popup__image">
                                             <img src={wepay} alt="wepay" />
                                         </div>
@@ -66,14 +85,14 @@ export const TopUp:React.FC<ITopUpProps> = ({isOpen}) => {
                             <div className="papayment-method-inner-popup__title">Top-up for EU users</div>
                             <div className="papayment-method-inner-popup__row">
                                 <div className="papayment-method-inner-popup__column">
-                                    <a href="" className="papayment-method-inner-popup__item">
+                                    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">
                                         <div className="papayment-method-inner-popup__image">
                                             <img src={stripe} alt="stripe" />
                                         </div>
                                     </a>
                                 </div>
                                 <div className="papayment-method-inner-popup__column">
-                                    <a href="" className="papayment-method-inner-popup__item">
+                                    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">
                                         <div className="papayment-method-inner-popup__image">
                                             <img src={paypalTopUp} alt="paypal" />
                                         </div>
