@@ -31,6 +31,9 @@ export const HeaderStyled = styled.header`
       color: #fff;
       transition: all 0.3s ease 0s;
     }
+    option {
+      color: #000000;
+    }
   }
 
   .header__servers::before {
