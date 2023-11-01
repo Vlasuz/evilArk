@@ -3,12 +3,14 @@ import {HistoryDonateItem} from "./components/historyDonateItem";
 import {Grid, Pagination} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Product} from "../product/products";
+import {apiLink} from "../../hooks/apiLink";
+import axios from 'axios';
 
 interface IHistoryDonateProps {
-
+    data: any
 }
 
-export const HistoryDonate: React.FC<IHistoryDonateProps> = () => {
+export const HistoryDonate: React.FC<IHistoryDonateProps> = ({data}) => {
 
     const [isLoad, setIsLoad] = useState(false)
 
@@ -24,9 +26,10 @@ export const HistoryDonate: React.FC<IHistoryDonateProps> = () => {
 
             {isLoad && <Swiper
                 slidesPerView={1}
-                grid={{rows: 3, fill: "row"}}
                 spaceBetween={20}
+                slidesPerGroup={1}
                 modules={[Grid, Pagination]}
+                grid={{rows: 6, fill: "row"}}
                 navigation={{
                     prevEl: ".purchases-slider__btn_prev",
                     nextEl: ".purchases-slider__btn_next",
@@ -45,51 +48,13 @@ export const HistoryDonate: React.FC<IHistoryDonateProps> = () => {
                     }
                 }}
             >
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <HistoryDonateItem/>
-                </SwiperSlide>
+                {
+                    data?.map((item: any) =>
+                        <SwiperSlide key={item?.id}>
+                            <HistoryDonateItem data={item}/>
+                        </SwiperSlide>
+                    )
+                }
             </Swiper>}
 
             <div className="purchases-slider__navigation">

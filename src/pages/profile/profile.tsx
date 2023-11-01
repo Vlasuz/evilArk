@@ -4,6 +4,8 @@ import {ProfileUser} from "./components/profileUser";
 import {Footer} from "../../components/footer/footer";
 import {TopUp} from "../../components/topUp/topUp";
 import {topUpContext} from '../../context/topUpContext';
+import axios from "axios";
+import {apiLink} from "../../hooks/apiLink";
 
 interface IProfileProps {
 

@@ -4,6 +4,7 @@ import {useImages} from "../../hooks/images";
 import {useSelector} from "react-redux";
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
+import getCookies from "../../functions/getCookie";
 
 interface ITopUpProps {
     isOpen: boolean
@@ -22,32 +23,18 @@ export const TopUp:React.FC<ITopUpProps> = ({isOpen}) => {
         isPopupOpen(false)
     }
 
-    const currencyIcon: any = {
-        "dollar": {
-            icon: "$",
-            value: 2
-        },
-        "euro": {
-            icon: "€",
-            value: 3
-        },
-        "hryvna": {
-            icon: "HR",
-            value: 6
-        },
-    }
-
     const handlePay = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault()
 
-        console.log('pay')
-
-        // axios.post(apiLink("api/deposits/create"), {
-        //     "currency": "UA",
-        //     "amount": 500
-        // }).then(({data}) => {
-        //     console.log(data)
-        // }).catch(er => {console.log(er)})
+        axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
+        axios.post(apiLink("api/payment"), {
+            "currency": infoForPay.currency,
+            "amount": infoForPay.value
+        }).then(({data}) => {
+            if(data.data.success) {
+                window.location.href = data.data.url
+            }
+        }).catch(er => {console.log(er)})
     }
 
     return (
@@ -57,7 +44,7 @@ export const TopUp:React.FC<ITopUpProps> = ({isOpen}) => {
                     <div className="popup__title">Choose how you will top up</div>
                     <div className="popup__inner inner-popup">
                         <div className="inner-popup__payment">
-                            Payment: <span>{infoForPay?.value}{currencyIcon[infoForPay.currency]?.icon}</span>
+                            Payment: <span>{infoForPay?.value}{infoForPay?.icon}</span>
                         </div>
                         <div className="inner-popup__payment-method papayment-method-inner-popup">
                             <div className="papayment-method-inner-popup__title">Replenishment for Soviet Union
@@ -72,32 +59,32 @@ export const TopUp:React.FC<ITopUpProps> = ({isOpen}) => {
                                         </div>
                                     </a>
                                 </div>
-                                <div className="papayment-method-inner-popup__column">
-                                    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">
-                                        <div className="papayment-method-inner-popup__image">
-                                            <img src={wepay} alt="wepay" />
-                                        </div>
-                                    </a>
-                                </div>
+                                {/*<div className="papayment-method-inner-popup__column">*/}
+                                {/*    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">*/}
+                                {/*        <div className="papayment-method-inner-popup__image">*/}
+                                {/*            <img src={wepay} alt="wepay" />*/}
+                                {/*        </div>*/}
+                                {/*    </a>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                         <div className="inner-popup__payment-method papayment-method-inner-popup">
-                            <div className="papayment-method-inner-popup__title">Top-up for EU users</div>
+                            {/*<div className="papayment-method-inner-popup__title">Top-up for EU users</div>*/}
                             <div className="papayment-method-inner-popup__row">
-                                <div className="papayment-method-inner-popup__column">
-                                    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">
-                                        <div className="papayment-method-inner-popup__image">
-                                            <img src={stripe} alt="stripe" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div className="papayment-method-inner-popup__column">
-                                    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">
-                                        <div className="papayment-method-inner-popup__image">
-                                            <img src={paypalTopUp} alt="paypal" />
-                                        </div>
-                                    </a>
-                                </div>
+                                {/*<div className="papayment-method-inner-popup__column">*/}
+                                {/*    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">*/}
+                                {/*        <div className="papayment-method-inner-popup__image">*/}
+                                {/*            <img src={stripe} alt="stripe" />*/}
+                                {/*        </div>*/}
+                                {/*    </a>*/}
+                                {/*</div>*/}
+                                {/*<div className="papayment-method-inner-popup__column">*/}
+                                {/*    <a href="" onClick={handlePay} className="papayment-method-inner-popup__item">*/}
+                                {/*        <div className="papayment-method-inner-popup__image">*/}
+                                {/*            <img src={paypalTopUp} alt="paypal" />*/}
+                                {/*        </div>*/}
+                                {/*    </a>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     </div>

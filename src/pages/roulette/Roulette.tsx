@@ -1,106 +1,104 @@
 import React, {useEffect, useState} from 'react'
 import {Footer} from "../../components/footer/footer";
 import mainImg from './../../assets/img/roulette/main-img.jpg'
-import {IServers} from "../../models";
+import {IProduct, IServers} from "../../models";
 import {useImages} from "../../hooks/images";
 import {RouletteItem} from "./components/rouletteItem";
 import {HistoryRouletteItem} from "../../components/historyRouletteItem/historyRouletteItem";
 import {useDispatch, useSelector} from "react-redux";
-import { setCategory } from '../../redux/toolkitSlice';
+import {changeUserBalance, setCategory} from '../../redux/toolkitSlice';
 import {Swiper, SwiperSlide} from "swiper/react";
 import {RouletteStyled} from "./roulette.styled";
-import {Pagination} from "swiper";
+import {Grid, Pagination} from "swiper";
 import io from 'socket.io-client';
 import getCookies from "../../functions/getCookie";
 import axios from 'axios';
+import {apiLink} from "../../hooks/apiLink";
+import {toast} from "react-toastify";
+import {notifications} from "../../hooks/notifications";
 
 interface IRouletteProps {
 
 }
 
 export const Roulette: React.FC<IRouletteProps> = () => {
-    const {placeholder, profit, servers_2, servers_3, servers_4, servers_6, servers_5, servers_1} = useImages()
+    const {placeholder, profit} = useImages()
 
     const dispatch = useDispatch()
     const servers: IServers[] = useSelector((state: any) => state.toolkit.servers)
     const category: string = useSelector((state: any) => state.toolkit.category)
 
     const [isLoad, setIsLoad] = useState(false)
+    const [roulettesCases, setRoulettesCases] = useState([])
+    const [activeCase, setActiveCase]: any = useState({})
+    const [itemsForRoll, setItemsForRoll]: any = useState([])
+    const [winnerItem, setWinnerItem] = useState<IProduct | null>(null)
+    const [rouletteHistory, setRouletteHistory] = useState([])
 
     useEffect(() => {
-        setIsLoad(true)
-    }, [])
+        setItemsForRoll([])
+        if (!activeCase || !Object.keys(activeCase).length) return
+
+        for (let i = 0; i < 50; i++) {
+            const randomIndex = Math.floor(Math.random() * activeCase.products.length);
+            const randomItem = activeCase.products[randomIndex];
+            setItemsForRoll((prev: any) => [...prev, randomItem])
+        }
+    }, [activeCase])
 
     const [isStartRoulette, setIsStartRoulette] = useState(false)
 
-    const handleStartRoulette = () => {
-        setIsStartRoulette(true)
+    useEffect(() => {
+        axios.get(apiLink("api/roulettes?server_id=" + category)).then(({data}) => {
+            setRoulettesCases(data.data)
+            setActiveCase(data.data[0])
+        }).catch(er => console.log(er))
+    }, [category])
 
-        setTimeout(() => {
-            setIsStartRoulette(false)
-        }, 11000)
+    const handleSelectCase = (caseData: any) => {
+        if (caseData.id === activeCase.id) return
+
+        axios.get(apiLink("api/roulette/" + caseData.id)).then(({data}) => {
+            setActiveCase(data.data)
+        }).catch(er => console.log(er))
     }
 
-    // useEffect(() => {
-    //     // console.log(getCookies("access_token"))
-    //
-    //     const socket = io('http://localhost:6001', {
-    //         transportOptions: {
-    //             polling: {
-    //                 extraHeaders: {
-    //                     Authorization: `Bearer ${getCookies("access_token")}`, // Здесь yourToken - ваш JWT-токен
-    //                 },
-    //             },
-    //         },
-    //     });
-    //
-    //     socket.on('connect', () => {
-    //         console.log('WebSocket соединение установлено.');
-    //     });
-    //
-    //     return () => {
-    //         socket.disconnect();
-    //     };
-    // }, []);
+    const handleStartRoulette = () => {
 
-    // useEffect(() => {
-    //     const socket = io('http://localhost:6001');
-    //
-    //     console.log(socket)
-    //
-    //     // Выполните POST-запрос к authEndpoint для получения аутентификационных данных
-    //     axios.post('http://localhost/broadcasting/auth') // Замените на актуальный URL
-    //         .then((response) => {
-    //             const authData = {
-    //                 headers: {
-    //                     Authorization: `Bearer ${getCookies("access_token")}`, // Пример аутентификационных данных
-    //                 },
-    //             };
-    //
-    //             console.log(authData)
-    //
-    //             // @ts-ignore
-    //             socket.io.opts.extraHeaders = authData;
-    //             socket.connect();
-    //         })
-    //         .catch((error) => {
-    //             console.error('Ошибка аутентификации:', error);
-    //         });
-    //
-    //     socket.on('connect', () => {
-    //         console.log('Connected to Socket.io');
-    //     });
-    //
-    //     // Добавьте обработчики для событий, которые вам нужно отслеживать
-    //     socket.on('someEvent', (data) => {
-    //         console.log('Received data from server:', data);
-    //     });
-    //
-    //     // Когда компонент размонтируется, отключитесь от сервера
-    //     return () => {
-    //         socket.disconnect();
-    //     };
-    // }, []);
+        axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
+        axios.post(apiLink("api/roulettes/play/" + activeCase.id), {
+            "server_id": category
+        }).then(({data}) => {
+            console.log(data.data)
+            if(data.data?.status === false) {
+                notifications(data.data.message)
+                return;
+            }
+
+            dispatch(changeUserBalance(activeCase.cost))
+
+            setTimeout(() => {
+                toast.success("Поздравляем! Вы выиграли " + data.data?.name)
+            }, 10300)
+
+            setIsStartRoulette(true)
+
+            setTimeout(() => {
+                setIsStartRoulette(false)
+            }, 16000)
+
+            setWinnerItem(data.data)
+        }).catch(er => {
+            er.response?.status === 401 && notifications(er.response.status)
+        })
+    }
+
+    useEffect(() => {
+        axios.get(apiLink("api/users/users-roulette-history?max_length=6")).then(({data}) => {
+            setIsLoad(true)
+            setRouletteHistory(data.data)
+        }).catch(er => console.log(er))
+    }, [])
 
     return (
         <RouletteStyled className="roulette">
@@ -118,52 +116,44 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
                                 {
                                     servers?.map((item: IServers) =>
-                                        <div key={item.id} className={"select-category__column" + (category === item.id ? " _active" : "")}>
+                                        <div key={item.id}
+                                             className={"select-category__column" + (category === item.id ? " _active" : "")}>
                                             <div className="select-category__item item-select-category">
                                                 <div className="item-select-category__image-block">
                                                     <div className="item-select-category__image">
-                                                        <img src={item.image.length ? item.image : placeholder} alt="4 man shop"/>
+                                                        <img src={item.image.length ? item.image : placeholder}/>
                                                     </div>
                                                     <div className="item-select-category__label">
                                                         {item.name}
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button onClick={_ => dispatch(setCategory(item.id))} className="select-category__btn btn btn_small">Choose</button>
+                                            <button onClick={_ => dispatch(setCategory(item.id))}
+                                                    className="select-category__btn btn btn_small">Choose
+                                            </button>
                                         </div>
                                     )
                                 }
 
                             </div>
                         </div>
-                        <div className="roulette__inner">
+                        {category && <div className="roulette__inner">
                             <div className="roulette__filter filter-roulette">
                                 <div className="filter-roulette__categories categories-filter-roulette">
                                     <div className="categories-filter-roulette__items">
-                                        <div className="categories-filter-roulette__item">
-                                            <div
-                                                className="categories-filter-roulette__link categories-filter-roulette__link_blue">
-                                                Roulette 1
-                                            </div>
-                                        </div>
-                                        <div className="categories-filter-roulette__item">
-                                            <div
-                                                className="categories-filter-roulette__link categories-filter-roulette__link_orange">
-                                                Roulette 2
-                                            </div>
-                                        </div>
-                                        <div className="categories-filter-roulette__item">
-                                            <div
-                                                className="categories-filter-roulette__link categories-filter-roulette__link_blue">
-                                                Roulette 3
-                                            </div>
-                                        </div>
-                                        <div className="categories-filter-roulette__item">
-                                            <div
-                                                className="categories-filter-roulette__link categories-filter-roulette__link_orange">
-                                                Roulette 4
-                                            </div>
-                                        </div>
+
+                                        {
+                                            roulettesCases.map((item: any) =>
+                                                <div key={item.id} onClick={_ => handleSelectCase(item)}
+                                                     className={"categories-filter-roulette__item"}>
+                                                    <div
+                                                        className={"categories-filter-roulette__link categories-filter-roulette__link_blue" + (activeCase.id === item.id ? " active" : "")}>
+                                                        {item.name}
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+
                                     </div>
                                 </div>
                                 <div className="filter-roulette__games games-filter-roulette">
@@ -171,255 +161,82 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                         <div className="title-games-filter-roulette__icon">
                                             <img src={profit} alt="profit"/>
                                         </div>
-                                        <div className="title-games-filter-roulette__text">Game cost 5 ec</div>
+                                        <div className="title-games-filter-roulette__text">Game
+                                            cost {activeCase?.cost} ec
+                                        </div>
                                     </div>
                                     <div className="games-filter-roulette__slider">
 
                                         <div className="games-filter-roulette__items">
-                                            <RouletteItem isStart={isStartRoulette} data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
-                                            <RouletteItem data={{name: "Title 2", image: servers_2}}/>
-                                            <RouletteItem data={{name: "Title 6", image: servers_1}}/>
-                                            <RouletteItem data={{name: "123 asda", image: servers_3}}/>
-                                            <RouletteItem data={{name: "92130c xc", image: servers_4}}/>
-                                            <RouletteItem data={{name: "xcvsdefrq asd asdasd as d", image: servers_5}}/>
-                                            <RouletteItem data={{name: "123", image: servers_6}}/>
+
+                                            {
+                                                itemsForRoll?.map((item: IProduct, index: number) => <RouletteItem
+                                                    key={index} isStart={index === 0 ? isStartRoulette : null} data={{
+                                                    name: index !== 35 ? item.name : winnerItem?.name,
+                                                    image: index !== 35 ? item.icon : winnerItem?.icon
+                                                }}/>)
+                                            }
+
                                         </div>
 
                                         <div className="games-filter-roulette__row">
-                                            <div className="games-filter-roulette__element" />
-                                            <div className="games-filter-roulette__column games-filter-roulette__column_hide" />
-                                            <div className="games-filter-roulette__column" />
-                                            <div className="games-filter-roulette__column games-filter-roulette__column_border">
-                                                <span />
+                                            <div className="games-filter-roulette__element"/>
+                                            <div
+                                                className="games-filter-roulette__column games-filter-roulette__column_hide"/>
+                                            <div className="games-filter-roulette__column"/>
+                                            <div
+                                                className="games-filter-roulette__column games-filter-roulette__column_border">
+                                                <span/>
                                             </div>
-                                            <div className="games-filter-roulette__column" />
-                                            <div className="games-filter-roulette__column games-filter-roulette__column_hide" />
+                                            <div className="games-filter-roulette__column"/>
+                                            <div
+                                                className="games-filter-roulette__column games-filter-roulette__column_hide"/>
                                         </div>
                                     </div>
                                     <div className="filter-roulette__btn-block">
-                                        <button onClick={handleStartRoulette} className="filter-roulette__btn btn btn_small">Play</button>
+                                        <button onClick={handleStartRoulette}
+                                                className="filter-roulette__btn btn btn_small">Play
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                             <div className="roulette__users users">
+
                                 <div className="users__swiper swiper">
+
                                     {isLoad && <Swiper
                                         slidesPerView={1}
-                                        modules={[Pagination]}
+                                        spaceBetween={20}
+                                        slidesPerGroup={1}
+                                        modules={[Grid, Pagination]}
+                                        grid={{rows: 4, fill: "row"}}
                                         navigation={{
-                                            prevEl: ".users__navigation .users__btn_prev",
-                                            nextEl: ".users__navigation .users__btn_next",
+                                            prevEl: ".purchases-slider__btn.purchases-slider__btn_prev",
+                                            nextEl: ".purchases-slider__btn.purchases-slider__btn_next",
                                         }}
                                         pagination={{
                                             clickable: true,
-                                            el: '.users__navigation .users__pagination'
+                                            el: '.purchases-slider__pagination'
                                         }}
                                     >
-                                        <SwiperSlide>
-                                            <HistoryRouletteItem/>
-                                            <HistoryRouletteItem/>
-                                            <HistoryRouletteItem/>
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <HistoryRouletteItem/>
-                                            <HistoryRouletteItem/>
-                                            <HistoryRouletteItem/>
-                                        </SwiperSlide>
+                                        {
+                                            rouletteHistory.map((item: any, index) =>
+                                                <SwiperSlide key={index}>
+                                                    <HistoryRouletteItem data={item}/>
+                                                </SwiperSlide>
+                                            )
+                                        }
                                     </Swiper>}
-
-                                    <div className="users__navigation">
-                                        <div className="users__btn users__btn_prev"/>
-                                        <div className="users__pagination"/>
-                                        <div className="users__btn users__btn_next"/>
-                                    </div>
                                 </div>
+
+                                <div className="purchases-slider__navigation">
+                                    <div className="purchases-slider__btn purchases-slider__btn_prev"/>
+                                    <div className="purchases-slider__pagination"/>
+                                    <div className="purchases-slider__btn purchases-slider__btn_next"/>
+                                </div>
+
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </section>

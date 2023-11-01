@@ -22,9 +22,6 @@ export const ShopAccount:React.FC<IShopAccountProps> = ({userInfo}) => {
                             {userInfo.name}
                         </div>
                         <div className="user-info-panel-categories__id">SteamID: {userInfo.steam_id}</div>
-                        <a href="" className="user-info-panel-categories__agreement">
-                            Service Agreement
-                        </a>
                     </div>
                 </div>
                 <div className="info-panel-categories__balance balance-info-panel-categories">

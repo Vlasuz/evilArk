@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import {useImages} from "../../../hooks/images";
 
 interface IRouletteItemProps {
-    isStart?: boolean
+    isStart?: boolean | null
     data: any
 }
 

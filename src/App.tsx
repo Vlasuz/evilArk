@@ -5,7 +5,7 @@ import './assets/js/app.min'
 import {Sidebar} from "./components/sidebar/sidebar";
 import {SvgIcons} from "./components/svgIcons/svgIcons";
 import {responsiveSite} from "./functions/responsive";
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {
     TransitionGroup,
@@ -28,6 +28,7 @@ function App() {
 
     const dispatch = useDispatch()
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
+    const navigate = useNavigate()
 
     useEffect(() => {
         responsiveSite()
@@ -38,6 +39,12 @@ function App() {
 
         if(window.location.href.includes("?cluster")) {
             dispatch(setCategory(window.location.href.slice(window.location.href.indexOf("?cluster") + 9, window.location.href.indexOf("&") > 0 ? window.location.href.indexOf("&") : undefined)))
+        } else if (window.location.href.includes("?payment=true")) {
+            toast.success('Оплата прошла успешно!')
+            navigate('/')
+        } else if (window.location.href.includes("?payment=false")) {
+            toast.error('К сожалению оплата не прошла успешно!')
+            navigate('/')
         }
     }, [])
 

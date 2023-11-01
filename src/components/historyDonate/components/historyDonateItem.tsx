@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
+import {currencyList} from "../../../functions/currencyList";
 
 interface IHistoryDonateItemProps {
-
+    data: any
 }
 
-export const HistoryDonateItem:React.FC<IHistoryDonateItemProps> = () => {
+export const HistoryDonateItem:React.FC<IHistoryDonateItemProps> = ({data}) => {
 
     return (
         <div className="history-profile__column">
@@ -18,7 +19,7 @@ export const HistoryDonateItem:React.FC<IHistoryDonateItemProps> = () => {
                     </div>
                     <div
                         className="date-item-history-profile__value">
-                        09/11/2023
+                        {data.created_at.slice(0, data.created_at.indexOf(" ")).replaceAll("-", "/")}
                     </div>
                 </div>
                 <div
@@ -29,7 +30,7 @@ export const HistoryDonateItem:React.FC<IHistoryDonateItemProps> = () => {
                     </div>
                     <div
                         className="amount-item-history-profile__value">
-                        100$
+                        {data.amount.real} {currencyList.filter((item: any) => item.currency === data.currency)[0].icon}
                     </div>
                 </div>
             </div>

@@ -49,7 +49,7 @@ export const About: React.FC<IAboutProps> = () => {
                                 <div key={index} className="sobre-nosotros__column">
                                     <div className="sobre-nosotros__item item-sobre-nosotros">
                                         <div className="item-sobre-nosotros__image">
-                                            <img src={item.icon ? apiLink(item.icon) : placeholder} alt="Comunidad"/>
+                                            <img src={item.icon ?? placeholder} alt="Comunidad"/>
                                         </div>
                                         <div className="item-sobre-nosotros__title">
                                             {item.title}

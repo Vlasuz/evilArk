@@ -15,17 +15,18 @@ interface IPurchasesProps {
 export const Purchases: React.FC<IPurchasesProps> = () => {
 
     const [isLoad, setIsLoad] = useState(false)
-    const [arrayPurchases, setArrayPurchases] = useState([])
-
-    useEffect(() => {
-        setIsLoad(true)
-    }, [])
+    const [historyPurchases, setHistoryPurchases] = useState([])
+    const [historyRoulette, setHistoryRoulette] = useState([])
 
     useEffect(() => {
         axios.get(apiLink("api/users/history")).then(({data}) => {
-            console.log('asdasd', data.data)
-            setArrayPurchases(data.data)
+            setHistoryPurchases(data.data)
+            setIsLoad(true)
         })
+
+        axios.get(apiLink("api/users/roulette-history")).then(({data}) => {
+            setHistoryRoulette(data.data)
+        }).catch(er => console.log(er))
     }, [])
 
     return (
@@ -47,7 +48,9 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                             {isLoad && <Swiper
                                                 slidesPerView={6}
                                                 spaceBetween={37}
+                                                slidesPerGroup={6}
                                                 modules={[Grid, Pagination]}
+                                                grid={{rows: 2, fill: "row"}}
                                                 navigation={{
                                                     prevEl: ".purchases-slider__navigation .purchases-slider__btn_prev",
                                                     nextEl: ".purchases-slider__navigation .purchases-slider__btn_next",
@@ -56,7 +59,6 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                                     clickable: true,
                                                     el: '.purchases-slider__navigation .purchases-slider__pagination'
                                                 }}
-                                                grid={{rows: 2, fill: "row"}}
                                                 breakpoints={{
                                                     768: {
                                                         slidesPerView: 6,
@@ -64,23 +66,26 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                                     },
                                                     700: {
                                                         slidesPerView: 4,
+                                                        slidesPerGroup: 4,
                                                         grid: {rows: 2, fill: "row"}
                                                     },
                                                     540: {
                                                         slidesPerView: 3,
+                                                        slidesPerGroup: 3,
                                                         grid: {rows: 2, fill: "row"}
                                                     },
                                                     320: {
                                                         spaceBetween: 15,
                                                         slidesPerView: 2,
+                                                        slidesPerGroup: 2,
                                                         grid: {rows: 2, fill: "row"}
                                                     }
                                                 }}
                                             >
 
                                                 {
-                                                    arrayPurchases.map(item =>
-                                                        <SwiperSlide>
+                                                    historyPurchases.map((item, index) =>
+                                                        <SwiperSlide key={index}>
                                                             <Product data={item} isCanGet={false}/>
                                                         </SwiperSlide>
                                                     )
@@ -103,7 +108,10 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
 
                                         {isLoad && <Swiper
                                             slidesPerView={1}
-                                            modules={[Pagination]}
+                                            spaceBetween={20}
+                                            slidesPerGroup={1}
+                                            modules={[Grid, Pagination]}
+                                            grid={{rows: 6, fill: "row"}}
                                             navigation={{
                                                 prevEl: ".users__navigation .users__btn_prev",
                                                 nextEl: ".users__navigation .users__btn_next",
@@ -113,16 +121,13 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                                 el: '.users__navigation .users__pagination'
                                             }}
                                         >
-                                            <SwiperSlide>
-                                                <HistoryRouletteItem/>
-                                                <HistoryRouletteItem/>
-                                                <HistoryRouletteItem/>
-                                            </SwiperSlide>
-                                            <SwiperSlide>
-                                                <HistoryRouletteItem/>
-                                                <HistoryRouletteItem/>
-                                                <HistoryRouletteItem/>
-                                            </SwiperSlide>
+                                            {
+                                                historyRoulette.map((item: any, index) =>
+                                                    <SwiperSlide key={index}>
+                                                        <HistoryRouletteItem data={item}/>
+                                                    </SwiperSlide>
+                                                )
+                                            }
                                         </Swiper>}
 
                                         <div className="users__navigation">

@@ -3,6 +3,10 @@ import {toast} from "react-toastify";
 export const notifications = (data: any) => {
 
     const notifies: any = {
+        "401": {
+            type: "error",
+            message: "Для начала вам надо авторизироваться",
+        },
         "Product issued": {
             type: "error",
             message: "Предмет был успешно куплен и выдан в игре",
@@ -34,6 +38,10 @@ export const notifications = (data: any) => {
         "Get in game. The servers are down": {
             type: "error",
             message: "К сожалению сервера закрыты для выдачи предметов",
+        },
+        "fill_the_field_for_payment": {
+            type: "info",
+            message: "Пожалуйста введите сумму пополнения",
         },
     }
 

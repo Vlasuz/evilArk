@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {IUser} from "../../../models";
 import {Calculator} from "../../../components/calculator/calculator";
@@ -18,6 +18,7 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [donateHistory, setDonateHistory] = useState<any>([])
 
     const handleExit = () => {
         setCookie("access_token", '')
@@ -25,12 +26,19 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
         navigate('/')
     }
 
+    useEffect(() => {
+        axios.get(apiLink("api/deposits/history")).then(({data}) => {
+            setDonateHistory(data.data)
+        }).catch(er => console.log(er))
+
+    }, [])
+
     return (
         <div className="inner__content content-inner">
             <div className="content-inner__body">
                 <div className="profile__row">
                     <div className="profile__user user-profile">
-                        <div className="user-profile__image green">
+                        <div className="user-profile__image" style={{borderColor: userInfo?.level?.color_number}}>
                             <img src={userInfo.avatar} alt="user-icon.svg"/>
                         </div>
                         <div className="user-profile__body">
@@ -47,14 +55,14 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                         </div>
                         <div className="info-profile__balance balance-info-profile">
                             <div className="balance-info-profile__text">Balance:</div>
-                            <div className="balance-info-profile__value">{userInfo.balance.toFixed(2)} EC</div>
+                            <div className="balance-info-profile__value">{userInfo.balance?.toFixed(2)} EC</div>
                         </div>
                         <button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>Exit from site</button>
                     </div>
                 </div>
 
                 <Calculator/>
-                <HistoryDonate/>
+                {donateHistory.length && <HistoryDonate data={donateHistory}/>}
             </div>
         </div>
     )

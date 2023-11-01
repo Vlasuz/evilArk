@@ -56,7 +56,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
 
             dispatch(changeUserBalance(product?.price && +product?.price * count))
         }).catch(er => {
-            console.log(er)
+            notifications(er.response.status)
             setIsLoading(false)
         })
     }

@@ -28,8 +28,8 @@ export interface IUser {
     email: string | null
     id: number | string
     level: {
-        color_number: null | string
-        name: null | string
+        color_number: string
+        name: string
     }
     local_country_code: string
     name: string
