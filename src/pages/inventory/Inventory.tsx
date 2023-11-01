@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Footer} from '../../components/footer/footer'
-import {ProfileSidebar} from "../../components/profileSidebar/profileSidebar";
+import {ProfileSidebar} from "../../components/profileSidebar/ProfileSidebar";
 import {Product} from "../../components/product/products";
 import {Swiper} from "swiper/react";
 import {SwiperSlide} from "swiper/react";
@@ -11,6 +11,7 @@ import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
 import getCookies from "../../functions/getCookie";
 import {IProduct} from "../../models";
+import {Translate} from "../../components/translate/Translate";
 
 interface IInventoryProps {
 
@@ -24,7 +25,6 @@ export const Inventory: React.FC<IInventoryProps> = () => {
     useEffect(() => {
         axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.get(apiLink('api/users/inventory')).then(({data}) => {
-            console.log(data)
             setInventory(data.data)
             setIsLoad(true)
         }).catch(er => {console.log(er)})
@@ -35,15 +35,14 @@ export const Inventory: React.FC<IInventoryProps> = () => {
             <section className="inventory__main">
                 <div className="inventory__container container">
                     <div className="inventory__body">
-                        <h2 className="inventory__title title-h2">Inventory</h2>
+                        <h2 className="inventory__title title-h2">
+                            <Translate>my_inventory</Translate>
+                        </h2>
                         <div className="inventory__inner inner">
                             <div className="inner__row">
                                 <ProfileSidebar/>
                                 <div className="inner__content content-inner">
                                     <div className="content-inner__body">
-                                        <div className="replenishment-bonuses__title">
-                                            Store purchase history
-                                        </div>
                                         <div className="purchases__items">
 
                                             {isLoad && <Swiper

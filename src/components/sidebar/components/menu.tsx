@@ -13,7 +13,6 @@ export const Menu:React.FC<IMenuProps> = () => {
     const {sidebarRolette, sidebarHome, sidebarShop} = useImages()
 
     const dispatch = useDispatch()
-    const isChosenCategory = useSelector((state: any) => state.toolkit.category)
 
     return (
         <nav className="sidebar__menu menu-sidebar">
@@ -27,7 +26,7 @@ export const Menu:React.FC<IMenuProps> = () => {
                     </NavLink>
                 </li>
                 <li className="menu-sidebar__item">
-                    <NavLink to={isChosenCategory ? '/shop' : '/category'} onClick={_ => dispatch(setPage('/shop'))} className="menu-sidebar__link">
+                    <NavLink to={'/shop'} onClick={_ => dispatch(setPage('/shop'))} className="menu-sidebar__link">
                         <img src={sidebarShop} alt="shop"/>
                         <span>
                             <Translate>text_shop</Translate>
@@ -35,7 +34,7 @@ export const Menu:React.FC<IMenuProps> = () => {
                     </NavLink>
                 </li>
                 <li className="menu-sidebar__item">
-                    <NavLink to={isChosenCategory ? '/roulette' : '/category'} onClick={_ => dispatch(setPage('/roulette'))} className="menu-sidebar__link">
+                    <NavLink to={'/roulette'} onClick={_ => dispatch(setPage('/roulette'))} className="menu-sidebar__link">
                         <img src={sidebarRolette} alt="roulette"/>
                         <span>
                             <Translate>text_roulette</Translate>

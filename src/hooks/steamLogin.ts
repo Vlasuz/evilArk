@@ -17,8 +17,8 @@ export const useSteamLogin = () => {
     const auth_params = {
         'openid.ns': 'http://specs.openid.net/auth/2.0',
         'openid.mode': 'checkid_setup',
-        'openid.return_to': window.location.origin + location.pathname + "auth-steam",
-        'openid.realm': window.location.origin + location.pathname + "auth-steam",
+        'openid.return_to': window.location.origin + location.pathname,
+        'openid.realm': window.location.origin + location.pathname,
         'openid.identity': 'http://specs.openid.net/auth/2.0/identifier_select',
         'openid.claimed_id': 'http://specs.openid.net/auth/2.0/identifier_select'
     }

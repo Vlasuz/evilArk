@@ -1,16 +1,20 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useHeaderScroll} from "../../hooks/headerScroll";
-import {HeaderMenu} from "./components/headerMenu";
+import {HeaderMenu} from "./components/HeaderMenu";
 import {Menu} from "../sidebar/components/menu";
-import {Languages} from "./components/languages";
+import {HeaderLanguages} from "./components/HeaderLanguages";
 import {useImages} from "../../hooks/images";
 import {NavLink, useLocation, useNavigate} from 'react-router-dom';
-import {User} from "./components/user";
-import {Login} from "./components/login";
-import {useSelector} from "react-redux";
-import {IGeneralInfo} from "../../models";
+import {HeaderUser} from "./components/HeaderUser";
+import {HeaderLogin} from "./components/HeaderLogin";
+import {useDispatch, useSelector} from "react-redux";
+import {ICategory, IGeneralInfo, IServers, IUser} from "../../models";
 import {Translate} from "../translate/Translate";
 import logo from "../../assets/img/logo.svg";
+import axios from "axios";
+import {apiLink} from "../../hooks/apiLink";
+import {HeaderStyled} from "./Header.styles";
+import {setCategory} from "../../redux/toolkitSlice";
 
 interface IHeaderProps {
 
@@ -21,10 +25,15 @@ export const Header: React.FC<IHeaderProps> = () => {
 
     const {isFixed} = useHeaderScroll()
 
-    const userInfo = useSelector((state: any) => state.toolkit.user)
+    const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
     const generalInfo: IGeneralInfo = useSelector((state: any) => state.toolkit.generalInfo)
+    const category: IServers = useSelector((state: any) => state.toolkit.category)
 
     const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false)
+    const [categories, setCategories] = useState<IServers[]>([])
+    const dispatch = useDispatch()
+
+    const selectBlock: any = useRef(null)
 
     window.addEventListener('click', (e: any) => {
         if(!e.target.closest('.header-mobile') && !e.target.closest('.header__burger')) setIsOpenMobileMenu(false)
@@ -34,20 +43,37 @@ export const Header: React.FC<IHeaderProps> = () => {
         isOpenMobileMenu ? document.querySelector('body')?.classList.add('product-select') : document.querySelector('body')?.classList.remove('product-select')
     }, [isOpenMobileMenu])
 
+    useEffect(() => {
+        axios.get(apiLink("api/servers")).then(({data}) => {
+            setCategories(data.data)
+        }).catch(er => console.log(er))
+    }, [])
+
+    useEffect(() => {
+        selectBlock.current.value = JSON.stringify(category)
+    }, [category])
+
+    const handleClusterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setCategory(JSON.parse(e.target.value)))
+    }
+
     return (
-        <>
+        <HeaderStyled>
             <div className={"header-mobile mobile-header" + (isOpenMobileMenu ? " active" : "")}>
                 <div className="mobile-header__top top-mobile-header">
                     <button onClick={_ => setIsOpenMobileMenu(false)} className="top-mobile-header__btn">
                         <img src={arrowWhite} alt="arrow"/>
                     </button>
+                    <div className="header__servers">
+                        <select ref={selectBlock} onChange={handleClusterChange}>
+                            {categories.length && categories?.map(item => <option key={item.id} value={JSON.stringify(item)}>{item.name}</option>)}
+                        </select>
+                    </div>
                     {!!Object.keys(userInfo).length && <div className="balance-header__body" data-da="top-mobile-header, 1, 480">
                         <div className="balance-header__bonuses bonuses-balance-header">
                             <NavLink to={'/bonuses'} className="bonuses-balance-header__icon">
                                 <svg>
-                                    <use xlinkHref="#bonuses">
-
-                                    </use>
+                                    <use xlinkHref="#bonuses" />
                                 </svg>
                             </NavLink>
                             <div className="bonuses-balance-header__message">Bonuses</div>
@@ -73,7 +99,7 @@ export const Header: React.FC<IHeaderProps> = () => {
                         </div>
                     </div>
                     <HeaderMenu/>
-                    <Languages/>
+                    <HeaderLanguages/>
                 </div>
             </div>
             <header className={"header" + (isFixed ? " fixed" : "")}>
@@ -87,9 +113,15 @@ export const Header: React.FC<IHeaderProps> = () => {
                                 <HeaderMenu/>
                             </div>
 
-                            <Languages/>
+                            <HeaderLanguages/>
 
-                            {!!Object.keys(userInfo).length ? <User/> : <Login/>}
+                            <div className="header__servers">
+                                <select ref={selectBlock} onChange={handleClusterChange}>
+                                    {categories.length && categories?.map(item => <option key={item.id} value={JSON.stringify(item)}>{item.name}</option>)}
+                                </select>
+                            </div>
+
+                            {!!Object.keys(userInfo).length ? <HeaderUser/> : <HeaderLogin/>}
                             <div className="header__burger" onClick={_ => setIsOpenMobileMenu(true)}>
                                 <span/>
                                 <span/>
@@ -99,6 +131,6 @@ export const Header: React.FC<IHeaderProps> = () => {
                     </div>
                 </div>
             </header>
-        </>
+        </HeaderStyled>
     )
 }

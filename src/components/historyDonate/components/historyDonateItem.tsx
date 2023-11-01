@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import {currencyList} from "../../../functions/currencyList";
+import {Translate} from "../../translate/Translate";
 
 interface IHistoryDonateItemProps {
     data: any
@@ -15,7 +16,7 @@ export const HistoryDonateItem:React.FC<IHistoryDonateItemProps> = ({data}) => {
                     className="item-history-profile__date date-item-history-profile">
                     <div
                         className="date-item-history-profile__label">
-                        Date:
+                        <Translate>date</Translate>
                     </div>
                     <div
                         className="date-item-history-profile__value">
@@ -26,7 +27,7 @@ export const HistoryDonateItem:React.FC<IHistoryDonateItemProps> = ({data}) => {
                     className="item-history-profile__amount amount-item-history-profile">
                     <div
                         className="amount-item-history-profile__label">
-                        Replenishment amount:
+                        <Translate>payment_amount</Translate>
                     </div>
                     <div
                         className="amount-item-history-profile__value">

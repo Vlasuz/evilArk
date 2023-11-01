@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react'
 import {Footer} from "../../components/footer/footer";
 import mainImg from './../../assets/img/roulette/main-img.jpg'
-import {IProduct, IServers} from "../../models";
+import {ICategory, IProduct, IServers} from "../../models";
 import {useImages} from "../../hooks/images";
 import {RouletteItem} from "./components/rouletteItem";
 import {HistoryRouletteItem} from "../../components/historyRouletteItem/historyRouletteItem";
 import {useDispatch, useSelector} from "react-redux";
 import {changeUserBalance, setCategory} from '../../redux/toolkitSlice';
 import {Swiper, SwiperSlide} from "swiper/react";
-import {RouletteStyled} from "./roulette.styled";
 import {Grid, Pagination} from "swiper";
-import io from 'socket.io-client';
 import getCookies from "../../functions/getCookie";
 import axios from 'axios';
 import {apiLink} from "../../hooks/apiLink";
 import {toast} from "react-toastify";
 import {notifications} from "../../hooks/notifications";
+import {RouletteStyled} from './Roulette.styled';
+import {Translate} from "../../components/translate/Translate";
 
 interface IRouletteProps {
 
@@ -26,7 +26,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
     const dispatch = useDispatch()
     const servers: IServers[] = useSelector((state: any) => state.toolkit.servers)
-    const category: string = useSelector((state: any) => state.toolkit.category)
+    const category: ICategory = useSelector((state: any) => state.toolkit.category)
 
     const [isLoad, setIsLoad] = useState(false)
     const [roulettesCases, setRoulettesCases] = useState([])
@@ -34,6 +34,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     const [itemsForRoll, setItemsForRoll]: any = useState([])
     const [winnerItem, setWinnerItem] = useState<IProduct | null>(null)
     const [rouletteHistory, setRouletteHistory] = useState([])
+    const [isStartRoulette, setIsStartRoulette] = useState(false)
 
     useEffect(() => {
         setItemsForRoll([])
@@ -45,15 +46,6 @@ export const Roulette: React.FC<IRouletteProps> = () => {
             setItemsForRoll((prev: any) => [...prev, randomItem])
         }
     }, [activeCase])
-
-    const [isStartRoulette, setIsStartRoulette] = useState(false)
-
-    useEffect(() => {
-        axios.get(apiLink("api/roulettes?server_id=" + category)).then(({data}) => {
-            setRoulettesCases(data.data)
-            setActiveCase(data.data[0])
-        }).catch(er => console.log(er))
-    }, [category])
 
     const handleSelectCase = (caseData: any) => {
         if (caseData.id === activeCase.id) return
@@ -67,10 +59,9 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
         axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.post(apiLink("api/roulettes/play/" + activeCase.id), {
-            "server_id": category
+            "server_id": category.id
         }).then(({data}) => {
-            console.log(data.data)
-            if(data.data?.status === false) {
+            if (data.data?.status === false) {
                 notifications(data.data.message)
                 return;
             }
@@ -84,7 +75,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
             setIsStartRoulette(true)
 
             setTimeout(() => {
-                setIsStartRoulette(false)
+                // setIsStartRoulette(false)
             }, 16000)
 
             setWinnerItem(data.data)
@@ -92,6 +83,13 @@ export const Roulette: React.FC<IRouletteProps> = () => {
             er.response?.status === 401 && notifications(er.response.status)
         })
     }
+
+    useEffect(() => {
+        axios.get(apiLink("api/roulettes?server_id=" + category.id)).then(({data}) => {
+            setRoulettesCases(data.data)
+            setActiveCase(data.data[0])
+        }).catch(er => console.log(er))
+    }, [category])
 
     useEffect(() => {
         axios.get(apiLink("api/users/users-roulette-history?max_length=6")).then(({data}) => {
@@ -105,7 +103,9 @@ export const Roulette: React.FC<IRouletteProps> = () => {
             <section className="roulette__main">
                 <div className="roulette__container container">
                     <div className="roulette__body">
-                        <h2 className="roulette__title title-h2">Roulette</h2>
+                        <h2 className="roulette__title title-h2">
+                            <Translate>text_roulette</Translate>
+                        </h2>
                         <div className="roulette__image-block">
                             <div className="roulette__image">
                                 <img src={mainImg} alt="main-img"/>
@@ -117,7 +117,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                 {
                                     servers?.map((item: IServers) =>
                                         <div key={item.id}
-                                             className={"select-category__column" + (category === item.id ? " _active" : "")}>
+                                             className={"select-category__column" + (category.name === item.name ? " _active" : "")}>
                                             <div className="select-category__item item-select-category">
                                                 <div className="item-select-category__image-block">
                                                     <div className="item-select-category__image">
@@ -128,8 +128,9 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button onClick={_ => dispatch(setCategory(item.id))}
-                                                    className="select-category__btn btn btn_small">Choose
+                                            <button onClick={_ => dispatch(setCategory(item))}
+                                                    className="select-category__btn btn btn_small">
+                                                <Translate>choose</Translate>
                                             </button>
                                         </div>
                                     )
@@ -156,13 +157,13 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
                                     </div>
                                 </div>
-                                <div className="filter-roulette__games games-filter-roulette">
+                                {itemsForRoll.length && <div className="filter-roulette__games games-filter-roulette">
                                     <div className="games-filter-roulette__title title-games-filter-roulette">
                                         <div className="title-games-filter-roulette__icon">
                                             <img src={profit} alt="profit"/>
                                         </div>
-                                        <div className="title-games-filter-roulette__text">Game
-                                            cost {activeCase?.cost} ec
+                                        <div className="title-games-filter-roulette__text">
+                                            <Translate>game_cost_title</Translate> {activeCase?.cost} ec
                                         </div>
                                     </div>
                                     <div className="games-filter-roulette__slider">
@@ -173,7 +174,8 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                 itemsForRoll?.map((item: IProduct, index: number) => <RouletteItem
                                                     key={index} isStart={index === 0 ? isStartRoulette : null} data={{
                                                     name: index !== 35 ? item.name : winnerItem?.name,
-                                                    image: index !== 35 ? item.icon : winnerItem?.icon
+                                                    image: index !== 35 ? item.icon : winnerItem?.icon,
+                                                    isWinner: index === 35
                                                 }}/>)
                                             }
 
@@ -195,10 +197,11 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                     </div>
                                     <div className="filter-roulette__btn-block">
                                         <button onClick={handleStartRoulette}
-                                                className="filter-roulette__btn btn btn_small">Play
+                                                className="filter-roulette__btn btn btn_small">
+                                            <Translate>play_title</Translate>
                                         </button>
                                     </div>
-                                </div>
+                                </div>}
                             </div>
                             <div className="roulette__users users">
 

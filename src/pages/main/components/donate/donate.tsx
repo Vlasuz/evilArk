@@ -14,13 +14,15 @@ export const Donate: React.FC<IDonateProps> = () => {
     const [pageInfo, setPageInfo] = useState<any>({})
     const donateInfo = useSelector((state: any) => state.toolkit.donateInfo)
 
+    const lang = useSelector((state: any) => state.toolkit.language)
+
     useEffect(() => {
-        axios.get(apiLink("api/home/donate?language=en")).then(({data}) => {
+        axios.get(apiLink("api/home/donate?language="+lang)).then(({data}) => {
             setPageInfo(data.data)
         }).catch(er => {
             console.log(er)
         })
-    }, [])
+    }, [lang])
 
     return (
         <section className="donaciones" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="donates">
@@ -50,12 +52,12 @@ export const Donate: React.FC<IDonateProps> = () => {
                         }
 
                     </div>
-                    <a href="" className="donaciones__link link-donaciones">
-                        <div className="link-donaciones__image">
-                            <img src={donateImage} alt="Reglas del proyecto"/>
-                        </div>
-                        <span className="link-donaciones__text">Reglas del proyecto</span>
-                    </a>
+                    {/*<a href="" className="donaciones__link link-donaciones">*/}
+                    {/*    <div className="link-donaciones__image">*/}
+                    {/*        <img src={donateImage} alt="Reglas del proyecto"/>*/}
+                    {/*    </div>*/}
+                    {/*    <span className="link-donaciones__text">Reglas del proyecto</span>*/}
+                    {/*</a>*/}
                 </div>
             </div>
         </section>

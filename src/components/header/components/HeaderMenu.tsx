@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import {NavLink, useLocation, useParams} from "react-router-dom";
+import {Translate} from "../../translate/Translate";
 
 interface IMenuProps {
 
@@ -11,27 +12,27 @@ export const HeaderMenu:React.FC<IMenuProps> = () => {
 
     const menus = [
         {
-            title: "Servers",
+            title: <Translate>menu_servers</Translate>,
             link: "#servers"
         },
         {
-            title: "Contacts",
+            title: <Translate>menu_contacts</Translate>,
             link: "#contacts"
         },
         {
-            title: "Faq",
+            title: <Translate>menu_faq</Translate>,
             link: "#faq"
         },
         {
-            title: "Donates",
+            title: <Translate>menu_donates</Translate>,
             link: "#donates"
         },
         {
-            title: "News",
+            title: <Translate>menu_news</Translate>,
             link: "#news"
         },
         {
-            title: "About",
+            title: <Translate>menu_about</Translate>,
             link: "#about"
         },
     ]
@@ -42,7 +43,7 @@ export const HeaderMenu:React.FC<IMenuProps> = () => {
 
                 {
                     menus.map(item =>
-                        <li key={item.title} className="menu-header__item">
+                        <li key={item.link} className="menu-header__item">
                             {location.pathname === '/' ? <a href={item.link} className="menu-header__link">
                                 {item.title}
                             </a> :

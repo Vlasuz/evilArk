@@ -4,6 +4,7 @@ import {ServersItem} from "./components/serversItem";
 import axios from "axios";
 import {apiLink} from "../../../../hooks/apiLink";
 import {IServers} from "../../../../models";
+import {useSelector} from "react-redux";
 
 interface IServersProps {
 
@@ -12,25 +13,40 @@ interface IServersProps {
 export const Servers:React.FC<IServersProps> = () => {
 
     const [servers, setServers] = useState<IServers[]>([])
+    const [serversText, setServersText] = useState<any>({})
+
+    const lang = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
         axios.get(apiLink('api/servers')).then(({data}) => {
             setServers(data.data)
-            console.log(data.data)
-        })
+        }).catch(er => console.log(er))
     }, [])
+
+    useEffect(() => {
+        axios.get(apiLink('api/home/servers?language='+lang)).then(({data}) => {
+            setServersText(data.data)
+        }).catch(er => console.log(er))
+    }, [lang])
 
     return (
         <section id={"servers"} className="servidores" data-aos="fade" data-aos-duration="750" data-aos-offset="200">
             <div className="servidores__container container">
                 <div className="servidores__body">
-                    <div className="servidores__label label">SERVIDORES</div>
+                    <div className="servidores__label label">
+                        {serversText.title}
+                    </div>
                     <h3 className="servidores__title title-h3 title-h3_dark">
-                        <span>Servidores de Ark Survival</span>
-                        <span>Evolved Españoles e Ingleses</span>
-                        <span>para PC</span>
+                        <span>
+                            {serversText.sub_title}
+                        </span>
+                        <span>
+                            {serversText.main_title}
+                        </span>
                     </h3>
-                    <div className="servidores__subtitle">Listado de servidores disponibles en la comunidad.</div>
+                    <div className="servidores__subtitle">
+                        {serversText.text}
+                    </div>
                     <div className="servidores__row">
 
                         {

@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {IModule} from "../../../models";
 import { ProductModule } from './shopItemMore';
+import {Translate} from "../../../components/translate/Translate";
 
 interface IShopItemMoreSelectProps {
     modules?: IModule[]
@@ -14,7 +15,9 @@ export const ShopItemMoreSelect: React.FC<IShopItemMoreSelectProps> = ({modules}
 
     return (
         <div className="characteristics-select-product__item characteristics-select-product__item_select-product">
-            <div className="characteristics-select-product__label">Select Product:</div>
+            <div className="characteristics-select-product__label">
+                <Translate>select_product</Translate>:
+            </div>
             <div className="characteristics-select-product__dropdown dropdown">
                 <button className='dropdown__button' onClick={_ => setIsOpen(prev => !prev)}>
                     {moduleActive?.name}

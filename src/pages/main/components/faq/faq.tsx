@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react'
 import {useImages} from "../../../../hooks/images";
+import {Translate} from "../../../../components/translate/Translate";
 
 interface IFaqProps {
 
@@ -21,7 +22,9 @@ export const Faq:React.FC<IFaqProps> = () => {
                     <div className="faq__btn-block">
                         <a href="" className="faq__btn btn btn_big">
                             <img src={question} alt="question"/>
-                            <span>See questions<br /> and answers</span>
+                            <span>
+                                <Translate>home_see_faq</Translate>
+                            </span>
                         </a>
                     </div>
                 </div>

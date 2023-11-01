@@ -3,6 +3,7 @@ import {useImages} from "../../../hooks/images";
 import {IFilterShop, ISort} from "../../../models";
 import axios from "axios";
 import {apiLink} from "../../../hooks/apiLink";
+import {Translate} from "../../../components/translate/Translate";
 
 interface IShopFilterProps {
     setFilter: any
@@ -40,7 +41,7 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
         })
     }, [])
 
-    const ordersBy = ['Price', 'Stock']
+    const ordersBy: any = [<Translate>price_title</Translate>]
     const [isSort, setIsSort] = useState<ISort>()
 
     const handleSearchTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,11 +94,13 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
                 </div>
             </div>
             <div className="top-cards-categories__order order-top-cards-categories">
-                <div className="order-top-cards-categories__text">Order by</div>
+                <div className="order-top-cards-categories__text">
+                    <Translate>order_by</Translate>
+                </div>
                 <div className="order-top-cards-categories__items">
 
                     {
-                        ordersBy.map((item, index) =>
+                        ordersBy.map((item: any, index: number) =>
                             <button key={index} onClick={_ => handleSort(item)}
                                 className="order-top-cards-categories__item item-order-top-cards-categories order-top-cards-categories__item_name">
                                 <div className="item-order-top-cards-categories__arrows">

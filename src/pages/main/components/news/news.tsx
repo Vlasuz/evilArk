@@ -9,7 +9,7 @@ import axios from "axios";
 import {INews, INewsSingle, IServers} from "../../../../models";
 import {apiLink} from "../../../../hooks/apiLink";
 import ReactHtmlParser from "html-react-parser";
-import {isOpenPopupContext} from "../../main";
+import {isOpenPopupContext} from "../../Main";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setNews} from '../../../../redux/toolkitSlice';
@@ -28,11 +28,14 @@ export const News: React.FC<INewsProps> = () => {
     const navigate = useNavigate()
     const [server, setServer] = useState<IServers>()
 
+    const lang = useSelector((state: any) => state.toolkit.language)
+
     useEffect(() => {
-        axios.get(apiLink('api/news?language=en')).then(({data}) => {
-            dispatch(setNews(data.data))
+        axios.get(apiLink('api/news?language='+lang)).then(({data}) => {
+            console.log(data.data)
+            dispatch(setNews(data.data.length ? data.data : []))
         })
-    }, [])
+    }, [lang])
 
     const isOpenPopup: any = useContext(isOpenPopupContext)
 
@@ -45,6 +48,8 @@ export const News: React.FC<INewsProps> = () => {
         })
     }
 
+    console.log()
+
     return (
         <>
             <section className="news" id="news" data-aos="fade" data-aos-duration="750" data-aos-offset="200">
@@ -53,7 +58,8 @@ export const News: React.FC<INewsProps> = () => {
                         <Categories setServer={setServer} server={server}/>
                         <div className="news__body">
 
-                            <NewsItemFirst handleReadNews={handleReadNews} data={news.filter(item => item.server.id === server?.id)[0]}/>
+                            {news.length >= 1 && <NewsItemFirst handleReadNews={handleReadNews}
+                                            data={news.filter(item => item.server.id === server?.id)[0]}/>}
 
                             <div className="news__slider">
 
@@ -93,7 +99,7 @@ export const News: React.FC<INewsProps> = () => {
                                     }}
                                 >
                                     {
-                                        news.filter((item: INews) => item.server.id === server?.id).map((item: INews, index: number) => index > 0 &&
+                                        news.length && news.filter((item: INews) => item.server.id === server?.id).map((item: INews, index: number) => index > 0 &&
                                             <SwiperSlide key={item.id}>
                                                 <NewsItem data={item}/>
                                             </SwiperSlide>

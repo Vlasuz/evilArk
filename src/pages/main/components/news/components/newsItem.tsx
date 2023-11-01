@@ -3,7 +3,7 @@ import {useImages} from "../../../../../hooks/images";
 import {INews} from "../../../../../models";
 import ReactHtmlParser from "html-react-parser"
 import {apiLink} from "../../../../../hooks/apiLink";
-import { isOpenPopupContext } from '../../../main';
+import { isOpenPopupContext } from '../../../Main';
 import {useNavigate} from "react-router-dom";
 
 
@@ -48,7 +48,7 @@ export const NewsItem:React.FC<INewsItemProps> = ({data}) => {
                 </div>
                 <div className="slide-news__text">
                     {
-                        ReactHtmlParser(data.text)
+                        ReactHtmlParser(data.text ?? "")
                     }
                 </div>
                 <button onClick={handleReadNews} className="slide-news__link news-open-btn">Read the news</button>

@@ -13,7 +13,7 @@ interface ILanguagesProps {
 
 }
 
-export const Languages:React.FC<ILanguagesProps> = () => {
+export const HeaderLanguages:React.FC<ILanguagesProps> = () => {
 
     const {languages, handleSwitch, langSelected} = useLanguage()
 

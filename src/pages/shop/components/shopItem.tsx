@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react'
 import {useImages} from "../../../hooks/images";
 import {IProduct} from "../../../models";
-import {isOpenPopupContext} from "../shop";
+import {isOpenPopupContext} from "../Shop";
 
 interface IShopItemProps {
     data: IProduct
@@ -29,8 +29,12 @@ export const ShopItem:React.FC<IShopItemProps> = ({data}) => {
                 </div>
                 <div className="item-cards-categories__bottom bottom-item-cards-categories">
                     <div className="bottom-item-cards-categories__row">
-                        <div className="bottom-item-cards-categories__number">x{data.amount}</div>
-                        <div className="bottom-item-cards-categories__price">{data.price} EC</div>
+                        <div className="bottom-item-cards-categories__number"></div>
+                        <div className="bottom-item-cards-categories__price">
+                            {data.price_without_sales !== data.price && <div
+                                className="bottom-item-cards-categories__price_old">{data.price_without_sales} EC</div>}
+                            <div className="bottom-item-cards-categories__price_now">{data.price} EC</div>
+                        </div>
                     </div>
                 </div>
             </a>

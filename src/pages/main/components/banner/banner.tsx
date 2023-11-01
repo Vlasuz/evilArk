@@ -5,6 +5,7 @@ import axios from "axios";
 import {apiLink} from "../../../../hooks/apiLink";
 import {IBannerInfo} from "../../../../models";
 import ReactHtmlParser from "html-react-parser";
+import {useSelector} from "react-redux";
 
 interface IBannerProps {
 
@@ -20,11 +21,13 @@ export const Banner: React.FC<IBannerProps> = () => {
         title: '',
     })
 
+    const lang = useSelector((state: any) => state.toolkit.language)
+
     useEffect(() => {
-        axios.get(apiLink('api/home/banner?language=en')).then(({data}) => {
+        axios.get(apiLink('api/home/banner?language='+lang)).then(({data}) => {
             setBannerInfo(data.data)
         })
-    }, [])
+    }, [lang])
 
     return (
         <section className="main-block">
@@ -41,7 +44,7 @@ export const Banner: React.FC<IBannerProps> = () => {
                                 }
                             </h1>
                             <div className="content-main-block__subtitle">
-                                {ReactHtmlParser(bannerInfo.text)}
+                                {ReactHtmlParser(bannerInfo.text ?? "")}
                             </div>
                             <a href={bannerInfo.button_url} className="content-main-block__btn btn btn_medium">
                                 <span>

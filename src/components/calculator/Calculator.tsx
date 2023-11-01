@@ -1,8 +1,9 @@
 import React, {useContext, useEffect} from 'react'
-import {CalculatorForm} from "./components/calculatorForm";
+import {CalculatorForm} from "./components/CalculatorForm";
 import {topUpContext} from "../../context/topUpContext";
 import {useSelector} from "react-redux";
 import {notifications} from "../../hooks/notifications";
+import {Translate} from "../translate/Translate";
 
 interface ICalculatorProps {
 
@@ -24,14 +25,15 @@ export const Calculator: React.FC<ICalculatorProps> = () => {
     return (
 
         <div className="bonuses__replenishment replenishment-bonuses">
-            <div className="replenishment-bonuses__title">Balance replenishment</div>
-            <div className="replenishment-bonuses__text">Enter the amount to replenish
-                the
-                balance
+            <div className="replenishment-bonuses__title">
+                <Translate>balance_replenishment</Translate>
+            </div>
+            <div className="replenishment-bonuses__text">
+                <Translate>balance_replenishment_text</Translate>
             </div>
             <CalculatorForm/>
             <button onClick={handleOpenPopup} type="submit" className="replenishment-bonuses__btn top-up-btn">
-                Top up balance
+                <Translate>top_up_balance</Translate>
             </button>
         </div>
     )

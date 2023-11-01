@@ -1,15 +1,16 @@
 import React, {createContext, useContext, useEffect, useState} from 'react'
 import axios from "axios";
 import {apiLink} from "../../../hooks/apiLink";
-import {isOpenPopupContext} from "../shop";
+import {isOpenPopupContext} from "../Shop";
 import {useImages} from "../../../hooks/images";
-import {IProduct, IProductSingle} from "../../../models";
+import {ICategory, IProduct, IProductSingle} from "../../../models";
 import getCookies from "../../../functions/getCookie";
 import {useDispatch, useSelector} from "react-redux";
 import {changeUserBalance} from '../../../redux/toolkitSlice';
 import {ShopItemMoreSelect} from "./shopItemMoreSelect";
 import {toast} from "react-toastify";
 import {notifications} from "../../../hooks/notifications";
+import {Translate} from "../../../components/translate/Translate";
 
 interface IShopItemMoreProps {
     isActive: number | string
@@ -27,7 +28,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     const [productModule, setProductModule]: any = useState("")
 
     const dispatch = useDispatch()
-    const category = useSelector((state: any) => state.toolkit.category)
+    const category: ICategory = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
         isActive && axios.get(apiLink('api/products/' + isActive)).then(({data}) => {
@@ -44,7 +45,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
 
         axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.post(apiLink('api/products/buy/' + product?.id), {
-            "server_id": category,
+            "server_id": category.id,
             "amount": count,
             "module_id": productModule
         }).then(({data}) => {
@@ -77,7 +78,9 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                         <img src={arrowWhite} alt="arrow"/>
                     </button>
                     <div className="select-product__form">
-                        <h4 className="select-product__title title-h4">Selected product</h4>
+                        <h4 className="select-product__title title-h4">
+                            <Translate>selected_product</Translate>
+                        </h4>
                         <div className="select-product__control-panel control-panel-select-product">
                         </div>
                         <div
@@ -99,7 +102,9 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                     className="characteristics-select-product__column characteristics-select-product__column_quatity">
                                     <div
                                         className="characteristics-select-product__item characteristics-select-product__item_quantity">
-                                        <div className="characteristics-select-product__label">Quantity</div>
+                                        <div className="characteristics-select-product__label">
+                                            <Translate>quantity</Translate>
+                                        </div>
                                         <div className="characteristics-select-product__input-block">
                                             <button className="characteristics-select-product__minus"
                                                     onClick={_ => setCount(prev => prev > 1 ? prev - 1 : prev)}>-
@@ -127,7 +132,9 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                             className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
                             <div className="bottom-select-product__row">
                                 {
-                                     <button onClick={handleBuy} className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>Buy</button>
+                                     <button onClick={handleBuy} className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
+                                         <Translate>buy_title</Translate>
+                                     </button>
                                 }
 
                                 {

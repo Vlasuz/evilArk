@@ -5,6 +5,7 @@ import {useSelector} from "react-redux";
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
 import getCookies from "../../functions/getCookie";
+import {Translate} from "../translate/Translate";
 
 interface ITopUpProps {
     isOpen: boolean
@@ -41,15 +42,16 @@ export const TopUp:React.FC<ITopUpProps> = ({isOpen}) => {
         <div ref={popupBlock} className={"popup popup-top-up" + (isOpen ? " open" : "")}>
             <div className="popup__body" onClick={handleCloseModal}>
                 <div className="popup__content" onClick={handleCloseModal}>
-                    <div className="popup__title">Choose how you will top up</div>
+                    <div className="popup__title">
+                        <Translate>choose_payment_method</Translate>
+                    </div>
                     <div className="popup__inner inner-popup">
                         <div className="inner-popup__payment">
-                            Payment: <span>{infoForPay?.value}{infoForPay?.icon}</span>
+                            <Translate>amount_for_payment</Translate> <span>{infoForPay?.value}{infoForPay?.icon}</span>
                         </div>
                         <div className="inner-popup__payment-method papayment-method-inner-popup">
-                            <div className="papayment-method-inner-popup__title">Replenishment for Soviet Union
-                                countries
-                                users
+                            <div className="papayment-method-inner-popup__title">
+                                <Translate>replenishment_balance_modal_text</Translate>
                             </div>
                             <div className="papayment-method-inner-popup__row">
                                 <div className="papayment-method-inner-popup__column">
@@ -89,7 +91,9 @@ export const TopUp:React.FC<ITopUpProps> = ({isOpen}) => {
                         </div>
                     </div>
                     <div className="popup__btn-block">
-                        <button onClick={_ => isPopupOpen(false)} className="inner-popup__close btn btn_small">Close</button>
+                        <button onClick={_ => isPopupOpen(false)} className="inner-popup__close btn btn_small">
+                            <Translate>close</Translate>
+                        </button>
                     </div>
                 </div>
             </div>

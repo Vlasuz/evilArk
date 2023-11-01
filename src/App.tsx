@@ -33,6 +33,7 @@ function App() {
     useEffect(() => {
         responsiveSite()
 
+
         servers({dispatch})
         generalInfo({dispatch})
         donateInfo({dispatch})

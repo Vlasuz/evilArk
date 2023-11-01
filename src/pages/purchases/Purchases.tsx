@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {Footer} from '../../components/footer/footer'
-import {ProfileSidebar} from "../../components/profileSidebar/profileSidebar";
+import {ProfileSidebar} from "../../components/profileSidebar/ProfileSidebar";
 import {Product} from "../../components/product/products";
 import {HistoryRouletteItem} from "../../components/historyRouletteItem/historyRouletteItem";
 import {Grid, Pagination} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
+import {Translate} from "../../components/translate/Translate";
 
 interface IPurchasesProps {
 
@@ -34,14 +35,16 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
             <section className="purchases__main">
                 <div className="purchases__container container">
                     <div className="purchases__body">
-                        <h2 className="purchases__title title-h2">my purchases</h2>
+                        <h2 className="purchases__title title-h2">
+                            <Translate>my_purchases</Translate>
+                        </h2>
                         <div className="purchases__inner inner">
                             <div className="inner__row">
                                 <ProfileSidebar/>
                                 <div className="inner__content content-inner">
                                     <div className="content-inner__body">
                                         <div className="replenishment-bonuses__title">
-                                            Store purchase history
+                                            <Translate>purchase_history</Translate>
                                         </div>
                                         <div className="purchases__items">
 
@@ -102,9 +105,8 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                     </div>
                                     <div className="roulette__users purchases__users users">
                                         <div className="replenishment-bonuses__title">
-                                            roulette winning history
+                                            <Translate>roulette_history</Translate>
                                         </div>
-
 
                                         {isLoad && <Swiper
                                             slidesPerView={1}

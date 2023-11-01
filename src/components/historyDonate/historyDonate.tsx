@@ -5,6 +5,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import {Product} from "../product/products";
 import {apiLink} from "../../hooks/apiLink";
 import axios from 'axios';
+import {Translate} from "../translate/Translate";
 
 interface IHistoryDonateProps {
     data: any
@@ -21,7 +22,7 @@ export const HistoryDonate: React.FC<IHistoryDonateProps> = ({data}) => {
     return (
         <div className="profile__history history-profile">
             <div className="history-profile__title replenishment-bonuses__title">
-                History of donations
+                <Translate>donates_history</Translate>
             </div>
 
             {isLoad && <Swiper

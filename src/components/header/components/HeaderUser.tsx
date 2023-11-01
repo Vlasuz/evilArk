@@ -8,7 +8,7 @@ interface IUserProps {
 
 }
 
-export const User: React.FC<IUserProps> = () => {
+export const HeaderUser: React.FC<IUserProps> = () => {
 
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
     const [isCopied, setIsCopied] = useState(false)
@@ -24,9 +24,7 @@ export const User: React.FC<IUserProps> = () => {
                 <div className="balance-header__bonuses bonuses-balance-header">
                     <NavLink to={'/bonuses'} className="bonuses-balance-header__icon">
                         <svg>
-                            <use xlinkHref="#bonuses">
-
-                            </use>
+                            <use xlinkHref="#bonuses" />
                         </svg>
                     </NavLink>
                     <div className="bonuses-balance-header__message">Bonuses</div>

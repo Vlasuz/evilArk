@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import {IUser} from "../../../models";
 import {useImages} from "../../../hooks/images";
 import {NavLink} from "react-router-dom";
+import {Translate} from "../../../components/translate/Translate";
 
 interface IShopAccountProps {
     userInfo: IUser
@@ -27,7 +28,9 @@ export const ShopAccount:React.FC<IShopAccountProps> = ({userInfo}) => {
                 <div className="info-panel-categories__balance balance-info-panel-categories">
                     <div
                         className="balance-info-panel-categories__balance-now balance-now-info-panel-categories">
-                        <div className="balance-now-info-panel-categories__text">Balance:</div>
+                        <div className="balance-now-info-panel-categories__text">
+                            <Translate>balance</Translate>:
+                        </div>
                         <div className="balance-now-info-panel-categories__value">{userInfo.balance.toFixed(2)} EC</div>
                     </div>
                     <NavLink to={"/profile"}
@@ -35,14 +38,18 @@ export const ShopAccount:React.FC<IShopAccountProps> = ({userInfo}) => {
                         <span className="top-up-info-panel-categories__icon">
                             <img src={wallet} alt="wallet" />
                         </span>
-                        <span className="top-up-info-panel-categories__text">Top up your account</span>
+                        <span className="top-up-info-panel-categories__text">
+                            <Translate>top_up_your_account</Translate>
+                        </span>
                     </NavLink>
                     <NavLink to={"/bonuses"}
                        className="balance-info-panel-categories__bonuses bonuses-info-panel-categories">
                         <span className="bonuses-info-panel-categories__icon">
                             <img src={gift} alt="gift" />
                         </span>
-                        <span className="bonuses-info-panel-categories__text">Bonuses</span>
+                        <span className="bonuses-info-panel-categories__text">
+                            <Translate>bonuses_title</Translate>
+                        </span>
                     </NavLink>
                 </div>
             </div>

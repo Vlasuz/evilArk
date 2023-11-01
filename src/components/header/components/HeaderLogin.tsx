@@ -6,7 +6,7 @@ interface ILoginProps {
 
 }
 
-export const Login:React.FC<ILoginProps> = () => {
+export const HeaderLogin:React.FC<ILoginProps> = () => {
     const {headerSteam} = useImages()
     const {auth_params} = useSteamLogin()
 

@@ -5,6 +5,7 @@ import {apiLink} from "../../hooks/apiLink";
 import getCookies from "../../functions/getCookie";
 import {toast} from "react-toastify";
 import {notifications} from "../../hooks/notifications";
+import {Translate} from "../translate/Translate";
 
 interface IProductProps {
     isCanGet: boolean
@@ -45,7 +46,7 @@ export const Product:React.FC<IProductProps> = ({isCanGet, data}) => {
                     </div>
                 </div>
                 {isCanGet && <button onClick={handleGetInGame} className="item-purchases__btn">
-                    Get in game
+                    <Translate>get_in_game_title</Translate>
                 </button>}
             </div>
         </div>

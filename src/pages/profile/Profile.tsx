@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import {ProfileSidebar} from "../../components/profileSidebar/profileSidebar";
+import {ProfileSidebar} from "../../components/profileSidebar/ProfileSidebar";
 import {ProfileUser} from "./components/profileUser";
 import {Footer} from "../../components/footer/footer";
 import {TopUp} from "../../components/topUp/topUp";
 import {topUpContext} from '../../context/topUpContext';
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
+import {Translate} from "../../components/translate/Translate";
 
 interface IProfileProps {
 
@@ -23,7 +24,9 @@ export const Profile: React.FC<IProfileProps> = () => {
                 <section className="profile__main">
                     <div className="profile__container container">
                         <div className="profile__body">
-                            <h2 className="profile__title title-h2">Profile</h2>
+                            <h2 className="profile__title title-h2">
+                                <Translate>my_profile</Translate>
+                            </h2>
                             <div className="profile__inner inner">
                                 <div className="inner__row">
                                     <ProfileSidebar/>

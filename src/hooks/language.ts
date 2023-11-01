@@ -5,12 +5,14 @@ import {setLanguage} from "../redux/toolkitSlice";
 import setCookie from "../functions/setCookie";
 import Lang_EN from "../languages/en.json";
 import Lang_UA from "../languages/ua.json";
+import Lang_RU from "../languages/ru.json";
 import i18n from "i18next";
 import getCookie from "../functions/getCookie";
 
 const jsonLanguages = {
     "en": { translation: Lang_EN },
     "ua": { translation: Lang_UA },
+    "ru": { translation: Lang_RU },
 }
 // Инициализация:
 i18n.use(initReactI18next).init({
@@ -29,6 +31,10 @@ export const useLanguage = () => {
         {
             title: "UA",
             slug: "ua"
+        },
+        {
+            title: "RU",
+            slug: "ru"
         },
     ]
 

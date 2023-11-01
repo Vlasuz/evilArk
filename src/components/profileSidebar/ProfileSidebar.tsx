@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {NavLink, useLocation} from "react-router-dom";
+import {Translate} from "../translate/Translate";
 
 interface IProfileSidebarProps {
 
@@ -14,22 +15,22 @@ export const ProfileSidebar: React.FC<IProfileSidebarProps> = () => {
     const routes: any = [
         {
             link: "/profile",
-            text: "Profile",
+            text: <Translate>my_profile</Translate>,
             icon: "#profile"
         },
         {
             link: "/bonuses",
-            text: "My bonuses",
+            text: <Translate>my_bonuses</Translate>,
             icon: "#bonuses"
         },
         {
             link: "/purchases",
-            text: "My purchases",
+            text: <Translate>my_purchases</Translate>,
             icon: "#cart"
         },
         {
             link: "/inventory",
-            text: "Inventory",
+            text: <Translate>my_inventory</Translate>,
             icon: "#inventory"
         },
     ]

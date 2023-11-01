@@ -31,6 +31,10 @@ export interface IUser {
         color_number: string
         name: string
     }
+    level_pve: {
+        color_number: string
+        name: string
+    }
     local_country_code: string
     name: string
     profile_url: string
@@ -134,6 +138,7 @@ export interface IProduct {
     "category": ICategory[],
     "icon": string,
     "price": string,
+    price_without_sales: string,
     "amount": number,
     "sales": number,
     "sex": string,
@@ -146,18 +151,18 @@ export interface IProduct {
 
 export interface IProductSingle {
     "id": 1,
-    "name": "Metal",
-    "description": "“Blueprint’/Game/PrimalEarth/CoreBlueprints/Resources/PrimalItemResource_Metal.PrimalItemResource_Metal'”",
+    "name": string,
+    "description": string,
     "category": ICategory[]
-    "icon": "http://127.0.0.1/storage/products/2024.png",
-    "price": "29.70",
-    "amount": "71",
-    "sales": "3",
-    "sex": "none",
-    "purchase_interval": "00:02",
-    "available": "0",
-    "level": "5",
-    "quality": "6",
+    "icon": string,
+    "price": string,
+    "amount": string,
+    "sales": string,
+    "sex": string,
+    "purchase_interval": string,
+    "available": string,
+    "level": string,
+    "quality": string,
     "server": IServers,
     "modules": IModule[]
 }

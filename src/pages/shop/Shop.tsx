@@ -5,13 +5,14 @@ import {ShopAccount} from "./components/shopAccount";
 import {ShopFilter} from "./components/shopFilter";
 import {ShopItem} from "./components/shopItem";
 import {ShopItemMore} from "./components/shopItemMore";
-import {IFilterShop, IProduct} from "../../models";
+import {ICategory, IFilterShop, IProduct} from "../../models";
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setPage} from "../../redux/toolkitSlice";
 import {apiLink} from "../../hooks/apiLink";
 import ReactHtmlParser from "html-react-parser";
+import {Translate} from "../../components/translate/Translate";
 
 interface IShopProps {
 
@@ -33,31 +34,15 @@ export const Shop: React.FC<IShopProps> = () => {
     const [activeProduct, setActiveProduct] = useState('')
     const userInfo = useSelector((state: any) => state.toolkit.user)
     const [shop, setShop] = useState<IProduct[]>([])
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const location = useLocation()
-    const category = useSelector((state: any) => state.toolkit.category)
-    const isChosenCategory = useSelector((state: any) => state.toolkit.category)
+    const category: ICategory = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
-
-        axios.get(apiLink('api/products?server_id='+category)).then(({data}) => {
+        axios.get(apiLink('api/products?server_id='+category.id)).then(({data}) => {
             setShop(data.data)
-        }).catch(er => {
-            console.log(er)
-        })
+            console.log(data.data)
+        }).catch(er => console.log(er))
+    }, [category])
 
-        if (!isChosenCategory) {
-            navigate('/category')
-            dispatch(setPage(location.pathname))
-        }
-
-    }, [])
-
-    console.log(filter)
-
-
-    console.log(shop)
     return (
         <isOpenPopupContext.Provider value={setActiveProduct}>
             <main onClick={_ => activeProduct && setActiveProduct('')}
@@ -65,7 +50,9 @@ export const Shop: React.FC<IShopProps> = () => {
                 <section className="categories__main">
                     <div className="categories__container container">
                         <div className="categories__body">
-                            <h2 className="categories__title title-h2">Shop</h2>
+                            <h2 className="categories__title title-h2">
+                                <Translate>text_shop</Translate>
+                            </h2>
                             <div className="categories__inner">
                                 <ShopTop/>
                                 {!!Object.keys(userInfo).length && <ShopAccount userInfo={userInfo}/>}

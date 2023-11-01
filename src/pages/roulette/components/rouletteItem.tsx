@@ -9,7 +9,7 @@ interface IRouletteItemProps {
 export const RouletteItem:React.FC<IRouletteItemProps> = ({isStart, data}) => {
 
     return (
-        <div style={{transition: isStart ? "all 10s ease" : "none"}} className={"games-filter-roulette__slide slide-games-filter-roulette" + (isStart ? " is_scroll_roulette" : "")}>
+        <div style={{transition: isStart ? "all 10s ease" : "none"}} className={"games-filter-roulette__slide slide-games-filter-roulette " + (data.isWinner && " 111111") + (isStart ? " is_scroll_roulette" : "")}>
             <span className="item-games-filter-roulette__image">
                     <img src={data.image} alt="game"/>
                 </span>

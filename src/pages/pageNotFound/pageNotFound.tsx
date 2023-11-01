@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {ProfileSidebar} from "../../components/profileSidebar/profileSidebar";
+import {ProfileSidebar} from "../../components/profileSidebar/ProfileSidebar";
 import {ProfileUser} from "../profile/components/profileUser";
 import {Footer} from "../../components/footer/footer";
 import {PageNotFoundStyled} from "./pageNotFound.styled";

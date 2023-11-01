@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { currencyList } from '../../../functions/currencyList';
 import {setInfoForPay} from '../../../redux/toolkitSlice';
 
@@ -9,10 +9,12 @@ interface ICalculatorFormProps {
 
 export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
 
+    const infoForPay = useSelector((state: any) => state.toolkit.infoForPay)
+
     const [isSelectOpen, setIsSelectOpen] = useState(false)
-    const [activeCurrency, setActiveCurrency] = useState<any>(currencyList[0])
-    const [valueCurrency, setValueCurrency] = useState(0)
-    const [valueEvilCoin, setValueEvilCoin] = useState(0)
+    const [activeCurrency, setActiveCurrency] = useState<any>(currencyList.filter((item: any) => item.currency === infoForPay.currency)[0] ?? currencyList[0])
+    const [valueCurrency, setValueCurrency] = useState(+infoForPay.value)
+    const [valueEvilCoin, setValueEvilCoin] = useState(+infoForPay.value * activeCurrency.value)
     const dispatch = useDispatch()
 
     const handleChangeCurrency = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,8 +41,8 @@ export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
         setActiveCurrency(currencyData)
         dispatch(setInfoForPay({
             currency: currencyData.currency,
-            value: valueCurrency * activeCurrency.value,
-            icon: activeCurrency.icon
+            value: valueCurrency,
+            icon: currencyData.icon
         }))
         setValueEvilCoin(valueCurrency * currencyData.value)
     }
@@ -49,8 +51,8 @@ export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
         <div
             className="replenishment-bonuses__calculator calculator-replenishment-bonuses">
             <div className="calculator-replenishment-bonuses__item ">
-                <input value={Math.ceil(valueCurrency)} onChange={e => handleChangeCurrency(e)} placeholder="0"
-                       autoComplete='off' type='text' name='form[]'
+                <input value={valueCurrency > 0 ? Math.ceil(valueCurrency) : ""} onChange={e => handleChangeCurrency(e)} placeholder="0"
+                       autoComplete='off' type='number' name='form[]'
                        className='calculator-replenishment-bonuses__input calculator-replenishment-bonuses__input_give'/>
                 <div className="calculator-replenishment-bonuses__valuta">
                     <div className="dropdown dropdown">
@@ -71,7 +73,7 @@ export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
                             }
 
                         </ul>
-                        <input value={valueEvilCoin} onChange={e => setValueEvilCoin(+e.target.value)} type='text'
+                        <input value={valueEvilCoin} onChange={e => setValueEvilCoin(+e.target.value)} type='tel'
                                name='form[]'
                                className='dropdown__input-hidden dropdown__input-hidden_valuta'/>
                     </div>
@@ -79,8 +81,8 @@ export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
             </div>
             <div className="calculator-replenishment-bonuses__equal">=</div>
             <div className="calculator-replenishment-bonuses__item">
-                <input value={valueEvilCoin.toFixed(2)} onChange={e => handleChangeEvilCoin(e)} placeholder="0"
-                       autoComplete='off' type='text' name='form[]'
+                <input value={valueEvilCoin > 0 ? valueEvilCoin.toFixed(2) : ""} onChange={e => handleChangeEvilCoin(e)} placeholder="0.00"
+                       autoComplete='off' type='number' name='form[]'
                        className='calculator-replenishment-bonuses__input calculator-replenishment-bonuses__input_get'/>
                 <span>EC</span>
             </div>

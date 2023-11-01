@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useRef, useState} from 'react'
-import {MainStyled} from "./main.styled";
+import {MainStyled} from "./Main.styled";
 import video from './../../assets/img/media/VideoEvilArk.mp4'
 import {Banner} from "./components/banner/banner";
 import {About} from "./components/about/about";
