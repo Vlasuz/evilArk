@@ -29,22 +29,22 @@ export const Donate: React.FC<IDonateProps> = () => {
             <div className="donaciones__container container">
                 <div className="donaciones__body">
                     <div className="donaciones__label label">
-                        {pageInfo.title}
+                        {pageInfo?.title}
                     </div>
                     <h3 className="donaciones__title title-h3">
-                        {pageInfo.sub_title}
+                        {pageInfo?.sub_title}
                     </h3>
                     <div className="donaciones__sibtitle">
-                        {pageInfo.text}
+                        {pageInfo?.text}
                     </div>
                     <div className="donaciones__row">
 
                         {
-                            donateInfo.map((item: any) =>
-                                <div key={item.description} className="donaciones__column">
+                            donateInfo?.map((item: any) =>
+                                <div key={item?.description} className="donaciones__column">
                                     <div className="donaciones__item item-donaciones">
-                                        <a href={item.url} className="item-donaciones__btn">
-                                            <img src={item.icon ? item.icon : placeholder} alt={item.description} />
+                                        <a href={item?.url} className="item-donaciones__btn">
+                                            <img src={item?.icon ?? placeholder} alt={item?.description} />
                                         </a>
                                     </div>
                                 </div>

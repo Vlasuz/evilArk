@@ -9,7 +9,7 @@ export const notifications = (data: any) => {
             message: <Translate>text_for_notify_1</Translate>,
         },
         "Product issued": {
-            type: "error",
+            type: "success",
             message: <Translate>text_for_notify_2</Translate>,
         },
         "The servers are down": {
@@ -40,10 +40,22 @@ export const notifications = (data: any) => {
             type: "error",
             message: <Translate>text_for_notify_9</Translate>,
         },
+        "Get in game. Product not exist": {
+            type: "error",
+            message: "Product not exist",
+        },
         "fill_the_field_for_payment": {
             type: "info",
             message: <Translate>text_for_notify_10</Translate>,
         },
+        "Wait to rolling game": {
+            type: "info",
+            message: "Подождите пока закончится начатая игра",
+        },
+        "Wait please": {
+            type: "info",
+            message: "Попридержите коней, не так быстро!",
+        }
     }
 
     if(notifies[data].type === "info") {

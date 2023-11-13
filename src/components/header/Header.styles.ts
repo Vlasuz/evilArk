@@ -2,37 +2,38 @@ import styled from "styled-components";
 import arrowWhite from './../../assets/img/icons/arrow-white.svg'
 
 export const HeaderStyled = styled.header`
-  
-  .top-mobile-header {
-    .header__servers {
-      display: block;
-      margin: 10px 0;
-      margin-top: 15px;
-    }  
-  }
-  .header__servers {
-    position: relative;
-    margin-right: 20px;
+
+  .characteristics-select-product__dropdown {
+    white-space: nowrap;
+    margin: 0 10px;
+    min-width: 170px;
     
     @media screen and (max-width: 576px) {
       display: none;
     }
 
-    select {
-      appearance: none;
-      background: transparent;
-      border: none;
-      padding-right: 20px;
-
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 118.75%;
-      letter-spacing: -0.01em;
-      color: #fff;
-      transition: all 0.3s ease 0s;
+    .dropdown__button {
+      padding-left: 8px;
+      padding-right: 8px;
     }
-    option {
-      color: #000000;
+
+    .dropdown__button::before {
+      right: 10px;
+    }
+  }
+
+  .top-mobile-header {
+    .header__servers {
+      display: block;
+      margin: 10px 0;
+      margin-top: 15px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .mobile-header__top .characteristics-select-product__dropdown {
+      display: block;
+      margin: 0;
     }
   }
 

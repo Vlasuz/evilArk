@@ -26,11 +26,11 @@ export const HistoryRouletteItem: React.FC<IHistoryRouletteProps> = ({data}) => 
                         <Translate>roulette_gotten</Translate>
                     </div>
                     <div className="users__name">
-                        {data.product.name}
+                        {data.product?.name}
                     </div>
                 </div>
                 <div className="users__level">
-                    Lvl {data.product.level}
+                    Lvl {data.product?.level}
                 </div>
             </div>
         </div>

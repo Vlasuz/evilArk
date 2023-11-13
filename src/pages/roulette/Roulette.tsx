@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, {createContext, useEffect, useState} from 'react'
 import {Footer} from "../../components/footer/footer";
-import mainImg from './../../assets/img/roulette/main-img.jpg'
+import domestication from './../../assets/img/icons/domestication.svg'
 import {ICategory, IProduct, IServers} from "../../models";
 import {useImages} from "../../hooks/images";
 import {RouletteItem} from "./components/rouletteItem";
@@ -16,10 +16,14 @@ import {toast} from "react-toastify";
 import {notifications} from "../../hooks/notifications";
 import {RouletteStyled} from './Roulette.styled';
 import {Translate} from "../../components/translate/Translate";
+import Socket from '../../socket';
+import {RouletteCaseInfo} from "./components/RouletteCaseInfo";
 
 interface IRouletteProps {
 
 }
+
+export const isOpenPopupContext: any = createContext(null);
 
 export const Roulette: React.FC<IRouletteProps> = () => {
     const {placeholder, profit} = useImages()
@@ -27,14 +31,15 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     const dispatch = useDispatch()
     const servers: IServers[] = useSelector((state: any) => state.toolkit.servers)
     const category: ICategory = useSelector((state: any) => state.toolkit.category)
+    const userInfo = useSelector((state: any) => state.toolkit.user)
 
-    const [isLoad, setIsLoad] = useState(false)
     const [roulettesCases, setRoulettesCases] = useState([])
     const [activeCase, setActiveCase]: any = useState({})
     const [itemsForRoll, setItemsForRoll]: any = useState([])
     const [winnerItem, setWinnerItem] = useState<IProduct | null>(null)
     const [rouletteHistory, setRouletteHistory] = useState([])
     const [isStartRoulette, setIsStartRoulette] = useState(false)
+    const [isActive, setIsActive] = useState(false)
 
     useEffect(() => {
         setItemsForRoll([])
@@ -56,6 +61,14 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     }
 
     const handleStartRoulette = () => {
+        if (isStartRoulette) {
+            notifications('Wait to rolling game')
+            return
+        }
+
+        if (Object.keys(userInfo).length) {
+            setIsStartRoulette(true)
+        }
 
         axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.post(apiLink("api/roulettes/play/" + activeCase.id), {
@@ -72,11 +85,9 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                 toast.success("Поздравляем! Вы выиграли " + data.data?.name)
             }, 10300)
 
-            setIsStartRoulette(true)
-
             setTimeout(() => {
-                // setIsStartRoulette(false)
-            }, 16000)
+                setIsStartRoulette(false)
+            }, 12000)
 
             setWinnerItem(data.data)
         }).catch(er => {
@@ -92,158 +103,182 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     }, [category])
 
     useEffect(() => {
-        axios.get(apiLink("api/users/users-roulette-history?max_length=6")).then(({data}) => {
-            setIsLoad(true)
+
+        axios.get(apiLink("api/users/users-roulette-history?max_length=7")).then(({data}) => {
             setRouletteHistory(data.data)
         }).catch(er => console.log(er))
+
     }, [])
 
     return (
-        <RouletteStyled className="roulette">
-            <section className="roulette__main">
-                <div className="roulette__container container">
-                    <div className="roulette__body">
-                        <h2 className="roulette__title title-h2">
-                            <Translate>text_roulette</Translate>
-                        </h2>
-                        <div className="roulette__image-block">
-                            <div className="roulette__image">
-                                <img src={mainImg} alt="main-img"/>
-                            </div>
-                        </div>
-                        <div className="roulette__select-category">
-                            <div className="select-category__row">
-
-                                {
-                                    servers?.map((item: IServers) =>
-                                        <div key={item.id}
-                                             className={"select-category__column" + (category.name === item.name ? " _active" : "")}>
-                                            <div className="select-category__item item-select-category">
-                                                <div className="item-select-category__image-block">
-                                                    <div className="item-select-category__image">
-                                                        <img src={item.image.length ? item.image : placeholder}/>
-                                                    </div>
-                                                    <div className="item-select-category__label">
-                                                        {item.name}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button onClick={_ => dispatch(setCategory(item))}
-                                                    className="select-category__btn btn btn_small">
-                                                <Translate>choose</Translate>
-                                            </button>
-                                        </div>
-                                    )
-                                }
-
-                            </div>
-                        </div>
-                        {category && <div className="roulette__inner">
-                            <div className="roulette__filter filter-roulette">
-                                <div className="filter-roulette__categories categories-filter-roulette">
-                                    <div className="categories-filter-roulette__items">
+        <isOpenPopupContext.Provider value={setIsActive}>
+            <RouletteStyled>
+                <main onClick={_ => isActive && setIsActive(false)}
+                      className={"roulette" + (isActive ? " product-select" : "")}>
+                    <section className="roulette__main">
+                        <Socket/>
+                        <div className="roulette__container container">
+                            <div className="roulette__body">
+                                <h2 className="roulette__title title-h2">
+                                    <Translate>text_roulette</Translate>
+                                </h2>
+                                {/*<div className="roulette__image-block">*/}
+                                {/*    <div className="roulette__image">*/}
+                                {/*        <img src={mainImg} alt="main-img"/>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
+                                <div className="roulette__select-category">
+                                    <div className="select-category__row">
 
                                         {
-                                            roulettesCases.map((item: any) =>
-                                                <div key={item.id} onClick={_ => handleSelectCase(item)}
-                                                     className={"categories-filter-roulette__item"}>
-                                                    <div
-                                                        className={"categories-filter-roulette__link categories-filter-roulette__link_blue" + (activeCase.id === item.id ? " active" : "")}>
-                                                        {item.name}
+                                            servers?.map((item: IServers) =>
+                                                <div onClick={_ => dispatch(setCategory(item))} key={item.id}
+                                                     className={"select-category__column" + (category.name === item.name ? " _active" : "")}>
+                                                    <div className="select-category__item item-select-category">
+                                                        <div className="item-select-category__image-block">
+                                                            <div className="item-select-category__image">
+                                                                <img src={item.image.length ? item.image : placeholder}/>
+                                                            </div>
+                                                            <div className="item-select-category__label">
+                                                                {item.name}
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    <button className="select-category__btn btn btn_small">
+                                                        <Translate>choose</Translate>
+                                                    </button>
                                                 </div>
                                             )
                                         }
 
                                     </div>
                                 </div>
-                                {itemsForRoll.length && <div className="filter-roulette__games games-filter-roulette">
-                                    <div className="games-filter-roulette__title title-games-filter-roulette">
-                                        <div className="title-games-filter-roulette__icon">
-                                            <img src={profit} alt="profit"/>
-                                        </div>
-                                        <div className="title-games-filter-roulette__text">
-                                            <Translate>game_cost_title</Translate> {activeCase?.cost} ec
-                                        </div>
-                                    </div>
-                                    <div className="games-filter-roulette__slider">
+                                {category && <div className="roulette__inner">
+                                    <div className="roulette__filter filter-roulette">
+                                        <div className="filter-roulette__categories categories-filter-roulette">
+                                            <div className="categories-filter-roulette__items">
 
-                                        <div className="games-filter-roulette__items">
+                                                {
+                                                    roulettesCases.map((item: any) =>
+                                                        <div key={item.id} onClick={_ => handleSelectCase(item)}
+                                                             className={"categories-filter-roulette__item"}>
+                                                            <div
+                                                                className={"categories-filter-roulette__link categories-filter-roulette__link_blue" + (activeCase.id === item.id ? " active" : "")}>
+                                                                {item.name}
 
-                                            {
-                                                itemsForRoll?.map((item: IProduct, index: number) => <RouletteItem
-                                                    key={index} isStart={index === 0 ? isStartRoulette : null} data={{
-                                                    name: index !== 35 ? item.name : winnerItem?.name,
-                                                    image: index !== 35 ? item.icon : winnerItem?.icon,
-                                                    isWinner: index === 35
-                                                }}/>)
-                                            }
+                                                                <button onClick={_ => setIsActive(true)}>
+                                                                    {/*<img src={domestication} alt=""/>*/}
+                                                                    i
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
 
-                                        </div>
-
-                                        <div className="games-filter-roulette__row">
-                                            <div className="games-filter-roulette__element"/>
-                                            <div
-                                                className="games-filter-roulette__column games-filter-roulette__column_hide"/>
-                                            <div className="games-filter-roulette__column"/>
-                                            <div
-                                                className="games-filter-roulette__column games-filter-roulette__column_border">
-                                                <span/>
                                             </div>
-                                            <div className="games-filter-roulette__column"/>
-                                            <div
-                                                className="games-filter-roulette__column games-filter-roulette__column_hide"/>
                                         </div>
+                                        {itemsForRoll.length &&
+                                            <div className="filter-roulette__games games-filter-roulette">
+                                                <div className="games-filter-roulette__title title-games-filter-roulette">
+                                                    <div className="title-games-filter-roulette__icon">
+                                                        <img src={profit} alt="profit"/>
+                                                    </div>
+                                                    <div className="title-games-filter-roulette__text">
+                                                        <Translate>game_cost_title</Translate> {activeCase?.cost} ec
+                                                    </div>
+                                                </div>
+                                                <div className="games-filter-roulette__slider">
+
+                                                    <div className="games-filter-roulette__items">
+
+                                                        {
+                                                            itemsForRoll?.map((item: IProduct, index: number) =>
+                                                                <RouletteItem
+                                                                    key={index}
+                                                                    isStart={index === 0 ? isStartRoulette : null} data={{
+                                                                    name: index !== 35 ? item?.name : winnerItem?.name,
+                                                                    image: index !== 35 ? item?.icon : winnerItem?.icon,
+                                                                    isWinner: index === 35
+                                                                }}/>)
+                                                        }
+
+                                                    </div>
+
+                                                    <div className="games-filter-roulette__row">
+                                                        <div className="games-filter-roulette__element"/>
+                                                        <div
+                                                            className="games-filter-roulette__column games-filter-roulette__column_hide"/>
+                                                        <div className="games-filter-roulette__column"/>
+                                                        <div
+                                                            className="games-filter-roulette__column games-filter-roulette__column_border">
+                                                            <span/>
+                                                        </div>
+                                                        <div className="games-filter-roulette__column"/>
+                                                        <div
+                                                            className="games-filter-roulette__column games-filter-roulette__column_hide"/>
+                                                    </div>
+                                                </div>
+                                                <div className="filter-roulette__btn-block">
+                                                    <button onClick={handleStartRoulette}
+                                                            className="filter-roulette__btn btn btn_small">
+                                                        <Translate>play_title</Translate>
+                                                    </button>
+                                                </div>
+                                            </div>}
                                     </div>
-                                    <div className="filter-roulette__btn-block">
-                                        <button onClick={handleStartRoulette}
-                                                className="filter-roulette__btn btn btn_small">
-                                            <Translate>play_title</Translate>
-                                        </button>
+
+                                    <div className="roulette__users users">
+
+                                        {/*<div className="users__swiper swiper">*/}
+
+                                        {/*    {isLoad && rouletteHistory.length && <Swiper*/}
+                                        {/*        slidesPerView={1}*/}
+                                        {/*        spaceBetween={20}*/}
+                                        {/*        slidesPerGroup={1}*/}
+                                        {/*        modules={[Grid, Pagination]}*/}
+                                        {/*        grid={{rows: 5, fill: "row"}}*/}
+                                        {/*        navigation={{*/}
+                                        {/*            prevEl: ".purchases-slider__btn.purchases-slider__btn_prev",*/}
+                                        {/*            nextEl: ".purchases-slider__btn.purchases-slider__btn_next",*/}
+                                        {/*        }}*/}
+                                        {/*        pagination={{*/}
+                                        {/*            clickable: true,*/}
+                                        {/*            el: '.purchases-slider__pagination'*/}
+                                        {/*        }}*/}
+                                        {/*    >*/}
+                                        {/*        {*/}
+                                        {/*            rouletteHistory.map((item: any, index) =>*/}
+                                        {/*                <SwiperSlide key={index}>*/}
+                                        {/*                    <HistoryRouletteItem data={item}/>*/}
+                                        {/*                </SwiperSlide>*/}
+                                        {/*            )*/}
+                                        {/*        }*/}
+                                        {/*    </Swiper>}*/}
+                                        {/*</div>*/}
+
+                                        {/*<div className="purchases-slider__navigation">*/}
+                                        {/*    <div className="purchases-slider__btn purchases-slider__btn_prev"/>*/}
+                                        {/*    <div className="purchases-slider__pagination"/>*/}
+                                        {/*    <div className="purchases-slider__btn purchases-slider__btn_next"/>*/}
+                                        {/*</div>*/}
+
+                                        {
+                                            rouletteHistory.map((item: any, index) =>
+                                                <HistoryRouletteItem key={item.id} data={item}/>
+                                            )
+                                        }
+
                                     </div>
                                 </div>}
                             </div>
-                            <div className="roulette__users users">
+                        </div>
+                    </section>
 
-                                <div className="users__swiper swiper">
+                    <Footer/>
+                </main>
 
-                                    {isLoad && <Swiper
-                                        slidesPerView={1}
-                                        spaceBetween={20}
-                                        slidesPerGroup={1}
-                                        modules={[Grid, Pagination]}
-                                        grid={{rows: 4, fill: "row"}}
-                                        navigation={{
-                                            prevEl: ".purchases-slider__btn.purchases-slider__btn_prev",
-                                            nextEl: ".purchases-slider__btn.purchases-slider__btn_next",
-                                        }}
-                                        pagination={{
-                                            clickable: true,
-                                            el: '.purchases-slider__pagination'
-                                        }}
-                                    >
-                                        {
-                                            rouletteHistory.map((item: any, index) =>
-                                                <SwiperSlide key={index}>
-                                                    <HistoryRouletteItem data={item}/>
-                                                </SwiperSlide>
-                                            )
-                                        }
-                                    </Swiper>}
-                                </div>
-
-                                <div className="purchases-slider__navigation">
-                                    <div className="purchases-slider__btn purchases-slider__btn_prev"/>
-                                    <div className="purchases-slider__pagination"/>
-                                    <div className="purchases-slider__btn purchases-slider__btn_next"/>
-                                </div>
-
-                            </div>
-                        </div>}
-                    </div>
-                </div>
-            </section>
-            <Footer/>
-        </RouletteStyled>
+                <RouletteCaseInfo isActive={isActive} activeCase={activeCase}/>
+            </RouletteStyled>
+        </isOpenPopupContext.Provider>
     )
 }

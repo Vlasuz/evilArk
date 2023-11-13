@@ -23,14 +23,8 @@ export const About: React.FC<IAboutProps> = () => {
     const lang = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
-        axios.get(apiLink('api/home/about-us?language='+lang)).then(({data}) => {
-            console.log(data.data)
-            setAboutInfo(data.data)
-        })
-        axios.get(apiLink('api/about-us?language='+lang)).then(({data}) => {
-            console.log(data.data)
-            setAboutItems(data.data)
-        })
+        axios.get(apiLink('api/home/about-us?language='+lang)).then(({data}) => setAboutInfo(data.data))
+        axios.get(apiLink('api/about-us?language='+lang)).then(({data}) => setAboutItems(data.data))
     }, [lang])
 
     return (
@@ -49,7 +43,7 @@ export const About: React.FC<IAboutProps> = () => {
                     <div className="sobre-nosotros__row">
 
                         {
-                            aboutItems.length && aboutItems?.map((item: IAboutItems, index: number) =>
+                            aboutItems?.length && aboutItems?.map((item: IAboutItems, index: number) =>
                                 <div key={index} className="sobre-nosotros__column">
                                     <div className="sobre-nosotros__item item-sobre-nosotros">
                                         <div className="item-sobre-nosotros__image">

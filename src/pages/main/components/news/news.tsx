@@ -48,7 +48,7 @@ export const News: React.FC<INewsProps> = () => {
         })
     }
 
-    console.log()
+    console.log(news)
 
     return (
         <>
@@ -58,8 +58,8 @@ export const News: React.FC<INewsProps> = () => {
                         <Categories setServer={setServer} server={server}/>
                         <div className="news__body">
 
-                            {news.length >= 1 && <NewsItemFirst handleReadNews={handleReadNews}
-                                            data={news.filter(item => item.server.id === server?.id)[0]}/>}
+                            {news?.length >= 1 && <NewsItemFirst handleReadNews={handleReadNews}
+                                            data={news?.filter(item => item?.server?.id === server?.id)[0]}/>}
 
                             <div className="news__slider">
 
@@ -99,7 +99,7 @@ export const News: React.FC<INewsProps> = () => {
                                     }}
                                 >
                                     {
-                                        news.length && news.filter((item: INews) => item.server.id === server?.id).map((item: INews, index: number) => index > 0 &&
+                                        news.length && news?.filter((item: INews) => item.server.id === server?.id).map((item: INews, index: number) => index > 0 &&
                                             <SwiperSlide key={item.id}>
                                                 <NewsItem data={item}/>
                                             </SwiperSlide>

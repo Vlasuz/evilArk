@@ -31,9 +31,9 @@ export const Header: React.FC<IHeaderProps> = () => {
 
     const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false)
     const [categories, setCategories] = useState<IServers[]>([])
-    const dispatch = useDispatch()
+    const [isOpenSelectClusters, setIsOpenSelectClusters] = useState(false)
 
-    const selectBlock: any = useRef(null)
+    const dispatch = useDispatch()
 
     window.addEventListener('click', (e: any) => {
         if(!e.target.closest('.header-mobile') && !e.target.closest('.header__burger')) setIsOpenMobileMenu(false)
@@ -50,11 +50,12 @@ export const Header: React.FC<IHeaderProps> = () => {
     }, [])
 
     useEffect(() => {
-        selectBlock.current.value = JSON.stringify(category)
+        setCategory(category)
     }, [category])
 
-    const handleClusterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        dispatch(setCategory(JSON.parse(e.target.value)))
+    const handleClusterChange = (item: string) => {
+        dispatch(setCategory(JSON.parse(item)))
+        setIsOpenSelectClusters(false)
     }
 
     return (
@@ -65,9 +66,14 @@ export const Header: React.FC<IHeaderProps> = () => {
                         <img src={arrowWhite} alt="arrow"/>
                     </button>
                     <div className="header__servers">
-                        <select ref={selectBlock} onChange={handleClusterChange}>
-                            {categories.length && categories?.map(item => <option key={item.id} value={JSON.stringify(item)}>{item.name}</option>)}
-                        </select>
+                        <div className="characteristics-select-product__dropdown dropdown">
+                            <button onClick={_ => setIsOpenSelectClusters(prev => !prev)} className="dropdown__button">
+                                {category.name}
+                            </button>
+                            <ul className={"dropdown__list" + (isOpenSelectClusters ? " visible" : "")}>
+                                {categories.length && categories?.map(item => <li key={item.id} onClick={_ => item.name !== category.name && handleClusterChange(JSON.stringify(item))} className="dropdown__list-item" data-dropdown="module 2 - 125 lvl">{item.name}</li>)}
+                            </ul>
+                        </div>
                     </div>
                     {!!Object.keys(userInfo).length && <div className="balance-header__body" data-da="top-mobile-header, 1, 480">
                         <div className="balance-header__bonuses bonuses-balance-header">
@@ -115,10 +121,13 @@ export const Header: React.FC<IHeaderProps> = () => {
 
                             <HeaderLanguages/>
 
-                            <div className="header__servers">
-                                <select ref={selectBlock} onChange={handleClusterChange}>
-                                    {categories.length && categories?.map(item => <option key={item.id} value={JSON.stringify(item)}>{item.name}</option>)}
-                                </select>
+                            <div className="characteristics-select-product__dropdown dropdown">
+                                <button onClick={_ => setIsOpenSelectClusters(prev => !prev)} className="dropdown__button">
+                                    {category.name}
+                                </button>
+                                <ul className={"dropdown__list" + (isOpenSelectClusters ? " visible" : "")}>
+                                    {categories.length && categories?.map(item => <li key={item.id} onClick={_ => item.name !== category.name && handleClusterChange(JSON.stringify(item))} className="dropdown__list-item" data-dropdown="module 2 - 125 lvl">{item.name}</li>)}
+                                </ul>
                             </div>
 
                             {!!Object.keys(userInfo).length ? <HeaderUser/> : <HeaderLogin/>}

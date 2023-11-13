@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import {IProduct} from "../../models";
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
@@ -12,15 +12,12 @@ interface IProductProps {
     data: IProduct
 }
 
-export const Product:React.FC<IProductProps> = ({isCanGet, data}) => {
+export const Product: React.FC<IProductProps> = ({isCanGet, data}) => {
 
     const handleGetInGame = () => {
-        console.log('get in game', data)
-
         axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
-        axios.post(apiLink("api/products/get-in-game/"+data.id)).then(({data}) => {
-            console.log(data.data)
-            notifications("Get in game. "+data.data.message)
+        axios.post(apiLink("api/products/get-in-game/" + data.id)).then(({data}) => {
+            notifications("Get in game. " + data.data.message)
         }).catch(er => console.log(er))
     }
 

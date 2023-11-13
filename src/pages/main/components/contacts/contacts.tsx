@@ -16,7 +16,6 @@ export const Contacts:React.FC<IContactsProps> = () => {
     const [contactInfo, setContactInfo] = useState<any>({})
 
     const generalInfo: IGeneralInfo = useSelector((state: any) => state.toolkit.generalInfo)
-
     const lang = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
@@ -32,21 +31,21 @@ export const Contacts:React.FC<IContactsProps> = () => {
                     <div className="contacto__row">
                         <div className="contacto__content">
                             <h3 className="contacto__title title-h3">
-                                {contactInfo.title}
+                                {contactInfo?.title}
                             </h3>
                             <div className="contacto__subtitle">
-                                {contactInfo.text}
+                                {contactInfo?.text}
                             </div>
                         </div>
                         <div className="contacto__btns">
-                            {generalInfo.email_url && <a href={"mailto:" + generalInfo.email_url}
+                            {generalInfo?.email_url && <a href={"mailto:" + generalInfo?.email_url}
                                 className="contacto__btn btn btn_big btn_white">
                                 <img src={contactsEmail} alt="email"/>
                                 <span>
                                     <Translate>home_use_email</Translate>
                                 </span>
                             </a>}
-                            {generalInfo.discord_url && <a href={generalInfo.discord_url} className="contacto__btn btn btn_big">
+                            {generalInfo?.discord_url && <a href={generalInfo?.discord_url} className="contacto__btn btn btn_big">
                                 <img src={contactsFace} alt="face"/>
                                 <span>
                                     <Translate>home_use_discord</Translate>

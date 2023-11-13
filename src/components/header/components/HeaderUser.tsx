@@ -22,12 +22,12 @@ export const HeaderUser: React.FC<IUserProps> = () => {
         <div className="header__balance balance-header active">
             <div className="balance-header__body" data-da="top-mobile-header, 1, 480">
                 <div className="balance-header__bonuses bonuses-balance-header">
-                    <NavLink to={'/bonuses'} className="bonuses-balance-header__icon">
-                        <svg>
-                            <use xlinkHref="#bonuses" />
+                    <NavLink to={'/inventory'} className="bonuses-balance-header__icon">
+                        <svg className="delivery__arrow">
+                            <use xlinkHref="#inventory"></use>
                         </svg>
                     </NavLink>
-                    <div className="bonuses-balance-header__message">Bonuses</div>
+                    <div className="bonuses-balance-header__message">Invenroty</div>
                 </div>
                 <div className="balance-header__top-up top-up-balance-header">
                     <NavLink to={'/profile'} className="top-up-balance-header__icon">

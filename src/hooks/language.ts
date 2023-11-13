@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {useEffect, useState} from 'react'
 import {initReactI18next, useTranslation} from "react-i18next";
 import {useDispatch, useSelector} from "react-redux";
 import {setLanguage} from "../redux/toolkitSlice";
@@ -8,6 +8,7 @@ import Lang_UA from "../languages/ua.json";
 import Lang_RU from "../languages/ru.json";
 import i18n from "i18next";
 import getCookie from "../functions/getCookie";
+import {notifications} from "./notifications";
 
 const jsonLanguages = {
     "en": { translation: Lang_EN },
@@ -22,6 +23,8 @@ i18n.use(initReactI18next).init({
 });
 
 export const useLanguage = () => {
+
+    const [isNeedToWait, setIsNeedToWait] = useState(false)
 
     const languages = [
         {
@@ -43,11 +46,24 @@ export const useLanguage = () => {
     const langSelected = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
+
         dispatch(setLanguage(i18n.language))
         setCookie('lang', i18n.language)
+
+        setIsNeedToWait(true)
+        setTimeout(() => {
+            setIsNeedToWait(false)
+        }, 2000)
     }, [i18n.language])
 
-    const handleSwitch = (slug: string) => i18n.changeLanguage(slug)
+    const handleSwitch = (slug: string) => {
+        if(isNeedToWait) {
+            notifications("Wait please")
+            return;
+        }
+
+        i18n.changeLanguage(slug)
+    }
 
     return {languages, handleSwitch, langSelected}
 

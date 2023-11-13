@@ -41,7 +41,7 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
         })
     }, [])
 
-    const ordersBy: any = [<Translate>price_title</Translate>]
+    const ordersBy: any = ["Price"]
     const [isSort, setIsSort] = useState<ISort>()
 
     const handleSearchTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -11,6 +11,7 @@ import {ShopItemMoreSelect} from "./shopItemMoreSelect";
 import {toast} from "react-toastify";
 import {notifications} from "../../../hooks/notifications";
 import {Translate} from "../../../components/translate/Translate";
+import {ShopItemTableItem} from "./ShopItemTableItem";
 
 interface IShopItemMoreProps {
     isActive: number | string
@@ -26,6 +27,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
     const [productModule, setProductModule]: any = useState("")
+    const [isWantToBuy, setIsWantToBuy] = useState(false)
 
     const dispatch = useDispatch()
     const category: ICategory = useSelector((state: any) => state.toolkit.category)
@@ -38,6 +40,11 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     }, [isActive])
 
     const isActivePopup: any = useContext(isOpenPopupContext)
+
+    const handleClickButtonBuy = () => {
+        setError('')
+        setIsWantToBuy(true)
+    }
 
     const handleBuy = () => {
         setIsLoading(true)
@@ -53,12 +60,14 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
             notifications(data.data.message)
 
             setIsLoading(false)
+            setIsWantToBuy(false)
             if (!data.data.success) return;
 
             dispatch(changeUserBalance(product?.price && +product?.price * count))
         }).catch(er => {
             notifications(er.response.status)
             setIsLoading(false)
+            setIsWantToBuy(false)
         })
     }
 
@@ -68,7 +77,10 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
         setIsLoading(false)
         setError('')
         setCount(1)
+        setIsWantToBuy(false)
     }, [isActive])
+
+    const isAnyoneHave = !!product?.damage || !!product?.durability || !!product?.food || !!product?.health || !!product?.movement_speed || !!product?.neuter || !!product?.oxygen || !!product?.stamina || !!product?.torpidity || !!product?.weight || product?.sex !== "product";
 
     return (
         <ProductModule.Provider value={setProductModule}>
@@ -83,15 +95,29 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                         </h4>
                         <div className="select-product__control-panel control-panel-select-product">
                         </div>
-                        <div
-                            className="select-product__about-product select-product__about-product_no-authorization">
-                            <div className="select-product__name">
-                                {product?.name}
-                            </div>
+                        <div className="select-product__about-product">
+                            <div className="select-product__name">{product?.name}</div>
                             <div className="select-product__description">
                                 {product?.description}
                             </div>
                         </div>
+
+                        {isAnyoneHave && <div className="select-product__parameters parameters-select-product">
+                            <div className="parameters-select-product__body">
+                                {!!product?.damage && <ShopItemTableItem value={product?.damage} name={"Damage"}/>}
+                                {!!product?.durability && <ShopItemTableItem value={product?.durability} name={"Durability"}/>}
+                                {!!product?.food && <ShopItemTableItem value={product?.food} name={"Food"}/>}
+                                {!!product?.health && <ShopItemTableItem value={product?.health} name={"Health"}/>}
+                                {!!product?.movement_speed && <ShopItemTableItem value={product?.movement_speed} name={"Movement speed"}/>}
+                                {!!product?.neuter && <ShopItemTableItem value={product?.neuter} name={"Neuter"}/>}
+                                {!!product?.oxygen && <ShopItemTableItem value={product?.oxygen} name={"Oxygen"}/>}
+                                {!!product?.stamina && <ShopItemTableItem value={product?.stamina} name={"Stamina"}/>}
+                                {!!product?.torpidity && <ShopItemTableItem value={product?.torpidity} name={"Torpidity"}/>}
+                                {!!product?.weight && <ShopItemTableItem value={product?.weight} name={"Weight"}/>}
+                                {product?.sex !== "product" && <ShopItemTableItem value={product?.sex ?? ""} name={"Sex"}/>}
+                            </div>
+                        </div>}
+
                         <div
                             className="select-product__characteristics characteristics-select-product characteristics-select-product_no-authorization">
                             <div className="characteristics-select-product__row">
@@ -128,13 +154,26 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                 </div>
                             </div>
                         </div>
-                        <div
-                            className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
+                        <div className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
+                            {isWantToBuy && <h3>Вы подтверждаете покупку?</h3>}
                             <div className="bottom-select-product__row">
                                 {
-                                     <button onClick={handleBuy} className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
-                                         <Translate>buy_title</Translate>
-                                     </button>
+                                    !isWantToBuy && <button onClick={handleClickButtonBuy}
+                                            className={'bottom-select-product__btn'}>
+                                        <Translate>buy_title</Translate>
+                                    </button>
+                                }
+
+                                {
+                                    isWantToBuy && <div style={{display: "flex"}}>
+                                        <button onClick={handleBuy}
+                                                className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
+                                            Да
+                                        </button>
+                                        <button style={{background: "dimgrey", marginLeft: "15px"}} onClick={_ => setIsWantToBuy(false)} className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
+                                            Нет
+                                        </button>
+                                    </div>
                                 }
 
                                 {

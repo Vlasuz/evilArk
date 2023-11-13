@@ -2,6 +2,10 @@ import React, {useContext, useEffect} from 'react'
 import {useImages} from "../../../hooks/images";
 import {IProduct} from "../../../models";
 import {isOpenPopupContext} from "../Shop";
+// @ts-ignore
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 interface IShopItemProps {
     data: IProduct
@@ -24,7 +28,7 @@ export const ShopItem:React.FC<IShopItemProps> = ({data}) => {
                         {data.name}
                     </span>
                     <span className="item-cards-categories__image">
-                        <img src={data.icon} alt="PvP Simple Kit"/>
+                        <LazyLoadImage src={data.icon} alt="PvP Simple Kit"/>
                     </span>
                 </div>
                 <div className="item-cards-categories__bottom bottom-item-cards-categories">

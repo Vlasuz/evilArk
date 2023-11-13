@@ -165,6 +165,16 @@ export interface IProductSingle {
     "quality": string,
     "server": IServers,
     "modules": IModule[]
+    damage: null
+    durability: any
+    food: any
+    health: any
+    movement_speed: any
+    neuter: any
+    oxygen: any
+    stamina: any
+    torpidity: any
+    weight: any
 }
 
 export interface IUserDiscount {
