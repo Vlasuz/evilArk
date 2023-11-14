@@ -37,14 +37,19 @@ export const Shop: React.FC<IShopProps> = () => {
     const [shop, setShop] = useState<IProduct[]>([])
     const category: ICategory = useSelector((state: any) => state.toolkit.category)
     const [isLoading, setIsLoading] = useState(true)
+    const [pagination, setPagination] = useState<any>([])
 
     useEffect(() => {
         asyncLoading()
     }, [category])
 
-    const asyncLoading = async () => {
-        await axios.get(apiLink('api/products?server_id=' + category.id)).then(({data}) => {
+    const asyncLoading = (url?: string) => {
+        if(url !== null)
+
+        setIsLoading(true)
+        axios.get(url ? (url + "&server_id=" + category.id) : apiLink('api/products?server_id=' + category.id)).then(({data}) => {
             setShop(data.data)
+            setPagination(data.meta.links)
             setIsLoading(false)
         }).catch(er => console.log(er))
     }
@@ -53,7 +58,6 @@ export const Shop: React.FC<IShopProps> = () => {
         setIsLoading(true)
     }, [category])
 
-    console.log(shop)
     return (
         <isOpenPopupContext.Provider value={setActiveProduct}>
             <ShopStyled>
@@ -84,6 +88,16 @@ export const Shop: React.FC<IShopProps> = () => {
                                             </div> : <p className={"LoadingProducts"}>Loading...</p>}
                                         </div>
                                     </div>
+
+                                    <div className="shop__pagination">
+
+                                        {
+                                            pagination.map((pag: any) =>
+                                                <button className={pag.active ? " _active" : ""} onClick={_ => asyncLoading(pag.url)}>{pag.label}</button>
+                                            )
+                                        }
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

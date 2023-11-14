@@ -12,7 +12,7 @@ import {
     CSSTransition
 } from "react-transition-group";
 import {IRoutes, IUser} from "./models";
-import { Header } from './components/header/header';
+import { Header } from './components/header/Header';
 import { donateInfo } from './api/donateInfo';
 import { routes } from './functions/routes';
 import {generalInfo} from "./api/generalInfo";

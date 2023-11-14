@@ -115,6 +115,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                 {!!product?.torpidity && <ShopItemTableItem value={product?.torpidity} name={"Torpidity"}/>}
                                 {!!product?.weight && <ShopItemTableItem value={product?.weight} name={"Weight"}/>}
                                 {product?.sex !== "product" && <ShopItemTableItem value={product?.sex ?? ""} name={"Sex"}/>}
+
                             </div>
                         </div>}
 

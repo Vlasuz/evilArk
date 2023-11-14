@@ -15,6 +15,8 @@ import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
 import {HeaderStyled} from "./Header.styles";
 import {setCategory} from "../../redux/toolkitSlice";
+import setCookie from "../../functions/setCookie";
+import getCookies from "../../functions/getCookie";
 
 interface IHeaderProps {
 
@@ -45,6 +47,9 @@ export const Header: React.FC<IHeaderProps> = () => {
 
     useEffect(() => {
         axios.get(apiLink("api/servers")).then(({data}) => {
+            const selectedCluster: any = getCookies("cluster")
+            // dispatch(setCategory(JSON.parse(selectedCluster)))
+
             setCategories(data.data)
         }).catch(er => console.log(er))
     }, [])
@@ -56,6 +61,7 @@ export const Header: React.FC<IHeaderProps> = () => {
     const handleClusterChange = (item: string) => {
         dispatch(setCategory(JSON.parse(item)))
         setIsOpenSelectClusters(false)
+        setCookie("cluster", item)
     }
 
     return (

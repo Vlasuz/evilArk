@@ -7084,7 +7084,6 @@ body.lock::before {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    font-size: 0;
     align-items: center;
     font-size: 16px;
     line-height: 156.25%;
@@ -12922,7 +12921,7 @@ body.lock::before {
 
 .news::before {
     position: absolute;
-    content: "";
+    /*content: "";*/
     width: 655px;
     height: 655px;
     border-radius: 50%;
@@ -12947,7 +12946,7 @@ body.lock::before {
 
 .news::after {
     position: absolute;
-    content: "";
+    /*content: "";*/
     width: 577px;
     height: 577px;
     border-radius: 50%;
@@ -14164,7 +14163,7 @@ body.lock::before {
 
 .faq::before {
     position: absolute;
-    content: "";
+    /*content: "";*/
     width: 655px;
     height: 655px;
     border-radius: 50%;
@@ -14188,7 +14187,7 @@ body.lock::before {
 
 .faq::after {
     position: absolute;
-    content: "";
+    /*content: "";*/
     width: 655px;
     height: 655px;
     border-radius: 50%;

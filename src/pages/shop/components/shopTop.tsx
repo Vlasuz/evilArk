@@ -25,6 +25,8 @@ export const ShopTop: React.FC<IShopTopProps> = () => {
     const category: IServers = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
+        if(!Object.keys(userInfo).length) return;
+
         axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.get(apiLink("api/users/discount")).then(({data}) => {
             if (category.name?.toLowerCase().includes("pve")) {
