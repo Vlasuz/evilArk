@@ -28,7 +28,7 @@ export const ServersItem: React.FC<IServersItemProps> = ({data}) => {
                                 <img src={arrowWhite} alt="arrow"/>
                             </div>
                         </div>
-                        <div className="item-servidores__links" style={{display: isActive ? 'block' : 'none'}}>
+                        <div className="item-servidores__links">
                             {
                                 data.clusters.map((cluster: ICluster) =>
                                     <a href={cluster.url} key={cluster.id} className="item-servidores__link">

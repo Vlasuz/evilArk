@@ -6,34 +6,57 @@ import {apiLink} from "../../../hooks/apiLink";
 import {Translate} from "../../../components/translate/Translate";
 
 interface IShopFilterProps {
-    setFilter: any
-    filter: IFilterShop
+    setFilter?: any
+    filter?: IFilterShop
 }
 
 export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
     const {arrowUp} = useImages()
     const [titleSearch, setTitleSearch] = useState('')
 
+    const [chosenCategory, setChosenCategory] = useState([])
+    const ordersBy: any = ["Price"]
+    const [isSort, setIsSort] = useState("")
+    const [categories, setCategories] = useState([])
+
     const chooseCategory = (category: string) => {
-        let isHaveCategory = filter.category.some(item => item === category)
-        let localCategory: string[] = [];
-
-        if(isHaveCategory) {
-            localCategory = filter.category.filter(item => item !== category)
+        if(chosenCategory.some((item: any) => item.id === category)) {
+            setChosenCategory(prev => prev.filter((item: any) => item.id !== category))
         } else {
-            localCategory = [...filter.category, category]
+            setChosenCategory(prev => [...prev, categories.filter((item: any) => item.id === category)[0]])
         }
+    }
 
-        setFilter((prev: IFilterShop) => {
-            return {
-                name: prev.name,
-                orderBy: prev.orderBy,
-                category: localCategory,
-            }
+    const handleSearchTitleChange = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        setFilter({
+            searchTerm: titleSearch,
+            category: filter?.category,
+            orderBy: filter?.orderBy,
+            orderDirection: filter?.orderDirection
         })
     }
 
-    const [categories, setCategories] = useState([])
+    const handleSort = (sort: string) => {
+        setIsSort(prev => prev === "ASC" ? "DESC" : "ASC")
+
+        setFilter({
+            searchTerm: filter?.searchTerm,
+            category: filter?.category,
+            orderBy: sort,
+            orderDirection: isSort ? "ASC" : "DESC"
+        })
+    }
+
+    useEffect(() => {
+        setFilter({
+            searchTerm: filter?.searchTerm,
+            category: chosenCategory.map((item: any) => item.name),
+            orderBy: filter?.orderBy,
+            orderDirection: filter?.orderDirection
+        })
+    }, [chosenCategory])
 
     useEffect(() => {
         axios.get(apiLink("api/categories")).then(({data}) => {
@@ -41,49 +64,18 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
         })
     }, [])
 
-    const ordersBy: any = ["Price"]
-    const [isSort, setIsSort] = useState<ISort>()
-
-    const handleSearchTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitleSearch(e.target.value)
-
-        setFilter((prev: IFilterShop) => {
-            return {
-                name: e.target.value,
-                orderBy: prev.orderBy,
-                category: prev.category,
-            }
-        })
-    }
-
-    const handleSort = (sort: string) => {
-        setIsSort({
-            isActive: !isSort?.isActive,
-            sortItem: sort
-        })
-
-        setFilter((prev: IFilterShop) => {
-            return {
-                name: prev.name,
-                orderBy: {
-                    order: sort,
-                    isFromLow: !isSort?.isActive
-                },
-                category: prev.category,
-            }
-        })
-    }
-
     return (
         <div className="cards-categories__top top-cards-categories">
             <div className="top-cards-categories__filter filter-top-cards-categories">
-                <input placeholder="Filter by name" autoComplete='off' onChange={handleSearchTitleChange} value={titleSearch} type='text' name='form[]'
-                       className='filter-top-cards-categories__input'/>
+                <form onSubmit={handleSearchTitleChange}>
+                    <input placeholder="Filter by name" autoComplete='off' onChange={e => setTitleSearch(e.target.value)} value={titleSearch} type='text' name='form[]'
+                           className='filter-top-cards-categories__input'/>
+                </form>
                 <div className="filter-top-cards-categories__items">
 
                     {
                         categories?.map((item: any) =>
-                            <div key={item.id} onClick={_ => chooseCategory(item.id)} className={"filter-top-cards-categories__item" + (filter.category.some(cat => cat === item.id) ? " active" : "")}>
+                            <div key={item.id} onClick={_ => chooseCategory(item.id)} className={"filter-top-cards-categories__item" + (chosenCategory.some((cat: any) => cat.id === item.id) ? " active" : "")}>
                                 <div className="filter-top-cards-categories__link">
                                     {item.name}
                                 </div>
@@ -104,11 +96,11 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
                             <button key={index} onClick={_ => handleSort(item)}
                                 className="order-top-cards-categories__item item-order-top-cards-categories order-top-cards-categories__item_name">
                                 <div className="item-order-top-cards-categories__arrows">
-                                    {!(isSort?.isActive && item === isSort?.sortItem) && <div
+                                    {(isSort === "ASC" || !isSort) && <div
                                         className="item-order-top-cards-categories__arrow item-order-top-cards-categories__arrow-up">
                                         <img src={arrowUp} alt="arrow-up"/>
                                     </div>}
-                                    {!(!isSort?.isActive && item === isSort?.sortItem) && <div
+                                    {(isSort === "DESC" || !isSort) && <div
                                         className="item-order-top-cards-categories__arrow item-order-top-cards-categories__arrow-down">
                                         <img src={arrowUp} alt="arrow-down"/>
                                     </div>}

@@ -3,6 +3,7 @@ import {useImages} from "../../../../hooks/images";
 import {useSelector} from "react-redux";
 import axios from "axios";
 import {apiLink} from "../../../../hooks/apiLink";
+import ReactHtmlParser from "html-react-parser";
 
 interface IDonateProps {
 
@@ -29,13 +30,13 @@ export const Donate: React.FC<IDonateProps> = () => {
             <div className="donaciones__container container">
                 <div className="donaciones__body">
                     <div className="donaciones__label label">
-                        {pageInfo?.title}
+                        {ReactHtmlParser(pageInfo?.title ?? "")}
                     </div>
                     <h3 className="donaciones__title title-h3">
-                        {pageInfo?.sub_title}
+                        {ReactHtmlParser(pageInfo?.sub_title ?? "")}
                     </h3>
                     <div className="donaciones__sibtitle">
-                        {pageInfo?.text}
+                        {ReactHtmlParser(pageInfo?.text ?? "")}
                     </div>
                     <div className="donaciones__row">
 

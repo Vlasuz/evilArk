@@ -105,12 +105,13 @@ export const ShopStyled = styled.main`
 
   .parameters-select-product {
     //max-width: 100%;
+    width: fit-content;
   }
   .parameters-select-product__body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     max-width: 516px;
-    width: 100%;
+    width: fit-content;
     
     .parameters-select-product__item {
       flex: 0 1 50%;

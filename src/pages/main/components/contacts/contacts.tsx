@@ -5,6 +5,7 @@ import {useSelector} from "react-redux";
 import axios from "axios";
 import {apiLink} from "../../../../hooks/apiLink";
 import {Translate} from "../../../../components/translate/Translate";
+import ReactHtmlParser from "html-react-parser";
 
 interface IContactsProps {
 
@@ -31,10 +32,10 @@ export const Contacts:React.FC<IContactsProps> = () => {
                     <div className="contacto__row">
                         <div className="contacto__content">
                             <h3 className="contacto__title title-h3">
-                                {contactInfo?.title}
+                                {ReactHtmlParser(contactInfo?.title ?? "")}
                             </h3>
                             <div className="contacto__subtitle">
-                                {contactInfo?.text}
+                                {ReactHtmlParser(contactInfo?.text ?? "")}
                             </div>
                         </div>
                         <div className="contacto__btns">

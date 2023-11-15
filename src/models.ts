@@ -43,12 +43,10 @@ export interface IUser {
 }
 
 export interface IFilterShop {
-    name: string
-    category: string[]
-    orderBy: {
-        order: string
-        isFromLow: boolean
-    }
+    searchTerm: string
+    category: string
+    orderBy: string
+    orderDirection: string
 }
 
 export interface INews {
@@ -175,6 +173,8 @@ export interface IProductSingle {
     stamina: any
     torpidity: any
     weight: any
+    case: IProduct[]
+    is_case: number | boolean
 }
 
 export interface IUserDiscount {

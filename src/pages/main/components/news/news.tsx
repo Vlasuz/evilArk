@@ -48,8 +48,6 @@ export const News: React.FC<INewsProps> = () => {
         })
     }
 
-    console.log(news)
-
     return (
         <>
             <section className="news" id="news" data-aos="fade" data-aos-duration="750" data-aos-offset="200">

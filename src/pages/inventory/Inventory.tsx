@@ -48,7 +48,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                             {isLoad && <Swiper
                                                 slidesPerView={6}
                                                 spaceBetween={37}
-                                                slidesPerGroup={3}
+                                                slidesPerGroup={5}
                                                 modules={[Grid, Pagination]}
                                                 navigation={{
                                                     prevEl: ".purchases-slider__navigation .purchases-slider__btn_prev",
@@ -78,7 +78,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                                 {
                                                     inventory.map((item: IProduct, index: number) =>
                                                         <SwiperSlide key={index}>
-                                                            <Product data={item} isCanGet={true}/>
+                                                            <Product product={item} setInventory={setInventory} isCanGet={true}/>
                                                         </SwiperSlide>
                                                     )
                                                 }

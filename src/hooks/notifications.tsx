@@ -12,6 +12,10 @@ export const notifications = (data: any) => {
             type: "success",
             message: <Translate>text_for_notify_2</Translate>,
         },
+        "Product purchased": {
+            type: "success",
+            message: "Продукт успешно куплен",
+        },
         "The servers are down": {
             type: "info",
             message: <Translate>text_for_notify_3</Translate>,
@@ -40,6 +44,10 @@ export const notifications = (data: any) => {
             type: "error",
             message: <Translate>text_for_notify_9</Translate>,
         },
+        "Get in game. User not in game": {
+            type: "error",
+            message: "User not in game",
+        },
         "Get in game. Product not exist": {
             type: "error",
             message: "Product not exist",
@@ -58,11 +66,11 @@ export const notifications = (data: any) => {
         }
     }
 
-    if(notifies[data].type === "info") {
+    if(notifies[data]?.type === "info") {
         toast.info(notifies[data].message)
-    } else if (notifies[data].type === "success"){
+    } else if (notifies[data]?.type === "success"){
         toast.success(notifies[data].message)
-    } else if (notifies[data].type === "error"){
+    } else if (notifies[data]?.type === "error"){
         toast.error(notifies[data].message)
     }
 

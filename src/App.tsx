@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 
 import './assets/styles/style.css'
 import './assets/js/app.min'
-import {Sidebar} from "./components/sidebar/sidebar";
+import {Sidebar} from "./components/sidebar/Sidebar";
 import {SvgIcons} from "./components/svgIcons/svgIcons";
 import {responsiveSite} from "./functions/responsive";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
@@ -21,6 +21,7 @@ import {PageNotFound} from "./pages/pageNotFound/pageNotFound";
 import {setCategory} from "./redux/toolkitSlice";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TranslationComponent from "./components/testTranslateGoogle";
 
 
 
@@ -53,6 +54,7 @@ function App() {
 
     return (
         <div className="wrapper">
+            {/*<TranslationComponent/>*/}
             <SvgIcons/>
 
             <Header/>

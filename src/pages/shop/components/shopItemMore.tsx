@@ -12,6 +12,7 @@ import {toast} from "react-toastify";
 import {notifications} from "../../../hooks/notifications";
 import {Translate} from "../../../components/translate/Translate";
 import {ShopItemTableItem} from "./ShopItemTableItem";
+import ReactHtmlParser from "html-react-parser";
 
 interface IShopItemMoreProps {
     isActive: number | string
@@ -35,6 +36,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     useEffect(() => {
         isActive && axios.get(apiLink('api/products/' + isActive)).then(({data}) => {
             setProduct(data.data)
+            console.log(data)
             setProductModule(data.data?.modules.length && data.data?.modules[0].id)
         })
     }, [isActive])
@@ -57,6 +59,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
             "module_id": productModule
         }).then(({data}) => {
 
+            console.log(data)
             notifications(data.data.message)
 
             setIsLoading(false)
@@ -65,7 +68,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
 
             dispatch(changeUserBalance(product?.price && +product?.price * count))
         }).catch(er => {
-            notifications(er.response.status)
+            notifications(er?.response?.status)
             setIsLoading(false)
             setIsWantToBuy(false)
         })
@@ -98,23 +101,54 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                         <div className="select-product__about-product">
                             <div className="select-product__name">{product?.name}</div>
                             <div className="select-product__description">
-                                {product?.description}
+                                {ReactHtmlParser(product?.description ?? "")}
                             </div>
                         </div>
 
+                        {product?.is_case && <div className="select-product__rare rare-select-product">
+                            <div className="rare-select-product__options">
+                                <div className="rare-select-product__title">
+                                    Продукты в кейсе
+                                </div>
+
+                                {
+                                    product?.case?.map((item: IProduct) =>
+                                        <div key={item.id} className="rare-select-product__item">
+                                            <div className="label-rare-select-product__row">
+                                                <div className="label-rare-select-product__image">
+                                                    <img src={apiLink(item.icon)} alt="organic"/>
+                                                </div>
+                                                <div className="label-rare-select-product__name">
+                                                    {item.name}
+                                                </div>
+                                                <div className="label-rare-select-product__price">
+                                                    <span>{item.price} EC</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+
+                            </div>
+                        </div>}
+
                         {isAnyoneHave && <div className="select-product__parameters parameters-select-product">
                             <div className="parameters-select-product__body">
-                                {!!product?.damage && <ShopItemTableItem value={product?.damage} name={"Damage"}/>}
-                                {!!product?.durability && <ShopItemTableItem value={product?.durability} name={"Durability"}/>}
-                                {!!product?.food && <ShopItemTableItem value={product?.food} name={"Food"}/>}
-                                {!!product?.health && <ShopItemTableItem value={product?.health} name={"Health"}/>}
-                                {!!product?.movement_speed && <ShopItemTableItem value={product?.movement_speed} name={"Movement speed"}/>}
-                                {!!product?.neuter && <ShopItemTableItem value={product?.neuter} name={"Neuter"}/>}
-                                {!!product?.oxygen && <ShopItemTableItem value={product?.oxygen} name={"Oxygen"}/>}
-                                {!!product?.stamina && <ShopItemTableItem value={product?.stamina} name={"Stamina"}/>}
-                                {!!product?.torpidity && <ShopItemTableItem value={product?.torpidity} name={"Torpidity"}/>}
-                                {!!product?.weight && <ShopItemTableItem value={product?.weight} name={"Weight"}/>}
-                                {product?.sex !== "product" && <ShopItemTableItem value={product?.sex ?? ""} name={"Sex"}/>}
+                                {!!product?.damage && <ShopItemTableItem value={product?.damage} name={"damage"}/>}
+                                {!!product?.durability &&
+                                    <ShopItemTableItem value={product?.durability} name={"durability"}/>}
+                                {!!product?.food && <ShopItemTableItem value={product?.food} name={"food"}/>}
+                                {!!product?.health && <ShopItemTableItem value={product?.health} name={"health"}/>}
+                                {!!product?.movement_speed &&
+                                    <ShopItemTableItem value={product?.movement_speed} name={"movement speed"}/>}
+                                {!!product?.neuter && <ShopItemTableItem value={product?.neuter} name={"neuter"}/>}
+                                {!!product?.oxygen && <ShopItemTableItem value={product?.oxygen} name={"oxygen"}/>}
+                                {!!product?.stamina && <ShopItemTableItem value={product?.stamina} name={"stamina"}/>}
+                                {!!product?.torpidity &&
+                                    <ShopItemTableItem value={product?.torpidity} name={"torpidity"}/>}
+                                {!!product?.weight && <ShopItemTableItem value={product?.weight} name={"weight"}/>}
+                                {product?.sex !== "product" &&
+                                    <ShopItemTableItem value={product?.sex ?? ""} name={"sex"}/>}
 
                             </div>
                         </div>}
@@ -155,12 +189,13 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
+                        <div
+                            className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
                             {isWantToBuy && <h3>Вы подтверждаете покупку?</h3>}
                             <div className="bottom-select-product__row">
                                 {
                                     !isWantToBuy && <button onClick={handleClickButtonBuy}
-                                            className={'bottom-select-product__btn'}>
+                                                            className={'bottom-select-product__btn'}>
                                         <Translate>buy_title</Translate>
                                     </button>
                                 }
@@ -171,7 +206,9 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                                 className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
                                             Да
                                         </button>
-                                        <button style={{background: "dimgrey", marginLeft: "15px"}} onClick={_ => setIsWantToBuy(false)} className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
+                                        <button style={{background: "dimgrey", marginLeft: "15px"}}
+                                                onClick={_ => setIsWantToBuy(false)}
+                                                className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
                                             Нет
                                         </button>
                                     </div>

@@ -47,9 +47,6 @@ export const Header: React.FC<IHeaderProps> = () => {
 
     useEffect(() => {
         axios.get(apiLink("api/servers")).then(({data}) => {
-            const selectedCluster: any = getCookies("cluster")
-            // dispatch(setCategory(JSON.parse(selectedCluster)))
-
             setCategories(data.data)
         }).catch(er => console.log(er))
     }, [])

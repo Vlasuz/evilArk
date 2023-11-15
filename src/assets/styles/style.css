@@ -4439,6 +4439,12 @@ body.lock::before {
     height: 100%;
 }
 
+.item-donaciones__btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .select-category__column .item-select-category {
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -4547,7 +4553,7 @@ body.lock::before {
     flex-direction: column;
     border-radius: 30px;
     border: 1px solid #39495D;
-    padding: 10px 10px 60px 10px;
+    padding: 4px;
 }
 
 @media (max-width: 479.98px) {
@@ -4560,7 +4566,7 @@ body.lock::before {
     position: relative;
     border-radius: 25px;
     overflow: hidden;
-    padding: 0 0 70.5% 0;
+    padding: 0 0 56.5% 0;
 }
 
 .item-select-category__image {
@@ -6554,24 +6560,24 @@ body.lock::before {
 }
 
 .select-product__rare {
-    margin: 0 0 44px -8px;
+    margin: 0 0 44px 0;
 }
 
 @media (max-width: 1550px) {
     .select-product__rare {
-        margin: 0 0 38px -8px;
+        margin: 0 0 38px 0;
     }
 }
 
 @media (max-width: 991.98px) {
     .select-product__rare {
-        margin: 0 0 32.5px -8px;
+        margin: 0 0 32.5px 0;
     }
 }
 
 @media (max-width: 479.98px) {
     .select-product__rare {
-        margin: 0 0 27px -8px;
+        margin: 0 0 27px 0;
     }
 }
 
@@ -7125,7 +7131,8 @@ body.lock::before {
     font-weight: 500;
     line-height: 110%;
     color: #FFFFFF;
-    margin: 0 0 18px -8px;
+    /*margin: 0 0 18px -8px;*/
+    margin: 20px 0;
 }
 
 @media (max-width: 1550px) {
@@ -10126,6 +10133,10 @@ body.lock::before {
     }
 }
 
+.bonuses__inner .content-inner {
+    overflow: visible;
+}
+
 .bonuses__discount:not(:last-child) {
     margin: 0 0 20px 0;
 }
@@ -12662,7 +12673,7 @@ body.lock::before {
     position: relative;
     border-radius: 15px;
     overflow: hidden;
-    padding: 0 0 69.8% 0;
+    padding: 0 0 56.8% 0;
 }
 
 .item-servidores__image:not(:last-child) {
@@ -12699,6 +12710,13 @@ body.lock::before {
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+}
+
+.servidores__item:hover .item-servidores__links {
+    display: block;
+}
+.servidores__item:hover .item-servidores__info .item-servidores__btn img {
+    transform: rotateX(-180deg);
 }
 
 .item-servidores__info.active .item-servidores__btn img {

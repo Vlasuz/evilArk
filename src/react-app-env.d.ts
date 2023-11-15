@@ -6,3 +6,4 @@ declare module '*.png';
 declare module '*.jpg';
 declare module '*.gif';
 declare module 'aos';
+declare module 'google-translate-api';

@@ -24,12 +24,10 @@ export const isOpenPopupContext: any = createContext(null);
 export const Shop: React.FC<IShopProps> = () => {
 
     const [filter, setFilter] = useState<IFilterShop>({
-        name: '',
-        orderBy: {
-            order: '',
-            isFromLow: true
-        },
-        category: [],
+        searchTerm: "",
+        category: "",
+        orderBy: "",
+        orderDirection: ""
     })
 
     const [activeProduct, setActiveProduct] = useState('')
@@ -40,17 +38,21 @@ export const Shop: React.FC<IShopProps> = () => {
     const [pagination, setPagination] = useState<any>([])
 
     useEffect(() => {
-        asyncLoading()
-    }, [category])
+        asyncLoading("")
+    }, [category, filter])
 
     const asyncLoading = (url?: string) => {
-        if(url !== null)
+        const axiosUrl = url ? url : apiLink('api/products')
 
         setIsLoading(true)
-        axios.get(url ? (url + "&server_id=" + category.id) : apiLink('api/products?server_id=' + category.id)).then(({data}) => {
+        axios.post(axiosUrl, {
+            server_id: category.id,
+            ...filter
+        }).then(({data}) => {
             setShop(data.data)
             setPagination(data.meta.links)
             setIsLoading(false)
+            console.log(data)
         }).catch(er => console.log(er))
     }
 
@@ -73,16 +75,12 @@ export const Shop: React.FC<IShopProps> = () => {
                                     <ShopTop/>
                                     {!!Object.keys(userInfo).length && <ShopAccount userInfo={userInfo}/>}
                                     <div className="categories__cards cards-categories">
-                                        <ShopFilter setFilter={setFilter} filter={filter}/>
+                                        <ShopFilter filter={filter} setFilter={setFilter}/>
                                         <div className="cards-categories__body">
                                             {!isLoading ? <div className="cards-categories__row">
                                                 {
-                                                    !!shop.length ? shop
-                                                            ?.filter(item => item.name.toLowerCase().includes(filter.name.toLowerCase()))
-                                                            ?.filter(item => filter.category.length ? item.category.some((cat, index) => filter.category.some(cat2 => cat2 === cat.id)) : item)
-                                                            ?.sort((a: IProduct, b: IProduct) => filter?.orderBy?.order?.toLowerCase() === "price" ? (filter?.orderBy?.isFromLow ? +a.price - +b.price : +b.price - +a.price) : 1)
-                                                            .map((item: IProduct, index: number) => <ShopItem key={index}
-                                                                                                              data={item}/>) :
+                                                    !!shop.length ? shop.map((item: IProduct, index: number) =>
+                                                            <ShopItem key={index} data={item}/>) :
                                                         <p className={"NotFound"}>Not found</p>
                                                 }
                                             </div> : <p className={"LoadingProducts"}>Loading...</p>}
@@ -92,8 +90,9 @@ export const Shop: React.FC<IShopProps> = () => {
                                     <div className="shop__pagination">
 
                                         {
-                                            pagination.map((pag: any) =>
-                                                <button className={pag.active ? " _active" : ""} onClick={_ => asyncLoading(pag.url)}>{pag.label}</button>
+                                            pagination.map((pag: any, index: any) =>
+                                                <button key={pag.url + index} className={pag.active ? " _active" : ""}
+                                                        onClick={_ => asyncLoading(pag.url)}>{pag.label}</button>
                                             )
                                         }
                                     </div>

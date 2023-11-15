@@ -144,9 +144,9 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button className="select-category__btn btn btn_small">
-                                                        <Translate>choose</Translate>
-                                                    </button>
+                                                    {/*<button className="select-category__btn btn btn_small">*/}
+                                                    {/*    <Translate>choose</Translate>*/}
+                                                    {/*</button>*/}
                                                 </div>
                                             )
                                         }

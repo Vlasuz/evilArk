@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 import {apiLink} from "../../hooks/apiLink";
 import logo from './../../assets/img/logo.svg'
 import {Translate} from "../translate/Translate";
+import {SidebarStyled} from "./Sidebar.styled";
 
 interface ISidebarProps {
 
@@ -19,7 +20,7 @@ export const Sidebar: React.FC<ISidebarProps> = () => {
     const generalInfo: IGeneralInfo = useSelector((state: any) => state.toolkit.generalInfo)
 
     return (
-        <aside className={"sidebar" + (isFixed ? " header-fixed" : "")}>
+        <SidebarStyled className={"sidebar" + (isFixed ? " header-fixed" : "")}>
             <NavLink to={'/'} className="sidebar__logo logo" data-da="header__row, 0, 992">
                 <img src={generalInfo.header_logo ? generalInfo.header_logo : logo} alt="logo"/>
             </NavLink>
@@ -31,6 +32,6 @@ export const Sidebar: React.FC<ISidebarProps> = () => {
                     <a href="https://freelancehunt.com/freelancer/Vlasok.html" target={'_blank'}>Vlas Zubenko</a>
                 </div>
             </div>
-        </aside>
+        </SidebarStyled>
     )
 }

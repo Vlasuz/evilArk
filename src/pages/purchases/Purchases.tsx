@@ -89,7 +89,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                                 {
                                                     historyPurchases.map((item, index) =>
                                                         <SwiperSlide key={index}>
-                                                            <Product data={item} isCanGet={false}/>
+                                                            <Product product={item} isCanGet={false}/>
                                                         </SwiperSlide>
                                                     )
                                                 }
