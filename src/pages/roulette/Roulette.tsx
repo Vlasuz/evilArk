@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react'
 import {Footer} from "../../components/footer/footer";
 import domestication from './../../assets/img/icons/domestication.svg'
-import {ICategory, IProduct, IServers} from "../../models";
+import {ICategory, IProduct, IServers, IUser} from "../../models";
 import {useImages} from "../../hooks/images";
 import {RouletteItem} from "./components/rouletteItem";
 import {HistoryRouletteItem} from "../../components/historyRouletteItem/historyRouletteItem";
@@ -31,7 +31,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     const dispatch = useDispatch()
     const servers: IServers[] = useSelector((state: any) => state.toolkit.servers)
     const category: ICategory = useSelector((state: any) => state.toolkit.category)
-    const userInfo = useSelector((state: any) => state.toolkit.user)
+    const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
 
     const [roulettesCases, setRoulettesCases] = useState([])
     const [activeCase, setActiveCase]: any = useState({})
@@ -66,7 +66,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
             return
         }
 
-        if (Object.keys(userInfo).length) {
+        if (Object.keys(userInfo).length && userInfo.balance >= activeCase.cost) {
             setIsStartRoulette(true)
         }
 
@@ -74,7 +74,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
         axios.post(apiLink("api/roulettes/play/" + activeCase.id), {
             "server_id": category.id
         }).then(({data}) => {
-            if (data.data?.status === false) {
+            if (data.data?.success === false) {
                 notifications(data.data.message)
                 return;
             }
@@ -104,7 +104,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
     useEffect(() => {
 
-        axios.get(apiLink("api/users/users-roulette-history?max_length=7")).then(({data}) => {
+        axios.get(apiLink("api/users/users-roulette-history?max_length=14")).then(({data}) => {
             setRouletteHistory(data.data)
         }).catch(er => console.log(er))
 
@@ -116,7 +116,6 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                 <main onClick={_ => isActive && setIsActive(false)}
                       className={"roulette" + (isActive ? " product-select" : "")}>
                     <section className="roulette__main">
-                        <Socket/>
                         <div className="roulette__container container">
                             <div className="roulette__body">
                                 <h2 className="roulette__title title-h2">
@@ -144,9 +143,6 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {/*<button className="select-category__btn btn btn_small">*/}
-                                                    {/*    <Translate>choose</Translate>*/}
-                                                    {/*</button>*/}
                                                 </div>
                                             )
                                         }
@@ -167,7 +163,6 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                                 {item.name}
 
                                                                 <button onClick={_ => setIsActive(true)}>
-                                                                    {/*<img src={domestication} alt=""/>*/}
                                                                     i
                                                                 </button>
                                                             </div>
@@ -177,7 +172,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
                                             </div>
                                         </div>
-                                        {itemsForRoll.length &&
+                                        {!!itemsForRoll.length &&
                                             <div className="filter-roulette__games games-filter-roulette">
                                                 <div className="games-filter-roulette__title title-games-filter-roulette">
                                                     <div className="title-games-filter-roulette__icon">
@@ -228,39 +223,6 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                     </div>
 
                                     <div className="roulette__users users">
-
-                                        {/*<div className="users__swiper swiper">*/}
-
-                                        {/*    {isLoad && rouletteHistory.length && <Swiper*/}
-                                        {/*        slidesPerView={1}*/}
-                                        {/*        spaceBetween={20}*/}
-                                        {/*        slidesPerGroup={1}*/}
-                                        {/*        modules={[Grid, Pagination]}*/}
-                                        {/*        grid={{rows: 5, fill: "row"}}*/}
-                                        {/*        navigation={{*/}
-                                        {/*            prevEl: ".purchases-slider__btn.purchases-slider__btn_prev",*/}
-                                        {/*            nextEl: ".purchases-slider__btn.purchases-slider__btn_next",*/}
-                                        {/*        }}*/}
-                                        {/*        pagination={{*/}
-                                        {/*            clickable: true,*/}
-                                        {/*            el: '.purchases-slider__pagination'*/}
-                                        {/*        }}*/}
-                                        {/*    >*/}
-                                        {/*        {*/}
-                                        {/*            rouletteHistory.map((item: any, index) =>*/}
-                                        {/*                <SwiperSlide key={index}>*/}
-                                        {/*                    <HistoryRouletteItem data={item}/>*/}
-                                        {/*                </SwiperSlide>*/}
-                                        {/*            )*/}
-                                        {/*        }*/}
-                                        {/*    </Swiper>}*/}
-                                        {/*</div>*/}
-
-                                        {/*<div className="purchases-slider__navigation">*/}
-                                        {/*    <div className="purchases-slider__btn purchases-slider__btn_prev"/>*/}
-                                        {/*    <div className="purchases-slider__pagination"/>*/}
-                                        {/*    <div className="purchases-slider__btn purchases-slider__btn_next"/>*/}
-                                        {/*</div>*/}
 
                                         {
                                             rouletteHistory.map((item: any, index) =>

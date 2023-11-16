@@ -32,6 +32,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
 
     const dispatch = useDispatch()
     const category: ICategory = useSelector((state: any) => state.toolkit.category)
+    const language = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
         isActive && axios.get(apiLink('api/products/' + isActive)).then(({data}) => {
@@ -85,6 +86,17 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
 
     const isAnyoneHave = !!product?.damage || !!product?.durability || !!product?.food || !!product?.health || !!product?.movement_speed || !!product?.neuter || !!product?.oxygen || !!product?.stamina || !!product?.torpidity || !!product?.weight || product?.sex !== "product";
 
+    const productName: any = {
+        'en': product?.name,
+        'ru': product?.name_en,
+        'ua': product?.name_ua,
+    }
+    const productDescription: any = {
+        'en': product?.description,
+        'ru': product?.description_en,
+        'ua': product?.description_ua,
+    }
+
     return (
         <ProductModule.Provider value={setProductModule}>
             <div className={"categories__select-product select-product" + (!!isActive ? " active" : "")}>
@@ -99,13 +111,17 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                         <div className="select-product__control-panel control-panel-select-product">
                         </div>
                         <div className="select-product__about-product">
-                            <div className="select-product__name">{product?.name}</div>
+                            <div className="select-product__name">
+                                {
+                                    productName[language]
+                                }
+                            </div>
                             <div className="select-product__description">
-                                {ReactHtmlParser(product?.description ?? "")}
+                                {ReactHtmlParser(productDescription[language] ?? "")}
                             </div>
                         </div>
 
-                        {product?.is_case && <div className="select-product__rare rare-select-product">
+                        {!!product?.is_case && <div className="select-product__rare rare-select-product">
                             <div className="rare-select-product__options">
                                 <div className="rare-select-product__title">
                                     Продукты в кейсе
@@ -116,7 +132,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                         <div key={item.id} className="rare-select-product__item">
                                             <div className="label-rare-select-product__row">
                                                 <div className="label-rare-select-product__image">
-                                                    <img src={apiLink(item.icon)} alt="organic"/>
+                                                    <img src={item.icon} alt="organic"/>
                                                 </div>
                                                 <div className="label-rare-select-product__name">
                                                     {item.name}

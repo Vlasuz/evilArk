@@ -15,7 +15,7 @@ export const HistoryRouletteItem: React.FC<IHistoryRouletteProps> = ({data}) => 
             <div className="users__inner">
                 <div className="users__body">
                     <div className="users__name-block">
-                        <NavLink to={"/user/"+data.user?.id} className="users__game game-users">
+                        <NavLink to={"/user/" + data.user?.id} className="users__game game-users">
                         <span className="game-users__icon">
                             <img src={photoIcon} alt="snow-owl"/>
                         </span>
@@ -25,9 +25,9 @@ export const HistoryRouletteItem: React.FC<IHistoryRouletteProps> = ({data}) => 
                         </NavLink>
                         <Translate>roulette_gotten</Translate>
                     </div>
-                    <div className="users__name">
-                        {data.product?.name}
-                    </div>
+                </div>
+                <div className="users__name">
+                    {data.product?.name}
                 </div>
                 <div className="users__level">
                     Lvl {data.product?.level}

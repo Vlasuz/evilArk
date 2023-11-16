@@ -5,6 +5,7 @@ import {isOpenPopupContext} from "../Shop";
 // @ts-ignore
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useSelector } from 'react-redux';
 
 
 interface IShopItemProps {
@@ -19,13 +20,23 @@ export const ShopItem:React.FC<IShopItemProps> = ({data}) => {
         e.preventDefault()
         setActiveProduct(data.id)
     }
+    
+    const language = useSelector((state: any) => state.toolkit.language)
+
+    const productName: any = {
+        'en': data.name,
+        'ru': data.name_en,
+        'ua': data.name_ua,
+    }
 
     return (
         <div className="cards-categories__column">
             <a href={""} onClick={e => handleOpenProduct(e)} className="cards-categories__item item-cards-categories item-cards-categories_1">
                 <div className="item-cards-categories__body">
                     <span className="item-cards-categories__name">
-                        {data.name}
+                        {
+                            productName[language]
+                        }
                     </span>
                     <span className="item-cards-categories__image">
                         <LazyLoadImage src={data.icon} alt="PvP Simple Kit"/>

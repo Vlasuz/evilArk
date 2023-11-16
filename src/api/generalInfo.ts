@@ -10,9 +10,6 @@ interface IGeneralInfoProps {
 export const generalInfo = ({dispatch}: IGeneralInfoProps) => {
 
     axios.get(apiLink('api/general-info')).then(({data}) => {
-        console.log(data.data)
         dispatch(setGeneralInfo(data.data))
-    }).catch(er => {
-        console.log(er)
-    })
+    }).catch(er => console.log(er))
 }

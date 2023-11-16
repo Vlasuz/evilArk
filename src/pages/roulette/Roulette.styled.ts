@@ -181,6 +181,29 @@ export const RouletteStyled = styled.div`
       }
     }
   }
+  
+  .roulette__users {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+    .users__name {
+      margin-left: 0;
+    }
+    .users__item {
+      margin-bottom: 0;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .roulette__users {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .users__body {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
 
 `

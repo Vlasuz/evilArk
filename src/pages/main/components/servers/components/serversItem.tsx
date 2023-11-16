@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useImages} from "../../../../../hooks/images";
 import {apiLink} from "../../../../../hooks/apiLink";
 import {ICluster, IServers} from "../../../../../models";
+import ReactHtmlParser from "html-react-parser";
 
 interface IServersItemProps {
     data: IServers
@@ -31,9 +32,11 @@ export const ServersItem: React.FC<IServersItemProps> = ({data}) => {
                         <div className="item-servidores__links">
                             {
                                 data.clusters.map((cluster: ICluster) =>
-                                    <a href={cluster.url} key={cluster.id} className="item-servidores__link">
+                                    <a href={cluster.url} target={"_blank"} key={cluster.id} className="item-servidores__link">
                                         <img src={cluster.image ?? placeholder} alt=""/>
-                                        <span>{cluster.url}</span>
+                                        <span>{
+                                            ReactHtmlParser(cluster.name ?? "")
+                                        }</span>
                                     </a>
                                 )
                             }

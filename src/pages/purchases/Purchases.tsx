@@ -30,6 +30,18 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
         }).catch(er => console.log(er))
     }, [])
 
+    const [isHidePagination, setIsHidePagination] = useState(false)
+    const [isHidePaginationRoulette, setIsHidePaginationRoulette] = useState(false)
+
+    useEffect(() => {
+        if(!isLoad) return;
+
+        setIsHidePagination(document.querySelectorAll('.purchases-slider__pagination span').length <= 1)
+        setIsHidePaginationRoulette(document.querySelectorAll('.roulette__users .purchases-slider__pagination span').length <= 1)
+
+
+    }, [isLoad])
+
     return (
         <main className="purchases">
             <section className="purchases__main">
@@ -98,11 +110,12 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
 
                                         </div>
                                     </div>
-                                    <div className="purchases-slider__navigation">
+                                    {!isHidePagination && <div className="purchases-slider__navigation">
                                         <div className="purchases-slider__btn purchases-slider__btn_prev"/>
                                         <div className="purchases-slider__pagination"/>
                                         <div className="purchases-slider__btn purchases-slider__btn_next"/>
-                                    </div>
+                                    </div>}
+
                                     <div className="roulette__users purchases__users users">
                                         <div className="replenishment-bonuses__title">
                                             <Translate>roulette_history</Translate>
@@ -132,11 +145,11 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                             }
                                         </Swiper>}
 
-                                        <div className="users__navigation">
+                                        {!isHidePaginationRoulette && <div className="users__navigation">
                                             <div className="users__btn users__btn_prev"/>
                                             <div className="users__pagination"/>
                                             <div className="users__btn users__btn_next"/>
-                                        </div>
+                                        </div>}
                                     </div>
                                 </div>
                             </div>

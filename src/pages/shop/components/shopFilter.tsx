@@ -45,8 +45,10 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
             searchTerm: filter?.searchTerm,
             category: filter?.category,
             orderBy: sort,
-            orderDirection: isSort ? "ASC" : "DESC"
+            orderDirection: isSort
         })
+
+        console.log(filter)
     }
 
     useEffect(() => {

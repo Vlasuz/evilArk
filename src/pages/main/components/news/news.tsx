@@ -31,8 +31,7 @@ export const News: React.FC<INewsProps> = () => {
     const lang = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
-        axios.get(apiLink('api/news?language='+lang)).then(({data}) => {
-            console.log(data.data)
+        axios.get(apiLink('api/news?language=' + lang)).then(({data}) => {
             dispatch(setNews(data.data.length ? data.data : []))
         })
     }, [lang])
@@ -48,6 +47,22 @@ export const News: React.FC<INewsProps> = () => {
         })
     }
 
+    const [isHideArrows, setIsHideArrows] = useState(false)
+
+    useEffect(() => {
+
+        if (window.innerWidth > 1700) {
+            setIsHideArrows(news?.filter((item: INews) => item.server.id === server?.id).length < 6)
+        } else if (window.innerWidth >= 1600) {
+            setIsHideArrows(news?.filter((item: INews) => item.server.id === server?.id).length < 5)
+        } else if (window.innerWidth >= 1100) {
+            setIsHideArrows(news?.filter((item: INews) => item.server.id === server?.id).length < 5)
+        } else if (window.innerWidth >= 700) {
+            setIsHideArrows(news?.filter((item: INews) => item.server.id === server?.id).length < 3)
+        }
+
+    }, [])
+
     return (
         <>
             <section className="news" id="news" data-aos="fade" data-aos-duration="750" data-aos-offset="200">
@@ -57,7 +72,7 @@ export const News: React.FC<INewsProps> = () => {
                         <div className="news__body">
 
                             {news?.length >= 1 && <NewsItemFirst handleReadNews={handleReadNews}
-                                            data={news?.filter(item => item?.server?.id === server?.id)[0]}/>}
+                                                                 data={news?.filter(item => item?.server?.id === server?.id)[0]}/>}
 
                             <div className="news__slider">
 
@@ -105,8 +120,10 @@ export const News: React.FC<INewsProps> = () => {
                                     }
 
                                 </Swiper>
-                                <div className="news__btn news__btn_prev"/>
-                                <div className="news__btn news__btn_next"/>
+                                {!isHideArrows && <>
+                                    <div className="news__btn news__btn_prev"/>
+                                    <div className="news__btn news__btn_next"/>
+                                </>}
 
                             </div>
                         </div>

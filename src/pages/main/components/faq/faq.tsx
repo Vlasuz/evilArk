@@ -20,8 +20,6 @@ export const Faq:React.FC<IFaqProps> = () => {
         axios.get(apiLink("api/home/FAQs?language="+lang)).then(({data}) => setFaqContent(data.data))
     }, [lang])
 
-    console.log(faqContent)
-
     return (
         <section className="faq" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="faq">
             <div className="faq__container container">

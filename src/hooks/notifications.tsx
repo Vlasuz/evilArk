@@ -28,6 +28,10 @@ export const notifications = (data: any) => {
             type: "error",
             message: <Translate>text_for_notify_5</Translate>,
         },
+        "The item costs more than you have on your balance sheet": {
+            type: "error",
+            message: <Translate>text_for_notify_5</Translate>,
+        },
         "There's not enough amount": {
             type: "info",
             message: <Translate>text_for_notify_6</Translate>,

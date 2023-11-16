@@ -145,6 +145,8 @@ export interface IProduct {
     "level": number,
     "quality": string,
     "server": IServers
+    name_en: string
+    name_ua: string
 }
 
 export interface IProductSingle {
@@ -175,6 +177,10 @@ export interface IProductSingle {
     weight: any
     case: IProduct[]
     is_case: number | boolean
+    name_en: string
+    name_ua: string
+    description_en: string
+    description_ua: string
 }
 
 export interface IUserDiscount {

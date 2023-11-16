@@ -21,9 +21,10 @@ import {PageNotFound} from "./pages/pageNotFound/pageNotFound";
 import {setCategory} from "./redux/toolkitSlice";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import TranslationComponent from "./components/testTranslateGoogle";
+import Socket from "./socket";
+import io from "socket.io-client";
 
-
+Socket()
 
 function App() {
 
@@ -54,7 +55,6 @@ function App() {
 
     return (
         <div className="wrapper">
-            {/*<TranslationComponent/>*/}
             <SvgIcons/>
 
             <Header/>

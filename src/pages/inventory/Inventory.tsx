@@ -27,8 +27,16 @@ export const Inventory: React.FC<IInventoryProps> = () => {
         axios.get(apiLink('api/users/inventory')).then(({data}) => {
             setInventory(data.data)
             setIsLoad(true)
-        }).catch(er => {console.log(er)})
+        }).catch(er => {
+            console.log(er)
+        })
     }, [])
+
+    const [isHidePagination, setIsHidePagination] = useState(false)
+
+    useEffect(() => {
+        isLoad && setIsHidePagination(document.querySelectorAll('.purchases-slider__pagination span').length <= 1)
+    }, [isLoad])
 
     return (
         <main className="inventory">
@@ -78,7 +86,8 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                                 {
                                                     inventory.map((item: IProduct, index: number) =>
                                                         <SwiperSlide key={index}>
-                                                            <Product product={item} setInventory={setInventory} isCanGet={true}/>
+                                                            <Product product={item} setInventory={setInventory}
+                                                                     isCanGet={true}/>
                                                         </SwiperSlide>
                                                     )
                                                 }
@@ -87,11 +96,11 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                         </div>
                                     </div>
 
-                                    <div className="purchases-slider__navigation">
+                                    {!isHidePagination && <div className="purchases-slider__navigation">
                                         <div className="purchases-slider__btn purchases-slider__btn_prev"/>
                                         <div className="purchases-slider__pagination"/>
                                         <div className="purchases-slider__btn purchases-slider__btn_next"/>
-                                    </div>
+                                    </div>}
                                 </div>
                             </div>
                         </div>

@@ -102,6 +102,9 @@ export const ShopStyled = styled.main`
     margin: 0 0 0 6px;
   }
 
+  .rare-select-product__item {
+    margin-bottom: 15px;
+  }
 
   .parameters-select-product {
     //max-width: 100%;

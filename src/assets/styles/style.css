@@ -822,7 +822,7 @@ body.lock::before {
 
 .title-h3 {
     font-family: Barlow;
-    font-size: 85px;
+    font-size: 70px;
     line-height: 117.6470588235%;
     font-weight: 400;
     letter-spacing: -0.01em;
@@ -832,7 +832,7 @@ body.lock::before {
 
 @media (max-width: 1700px) {
     .title-h3 {
-        font-size: 76px;
+        font-size: 60px;
     }
 }
 
@@ -4454,7 +4454,7 @@ body.lock::before {
 }
 
 .select-category__column._active .item-select-category {
-    border: 2px solid white;
+    border: 2px solid #FF6C3D;
 }
 
 @media (max-width: 1500px) {
@@ -7212,9 +7212,27 @@ body.lock::before {
     background: rgba(79, 45, 47, 0.6);
 }
 
+.rare-select-product__options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+.rare-select-product__title {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
 @media (max-width: 767.98px) {
     .label-rare-select-product {
         padding: 6.5px 10px 6.5px 8px;
+    }
+    .rare-select-product__options {
+        grid-template-columns: 1fr;
+    }
+    .rare-select-product__title {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        margin: 10px 0;
     }
 }
 
@@ -12640,7 +12658,7 @@ body.lock::before {
 
 .item-servidores {
     border-radius: 20px;
-    border: 1.5px solid #051E3D;
+    border: 1.5px solid #FF6C3D;
     padding: 6px 4.5px 22px 4.5px;
     overflow: hidden;
 }
@@ -12713,7 +12731,10 @@ body.lock::before {
 }
 
 .servidores__item:hover .item-servidores__links {
-    display: block;
+    height: 50%;
+    margin: 17px 0 0 0;
+    padding: 13px 0 0 0;
+    border-top: 1.5px solid #051E3D;
 }
 .servidores__item:hover .item-servidores__info .item-servidores__btn img {
     transform: rotateX(-180deg);
@@ -12782,12 +12803,13 @@ body.lock::before {
 }
 
 .item-servidores__links {
-    display: none;
-    margin: 17px 0 0 0;
-    padding: 13px 0 0 0;
-    border-top: 1.5px solid #051E3D;
     width: 100%;
     position: relative;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
 .item-servidores__link {
