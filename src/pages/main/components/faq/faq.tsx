@@ -20,6 +20,8 @@ export const Faq:React.FC<IFaqProps> = () => {
         axios.get(apiLink("api/home/FAQs?language="+lang)).then(({data}) => setFaqContent(data.data))
     }, [lang])
 
+    console.log(faqContent)
+
     return (
         <section className="faq" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="faq">
             <div className="faq__container container">
@@ -34,10 +36,10 @@ export const Faq:React.FC<IFaqProps> = () => {
                         {ReactHtmlParser(faqContent?.text ?? "")}
                     </div>
                     <div className="faq__btn-block">
-                        <a href={faqContent.button_url} target={"_blank"} className="faq__btn btn btn_big">
+                        <a href={faqContent?.button_url} target={"_blank"} className="faq__btn btn btn_big">
                             <img src={question} alt="question"/>
                             <span>
-                                <Translate>home_see_faq</Translate>
+                                {ReactHtmlParser(faqContent?.button_text ?? "")}
                             </span>
                         </a>
                     </div>

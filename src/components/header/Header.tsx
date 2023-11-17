@@ -58,7 +58,7 @@ export const Header: React.FC<IHeaderProps> = () => {
     const handleClusterChange = (item: string) => {
         dispatch(setCategory(JSON.parse(item)))
         setIsOpenSelectClusters(false)
-        setCookie("cluster", item)
+        setCookie("cluster", JSON.parse(item).id)
     }
 
     return (

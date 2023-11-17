@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {INews, IServers} from "../../../../../models";
 import {useSelector} from "react-redux";
+import getCookies from "../../../../../functions/getCookie";
+import {setCategory} from "../../../../../redux/toolkitSlice";
 
 interface ICategoriesProps {
     setServer: any
@@ -13,8 +15,11 @@ export const Categories:React.FC<ICategoriesProps> = ({setServer, server}) => {
     const news: INews[] = useSelector((state: any) => state.toolkit.news)
 
     useEffect(() => {
-        setServer(servers[0])
+        const selectedClusterID: any = getCookies("cluster")
+        setServer(selectedClusterID ? servers.filter((item: any) => String(item.id) === String(selectedClusterID))[0] : servers[0])
     }, [servers])
+
+    console.log(servers)
 
     return (
         <div className="filter-top-cards-categories__items">

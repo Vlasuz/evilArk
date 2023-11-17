@@ -16,12 +16,19 @@ import {toast} from "react-toastify";
 import {notifications} from "../../hooks/notifications";
 import {RouletteStyled} from './Roulette.styled';
 import {Translate} from "../../components/translate/Translate";
-import Socket from '../../socket';
 import {RouletteCaseInfo} from "./components/RouletteCaseInfo";
+import Echo from "laravel-echo";
+import socketio from "socket.io-client";
 
 interface IRouletteProps {
 
 }
+
+const echo = new Echo({
+    host: "ws://evilarkcluster.com:6001",
+    broadcaster: "socket.io",
+    client: socketio
+});
 
 export const isOpenPopupContext: any = createContext(null);
 
@@ -37,7 +44,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     const [activeCase, setActiveCase]: any = useState({})
     const [itemsForRoll, setItemsForRoll]: any = useState([])
     const [winnerItem, setWinnerItem] = useState<IProduct | null>(null)
-    const [rouletteHistory, setRouletteHistory] = useState([])
+    const [rouletteHistory, setRouletteHistory] = useState<any>([])
     const [isStartRoulette, setIsStartRoulette] = useState(false)
     const [isActive, setIsActive] = useState(false)
 
@@ -108,6 +115,14 @@ export const Roulette: React.FC<IRouletteProps> = () => {
             setRouletteHistory(data.data)
         }).catch(er => console.log(er))
 
+        echo.channel("evilark_database_roulette-history").listen('EventRouletteHistory', (event: any) => {
+
+            setTimeout(() => {
+                setRouletteHistory((prev: any) => [...prev, event])
+            }, 10500)
+
+        });
+
     }, [])
 
     return (
@@ -136,7 +151,8 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                     <div className="select-category__item item-select-category">
                                                         <div className="item-select-category__image-block">
                                                             <div className="item-select-category__image">
-                                                                <img src={item.image.length ? item.image : placeholder}/>
+                                                                <img
+                                                                    src={item.image.length ? item.image : placeholder}/>
                                                             </div>
                                                             <div className="item-select-category__label">
                                                                 {item.name}
@@ -174,7 +190,8 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                         </div>
                                         {!!itemsForRoll.length &&
                                             <div className="filter-roulette__games games-filter-roulette">
-                                                <div className="games-filter-roulette__title title-games-filter-roulette">
+                                                <div
+                                                    className="games-filter-roulette__title title-games-filter-roulette">
                                                     <div className="title-games-filter-roulette__icon">
                                                         <img src={profit} alt="profit"/>
                                                     </div>
@@ -190,11 +207,12 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                             itemsForRoll?.map((item: IProduct, index: number) =>
                                                                 <RouletteItem
                                                                     key={index}
-                                                                    isStart={index === 0 ? isStartRoulette : null} data={{
-                                                                    name: index !== 35 ? item?.name : winnerItem?.name,
-                                                                    image: index !== 35 ? item?.icon : winnerItem?.icon,
-                                                                    isWinner: index === 35
-                                                                }}/>)
+                                                                    isStart={index === 0 ? isStartRoulette : null}
+                                                                    data={{
+                                                                        name: index !== 35 ? item?.name : winnerItem?.name,
+                                                                        image: index !== 35 ? item?.icon : winnerItem?.icon,
+                                                                        isWinner: index === 35
+                                                                    }}/>)
                                                         }
 
                                                     </div>
@@ -225,7 +243,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                     <div className="roulette__users users">
 
                                         {
-                                            rouletteHistory.map((item: any, index) =>
+                                            rouletteHistory.map((item: any, index: number) => index <= 14 &&
                                                 <HistoryRouletteItem key={item.id} data={item}/>
                                             )
                                         }

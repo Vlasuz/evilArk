@@ -12,13 +12,9 @@ export const notifications = (data: any) => {
             type: "success",
             message: <Translate>text_for_notify_2</Translate>,
         },
-        "Product purchased": {
-            type: "success",
-            message: "Продукт успешно куплен",
-        },
         "The servers are down": {
             type: "info",
-            message: <Translate>text_for_notify_3</Translate>,
+            message: <Translate>text_for_notify_9</Translate>,
         },
         "No such product exists": {
             type: "error",
@@ -44,21 +40,21 @@ export const notifications = (data: any) => {
             type: "info",
             message: <Translate>text_for_notify_8</Translate>,
         },
-        "Get in game. The servers are down": {
-            type: "error",
-            message: <Translate>text_for_notify_9</Translate>,
-        },
-        "Get in game. User not in game": {
-            type: "error",
-            message: "User not in game",
-        },
-        "Get in game. Product not exist": {
-            type: "error",
-            message: "Product not exist",
-        },
         "fill_the_field_for_payment": {
             type: "info",
             message: <Translate>text_for_notify_10</Translate>,
+        },
+        "Product purchased": {
+            type: "success",
+            message: "Продукт успешно куплен",
+        },
+        "User not in game": {
+            type: "error",
+            message: "Игрок не в игре",
+        },
+        "Product not exist": {
+            type: "error",
+            message: "Такого продукта не существует",
         },
         "Wait to rolling game": {
             type: "info",
@@ -67,8 +63,61 @@ export const notifications = (data: any) => {
         "Wait please": {
             type: "info",
             message: "Попридержите коней, не так быстро!",
-        }
+        },
+
+
+
+
+        "The product has already been issued and cannot be issued again": {
+            type: "info",
+            message: "Продукт уже выдан",
+        },
+        "Request has failed": {
+            type: "error",
+            message: "Неизвестная ошибка сервера",
+        },
+        "Bad or missing property 'blueprintPath'": {
+            type: "error",
+            message: "Ошибка blueprint",
+        },
+        "Incorrect SteamID": {
+            type: "error",
+            message: "Произошла ошибка при проверке SteamID, обратитесь к администратору",
+        },
+        "Incorrect Data": {
+            type: "error",
+            message: "Произошла ошибка при выдаче товара, обратитесь к администратору",
+        },
+        "Cant find player": {
+            type: "error",
+            message: "Не удалось выдать товар, игрок не на сервере",
+        },
+        "Incorrect blueprint": {
+            type: "error",
+            message: "Произошла ошибка из-за попытки выдать неизвестный предмет, обратитесь к администратору",
+        },
+        "Cant spawn dino in this map": {
+            type: "info",
+            message: "Товар не может быть выдан на этой карте",
+        },
+        "Failed spawn dino": {
+            type: "error",
+            message: "Произошла ошибка при выдаче дино. Обратитесь к администратору.",
+        },
+
+
+
+
     }
+    // 8) Incorrect blueprint
+    // не правильный bp
+    //
+    // 9) Cant spawn dino in this map
+    // не может заспаунить дино на этой карте
+    //
+    // 10) Failed spawn dino
+    // ошибка спауна дино
+
 
     if(notifies[data]?.type === "info") {
         toast.info(notifies[data].message)
@@ -76,6 +125,8 @@ export const notifications = (data: any) => {
         toast.success(notifies[data].message)
     } else if (notifies[data]?.type === "error"){
         toast.error(notifies[data].message)
+    } else {
+        toast.info(data)
     }
 
 }

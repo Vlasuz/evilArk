@@ -24,8 +24,8 @@ export const ShopItem:React.FC<IShopItemProps> = ({data}) => {
     const language = useSelector((state: any) => state.toolkit.language)
 
     const productName: any = {
-        'en': data.name,
-        'ru': data.name_en,
+        'ru': data.name,
+        'en': data.name_en,
         'ua': data.name_ua,
     }
 

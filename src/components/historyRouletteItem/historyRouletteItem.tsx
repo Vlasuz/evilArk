@@ -29,9 +29,9 @@ export const HistoryRouletteItem: React.FC<IHistoryRouletteProps> = ({data}) => 
                 <div className="users__name">
                     {data.product?.name}
                 </div>
-                <div className="users__level">
+                {data.product?.level && <div className="users__level">
                     Lvl {data.product?.level}
-                </div>
+                </div>}
             </div>
         </div>
     )

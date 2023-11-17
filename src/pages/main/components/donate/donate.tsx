@@ -20,9 +20,7 @@ export const Donate: React.FC<IDonateProps> = () => {
     useEffect(() => {
         axios.get(apiLink("api/home/donate?language="+lang)).then(({data}) => {
             setPageInfo(data.data)
-        }).catch(er => {
-            console.log(er)
-        })
+        }).catch(er => console.log(er))
     }, [lang])
 
     return (

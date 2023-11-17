@@ -10151,6 +10151,7 @@ body.lock::before {
     }
 }
 
+.profile__inner .content-inner,
 .bonuses__inner .content-inner {
     overflow: visible;
 }
@@ -12043,7 +12044,7 @@ body.lock::before {
 }
 
 .sobre-nosotros__title p:last-child {
-    justify-content: flex-end;
+    /*justify-content: flex-end;*/
 }
 
 @media (max-width: 479.98px) {

@@ -14,6 +14,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setNews} from '../../../../redux/toolkitSlice';
 import {NewsItemFirst} from "./components/newsItemFirst";
+import {servers} from "../../../../api/servers";
 
 SwiperCore.use([Navigation]);
 
@@ -23,12 +24,13 @@ interface INewsProps {
 
 export const News: React.FC<INewsProps> = () => {
 
-    const news: INews[] = useSelector((state: any) => state.toolkit.news)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [server, setServer] = useState<IServers>()
 
+    const news: INews[] = useSelector((state: any) => state.toolkit.news)
     const lang = useSelector((state: any) => state.toolkit.language)
+    const category = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
         axios.get(apiLink('api/news?language=' + lang)).then(({data}) => {
@@ -37,6 +39,10 @@ export const News: React.FC<INewsProps> = () => {
     }, [lang])
 
     const isOpenPopup: any = useContext(isOpenPopupContext)
+
+    useEffect(() => {
+        setServer(category)
+    }, [category])
 
     const handleReadNews = () => {
         navigate("?news_id=" + news.filter(item => item.server.id === server?.id)[0]?.id)
@@ -66,7 +72,7 @@ export const News: React.FC<INewsProps> = () => {
     return (
         <>
             <section className="news" id="news" data-aos="fade" data-aos-duration="750" data-aos-offset="200">
-                <div className="news__container container">
+                {news.length && <div className="news__container container">
                     <div className="news__inner">
                         <Categories setServer={setServer} server={server}/>
                         <div className="news__body">
@@ -128,7 +134,7 @@ export const News: React.FC<INewsProps> = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>}
             </section>
         </>
     )

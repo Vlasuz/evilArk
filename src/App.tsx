@@ -21,10 +21,7 @@ import {PageNotFound} from "./pages/pageNotFound/pageNotFound";
 import {setCategory} from "./redux/toolkitSlice";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Socket from "./socket";
-import io from "socket.io-client";
 
-Socket()
 
 function App() {
 
@@ -40,9 +37,7 @@ function App() {
         generalInfo({dispatch})
         donateInfo({dispatch})
 
-        if(window.location.href.includes("?cluster")) {
-            dispatch(setCategory(window.location.href.slice(window.location.href.indexOf("?cluster") + 9, window.location.href.indexOf("&") > 0 ? window.location.href.indexOf("&") : undefined)))
-        } else if (window.location.href.includes("?payment=true")) {
+        if(window.location.href.includes("?payment=true")) {
             toast.success('Оплата прошла успешно!')
             navigate('/')
         } else if (window.location.href.includes("?payment=false")) {

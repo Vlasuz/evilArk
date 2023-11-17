@@ -12,12 +12,16 @@ export const HeaderMenu:React.FC<IMenuProps> = () => {
 
     const menus = [
         {
+            title: <Translate>menu_about</Translate>,
+            link: "#about"
+        },
+        {
             title: <Translate>menu_servers</Translate>,
             link: "#servers"
         },
         {
-            title: <Translate>menu_contacts</Translate>,
-            link: "#contacts"
+            title: <Translate>menu_news</Translate>,
+            link: "#news"
         },
         {
             title: <Translate>menu_faq</Translate>,
@@ -28,12 +32,8 @@ export const HeaderMenu:React.FC<IMenuProps> = () => {
             link: "#donates"
         },
         {
-            title: <Translate>menu_news</Translate>,
-            link: "#news"
-        },
-        {
-            title: <Translate>menu_about</Translate>,
-            link: "#about"
+            title: <Translate>menu_contacts</Translate>,
+            link: "#contacts"
         },
     ]
 

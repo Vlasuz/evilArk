@@ -46,11 +46,11 @@ export const Banner: React.FC<IBannerProps> = () => {
                             <div className="content-main-block__subtitle">
                                 {ReactHtmlParser(bannerInfo?.text ?? "")}
                             </div>
-                            <a href={bannerInfo?.button_url} className="content-main-block__btn btn btn_medium">
-                                <span>
-                                    {bannerInfo?.button_text}
-                                </span>
-                            </a>
+                            {/*<a href={bannerInfo?.button_url} className="content-main-block__btn btn btn_medium">*/}
+                            {/*    <span>*/}
+                            {/*        {bannerInfo?.button_text}*/}
+                            {/*    </span>*/}
+                            {/*</a>*/}
                         </div>
                     </div>
                 </div>

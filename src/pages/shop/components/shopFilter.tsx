@@ -48,7 +48,6 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
             orderDirection: isSort
         })
 
-        console.log(filter)
     }
 
     useEffect(() => {

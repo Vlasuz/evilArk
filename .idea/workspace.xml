@@ -5,27 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="All fixed">
+      <change afterPath="$PROJECT_DIR$/src/pages/inventory/Inventory.styled.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/generalInfo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/generalInfo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/donateInfo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/donateInfo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/servers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/servers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/js/app.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/evilHtml/js/app.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Header.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/components/HeaderMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/components/HeaderMenu.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/historyRouletteItem/historyRouletteItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/historyRouletteItem/historyRouletteItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/product/products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/products.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/notifications.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/notifications.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/steamLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/steamLogin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/languages/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/languages/ua.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ua.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/banner/banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/banner/banner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/donate/donate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/donate/donate.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/main/components/faq/faq.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/faq/faq.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/components/categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/components/categories.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/news.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/news.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/purchases/Purchases.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/purchases/Purchases.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/roulette/Roulette.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/Roulette.styled.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.styled.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/socket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/react-app-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/react-app-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/socket.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,6 +156,13 @@
       <workItem from="1700122929327" duration="6524000" />
       <workItem from="1700130658705" duration="559000" />
       <workItem from="1700138804093" duration="1543000" />
+      <workItem from="1700142020747" duration="910000" />
+      <workItem from="1700144285312" duration="72000" />
+      <workItem from="1700145987639" duration="2931000" />
+      <workItem from="1700149502614" duration="831000" />
+      <workItem from="1700207480091" duration="6935000" />
+      <workItem from="1700232702133" duration="1275000" />
+      <workItem from="1700237766337" duration="635000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1695910913707</created>
@@ -230,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700064723698</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="All fixed">
+      <created>1700142035399</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1700142035399</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

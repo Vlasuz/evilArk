@@ -7,3 +7,4 @@ declare module '*.jpg';
 declare module '*.gif';
 declare module 'aos';
 declare module 'google-translate-api';
+declare module 'socket.io-client';

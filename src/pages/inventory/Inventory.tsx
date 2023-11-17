@@ -27,9 +27,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
         axios.get(apiLink('api/users/inventory')).then(({data}) => {
             setInventory(data.data)
             setIsLoad(true)
-        }).catch(er => {
-            console.log(er)
-        })
+        }).catch(er => console.log("api/users/inventory", er))
     }, [])
 
     const [isHidePagination, setIsHidePagination] = useState(false)

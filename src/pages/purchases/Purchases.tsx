@@ -54,7 +54,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                             <div className="inner__row">
                                 <ProfileSidebar/>
                                 <div className="inner__content content-inner">
-                                    <div className="content-inner__body">
+                                    {historyPurchases.length && <div className="content-inner__body">
                                         <div className="replenishment-bonuses__title">
                                             <Translate>purchase_history</Translate>
                                         </div>
@@ -109,14 +109,15 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                             </Swiper>}
 
                                         </div>
-                                    </div>
+                                    </div>}
+
                                     {!isHidePagination && <div className="purchases-slider__navigation">
                                         <div className="purchases-slider__btn purchases-slider__btn_prev"/>
                                         <div className="purchases-slider__pagination"/>
                                         <div className="purchases-slider__btn purchases-slider__btn_next"/>
                                     </div>}
 
-                                    <div className="roulette__users purchases__users users">
+                                    {historyRoulette.length && <div className="roulette__users purchases__users users">
                                         <div className="replenishment-bonuses__title">
                                             <Translate>roulette_history</Translate>
                                         </div>
@@ -150,7 +151,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                             <div className="users__pagination"/>
                                             <div className="users__btn users__btn_next"/>
                                         </div>}
-                                    </div>
+                                    </div>}
                                 </div>
                             </div>
                         </div>

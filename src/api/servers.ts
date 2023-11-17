@@ -12,9 +12,14 @@ interface serversProps {
 export const servers = ({dispatch}: serversProps) => {
 
     axios.get(apiLink('api/servers')).then(({data}) => {
-        const selectedCluster: any = getCookies("cluster")
+        const selectedClusterID: any = getCookies("cluster")
         dispatch(setServers(data.data))
-        dispatch(setCategory(selectedCluster ? JSON.parse(selectedCluster) : data.data[0]))
+        dispatch(setCategory(selectedClusterID ? data.data.filter((item: any) => String(item.id) === String(selectedClusterID))[0] : data.data[0]))
+        if(window.location.href.includes("?cluster")) {
+            const clusterId = window.location.href.slice(window.location.href.indexOf("?cluster") + 9, window.location.href.indexOf("&") > 0 ? window.location.href.indexOf("&") : undefined)
+            dispatch(setCategory(data.data.filter((item: any) => String(item.id) === String(clusterId))[0]))
+        }
+
     })
 
 }

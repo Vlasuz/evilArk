@@ -3,10 +3,13 @@ import arrowWhite from './../../assets/img/icons/arrow-white.svg'
 
 export const HeaderStyled = styled.header`
 
+  .dropdown__list {
+    width: fit-content;
+  }
   .characteristics-select-product__dropdown {
     white-space: nowrap;
     margin: 0 10px;
-    min-width: 170px;
+    //min-width: 170px;
     
     @media screen and (max-width: 576px) {
       display: none;
@@ -14,7 +17,7 @@ export const HeaderStyled = styled.header`
 
     .dropdown__button {
       padding-left: 8px;
-      padding-right: 8px;
+      padding-right: 30px;
     }
 
     .dropdown__button::before {

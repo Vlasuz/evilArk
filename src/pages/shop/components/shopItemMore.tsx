@@ -37,7 +37,6 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     useEffect(() => {
         isActive && axios.get(apiLink('api/products/' + isActive)).then(({data}) => {
             setProduct(data.data)
-            console.log(data)
             setProductModule(data.data?.modules.length && data.data?.modules[0].id)
         })
     }, [isActive])
@@ -60,7 +59,6 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
             "module_id": productModule
         }).then(({data}) => {
 
-            console.log(data)
             notifications(data.data.message)
 
             setIsLoading(false)
@@ -87,13 +85,13 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     const isAnyoneHave = !!product?.damage || !!product?.durability || !!product?.food || !!product?.health || !!product?.movement_speed || !!product?.neuter || !!product?.oxygen || !!product?.stamina || !!product?.torpidity || !!product?.weight || product?.sex !== "product";
 
     const productName: any = {
-        'en': product?.name,
-        'ru': product?.name_en,
+        'ru': product?.name,
+        'en': product?.name_en,
         'ua': product?.name_ua,
     }
     const productDescription: any = {
-        'en': product?.description,
-        'ru': product?.description_en,
+        'ru': product?.description,
+        'en': product?.description_en,
         'ua': product?.description_ua,
     }
 
