@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import './assets/styles/style.css'
 import './assets/js/app.min'
@@ -21,6 +21,10 @@ import {PageNotFound} from "./pages/pageNotFound/pageNotFound";
 import {setCategory} from "./redux/toolkitSlice";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { TechnicalTime } from './pages/technicalTime/TechnicalTime';
+import getCookies from "./functions/getCookie";
+import axios from "axios";
+import {apiLink} from "./hooks/apiLink";
 
 
 function App() {
@@ -47,6 +51,16 @@ function App() {
     }, [])
 
     const location = useLocation()
+
+    const [isTechnicalTime, setIsTechnicalTime] = useState(getCookies("isAdmin") ? !getCookies("isAdmin") : false)
+
+    // useEffect(() => {
+    //     axios.get(apiLink("api/tech-valid")).then(({data}) => {
+    //         setIsTechnicalTime(getCookies("isAdmin") ? !getCookies("isAdmin") : data.data)
+    //     })
+    // }, [])
+
+    if(isTechnicalTime) return <TechnicalTime setIsTechnicalTime={setIsTechnicalTime}/>
 
     return (
         <div className="wrapper">

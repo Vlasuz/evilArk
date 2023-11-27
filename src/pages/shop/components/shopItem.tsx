@@ -32,7 +32,8 @@ export const ShopItem:React.FC<IShopItemProps> = ({data}) => {
     return (
         <div className="cards-categories__column">
             <a href={""} onClick={e => handleOpenProduct(e)} className="cards-categories__item item-cards-categories item-cards-categories_1">
-                <div className="item-cards-categories__body">
+                {/*<div className="item-cards-categories__body">*/}
+                {/*</div>*/}
                     <span className="item-cards-categories__name">
                         {
                             productName[language]
@@ -41,7 +42,6 @@ export const ShopItem:React.FC<IShopItemProps> = ({data}) => {
                     <span className="item-cards-categories__image">
                         <LazyLoadImage src={data.icon} alt="PvP Simple Kit"/>
                     </span>
-                </div>
                 <div className="item-cards-categories__bottom bottom-item-cards-categories">
                     <div className="bottom-item-cards-categories__row">
                         <div className="bottom-item-cards-categories__number"></div>

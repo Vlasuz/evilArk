@@ -29,7 +29,7 @@ export const ShopAccount:React.FC<IShopAccountProps> = ({userInfo}) => {
                     <div
                         className="balance-info-panel-categories__balance-now balance-now-info-panel-categories">
                         <div className="balance-now-info-panel-categories__text">
-                            <Translate>balance</Translate>:
+                            <Translate>balance</Translate>
                         </div>
                         <div className="balance-now-info-panel-categories__value">{userInfo.balance.toFixed(2)} EC</div>
                     </div>

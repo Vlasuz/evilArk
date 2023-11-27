@@ -62,6 +62,7 @@ export const ShopStyled = styled.main`
   .shop__pagination {
     display: flex;
     justify-content: center;
+    margin-top: 15px;
   }
   .shop__pagination button:first-child,
   .shop__pagination button:last-child {
@@ -153,6 +154,30 @@ export const ShopStyled = styled.main`
     }
   }
 
+  .filter-top-cards-categories__item.active .filter-top-cards-categories__link {
+    border-color: #FF6C3D;
+  }
+
+  .cards-categories__column a {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, .1);
+    border-color: #ffffff80;
+  }
+  .item-cards-categories__image {
+    margin: 0 auto;
+    margin-bottom: 10px;
+    margin-top: auto;
+  }
+  .item-cards-categories__name {
+    line-height: 1.2;
+  }
+  .bottom-item-cards-categories__price_now {
+    width: 100%;
+  }
+  
+  
 
   @media (max-width: 767.98px) {
     .value-parameters-select-product__item img {

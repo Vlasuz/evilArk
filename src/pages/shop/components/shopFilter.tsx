@@ -23,7 +23,7 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
         if(chosenCategory.some((item: any) => item.id === category)) {
             setChosenCategory(prev => prev.filter((item: any) => item.id !== category))
         } else {
-            setChosenCategory(prev => [...prev, categories.filter((item: any) => item.id === category)[0]])
+            setChosenCategory(prev => [categories.filter((item: any) => item.id === category)[0]])
         }
     }
 

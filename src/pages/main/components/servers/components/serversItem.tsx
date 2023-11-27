@@ -3,6 +3,7 @@ import {useImages} from "../../../../../hooks/images";
 import {apiLink} from "../../../../../hooks/apiLink";
 import {ICluster, IServers} from "../../../../../models";
 import ReactHtmlParser from "html-react-parser";
+import {ServersServer} from "./serversServer";
 
 interface IServersItemProps {
     data: IServers
@@ -11,7 +12,7 @@ interface IServersItemProps {
 export const ServersItem: React.FC<IServersItemProps> = ({data}) => {
 
     const {arrowWhite, placeholder} = useImages()
-    const [isActive, setIsActive] = useState(false)
+    // const [isActive, setIsActive] = useState(false)
 
     return (
         <div className="servidores__column">
@@ -21,7 +22,8 @@ export const ServersItem: React.FC<IServersItemProps> = ({data}) => {
                         <img src={data.image ?? placeholder} alt="4 MAN Cluster"/>
                     </div>
                     <div className="item-servidores__content">
-                        <div className={"item-servidores__info" + (isActive ? " active" : "")} onClick={_ => setIsActive(prev => !prev)}>
+                        {/*+ (isActive ? " active" : "")} onClick={_ => setIsActive(prev => !prev)}*/}
+                        <div className={"item-servidores__info"}>
                             <div className="item-servidores__name">
                                 {data.name}
                             </div>
@@ -31,13 +33,8 @@ export const ServersItem: React.FC<IServersItemProps> = ({data}) => {
                         </div>
                         <div className="item-servidores__links">
                             {
-                                data.clusters.map((cluster: ICluster) =>
-                                    <a href={cluster.url} target={"_blank"} key={cluster.id} className="item-servidores__link">
-                                        <img src={cluster.image ?? placeholder} alt=""/>
-                                        <span>{
-                                            ReactHtmlParser(cluster.name ?? "")
-                                        }</span>
-                                    </a>
+                                data.clusters.map((server: ICluster) =>
+                                    <ServersServer key={server.id} server={server} />
                                 )
                             }
                         </div>

@@ -31,6 +31,7 @@ export const News: React.FC<INewsProps> = () => {
     const news: INews[] = useSelector((state: any) => state.toolkit.news)
     const lang = useSelector((state: any) => state.toolkit.language)
     const category = useSelector((state: any) => state.toolkit.category)
+    const [isStartCat, setIsStartCat] = useState(false)
 
     useEffect(() => {
         axios.get(apiLink('api/news?language=' + lang)).then(({data}) => {
@@ -74,11 +75,18 @@ export const News: React.FC<INewsProps> = () => {
             <section className="news" id="news" data-aos="fade" data-aos-duration="750" data-aos-offset="200">
                 {news.length && <div className="news__container container">
                     <div className="news__inner">
-                        <Categories setServer={setServer} server={server}/>
+                        <Categories setServer={setServer} server={server} isStartCat={isStartCat}
+                                    setIsStartCat={setIsStartCat}/>
                         <div className="news__body">
 
-                            {news?.length >= 1 && <NewsItemFirst handleReadNews={handleReadNews}
-                                                                 data={news?.filter(item => item?.server?.id === server?.id)[0]}/>}
+                            {
+                                news?.length >= 1 && <NewsItemFirst handleReadNews={handleReadNews}
+                                                                    data={news
+                                                                        ?.filter(item => isStartCat ? item : item?.server?.id === server?.id)
+                                                                        ?.filter(item => !isStartCat ? item : item.tags.some(item => item.slug.toLowerCase().includes('start')))[0]
+                                }
+                                />
+                            }
 
                             <div className="news__slider">
 
@@ -118,11 +126,14 @@ export const News: React.FC<INewsProps> = () => {
                                     }}
                                 >
                                     {
-                                        news.length && news?.filter((item: INews) => item.server.id === server?.id).map((item: INews, index: number) => index > 0 &&
-                                            <SwiperSlide key={item.id}>
-                                                <NewsItem data={item}/>
-                                            </SwiperSlide>
-                                        )
+                                        news.length && news
+                                            ?.filter((item: INews) => isStartCat ? item : item.server.id === server?.id)
+                                            ?.filter(item => !isStartCat ? item : item.tags.some(item => item.slug.toLowerCase().includes('start')))
+                                            ?.map((item: INews, index: number) => index > 0 &&
+                                                <SwiperSlide key={item.id}>
+                                                    <NewsItem data={item}/>
+                                                </SwiperSlide>
+                                            )
                                     }
 
                                 </Swiper>
