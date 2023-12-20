@@ -92,8 +92,6 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
             "crypto": dataToPaymentCrypto,
         }
 
-        console.log(dataBody[payMethod])
-
         axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.post(apiLink("api/payment"), dataBody[payMethod]).then(({data}) => {
             if (data.data.success) {

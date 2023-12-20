@@ -29,11 +29,11 @@ export const ShopTop: React.FC<IShopTopProps> = () => {
 
         axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.get(apiLink("api/users/discount")).then(({data}) => {
-            if (category.name?.toLowerCase().includes("pve")) {
-                setDiscount(data.data.filter((item: any) => item.is_pve && item)[0])
-            } else {
-                setDiscount(data.data.filter((item: any) => !item.is_pve && item)[0])
-            }
+            setDiscount(data.data.filter((item: any) => category?.id === item?.server?.id)[0])
+            // if (category.name?.toLowerCase().includes("pve")) {
+            // } else {
+            //     setDiscount(data.data.filter((item: any) => !item.is_pve && item)[0])
+            // }
         })
     }, [category])
 

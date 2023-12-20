@@ -67,10 +67,10 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
             setIsWantToBuy(false)
             if (!data.data.success) return;
 
-            console.log({
-                balance: product?.price && +product?.price * count,
-                cluster: category.id
-            })
+            // console.log({
+            //     balance: product?.price && +product?.price * count,
+            //     cluster: category.id
+            // })
             dispatch(changeUserBalance({
                 balance: product?.price && +product?.price * count,
                 cluster: category.id

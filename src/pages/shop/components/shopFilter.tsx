@@ -5,7 +5,7 @@ import axios from "axios";
 import {apiLink} from "../../../hooks/apiLink";
 import {Translate} from "../../../components/translate/Translate";
 import {ucs2} from "punycode";
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
 interface IShopFilterProps {
     setFilter?: any
@@ -17,7 +17,7 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
 
     const [titleSearch, setTitleSearch] = useState('')
     const [chosenCategory, setChosenCategory] = useState([])
-    const ordersBy: any = ["Price"]
+    const ordersBy: any = ["price"]
     const [isSort, setIsSort] = useState("")
     const [categories, setCategories] = useState([])
 
@@ -25,7 +25,7 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
     const language = useSelector((state: any) => state.toolkit.language)
 
     const chooseCategory = (category: string) => {
-        if(chosenCategory.some((item: any) => item.id === category)) {
+        if (chosenCategory.some((item: any) => item.id === category)) {
             setChosenCategory(prev => prev.filter((item: any) => item.id !== category))
         } else {
             setChosenCategory(prev => [categories.filter((item: any) => item.id === category)[0]])
@@ -44,50 +44,52 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
     }
 
     const handleSort = (sort: string) => {
+
         setIsSort(prev => prev === "ASC" ? "DESC" : "ASC")
+
 
         setFilter({
             searchTerm: filter?.searchTerm,
             category: filter?.category,
             orderBy: sort,
-            orderDirection: isSort
+            orderDirection: !!isSort ? isSort : "DESC"
         })
 
     }
 
-    // useEffect(() => {
-    //     setFilter({
-    //         searchTerm: filter?.searchTerm,
-    //         category: chosenCategory.map((item: any) => {
-    //             if(language === "en") {
-    //                 return item.name_en
-    //             } else if (language === "ua") {
-    //                 return item.name_ua
-    //             } else if (language === "ru") {
-    //                 return item.name_ru
-    //             }
-    //         }),
-    //         orderBy: filter?.orderBy,
-    //         orderDirection: filter?.orderDirection
-    //     })
-    // }, [chosenCategory])
+    useEffect(() => {
+        setFilter({
+            searchTerm: filter?.searchTerm,
+            category: chosenCategory.map((item: any) => {
+                if (language === "en") {
+                    return item.name_en
+                } else if (language === "ua") {
+                    return item.name_ua
+                } else if (language === "ru") {
+                    return item.name_ru
+                }
+            }),
+            orderBy: filter?.orderBy,
+            orderDirection: filter?.orderDirection
+        })
+    }, [chosenCategory])
 
-    // useEffect(() => {
-    //     setFilter({
-    //         searchTerm: filter?.searchTerm,
-    //         category: chosenCategory.map((item: any) => {
-    //             if(language === "en") {
-    //                 return item?.name_en
-    //             } else if (language === "ua") {
-    //                 return item?.name_ua
-    //             } else if (language === "ru") {
-    //                 return item?.name_ru
-    //             }
-    //         }),
-    //         orderBy: filter?.orderBy,
-    //         orderDirection: filter?.orderDirection
-    //     })
-    // }, [language])
+    useEffect(() => {
+        setFilter({
+            searchTerm: filter?.searchTerm,
+            category: chosenCategory.map((item: any) => {
+                if (language === "en") {
+                    return item?.name_en
+                } else if (language === "ua") {
+                    return item?.name_ua
+                } else if (language === "ru") {
+                    return item?.name_ru
+                }
+            }),
+            orderBy: filter?.orderBy,
+            orderDirection: filter?.orderDirection
+        })
+    }, [language])
 
     useEffect(() => {
         axios.get(apiLink("api/categories")).then(({data}) => {
@@ -100,16 +102,19 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
             <div className="top-cards-categories__filter filter-top-cards-categories">
                 <form onSubmit={handleSearchTitleChange}>
                     <div className="input">
-                    <input autoComplete='off' onChange={e => setTitleSearch(e.target.value)} value={titleSearch} type='text' name='form[]'
-                           className='filter-top-cards-categories__input'/>
-                        {!titleSearch && <div className="placeholder"><Translate>filter_by_name_placeholder</Translate></div>}
+                        <input autoComplete='off' onChange={e => setTitleSearch(e.target.value)} value={titleSearch}
+                               type='text' name='form[]'
+                               className='filter-top-cards-categories__input'/>
+                        {!titleSearch &&
+                            <div className="placeholder"><Translate>filter_by_name_placeholder</Translate></div>}
                     </div>
                 </form>
                 <div className="filter-top-cards-categories__items">
 
                     {
                         categories?.filter((item: any) => item?.server?.id === category?.id)?.map((item: any) =>
-                            <div key={item?.id} onClick={_ => chooseCategory(item?.id)} className={"filter-top-cards-categories__item" + (chosenCategory.some((cat: any) => cat.id === item.id) ? " active" : "")}>
+                            <div key={item?.id} onClick={_ => chooseCategory(item?.id)}
+                                 className={"filter-top-cards-categories__item" + (chosenCategory.some((cat: any) => cat.id === item.id) ? " active" : "")}>
                                 <div className="filter-top-cards-categories__link">
                                     {language === "ru" && item?.name_ru}
                                     {language === "ua" && item?.name_ua}
@@ -130,7 +135,7 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
                     {
                         ordersBy.map((item: any, index: number) =>
                             <button key={index} onClick={_ => handleSort(item)}
-                                className="order-top-cards-categories__item item-order-top-cards-categories order-top-cards-categories__item_name">
+                                    className="order-top-cards-categories__item item-order-top-cards-categories order-top-cards-categories__item_name">
                                 <div className="item-order-top-cards-categories__arrows">
                                     {(isSort === "ASC" || !isSort) && <div
                                         className="item-order-top-cards-categories__arrow item-order-top-cards-categories__arrow-up">

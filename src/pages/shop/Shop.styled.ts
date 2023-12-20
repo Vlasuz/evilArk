@@ -204,7 +204,11 @@ export const ShopStyled = styled.main`
     margin-right: auto;
     display: block;
   }
-  
+
+  .bottom-item-cards-categories__number {
+    font-weight: 400;
+    font-size: 14px;
+  }
   
   .select-product__rare.rare-select-product {
     margin-top: 20px;
@@ -258,9 +262,22 @@ export const ShopStyled = styled.main`
     }
   }
 
+  @media (max-width: 768px) {
+    .cards-categories__column {
+      flex: 0 1 49%;
+      padding: 0 5px;
+    }
+  }
   @media (max-width: 479.98px) {
+    .bottom-item-cards-categories__row {
+      flex-direction: column;
+    }
     .value-parameters-select-product__item {
       font-size: 13px;
+    }
+    .bottom-item-cards-categories__price {
+      //flex-direction: column;
+      margin-top: 10px;
     }
   }
 `

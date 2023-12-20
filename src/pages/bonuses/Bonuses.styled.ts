@@ -39,8 +39,8 @@ export const BonusesStyled = styled.main`
     justify-content: space-between;
 
     @media screen and (max-width: 1480px) {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      //display: grid;
+      //grid-template-columns: 1fr 1fr;
     }
     @media screen and (max-width: 768px) {
       display: block;
@@ -51,7 +51,8 @@ export const BonusesStyled = styled.main`
     font-size: 14px;
     line-height: 1.5;
     color: #fff;
-    max-width: 30%;
+    max-width: 100%;
+    margin-top: 20px;
     margin-left: 10px;
     
     @media screen and (max-width: 1480px) {

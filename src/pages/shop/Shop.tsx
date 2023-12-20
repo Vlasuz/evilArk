@@ -51,6 +51,7 @@ export const Shop: React.FC<IShopProps> = () => {
             server_id: category.id,
             ...filter
         }).then(({data}) => {
+
             setShop(data.data)
             setPagination(data.meta.links)
             setIsLoading(false)

@@ -4,17 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="Dann file">
-      <change afterPath="$PROJECT_DIR$/src/App.styled.ts" afterDir="false" />
+    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="FiX">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/tableNextBonuses/TableNextBonuses.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tableNextBonuses/TableNextBonuses.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/topUp/TopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/topUp/TopUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/steamLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/steamLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/languages/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/languages/ua.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ua.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/bonuses/Bonuses.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/bonuses/Bonuses.styled.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/bonuses/Bonuses.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/bonuses/Bonuses.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/purchases/Purchases.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/purchases/Purchases.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/faq/faq.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/faq/faq.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.styled.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopTop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopTop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/text/Text.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/text/Text.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +163,8 @@
       <workItem from="1702068456392" duration="239000" />
       <workItem from="1702113739135" duration="520000" />
       <workItem from="1702637272419" duration="2010000" />
-      <workItem from="1703002007058" duration="15020000" />
+      <workItem from="1703002007058" duration="15042000" />
+      <workItem from="1703091217222" duration="5235000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1695910913707</created>
@@ -270,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703074210644</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="FiX">
+      <created>1703080631354</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1703080631355</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,6 +300,7 @@
     <MESSAGE value="All fixed" />
     <MESSAGE value="News" />
     <MESSAGE value="Dann file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dann file" />
+    <MESSAGE value="FiX" />
+    <option name="LAST_COMMIT_MESSAGE" value="FiX" />
   </component>
 </project>

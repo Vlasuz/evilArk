@@ -30,7 +30,6 @@ export const Inventory: React.FC<IInventoryProps> = () => {
         axios.get(apiLink('api/users/inventory')).then(({data}) => {
             setInventory(data.data)
             setIsLoad(true)
-            console.log("api/users/inventory", data.data)
         }).catch(er => console.log("api/users/inventory", er))
     }, [])
 

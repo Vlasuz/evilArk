@@ -35,7 +35,6 @@ export const Text: React.FC<ITextProps> = () => {
 
     useEffect(() => {
         axios.get(apiLink(`/api/home/${docsId}`)).then(({data}) => {
-            console.log(data.data)
             setDoc(data.data)
         }).catch(er => console.log(apiLink("/api/home/privacy-policy"), er))
     }, [])

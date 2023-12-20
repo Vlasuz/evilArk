@@ -22,13 +22,6 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
     }
 
     const category = useSelector((state: any) => state.toolkit.category)
-    const language = useSelector((state: any) => state.toolkit.language)
-
-    const productName: any = {
-        'ru': data.name,
-        'en': data.name_en,
-        'ua': data.name_ua,
-    }
 
     const timeToSale = data?.category?.filter(item => item?.server?.id === category?.id)[0]?.discount[0]?.sales_by ?? data?.sales_by ?? "2023-12-20 16:56:00";
 
@@ -37,13 +30,15 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
         const now = new Date();
 
         const difference = saleDate.getTime() - now.getTime();
-        const minutesLeft = Math.floor((difference / 1000 / 60) % 60);
+        const daysLeft = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hoursLeft = Math.floor((difference / (1000 * 60 * 60)) % 24);
+        const minutesLeft = Math.floor((difference / 1000 / 60) % 60);
 
-        return {hoursLeft, minutesLeft};
+        return { daysLeft, hoursLeft, minutesLeft };
     };
 
-    const {hoursLeft, minutesLeft} = getTimeLeftUTC(timeToSale);
+    const { daysLeft, hoursLeft, minutesLeft } = getTimeLeftUTC(timeToSale);
+
 
 
     const isTimerExpired = (endTime: string) => {
@@ -62,9 +57,7 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
                 {/*<div className="item-cards-categories__body">*/}
                 {/*</div>*/}
                 <span className="item-cards-categories__name">
-                        {
-                            productName[language]
-                        }
+                        {data.name}
                     </span>
                 <span className="item-cards-categories__image">
                         <LazyLoadImage src={data.icon} alt="PvP Simple Kit"/>
@@ -74,8 +67,12 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
                         <div className="bottom-item-cards-categories__number">
 
                             {
-                                !timerExpired && `Скидка: ${hoursLeft < 10 ? "0" + hoursLeft : hoursLeft}h:${minutesLeft < 10 ? "0" + minutesLeft : minutesLeft}m`
+                                !timerExpired && `Скидка: `
                             }
+
+                            <b>
+                                {!timerExpired && `${daysLeft}d:${hoursLeft < 10 ? "0" + hoursLeft : hoursLeft}h:${minutesLeft < 10 ? "0" + minutesLeft : minutesLeft}m`}
+                            </b>
 
                         </div>
                         <div className="bottom-item-cards-categories__price">
