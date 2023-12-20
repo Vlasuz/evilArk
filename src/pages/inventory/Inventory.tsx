@@ -13,7 +13,7 @@ import getCookies from "../../functions/getCookie";
 import {IProduct, IServer} from "../../models";
 import {Translate} from "../../components/translate/Translate";
 import {useSelector} from 'react-redux';
-import { InventoryStyled } from './Inventory.styled';
+import {InventoryStyled} from './Inventory.styled';
 
 interface IInventoryProps {
 
@@ -37,7 +37,9 @@ export const Inventory: React.FC<IInventoryProps> = () => {
     const [isHidePagination, setIsHidePagination] = useState(false)
 
     useEffect(() => {
-        isLoad && setIsHidePagination(document.querySelectorAll('.purchases-slider__pagination span').length <= 1)
+        if (!isLoad) return;
+
+        setIsHidePagination(document.querySelectorAll('.purchases-slider__pagination span').length <= 1)
     }, [isLoad])
 
     return (
@@ -54,8 +56,8 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                 <div className="inner__content content-inner">
                                     <div className="content-inner__body">
                                         <div className="purchases__items">
-                                    {!inventory.filter(item => item?.server?.id === category?.id).length && isLoad &&
-                                        <p>Ничего нет!</p>}
+                                            {!inventory.filter(item => item?.server?.id === category?.id).length && isLoad &&
+                                                <p>Ничего нет!</p>}
 
 
                                             {isLoad && <Swiper
@@ -101,7 +103,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                         </div>
                                     </div>
 
-                                    {(isHidePagination || inventory.filter(item => item?.server?.id === category?.id).length) &&
+                                    {!(isLoad && isHidePagination) &&
                                         <div className="purchases-slider__navigation">
                                             <div className="purchases-slider__btn purchases-slider__btn_prev"/>
                                             <div className="purchases-slider__pagination"/>

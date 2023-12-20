@@ -25,12 +25,12 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
 
     useEffect(() => {
         axios.get(apiLink("api/users/history")).then(({data}) => {
-            setHistoryPurchases(data.data)
+            // setHistoryPurchases(data.data)
             setIsLoad(true)
         })
 
         axios.get(apiLink("api/users/roulette-history")).then(({data}) => {
-            setHistoryRoulette(data.data)
+            // setHistoryRoulette(data.data)
         }).catch(er => console.log(er))
     }, [])
 

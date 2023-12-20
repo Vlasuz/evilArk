@@ -64,5 +64,10 @@
   "text_for_notify_7": "This item is not available in this category",
   "text_for_notify_8": "There is not enough time since you purchased this item to buy it again!",
   "text_for_notify_9": "Unfortunately the servers are closed for giving out items.",
-  "text_for_notify_10": "Please enter the top up amount"
+  "text_for_notify_10": "Please enter the top up amount",
+
+  "filter_by_name_placeholder": "Filter by name",
+  "are_you_sure_to_buy": "Are you confirming the purchase?",
+  "yes": "Yes",
+  "no": "No"
 }

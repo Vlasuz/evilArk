@@ -105,8 +105,6 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
         'ua': product?.description_ua,
     }
 
-    console.log(isAnyoneHave)
-
     return (
         <ProductModule.Provider value={setProductModule}>
             <div className={"categories__select-product select-product" + (!!isActive ? " active" : "")}>
@@ -126,6 +124,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                     productName[language]
                                 }
                             </div>
+                        <img width="250" height="250" src={product?.icon} alt=""/>
                             <div className="select-product__description">
                                 {isShowDescription && ReactHtmlParser(productDescription[language] ?? "")}
                                 <button onClick={_ => setIsShowDescription(prev => !prev)} className={"show-more-description"}>
@@ -150,12 +149,12 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                                 <div className="label-rare-select-product__name">
                                                     {item.name}
                                                 </div>
-                                                <div className="label-rare-select-product__price">
-                                                    <span>{item.price} EC</span>
-                                                    {item.price_without_sales !== item.price && <div
-                                                        className="bottom-item-cards-categories__price_old">{item.price_without_sales} EC</div>}
-                                                    <div className="bottom-item-cards-categories__price_now">{item.price} EC</div>
-                                                </div>
+                                                {/*<div className="label-rare-select-product__price">*/}
+                                                {/*    <span>{item.price} EC</span>*/}
+                                                {/*    {item.price_without_sales !== item.price && <div*/}
+                                                {/*        className="bottom-item-cards-categories__price_old">{item.price_without_sales} EC</div>}*/}
+                                                {/*    <div className="bottom-item-cards-categories__price_now">{item.price} EC</div>*/}
+                                                {/*</div>*/}
                                             </div>
                                         </div>
                                     )
@@ -218,8 +217,8 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                             {/*{product?.price && (+product?.price * count).toFixed(2)} EC*/}
 
                                             {product?.price_without_sales !== product?.price && <div
-                                                className="bottom-item-cards-categories__price_old">{product?.price_without_sales} EC</div>}
-                                            <div className="bottom-item-cards-categories__price_now">{product?.price} EC</div>
+                                                className="bottom-item-cards-categories__price_old">{product?.price_without_sales && (+product?.price_without_sales * +count).toFixed(2)} EC</div>}
+                                            <div className="bottom-item-cards-categories__price_now">{product?.price && (+product?.price * +count).toFixed(2)} EC</div>
                                         </div>
                                     </div>
                                 </div>
@@ -227,7 +226,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                         </div>
                         <div
                             className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
-                            {isWantToBuy && <h3>Вы подтверждаете покупку?</h3>}
+                            {isWantToBuy && <h3><Translate>are_you_sure_to_buy</Translate></h3>}
                             <div className="bottom-select-product__row">
                                 {
                                     !isWantToBuy && <button onClick={handleClickButtonBuy}
@@ -240,12 +239,12 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                     isWantToBuy && <div style={{display: "flex"}}>
                                         <button onClick={handleBuy}
                                                 className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
-                                            Да
+                                            <Translate>yes</Translate>
                                         </button>
                                         <button style={{background: "dimgrey", marginLeft: "15px"}}
                                                 onClick={_ => setIsWantToBuy(false)}
                                                 className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
-                                            Нет
+                                            <Translate>no</Translate>
                                         </button>
                                     </div>
                                 }

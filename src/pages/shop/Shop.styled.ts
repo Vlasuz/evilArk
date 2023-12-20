@@ -205,6 +205,39 @@ export const ShopStyled = styled.main`
     display: block;
   }
   
+  
+  .select-product__rare.rare-select-product {
+    margin-top: 20px;
+    .rare-select-product__title {
+      margin-left: 0;
+      grid-column-end: 4;
+    }
+
+    .rare-select-product__options {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .label-rare-select-product__row {
+      flex-direction: column;
+    }
+
+    .label-rare-select-product__name {
+      margin-top: 10px;
+      margin-right: 0;
+    }
+    
+    .label-rare-select-product__image {
+      flex: 0 0 140px;
+      width: 140px;
+      height: 140px;
+      padding: 10px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  
 
   @media (max-width: 767.98px) {
     .value-parameters-select-product__item img {

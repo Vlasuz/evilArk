@@ -30,7 +30,7 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
         'ua': data.name_ua,
     }
 
-    const timeToSale = data?.category?.filter(item => item?.server?.id === category?.id)[0]?.discount[0]?.sales_by ?? data?.sales_by ?? "2023-12-20 13:56:00";
+    const timeToSale = data?.category?.filter(item => item?.server?.id === category?.id)[0]?.discount[0]?.sales_by ?? data?.sales_by ?? "2023-12-20 16:56:00";
 
     const getTimeLeftUTC = (saleTime: string) => {
         const saleDate = new Date(saleTime);
@@ -74,7 +74,7 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
                         <div className="bottom-item-cards-categories__number">
 
                             {
-                                !timerExpired && `${hoursLeft < 10 ? "0" + hoursLeft : hoursLeft}:${minutesLeft < 10 ? "0" + minutesLeft : minutesLeft}`
+                                !timerExpired && `Скидка: ${hoursLeft < 10 ? "0" + hoursLeft : hoursLeft}h:${minutesLeft < 10 ? "0" + minutesLeft : minutesLeft}m`
                             }
 
                         </div>

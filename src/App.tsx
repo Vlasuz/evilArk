@@ -26,6 +26,7 @@ import getCookies from "./functions/getCookie";
 import axios from "axios";
 import {apiLink} from "./hooks/apiLink";
 import setCookie from "./functions/setCookie";
+import {AppStyled} from "./App.styled";
 
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
     if(isTechnicalTime) return <TechnicalTime setIsTechnicalTime={setIsTechnicalTime}/>
 
     return (
-        <div className="wrapper">
+        <AppStyled className="wrapper">
             <SvgIcons/>
 
             <Header/>
@@ -85,7 +86,7 @@ function App() {
 
             <ToastContainer />
 
-        </div>
+        </AppStyled>
     );
 }
 

@@ -99,8 +99,11 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
         <div className="cards-categories__top top-cards-categories">
             <div className="top-cards-categories__filter filter-top-cards-categories">
                 <form onSubmit={handleSearchTitleChange}>
-                    <input placeholder="Filter by name" autoComplete='off' onChange={e => setTitleSearch(e.target.value)} value={titleSearch} type='text' name='form[]'
+                    <div className="input">
+                    <input autoComplete='off' onChange={e => setTitleSearch(e.target.value)} value={titleSearch} type='text' name='form[]'
                            className='filter-top-cards-categories__input'/>
+                        {!titleSearch && <div className="placeholder"><Translate>filter_by_name_placeholder</Translate></div>}
+                    </div>
                 </form>
                 <div className="filter-top-cards-categories__items">
 
