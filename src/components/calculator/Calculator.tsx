@@ -12,14 +12,9 @@ interface ICalculatorProps {
 export const Calculator: React.FC<ICalculatorProps> = () => {
 
     const isPopupOpen: any = useContext(topUpContext)
-    const infoForPay = useSelector((state: any) => state.toolkit.infoForPay)
 
     const handleOpenPopup = () => {
-        if(infoForPay.value <= 0) {
-            notifications("fill_the_field_for_payment")
-        } else {
-            isPopupOpen(true)
-        }
+        isPopupOpen(true)
     }
 
     return (
@@ -29,7 +24,7 @@ export const Calculator: React.FC<ICalculatorProps> = () => {
                 <Translate>balance_replenishment</Translate>
             </div>
             <div className="replenishment-bonuses__text">
-                <Translate>balance_replenishment_text</Translate>
+                Калькулятор
             </div>
             <CalculatorForm/>
             <button onClick={handleOpenPopup} type="submit" className="replenishment-bonuses__btn top-up-btn">

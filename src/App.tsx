@@ -25,6 +25,7 @@ import { TechnicalTime } from './pages/technicalTime/TechnicalTime';
 import getCookies from "./functions/getCookie";
 import axios from "axios";
 import {apiLink} from "./hooks/apiLink";
+import setCookie from "./functions/setCookie";
 
 
 function App() {
@@ -54,11 +55,11 @@ function App() {
 
     const [isTechnicalTime, setIsTechnicalTime] = useState(getCookies("isAdmin") ? !getCookies("isAdmin") : false)
 
-    // useEffect(() => {
-    //     axios.get(apiLink("api/tech-valid")).then(({data}) => {
-    //         setIsTechnicalTime(getCookies("isAdmin") ? !getCookies("isAdmin") : data.data)
-    //     })
-    // }, [])
+    useEffect(() => {
+        axios.get(apiLink("api/tech-valid")).then(({data}) => {
+            setIsTechnicalTime(getCookies("isAdmin") ? !getCookies("isAdmin") : data.data.valid)
+        })
+    }, [])
 
     if(isTechnicalTime) return <TechnicalTime setIsTechnicalTime={setIsTechnicalTime}/>
 

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {HistoryDonateItem} from "./components/historyDonateItem";
 import {Grid, Pagination} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Product} from "../product/products";
+import {Product} from "../product/Products";
 import {apiLink} from "../../hooks/apiLink";
 import axios from 'axios';
 import {Translate} from "../translate/Translate";
@@ -25,7 +25,9 @@ export const HistoryDonate: React.FC<IHistoryDonateProps> = ({data}) => {
                 <Translate>donates_history</Translate>
             </div>
 
-            {isLoad && <Swiper
+            {!data.length && <p>Тут ничего нет!</p>}
+
+            {!!data.length && isLoad && <Swiper
                 slidesPerView={1}
                 spaceBetween={20}
                 slidesPerGroup={1}
@@ -58,11 +60,11 @@ export const HistoryDonate: React.FC<IHistoryDonateProps> = ({data}) => {
                 }
             </Swiper>}
 
-            <div className="purchases-slider__navigation">
+            {!!data.length && <div className="purchases-slider__navigation">
                 <div className="purchases-slider__btn purchases-slider__btn_prev"/>
                 <div className="purchases-slider__pagination"/>
                 <div className="purchases-slider__btn purchases-slider__btn_next"/>
-            </div>
+            </div>}
         </div>
     )
 }

@@ -5,6 +5,8 @@ import {useSelector} from "react-redux";
 import {IGeneralInfo} from "../../models";
 import {apiLink} from "../../hooks/apiLink";
 import logo from './../../assets/img/logo.svg'
+import axios from "axios";
+import {FooterStyled} from "./Footer.styled";
 
 interface IFooterProps {
 
@@ -15,7 +17,7 @@ export const Footer: React.FC<IFooterProps> = () => {
     const generalInfo: IGeneralInfo = useSelector((state: any) => state.toolkit.generalInfo)
 
     return (
-        <footer className="footer">
+        <FooterStyled className="footer">
             <div className="footer__container container">
                 <div className="footer__body">
                     <div className="footer__row">
@@ -67,8 +69,19 @@ export const Footer: React.FC<IFooterProps> = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="links">
+                        <NavLink to={"/docs/privacy_policy"}>
+                            Privacy policy
+                        </NavLink>
+                        <NavLink to={"/docs/public_offer"}>
+                            Public offer
+                        </NavLink>
+                        <NavLink to={"/docs/return_policy"}>
+                            Return policy
+                        </NavLink>
+                    </div>
                 </div>
             </div>
-        </footer>
+        </FooterStyled>
     )
 }

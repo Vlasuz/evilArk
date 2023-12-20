@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import {topUpContext} from "../../context/topUpContext";
-import {TopUp} from "../../components/topUp/topUp";
+import {TopUp} from "../../components/topUp/TopUp";
 import {ProfileSidebar} from "../../components/profileSidebar/ProfileSidebar";
-import {ProfileUser} from "../profile/components/profileUser";
-import {Footer} from "../../components/footer/footer";
+import {ProfileUser} from "../profile/components/ProfileUser";
+import {Footer} from "../../components/footer/Footer";
 import {Calculator} from "../../components/calculator/Calculator";
 import {HistoryDonate} from "../../components/historyDonate/historyDonate";
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
-import {IServers, IUser} from "../../models";
+import {IServer, IUser} from "../../models";
 import {useParams} from "react-router-dom";
 import {UserStyled} from "./User.styled";
 import {useSelector} from "react-redux";
@@ -23,7 +23,7 @@ export const User: React.FC<IUserProps> = () => {
 
     const {userId} = useParams()
 
-    const category: IServers = useSelector((state: any) => state.toolkit.category)
+    const category: IServer = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
         axios.get(apiLink("api/users/" + userId)).then(({data}) => {
@@ -32,6 +32,8 @@ export const User: React.FC<IUserProps> = () => {
     }, [])
 
     const isCategoryPve = category?.name?.toLowerCase().includes("pve")
+    const userStatusColor = isCategoryPve ? userInfo?.level.filter(item => item.server.id === category.id)[0].color_PVE : userInfo?.level.filter(item => item.server.id === category.id)[0].color
+    const userStatusName = isCategoryPve ? userInfo?.level.filter(item => item.server.id === category.id)[0].level_name_PVE : userInfo?.level.filter(item => item.server.id === category.id)[0].level_name ?? "Newbie"
 
     return (
         <UserStyled className="profile">
@@ -45,13 +47,13 @@ export const User: React.FC<IUserProps> = () => {
                                     <div className="content-inner__body">
                                         <div className="profile__row">
                                             <div className="profile__user user-profile">
-                                                <div className="user-profile__image" style={{borderColor: isCategoryPve ? userInfo?.level_pve?.color_number : userInfo?.level?.color_number}}>
+                                                <div className="user-profile__image" style={{borderColor: userStatusColor ?? "#000"}}>
                                                     <img src={userInfo?.avatar} alt="user-icon.svg"/>
                                                 </div>
                                                 <div className="user-profile__body">
                                                     <div className="user-profile__name">{userInfo?.name}</div>
                                                     <div className="user-profile__level" data-da="info-profile, 2, 600">
-                                                        Level: <span>{isCategoryPve ? userInfo?.level_pve?.name : userInfo?.level?.name}</span>
+                                                        Level: <span>{userStatusName}</span>
                                                     </div>
                                                 </div>
                                             </div>

@@ -6,7 +6,7 @@ import {useImages} from '../../../../hooks/images';
 import {NewsItem} from './components/newsItem';
 import {Categories} from "./components/categories";
 import axios from "axios";
-import {INews, INewsSingle, IServers} from "../../../../models";
+import {INews, INewsSingle, IServer} from "../../../../models";
 import {apiLink} from "../../../../hooks/apiLink";
 import ReactHtmlParser from "html-react-parser";
 import {isOpenPopupContext} from "../../Main";
@@ -26,7 +26,7 @@ export const News: React.FC<INewsProps> = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [server, setServer] = useState<IServers>()
+    const [server, setServer] = useState<IServer>()
 
     const news: INews[] = useSelector((state: any) => state.toolkit.news)
     const lang = useSelector((state: any) => state.toolkit.language)
@@ -46,11 +46,11 @@ export const News: React.FC<INewsProps> = () => {
     }, [category])
 
     const handleReadNews = () => {
-        navigate("?news_id=" + news.filter(item => item.server.id === server?.id)[0]?.id)
+        navigate("?news_id=" + news.filter(item => item.server?.id === server?.id)[0]?.id)
 
         isOpenPopup({
             isOpen: true,
-            news: news.filter(item => item.server.id === server?.id)[0]
+            news: news.filter(item => item.server?.id === server?.id)[0]
         })
     }
 
@@ -59,13 +59,13 @@ export const News: React.FC<INewsProps> = () => {
     useEffect(() => {
 
         if (window.innerWidth > 1700) {
-            setIsHideArrows(news?.filter((item: INews) => item.server.id === server?.id).length < 6)
+            setIsHideArrows(news?.filter((item: INews) => item.server?.id === server?.id).length < 6)
         } else if (window.innerWidth >= 1600) {
-            setIsHideArrows(news?.filter((item: INews) => item.server.id === server?.id).length < 5)
+            setIsHideArrows(news?.filter((item: INews) => item.server?.id === server?.id).length < 5)
         } else if (window.innerWidth >= 1100) {
-            setIsHideArrows(news?.filter((item: INews) => item.server.id === server?.id).length < 5)
+            setIsHideArrows(news?.filter((item: INews) => item.server?.id === server?.id).length < 5)
         } else if (window.innerWidth >= 700) {
-            setIsHideArrows(news?.filter((item: INews) => item.server.id === server?.id).length < 3)
+            setIsHideArrows(news?.filter((item: INews) => item.server?.id === server?.id).length < 3)
         }
 
     }, [])
@@ -80,11 +80,12 @@ export const News: React.FC<INewsProps> = () => {
                         <div className="news__body">
 
                             {
-                                news?.length >= 1 && <NewsItemFirst handleReadNews={handleReadNews}
-                                                                    data={news
-                                                                        ?.filter(item => isStartCat ? item : item?.server?.id === server?.id)
-                                                                        ?.filter(item => !isStartCat ? item : item.tags.some(item => item.slug.toLowerCase().includes('start')))[0]
-                                }
+                                news?.length >= 1 && <NewsItemFirst
+                                    handleReadNews={handleReadNews}
+                                    data={news
+                                        ?.filter(item => isStartCat ? item : item?.server?.id === server?.id)
+                                        ?.filter(item => !isStartCat ? item : item.tags.some(item => item.slug.toLowerCase().includes('start')))[0]
+                                    }
                                 />
                             }
 
@@ -126,11 +127,11 @@ export const News: React.FC<INewsProps> = () => {
                                     }}
                                 >
                                     {
-                                        news.length && news
-                                            ?.filter((item: INews) => isStartCat ? item : item.server.id === server?.id)
-                                            ?.filter(item => !isStartCat ? item : item.tags.some(item => item.slug.toLowerCase().includes('start')))
+                                        news?.length && news
+                                            ?.filter((item: INews) => isStartCat ? item : item?.server?.id === server?.id)
+                                            ?.filter(item => !isStartCat ? item : item.tags?.some(item => item.slug?.toLowerCase().includes('start')))
                                             ?.map((item: INews, index: number) => index > 0 &&
-                                                <SwiperSlide key={item.id}>
+                                                <SwiperSlide key={item?.id}>
                                                     <NewsItem data={item}/>
                                                 </SwiperSlide>
                                             )

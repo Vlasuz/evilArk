@@ -3,6 +3,7 @@ import {IUser} from "../../../models";
 import {useImages} from "../../../hooks/images";
 import {NavLink} from "react-router-dom";
 import {Translate} from "../../../components/translate/Translate";
+import {useUserBalance} from "../../../hooks/userBalance";
 
 interface IShopAccountProps {
     userInfo: IUser
@@ -10,6 +11,7 @@ interface IShopAccountProps {
 
 export const ShopAccount:React.FC<IShopAccountProps> = ({userInfo}) => {
     const {wallet, gift} = useImages()
+    const userBalance = useUserBalance()
 
     return (
         <div className="categories__info-panel info-panel-categories">
@@ -31,7 +33,7 @@ export const ShopAccount:React.FC<IShopAccountProps> = ({userInfo}) => {
                         <div className="balance-now-info-panel-categories__text">
                             <Translate>balance</Translate>
                         </div>
-                        <div className="balance-now-info-panel-categories__value">{userInfo.balance.toFixed(2)} EC</div>
+                        <div className="balance-now-info-panel-categories__value">{userBalance} EC</div>
                     </div>
                     <NavLink to={"/profile"}
                        className="balance-info-panel-categories__top-up top-up-info-panel-categories">

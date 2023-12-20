@@ -3,7 +3,7 @@ import {useImages} from "../../../../hooks/images";
 import {ServersItem} from "./components/serversItem";
 import axios from "axios";
 import {apiLink} from "../../../../hooks/apiLink";
-import {IServers} from "../../../../models";
+import {IServer} from "../../../../models";
 import {useSelector} from "react-redux";
 import ReactHtmlParser from "html-react-parser";
 
@@ -13,7 +13,7 @@ interface IServersProps {
 
 export const Servers:React.FC<IServersProps> = () => {
 
-    const [servers, setServers] = useState<IServers[]>([])
+    const [servers, setServers] = useState<IServer[]>([])
     const [serversText, setServersText] = useState<any>({})
 
     const lang = useSelector((state: any) => state.toolkit.language)
@@ -47,7 +47,7 @@ export const Servers:React.FC<IServersProps> = () => {
                     <div className="servidores__row">
 
                         {
-                            servers?.map((server: IServers) => <ServersItem key={server.id} data={server} />)
+                            servers?.map((server: IServer) => <ServersItem key={server.id} data={server} />)
                         }
 
                     </div>

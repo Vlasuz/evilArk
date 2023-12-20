@@ -15,11 +15,11 @@ export const NewsItem:React.FC<INewsItemProps> = ({data}) => {
     const {calendar, placeholder} = useImages()
 
     const navigate = useNavigate()
-    const [date] = useState(data.created_at.slice(0, data.created_at.indexOf(' ')))
+    const [date] = useState(data?.created_at.slice(0, data?.created_at.indexOf(' ')))
     const isOpenPopup: any = useContext(isOpenPopupContext)
 
     const handleReadNews = () => {
-        navigate("?news_id="+data.id)
+        navigate("?news_id="+data?.id)
 
         isOpenPopup({
             isOpen: true,
@@ -31,12 +31,12 @@ export const NewsItem:React.FC<INewsItemProps> = ({data}) => {
         <div className="news__slide slide-news swiper-slide">
             <div className="slide-news__image-block news-open-btn">
                 <div onClick={handleReadNews} className="slide-news__image">
-                    <img src={data.image ?? placeholder} alt="news-img"/>
+                    <img src={data?.image ?? placeholder} alt="news-img"/>
                 </div>
             </div>
             <div className="slide-news__content">
                 <div onClick={handleReadNews} className="slide-news__title news-open-btn">
-                    {data.title}
+                    {data?.title}
                 </div>
                 <div className="slide-news__date date-slide-news">
                     <div className="date-slide-news__icon">
@@ -48,7 +48,7 @@ export const NewsItem:React.FC<INewsItemProps> = ({data}) => {
                 </div>
                 <div className="slide-news__text">
                     {
-                        ReactHtmlParser(data.text ?? "")
+                        ReactHtmlParser(data?.text ?? "")
                     }
                 </div>
                 <button onClick={handleReadNews} className="slide-news__link news-open-btn">Read the news</button>

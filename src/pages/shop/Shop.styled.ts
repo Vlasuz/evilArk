@@ -178,6 +178,33 @@ export const ShopStyled = styled.main`
   }
   
   
+  .show-more-description {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 46px;
+    padding: 5px 22px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #FF6C3D;
+    font-family: Barlow;
+    font-size: 15px;
+    font-weight: 600;
+    color: #FFFFFF;
+    transition: all 0.3s ease 0s;
+    margin-top: 10px;
+    &:hover {
+      background: #e76134;
+    }
+  }
+  
+  
+  .time-to-sales-end {
+    margin-right: auto;
+    display: block;
+  }
+  
 
   @media (max-width: 767.98px) {
     .value-parameters-select-product__item img {

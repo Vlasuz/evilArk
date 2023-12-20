@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {NavLink, useNavigate} from "react-router-dom";
-import {Footer} from "../../components/footer/footer";
+import {Footer} from "../../components/footer/Footer";
 import {PageNotFoundStyled} from "../pageNotFound/pageNotFound.styled";
 import {TechnicalTimeStyled} from "./TechnicalTime.styled";
 import setCookie from "../../functions/setCookie";

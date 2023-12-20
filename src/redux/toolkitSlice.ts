@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {IDonateInfo, IGeneralInfo, INews, INewsSingle, IServers, IUser} from "../models";
+import {IDonateInfo, IGeneralInfo, INews, INewsSingle, IServer, IUser} from "../models";
 
 
 const toolkitSlice = createSlice({
@@ -11,7 +11,7 @@ const toolkitSlice = createSlice({
         donateInfo: <IDonateInfo[]>[],
         generalInfo: <IGeneralInfo>{},
         news: <INewsSingle>[],
-        servers: <IServers[]>[],
+        servers: <IServer[]>[],
         language: <string>'',
         infoForPay: {
             value: 0,
@@ -23,10 +23,13 @@ const toolkitSlice = createSlice({
             state.user = action.payload
         },
         changeUserBalance(state, action) {
-            let newUser = state.user
-            newUser.balance = state.user.balance - action.payload
+            let user = state.user
+            const userClusterBalance = user.balance.filter(item => item.server.id === action.payload.cluster)[0]
+            const actionSum = state.user.balance.filter(item => item.server.id === action.payload.cluster)[0].balance
 
-            state.user = newUser
+            userClusterBalance.balance = actionSum - action.payload.balance
+
+            state.user = user
         },
 
         setCategory(state, action) {

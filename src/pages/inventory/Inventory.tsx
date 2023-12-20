@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {Footer} from '../../components/footer/footer'
+import {Footer} from '../../components/footer/Footer'
 import {ProfileSidebar} from "../../components/profileSidebar/ProfileSidebar";
-import {Product} from "../../components/product/products";
+import {Product} from "../../components/product/Products";
 import {Swiper} from "swiper/react";
 import {SwiperSlide} from "swiper/react";
 import {Grid, Pagination} from 'swiper';
@@ -10,8 +10,10 @@ import "swiper/css/grid";
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
 import getCookies from "../../functions/getCookie";
-import {IProduct} from "../../models";
+import {IProduct, IServer} from "../../models";
 import {Translate} from "../../components/translate/Translate";
+import {useSelector} from 'react-redux';
+import { InventoryStyled } from './Inventory.styled';
 
 interface IInventoryProps {
 
@@ -21,12 +23,14 @@ export const Inventory: React.FC<IInventoryProps> = () => {
 
     const [isLoad, setIsLoad] = useState(false)
     const [inventory, setInventory] = useState<IProduct[]>([])
+    const category: IServer = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
         axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.get(apiLink('api/users/inventory')).then(({data}) => {
             setInventory(data.data)
             setIsLoad(true)
+            console.log("api/users/inventory", data.data)
         }).catch(er => console.log("api/users/inventory", er))
     }, [])
 
@@ -37,7 +41,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
     }, [isLoad])
 
     return (
-        <main className="inventory">
+        <InventoryStyled className="inventory">
             <section className="inventory__main">
                 <div className="inventory__container container">
                     <div className="inventory__body">
@@ -50,6 +54,9 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                 <div className="inner__content content-inner">
                                     <div className="content-inner__body">
                                         <div className="purchases__items">
+                                    {!inventory.filter(item => item?.server?.id === category?.id).length && isLoad &&
+                                        <p>Ничего нет!</p>}
+
 
                                             {isLoad && <Swiper
                                                 slidesPerView={6}
@@ -82,7 +89,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                                 }}
                                             >
                                                 {
-                                                    inventory.map((item: IProduct, index: number) =>
+                                                    inventory.filter(item => item?.server?.id === category?.id).map((item: IProduct, index: number) =>
                                                         <SwiperSlide key={index}>
                                                             <Product product={item} setInventory={setInventory}
                                                                      isCanGet={true}/>
@@ -94,11 +101,12 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                         </div>
                                     </div>
 
-                                    {!isHidePagination && <div className="purchases-slider__navigation">
-                                        <div className="purchases-slider__btn purchases-slider__btn_prev"/>
-                                        <div className="purchases-slider__pagination"/>
-                                        <div className="purchases-slider__btn purchases-slider__btn_next"/>
-                                    </div>}
+                                    {(isHidePagination || inventory.filter(item => item?.server?.id === category?.id).length) &&
+                                        <div className="purchases-slider__navigation">
+                                            <div className="purchases-slider__btn purchases-slider__btn_prev"/>
+                                            <div className="purchases-slider__pagination"/>
+                                            <div className="purchases-slider__btn purchases-slider__btn_next"/>
+                                        </div>}
                                 </div>
                             </div>
                         </div>
@@ -106,6 +114,6 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                 </div>
             </section>
             <Footer/>
-        </main>
+        </InventoryStyled>
     )
 }

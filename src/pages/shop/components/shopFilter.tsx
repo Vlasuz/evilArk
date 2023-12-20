@@ -4,6 +4,8 @@ import {IFilterShop, ISort} from "../../../models";
 import axios from "axios";
 import {apiLink} from "../../../hooks/apiLink";
 import {Translate} from "../../../components/translate/Translate";
+import {ucs2} from "punycode";
+import { useSelector } from 'react-redux';
 
 interface IShopFilterProps {
     setFilter?: any
@@ -12,12 +14,15 @@ interface IShopFilterProps {
 
 export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
     const {arrowUp} = useImages()
-    const [titleSearch, setTitleSearch] = useState('')
 
+    const [titleSearch, setTitleSearch] = useState('')
     const [chosenCategory, setChosenCategory] = useState([])
     const ordersBy: any = ["Price"]
     const [isSort, setIsSort] = useState("")
     const [categories, setCategories] = useState([])
+
+    const category = useSelector((state: any) => state.toolkit.category)
+    const language = useSelector((state: any) => state.toolkit.language)
 
     const chooseCategory = (category: string) => {
         if(chosenCategory.some((item: any) => item.id === category)) {
@@ -50,14 +55,39 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
 
     }
 
-    useEffect(() => {
-        setFilter({
-            searchTerm: filter?.searchTerm,
-            category: chosenCategory.map((item: any) => item.name),
-            orderBy: filter?.orderBy,
-            orderDirection: filter?.orderDirection
-        })
-    }, [chosenCategory])
+    // useEffect(() => {
+    //     setFilter({
+    //         searchTerm: filter?.searchTerm,
+    //         category: chosenCategory.map((item: any) => {
+    //             if(language === "en") {
+    //                 return item.name_en
+    //             } else if (language === "ua") {
+    //                 return item.name_ua
+    //             } else if (language === "ru") {
+    //                 return item.name_ru
+    //             }
+    //         }),
+    //         orderBy: filter?.orderBy,
+    //         orderDirection: filter?.orderDirection
+    //     })
+    // }, [chosenCategory])
+
+    // useEffect(() => {
+    //     setFilter({
+    //         searchTerm: filter?.searchTerm,
+    //         category: chosenCategory.map((item: any) => {
+    //             if(language === "en") {
+    //                 return item?.name_en
+    //             } else if (language === "ua") {
+    //                 return item?.name_ua
+    //             } else if (language === "ru") {
+    //                 return item?.name_ru
+    //             }
+    //         }),
+    //         orderBy: filter?.orderBy,
+    //         orderDirection: filter?.orderDirection
+    //     })
+    // }, [language])
 
     useEffect(() => {
         axios.get(apiLink("api/categories")).then(({data}) => {
@@ -75,10 +105,12 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
                 <div className="filter-top-cards-categories__items">
 
                     {
-                        categories?.map((item: any) =>
-                            <div key={item.id} onClick={_ => chooseCategory(item.id)} className={"filter-top-cards-categories__item" + (chosenCategory.some((cat: any) => cat.id === item.id) ? " active" : "")}>
+                        categories?.filter((item: any) => item?.server?.id === category?.id)?.map((item: any) =>
+                            <div key={item?.id} onClick={_ => chooseCategory(item?.id)} className={"filter-top-cards-categories__item" + (chosenCategory.some((cat: any) => cat.id === item.id) ? " active" : "")}>
                                 <div className="filter-top-cards-categories__link">
-                                    {item.name}
+                                    {language === "ru" && item?.name_ru}
+                                    {language === "ua" && item?.name_ua}
+                                    {language === "en" && item?.name_en}
                                 </div>
                             </div>
                         )

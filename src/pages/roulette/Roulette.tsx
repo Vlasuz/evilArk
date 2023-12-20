@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react'
-import {Footer} from "../../components/footer/footer";
+import {Footer} from "../../components/footer/Footer";
 import domestication from './../../assets/img/icons/domestication.svg'
-import {ICategory, IProduct, IServers, IUser} from "../../models";
+import {ICategory, IProduct, IServer, IUser} from "../../models";
 import {useImages} from "../../hooks/images";
 import {RouletteItem} from "./components/rouletteItem";
 import {HistoryRouletteItem} from "../../components/historyRouletteItem/historyRouletteItem";
@@ -36,7 +36,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     const {placeholder, profit} = useImages()
 
     const dispatch = useDispatch()
-    const servers: IServers[] = useSelector((state: any) => state.toolkit.servers)
+    const servers: IServer[] = useSelector((state: any) => state.toolkit.servers)
     const category: ICategory = useSelector((state: any) => state.toolkit.category)
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
 
@@ -73,7 +73,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
             return
         }
 
-        if (Object.keys(userInfo).length && userInfo.balance >= activeCase.cost) {
+        if (Object.keys(userInfo).length && userInfo.balance.filter(item => item.server.id === category.id)[0].balance >= activeCase.cost) {
             setIsStartRoulette(true)
         }
 
@@ -86,7 +86,10 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                 return;
             }
 
-            dispatch(changeUserBalance(activeCase.cost))
+            dispatch(changeUserBalance({
+                balance: activeCase.cost,
+                cluster: category.id
+            }))
 
             setTimeout(() => {
                 toast.success("Поздравляем! Вы выиграли " + data.data?.name)
@@ -145,7 +148,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                     <div className="select-category__row">
 
                                         {
-                                            servers?.map((item: IServers) =>
+                                            servers?.map((item: IServer) =>
                                                 <div onClick={_ => dispatch(setCategory(item))} key={item.id}
                                                      className={"select-category__column" + (category.name === item.name ? " _active" : "")}>
                                                     <div className="select-category__item item-select-category">

@@ -8,7 +8,7 @@ import {News} from "./components/news/news";
 import {Faq} from "./components/faq/faq";
 import {Donate} from "./components/donate/donate";
 import {Contacts} from "./components/contacts/contacts";
-import {Footer} from "../../components/footer/footer";
+import {Footer} from "../../components/footer/Footer";
 
 import AOS from "aos";
 import "aos/dist/aos.css";

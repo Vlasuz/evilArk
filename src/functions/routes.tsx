@@ -10,6 +10,7 @@ import {Roulette} from "../pages/roulette/Roulette";
 import React from "react";
 import { PageNotFound } from "../pages/pageNotFound/pageNotFound";
 import {User} from "../pages/user/User";
+import {Text} from "../pages/text/Text";
 
 export const routes: IRoutes[] = [
     {
@@ -60,6 +61,11 @@ export const routes: IRoutes[] = [
     {
         path: '/user/:userId',
         element: <User/>,
+        isPublic: true,
+    },
+    {
+        path: '/docs/:docsId',
+        element: <Text/>,
         isPublic: true,
     },
 ]

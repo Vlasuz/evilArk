@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {ProfileSidebar} from "../../components/profileSidebar/ProfileSidebar";
-import {ProfileUser} from "../profile/components/profileUser";
-import {Footer} from "../../components/footer/footer";
+import {ProfileUser} from "../profile/components/ProfileUser";
+import {Footer} from "../../components/footer/Footer";
 import {PageNotFoundStyled} from "./pageNotFound.styled";
 import {NavLink} from "react-router-dom";
 

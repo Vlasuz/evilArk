@@ -8,7 +8,7 @@ import {NavLink, useLocation, useNavigate} from 'react-router-dom';
 import {HeaderUser} from "./components/HeaderUser";
 import {HeaderLogin} from "./components/HeaderLogin";
 import {useDispatch, useSelector} from "react-redux";
-import {ICategory, IGeneralInfo, IServers, IUser} from "../../models";
+import {ICategory, IGeneralInfo, IServer, IUser} from "../../models";
 import {Translate} from "../translate/Translate";
 import logo from "../../assets/img/logo.svg";
 import axios from "axios";
@@ -17,6 +17,7 @@ import {HeaderStyled} from "./Header.styles";
 import {setCategory} from "../../redux/toolkitSlice";
 import setCookie from "../../functions/setCookie";
 import getCookies from "../../functions/getCookie";
+import {useUserBalance} from "../../hooks/userBalance";
 
 interface IHeaderProps {
 
@@ -29,11 +30,12 @@ export const Header: React.FC<IHeaderProps> = () => {
 
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
     const generalInfo: IGeneralInfo = useSelector((state: any) => state.toolkit.generalInfo)
-    const category: IServers = useSelector((state: any) => state.toolkit.category)
+    const category: IServer = useSelector((state: any) => state.toolkit.category)
 
     const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false)
-    const [categories, setCategories] = useState<IServers[]>([])
+    const [categories, setCategories] = useState<IServer[]>([])
     const [isOpenSelectClusters, setIsOpenSelectClusters] = useState(false)
+    const userBalance = useUserBalance()
 
     const dispatch = useDispatch()
 
@@ -74,7 +76,7 @@ export const Header: React.FC<IHeaderProps> = () => {
                                 {category.name}
                             </button>
                             <ul className={"dropdown__list" + (isOpenSelectClusters ? " visible" : "")}>
-                                {categories.length && categories?.map(item => <li key={item.id} onClick={_ => item.name !== category.name && handleClusterChange(JSON.stringify(item))} className="dropdown__list-item" data-dropdown="module 2 - 125 lvl">{item.name}</li>)}
+                                {categories.length && categories?.filter(item => item.is_active)?.map(item => <li key={item.id} onClick={_ => item.name !== category.name && handleClusterChange(JSON.stringify(item))} className="dropdown__list-item" data-dropdown="module 2 - 125 lvl">{item.name}</li>)}
                             </ul>
                         </div>
                     </div>
@@ -95,7 +97,7 @@ export const Header: React.FC<IHeaderProps> = () => {
                             </NavLink>
                             <div className="top-up-balance-header__message">Top up your account</div>
                         </div>
-                        <div className="balance-header__value">{userInfo.balance.toFixed(2)} EC</div>
+                        <div className="balance-header__value">{userBalance} EC</div>
                     </div>}
                 </div>
                 <div className="mobile-header__body">
@@ -129,7 +131,7 @@ export const Header: React.FC<IHeaderProps> = () => {
                                     {category.name}
                                 </button>
                                 <ul className={"dropdown__list" + (isOpenSelectClusters ? " visible" : "")}>
-                                    {categories.length && categories?.map(item => <li key={item.id} onClick={_ => item.name !== category.name && handleClusterChange(JSON.stringify(item))} className="dropdown__list-item" data-dropdown="module 2 - 125 lvl">{item.name}</li>)}
+                                    {categories.length && categories?.filter(item => item.is_active)?.map(item => <li key={item.id} onClick={_ => item.name !== category.name && handleClusterChange(JSON.stringify(item))} className="dropdown__list-item" data-dropdown="module 2 - 125 lvl">{item.name}</li>)}
                                 </ul>
                             </div>
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import {apiLink} from "../../../hooks/apiLink";
 import {isOpenPopupContext} from "../Shop";
 import {useImages} from "../../../hooks/images";
-import {ICategory, IProduct, IProductSingle} from "../../../models";
+import {ICategory, IProduct, IProductSingle, IUser} from "../../../models";
 import getCookies from "../../../functions/getCookie";
 import {useDispatch, useSelector} from "react-redux";
 import {changeUserBalance} from '../../../redux/toolkitSlice';
@@ -29,13 +29,15 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     const [error, setError] = useState('')
     const [productModule, setProductModule]: any = useState("")
     const [isWantToBuy, setIsWantToBuy] = useState(false)
+    const [isShowDescription, setIsShowDescription] = useState(false)
 
     const dispatch = useDispatch()
+    const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
     const category: ICategory = useSelector((state: any) => state.toolkit.category)
     const language = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
-        isActive && axios.get(apiLink('api/products/' + isActive)).then(({data}) => {
+        isActive && axios.get(apiLink(`api/products/${isActive}?user_id=${userInfo.id ?? ""}`)).then(({data}) => {
             setProduct(data.data)
             setProductModule(data.data?.modules.length && data.data?.modules[0].id)
         })
@@ -65,7 +67,14 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
             setIsWantToBuy(false)
             if (!data.data.success) return;
 
-            dispatch(changeUserBalance(product?.price && +product?.price * count))
+            console.log({
+                balance: product?.price && +product?.price * count,
+                cluster: category.id
+            })
+            dispatch(changeUserBalance({
+                balance: product?.price && +product?.price * count,
+                cluster: category.id
+            }))
         }).catch(er => {
             notifications(er?.response?.status)
             setIsLoading(false)
@@ -80,9 +89,10 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
         setError('')
         setCount(1)
         setIsWantToBuy(false)
+        setIsShowDescription(false)
     }, [isActive])
 
-    const isAnyoneHave = !!product?.damage || !!product?.durability || !!product?.food || !!product?.health || !!product?.movement_speed || !!product?.neuter || !!product?.oxygen || !!product?.stamina || !!product?.torpidity || !!product?.weight || product?.sex !== "product";
+    const isAnyoneHave = !!product?.damage || !!product?.durability || !!product?.food || !!product?.health || !!product?.movement_speed || !!product?.neuter || !!product?.oxygen || !!product?.stamina || !!product?.torpidity || !!product?.weight || (!!product?.sex && product?.sex !== "product");
 
     const productName: any = {
         'ru': product?.name,
@@ -94,6 +104,8 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
         'en': product?.description_en,
         'ua': product?.description_ua,
     }
+
+    console.log(isAnyoneHave)
 
     return (
         <ProductModule.Provider value={setProductModule}>
@@ -115,7 +127,10 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                 }
                             </div>
                             <div className="select-product__description">
-                                {ReactHtmlParser(productDescription[language] ?? "")}
+                                {isShowDescription && ReactHtmlParser(productDescription[language] ?? "")}
+                                <button onClick={_ => setIsShowDescription(prev => !prev)} className={"show-more-description"}>
+                                    {isShowDescription ? "Скрыть инструкцию" : "Открыть инструкцию"}
+                                </button>
                             </div>
                         </div>
 
@@ -137,6 +152,9 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                                 </div>
                                                 <div className="label-rare-select-product__price">
                                                     <span>{item.price} EC</span>
+                                                    {item.price_without_sales !== item.price && <div
+                                                        className="bottom-item-cards-categories__price_old">{item.price_without_sales} EC</div>}
+                                                    <div className="bottom-item-cards-categories__price_now">{item.price} EC</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,7 +179,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                 {!!product?.torpidity &&
                                     <ShopItemTableItem value={product?.torpidity} name={"torpidity"}/>}
                                 {!!product?.weight && <ShopItemTableItem value={product?.weight} name={"weight"}/>}
-                                {product?.sex !== "product" &&
+                                {!!product?.sex && product?.sex !== "product" &&
                                     <ShopItemTableItem value={product?.sex ?? ""} name={"sex"}/>}
 
                             </div>
@@ -196,8 +214,12 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                     className="characteristics-select-product__column characteristics-select-product__column_price">
                                     <div
                                         className="characteristics-select-product__item characteristics-select-product__price">
-                                        <div
-                                            className="characteristics-select-product__price">{product?.price && (+product?.price * count).toFixed(2)} EC
+                                        <div className="characteristics-select-product__price">
+                                            {/*{product?.price && (+product?.price * count).toFixed(2)} EC*/}
+
+                                            {product?.price_without_sales !== product?.price && <div
+                                                className="bottom-item-cards-categories__price_old">{product?.price_without_sales} EC</div>}
+                                            <div className="bottom-item-cards-categories__price_now">{product?.price} EC</div>
                                         </div>
                                     </div>
                                 </div>

@@ -15,31 +15,46 @@ export interface ICluster {
     url: string
 }
 
-export interface IServers {
-    clusters: ICluster[]
+export interface IServer {
+    clusters?: ICluster[]
     id: string | number
     image: string
     name: string
+    is_pve: boolean
+    is_active: boolean
 }
 
 export interface IUser {
     avatar: string
-    balance: number
-    email: string | null
+    balance: IBalance[]
+    email: null | string
     id: number | string
-    level: {
-        color_number: string
-        name: string
-    }
-    level_pve: {
-        color_number: string
-        name: string
-    }
+    level: IUserLevel[]
     local_country_code: string
     name: string
     profile_url: string
     role: string
-    steam_id: number
+    steam_id: string
+    eos_id: string
+}
+
+export interface IUserLevel {
+    color: string
+    color_PVE: null | string
+    level_name: null | string
+    level_name_PVE: null | string
+    server: IServer
+    until_next_discount: {
+        cost: number
+        level_name: string
+        color: string
+    }
+}
+
+export interface IBalance {
+    balance: number
+    id: number | string
+    server: IServer
 }
 
 export interface IFilterShop {
@@ -56,7 +71,7 @@ export interface INews {
     image: string
     updated_at: string
     created_at: string
-    server: IServers
+    server: IServer
     tags: INewsTag[]
 }
 
@@ -106,15 +121,21 @@ export interface IGeneralInfo {
 }
 
 export interface INewsSingle {
-    isOpen?: boolean,
+    isOpen?: boolean
     news?: INews
 }
 
 export interface ICategory {
-    "id": number | string,
-    "name": string,
-    "type": string,
-    "discount": []
+    id: number | string
+    name: string
+    type: string
+    discount: {
+        id: number | string
+        discount: number
+        sales_by: string
+        description: string
+    }[]
+    server: IServer
 }
 
 export interface ISort {
@@ -123,49 +144,51 @@ export interface ISort {
 }
 
 export interface IModule {
-    "id": number | string,
-    "name": string,
-    "products": IProduct[]
+    id: number | string
+    name: string
+    products: IProduct[]
 
 }
 
 export interface IProduct {
-    "id": string | number,
-    "name": string,
-    "description": string,
-    "category": ICategory[],
-    "icon": string,
-    "price": string,
-    price_without_sales: string,
-    "amount": number,
-    "sales": number,
-    "sex": string,
-    "purchase_interval": number,
-    "available": number,
-    "level": number,
-    "quality": string,
-    "server": IServers
+    id: string | number
+    name: string
+    description: string
+    category: ICategory[]
+    icon: string
+    price: string
+    price_without_sales: string
+    amount: number
+    sales: number
+    sex: string
+    purchase_interval: number
+    available: number
+    level: number
+    quality: string
+    server: IServer
     name_en: string
     name_ua: string
+    sales_by: string
 }
 
 export interface IProductSingle {
-    "id": 1,
-    "name": string,
-    "description": string,
-    "category": ICategory[]
-    "icon": string,
-    "price": string,
-    "amount": string,
-    "sales": string,
-    "sex": string,
-    "purchase_interval": string,
-    "available": string,
-    "level": string,
-    "quality": string,
-    "server": IServers,
-    "modules": IModule[]
+    id: 1
+    name: string
+    description: string
+    category: ICategory[]
+    icon: string
+    price: string
+    amount: string
+    sales: string
+    sex: string
+    purchase_interval: string
+    available: string
+    level: string
+    quality: string
+    server: IServer
+    modules: IModule[]
     damage: null
+    price_without_sales: string
     durability: any
     food: any
     health: any
@@ -184,9 +207,10 @@ export interface IProductSingle {
 }
 
 export interface IUserDiscount {
-    description: null | string,
-    discount: number,
-    id: number,
-    user: string,
+    description: null | string
+    discount: number
+    id: number
+    user: string
     user_id: number
+    server: IServer
 }

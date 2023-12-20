@@ -38,6 +38,7 @@ export const useSteamLogin = () => {
         } else if (getCookies('access_token')) {
             axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
             axios.get(apiLink(`api/users/auth-user`)).then(({data}) => {
+                console.log(data.data)
                 dispatch(setUser(data.data))
             }).catch(er => {console.log('erLogs', er)})
         }

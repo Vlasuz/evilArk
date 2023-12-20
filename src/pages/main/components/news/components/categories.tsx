@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import {INews, IServers} from "../../../../../models";
+import {INews, IServer} from "../../../../../models";
 import {useSelector} from "react-redux";
 import getCookies from "../../../../../functions/getCookie";
 import {setCategory} from "../../../../../redux/toolkitSlice";
 
 interface ICategoriesProps {
     setServer: any
-    server?: IServers
+    server?: IServer
     setIsStartCat: any
     isStartCat: boolean
 }
 
 export const Categories:React.FC<ICategoriesProps> = ({setServer, server, setIsStartCat, isStartCat}) => {
 
-    const servers: IServers[] = useSelector((state: any) => state.toolkit.servers)
+    const servers: IServer[] = useSelector((state: any) => state.toolkit.servers)
     const news: INews[] = useSelector((state: any) => state.toolkit.news)
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export const Categories:React.FC<ICategoriesProps> = ({setServer, server, setIsS
                 </div>
             </div>
             {
-                servers.map((item: IServers) => news?.some(item2 => item2.server.id === item?.id) &&
+                servers.map((item: IServer) => news?.some(item2 => item2.server?.id === item?.id) &&
                     <div key={item?.id} onClick={_ => {
                         setServer(item)
                         setIsStartCat(false)

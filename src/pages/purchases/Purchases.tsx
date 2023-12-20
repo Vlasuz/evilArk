@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import {Footer} from '../../components/footer/footer'
+import {Footer} from '../../components/footer/Footer'
 import {ProfileSidebar} from "../../components/profileSidebar/ProfileSidebar";
-import {Product} from "../../components/product/products";
+import {Product} from "../../components/product/Products";
 import {HistoryRouletteItem} from "../../components/historyRouletteItem/historyRouletteItem";
 import {Grid, Pagination} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
 import {Translate} from "../../components/translate/Translate";
+import {IServer} from "../../models";
+import {useSelector} from "react-redux";
+import {PurchasesStyled} from "./Purchases.styled";
 
 interface IPurchasesProps {
 
@@ -18,6 +21,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
     const [isLoad, setIsLoad] = useState(false)
     const [historyPurchases, setHistoryPurchases] = useState([])
     const [historyRoulette, setHistoryRoulette] = useState([])
+    const category: IServer = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
         axios.get(apiLink("api/users/history")).then(({data}) => {
@@ -43,7 +47,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
     }, [isLoad])
 
     return (
-        <main className="purchases">
+        <PurchasesStyled className="purchases">
             <section className="purchases__main">
                 <div className="purchases__container container">
                     <div className="purchases__body">
@@ -54,13 +58,15 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                             <div className="inner__row">
                                 <ProfileSidebar/>
                                 <div className="inner__content content-inner">
-                                    {historyPurchases.length && <div className="content-inner__body">
+                                    <div className="content-inner__body">
                                         <div className="replenishment-bonuses__title">
                                             <Translate>purchase_history</Translate>
                                         </div>
                                         <div className="purchases__items">
 
-                                            {isLoad && <Swiper
+                                            {!historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <p>Ничего нет!</p>}
+
+                                            {isLoad && historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <Swiper
                                                 slidesPerView={6}
                                                 spaceBetween={37}
                                                 slidesPerGroup={6}
@@ -99,7 +105,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                             >
 
                                                 {
-                                                    historyPurchases.map((item, index) =>
+                                                    historyPurchases.filter((item: any) => item?.server?.id === category?.id).map((item, index) =>
                                                         <SwiperSlide key={index}>
                                                             <Product product={item} isCanGet={false}/>
                                                         </SwiperSlide>
@@ -109,9 +115,9 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                             </Swiper>}
 
                                         </div>
-                                    </div>}
+                                    </div>
 
-                                    {!isHidePagination && <div className="purchases-slider__navigation">
+                                    {!isHidePagination && historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <div className="purchases-slider__navigation">
                                         <div className="purchases-slider__btn purchases-slider__btn_prev"/>
                                         <div className="purchases-slider__pagination"/>
                                         <div className="purchases-slider__btn purchases-slider__btn_next"/>
@@ -159,6 +165,6 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                 </div>
             </section>
             <Footer/>
-        </main>
+        </PurchasesStyled>
     )
 }

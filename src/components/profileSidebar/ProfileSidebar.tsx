@@ -61,7 +61,7 @@ export const ProfileSidebar: React.FC<IProfileSidebarProps> = () => {
                                 <NavLink to={item.link} className="menu-inner__link link-menu-inner">
                                     <span className="link-menu-inner__image link-menu-inner__image_bonuses">
                                         <svg className="delivery__arrow">
-                                            <use xlinkHref={item.icon}/>
+                                            <use xlinkHref={item?.icon}/>
                                         </svg>
                                     </span>
                                     <span className="link-menu-inner__text">

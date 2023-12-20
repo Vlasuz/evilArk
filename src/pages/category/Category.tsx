@@ -1,11 +1,11 @@
 import React, {useEffect, useRef} from 'react'
-import {Footer} from "../../components/footer/footer";
+import {Footer} from "../../components/footer/Footer";
 import {useImages} from "../../hooks/images";
 import {useDispatch, useSelector} from "react-redux";
 import {setCategory} from "../../redux/toolkitSlice";
 import {Breadcrumbs} from "../../components/breadcrumbs/breadcrumbs";
 import {useLocation, useNavigate} from "react-router-dom";
-import {IServers} from "../../models";
+import {IServer} from "../../models";
 
 interface ICategoryProps {
 
@@ -17,7 +17,7 @@ export const Category: React.FC<ICategoryProps> = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const servers: IServers[] = useSelector((state: any) => state.toolkit.servers)
+    const servers: IServer[] = useSelector((state: any) => state.toolkit.servers)
     const nextPage = useSelector((state: any) => state.toolkit.page)
 
     const handleChoose = (e: React.MouseEvent<HTMLAnchorElement>, category: string | number) => {

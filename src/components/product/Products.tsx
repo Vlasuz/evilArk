@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {IProduct} from "../../models";
+import {IProduct, IServer} from "../../models";
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
 import getCookies from "../../functions/getCookie";
@@ -8,6 +8,7 @@ import {notifications} from "../../hooks/notifications";
 import {Translate} from "../translate/Translate";
 import { Blocks } from 'react-loader-spinner'
 import {InventoryStyled} from "../../pages/inventory/Inventory.styled";
+import { useSelector } from 'react-redux';
 
 interface IProductProps {
     isCanGet: boolean
@@ -18,12 +19,15 @@ interface IProductProps {
 export const Product: React.FC<IProductProps> = ({isCanGet, product, setInventory}) => {
 
     const [isLoadingToGive, setIsLoadingToGive] = useState(false)
+    const category: IServer = useSelector((state: any) => state.toolkit.category)
 
     const handleGetInGame = () => {
         setIsLoadingToGive(true)
 
         axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
-        axios.post(apiLink("api/products/get-in-game/" + product.id)).then(({data}) => {
+        axios.post(apiLink("api/products/get-in-game/" + product.id), {
+            "server_id": category.id
+        }).then(({data}) => {
 
             setIsLoadingToGive(false)
             if(!data.data.success) {
@@ -42,7 +46,7 @@ export const Product: React.FC<IProductProps> = ({isCanGet, product, setInventor
     }
 
     return (
-        <InventoryStyled className="purchases__column">
+        <div className="purchases__column">
             <div className="purchases__item item-purchases">
                 <div className="item-purchases__image-block">
                     <div className="item-purchases__image">
@@ -77,6 +81,6 @@ export const Product: React.FC<IProductProps> = ({isCanGet, product, setInventor
                     <Translate>get_in_game_title</Translate>
                 </button>}
             </div>
-        </InventoryStyled>
+        </div>
     )
 }

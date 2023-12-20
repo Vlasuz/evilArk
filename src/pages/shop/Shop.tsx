@@ -1,11 +1,11 @@
 import React, {createContext, useEffect, useState} from 'react'
-import {Footer} from "../../components/footer/footer";
+import {Footer} from "../../components/footer/Footer";
 import {ShopTop} from "./components/shopTop";
 import {ShopAccount} from "./components/shopAccount";
 import {ShopFilter} from "./components/shopFilter";
 import {ShopItem} from "./components/shopItem";
 import {ShopItemMore} from "./components/shopItemMore";
-import {ICategory, IFilterShop, IProduct} from "../../models";
+import {ICategory, IFilterShop, IProduct, IUser} from "../../models";
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -31,18 +31,20 @@ export const Shop: React.FC<IShopProps> = () => {
     })
 
     const [activeProduct, setActiveProduct] = useState('')
-    const userInfo = useSelector((state: any) => state.toolkit.user)
     const [shop, setShop] = useState<IProduct[]>([])
-    const category: ICategory = useSelector((state: any) => state.toolkit.category)
     const [isLoading, setIsLoading] = useState(true)
     const [pagination, setPagination] = useState<any>([])
+
+    const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
+    const category: ICategory = useSelector((state: any) => state.toolkit.category)
+    const language = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
         asyncLoading("")
     }, [category, filter])
 
     const asyncLoading = (url?: string) => {
-        const axiosUrl = url ? url : apiLink('api/products')
+        const axiosUrl = url ? url : apiLink(`api/products?user_id=${userInfo.id ?? ""}&language=${language}`)
 
         setIsLoading(true)
         axios.post(axiosUrl, {
@@ -58,6 +60,10 @@ export const Shop: React.FC<IShopProps> = () => {
     useEffect(() => {
         setIsLoading(true)
     }, [category])
+
+    useEffect(() => {
+        asyncLoading()
+    }, [language])
 
     return (
         <isOpenPopupContext.Provider value={setActiveProduct}>

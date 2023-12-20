@@ -31,7 +31,7 @@ export const HistoryDonateItem:React.FC<IHistoryDonateItemProps> = ({data}) => {
                     </div>
                     <div
                         className="amount-item-history-profile__value">
-                        {data.amount.real} {currencyList.filter((item: any) => item.currency === data.currency)[0].icon}
+                        {data?.amount?.real} {currencyList?.filter((item: any) => item?.currency === data?.currency)[0]?.icon}
                     </div>
                 </div>
             </div>

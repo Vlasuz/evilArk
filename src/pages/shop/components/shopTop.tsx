@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useImages} from "../../../hooks/images";
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {IServers, IUser, IUserDiscount} from "../../../models";
+import {IServer, IUser, IUserDiscount} from "../../../models";
 import {useSteamLogin} from "../../../hooks/steamLogin";
 import axios from "axios";
 import getCookies from "../../../functions/getCookie";
@@ -22,7 +22,7 @@ export const ShopTop: React.FC<IShopTopProps> = () => {
 
     const [discount, setDiscount] = useState<IUserDiscount | undefined>()
 
-    const category: IServers = useSelector((state: any) => state.toolkit.category)
+    const category: IServer = useSelector((state: any) => state.toolkit.category)
 
     useEffect(() => {
         if(!Object.keys(userInfo).length) return;

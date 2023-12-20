@@ -25,19 +25,22 @@ export const Contacts:React.FC<IContactsProps> = () => {
         }).catch(er => console.log(er))
     }, [lang])
 
+    const isHaveTextContent = contactInfo?.title && contactInfo?.text
+
     return (
         <section className="contacto" data-aos="fade" data-aos-duration="750" data-aos-offset="200" id="contacts">
             <div className="contacto__container container">
                 <div className="contacto__body">
                     <div className="contacto__row">
-                        <div className="contacto__content">
+                        {isHaveTextContent && <div className="contacto__content">
                             <h3 className="contacto__title title-h3">
                                 {ReactHtmlParser(contactInfo?.title ?? "")}
                             </h3>
                             <div className="contacto__subtitle">
                                 {ReactHtmlParser(contactInfo?.text ?? "")}
                             </div>
-                        </div>
+                        </div>}
+                        
                         <div className="contacto__btns">
                             {generalInfo?.email_url && <a href={"mailto:" + generalInfo?.email_url}
                                 className="contacto__btn btn btn_big btn_white">
