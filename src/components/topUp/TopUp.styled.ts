@@ -164,6 +164,8 @@ export const TopUpStyled = styled.div`
     display: flex;
     align-items: center;
     color: #000;
+    flex-wrap: wrap;
+    justify-content: center;
     p {
       margin-left: 10px;
     }

@@ -1,17 +1,27 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {IModule} from "../../../models";
+import {IModule, IProduct} from "../../../models";
 import { ProductModule } from './shopItemMore';
 import {Translate} from "../../../components/translate/Translate";
 
 interface IShopItemMoreSelectProps {
-    modules?: IModule[]
+    modules?: IProduct[]
+    setProduct: any
 }
 
-export const ShopItemMoreSelect: React.FC<IShopItemMoreSelectProps> = ({modules}) => {
+export const ShopItemMoreSelect: React.FC<IShopItemMoreSelectProps> = ({modules, setProduct}) => {
 
     const setModule: any = useContext(ProductModule)
     const [isOpen, setIsOpen] = useState(false)
-    const [moduleActive, setModuleActive] = useState<IModule | undefined>(modules && modules[0])
+    const [moduleActive, setModuleActive] = useState<IProduct | undefined>(modules && modules[0])
+
+    console.log(modules)
+
+    const handleChooseModule = (item: IProduct) => {
+        setIsOpen(false)
+        setModuleActive(item)
+        setModule(item.id)
+        setProduct(item)
+    }
 
     return (
         <div className="characteristics-select-product__item characteristics-select-product__item_select-product">
@@ -26,11 +36,7 @@ export const ShopItemMoreSelect: React.FC<IShopItemMoreSelectProps> = ({modules}
 
                     {
                         modules?.map(item =>
-                            <li key={item.id} onClick={_ => {
-                                setIsOpen(false)
-                                setModuleActive(item)
-                                setModule(item.id)
-                            }} className="dropdown__list-item"
+                            <li key={item.id} onClick={_ => handleChooseModule(item)} className="dropdown__list-item"
                                 data-dropdown="module 2 - 125 lvl">
                                 {item.name}
                             </li>

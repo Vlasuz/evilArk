@@ -24,7 +24,7 @@ export const Calculator: React.FC<ICalculatorProps> = () => {
                 <Translate>balance_replenishment</Translate>
             </div>
             <div className="replenishment-bonuses__text">
-                Калькулятор
+                <Translate>calculator</Translate>
             </div>
             <CalculatorForm/>
             <button onClick={handleOpenPopup} type="submit" className="replenishment-bonuses__btn top-up-btn">

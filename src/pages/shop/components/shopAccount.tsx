@@ -11,7 +11,7 @@ interface IShopAccountProps {
 
 export const ShopAccount:React.FC<IShopAccountProps> = ({userInfo}) => {
     const {wallet, gift} = useImages()
-    const userBalance = useUserBalance()
+    const {bonusBalance, balance} = useUserBalance()
 
     return (
         <div className="categories__info-panel info-panel-categories">
@@ -33,7 +33,14 @@ export const ShopAccount:React.FC<IShopAccountProps> = ({userInfo}) => {
                         <div className="balance-now-info-panel-categories__text">
                             <Translate>balance</Translate>
                         </div>
-                        <div className="balance-now-info-panel-categories__value">{userBalance} EC</div>
+                        <div className="balance-now-info-panel-categories__value">{balance} EC</div>
+                    </div>
+                    <div
+                        className="balance-info-panel-categories__balance-now balance-now-info-panel-categories">
+                        <div className="balance-now-info-panel-categories__text">
+                            <Translate>balance_bonus</Translate>
+                        </div>
+                        <div className="balance-now-info-panel-categories__value">{bonusBalance} EC</div>
                     </div>
                     <NavLink to={"/profile"}
                        className="balance-info-panel-categories__top-up top-up-info-panel-categories">

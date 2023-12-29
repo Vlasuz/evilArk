@@ -70,13 +70,13 @@ export const Footer: React.FC<IFooterProps> = () => {
                         </div>
                     </div>
                     <div className="links">
-                        <NavLink to={"/docs/privacy_policy"}>
+                        <NavLink to={"/docs/privacy-policy"}>
                             Privacy policy
                         </NavLink>
-                        <NavLink to={"/docs/public_offer"}>
+                        <NavLink to={"/docs/public-offer"}>
                             Public offer
                         </NavLink>
-                        <NavLink to={"/docs/return_policy"}>
+                        <NavLink to={"/docs/return-policy"}>
                             Return policy
                         </NavLink>
                     </div>

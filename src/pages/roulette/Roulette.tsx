@@ -108,7 +108,8 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     useEffect(() => {
         axios.get(apiLink("api/roulettes?server_id=" + category.id)).then(({data}) => {
             setRoulettesCases(data.data)
-            setActiveCase(data.data[0])
+            // setActiveCase(data.data[0])
+            console.log(data.data)
         }).catch(er => console.log(er))
     }, [category])
 
@@ -154,8 +155,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                     <div className="select-category__item item-select-category">
                                                         <div className="item-select-category__image-block">
                                                             <div className="item-select-category__image">
-                                                                <img
-                                                                    src={item.image.length ? item.image : placeholder}/>
+                                                                <img src={item.image.length ? item.image : placeholder}/>
                                                             </div>
                                                             <div className="item-select-category__label">
                                                                 {item.name}
@@ -177,13 +177,20 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                     roulettesCases.map((item: any) =>
                                                         <div key={item.id} onClick={_ => handleSelectCase(item)}
                                                              className={"categories-filter-roulette__item"}>
-                                                            <div
-                                                                className={"categories-filter-roulette__link categories-filter-roulette__link_blue" + (activeCase.id === item.id ? " active" : "")}>
-                                                                {item.name}
+                                                            <div className={"categories-filter-roulette__link categories-filter-roulette__link_blue" + (activeCase.id === item.id ? " active" : "")}>
+                                                                <div className="item__image">
+                                                                    <img src={item.image} alt=""/>
+                                                                </div>
+                                                                <p>
+                                                                    {item.name}
+                                                                    <br/>
+                                                                    <br/>
+                                                                    <b>{item.cost} EC</b>
+                                                                </p>
 
-                                                                <button onClick={_ => setIsActive(true)}>
-                                                                    i
-                                                                </button>
+                                                                {/*<button onClick={_ => setIsActive(true)}>*/}
+                                                                {/*    i*/}
+                                                                {/*</button>*/}
                                                             </div>
                                                         </div>
                                                     )
@@ -193,15 +200,15 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                         </div>
                                         {!!itemsForRoll.length &&
                                             <div className="filter-roulette__games games-filter-roulette">
-                                                <div
-                                                    className="games-filter-roulette__title title-games-filter-roulette">
-                                                    <div className="title-games-filter-roulette__icon">
-                                                        <img src={profit} alt="profit"/>
-                                                    </div>
-                                                    <div className="title-games-filter-roulette__text">
-                                                        <Translate>game_cost_title</Translate> {activeCase?.cost} ec
-                                                    </div>
-                                                </div>
+                                                {/*<div*/}
+                                                {/*    className="games-filter-roulette__title title-games-filter-roulette">*/}
+                                                {/*    <div className="title-games-filter-roulette__icon">*/}
+                                                {/*        <img src={profit} alt="profit"/>*/}
+                                                {/*    </div>*/}
+                                                {/*    <div className="title-games-filter-roulette__text">*/}
+                                                {/*        <Translate>game_cost_title</Translate> {activeCase?.cost} ec*/}
+                                                {/*    </div>*/}
+                                                {/*</div>*/}
                                                 <div className="games-filter-roulette__slider">
 
                                                     <div className="games-filter-roulette__items">
@@ -238,10 +245,38 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                     <button onClick={handleStartRoulette}
                                                             className="filter-roulette__btn btn btn_small">
                                                         <Translate>play_title</Translate>
+                                                        <br/>
+                                                        {activeCase?.cost} EC
                                                     </button>
                                                 </div>
                                             </div>}
                                     </div>
+
+                                    {activeCase?.products && <div className="filter-roulette__games games-filter-roulette">
+                                        <div className="games-filter-roulette__slider games-filter-roulette__slider_in">
+                                            <div className="games-filter-roulette__title title-games-filter-roulette">
+                                                <div className="title-games-filter-roulette__text">
+                                                    Предметы из кейса:
+                                                </div>
+                                            </div>
+                                            <div className="games-filter-roulette__items_in">
+
+                                                {
+                                                    activeCase?.products?.map((item: IProduct, index: number) =>
+                                                        <RouletteItem
+                                                            key={index}
+                                                            isStart={index === 0 ? isStartRoulette : null}
+                                                            data={{
+                                                                name: index !== 35 ? item?.name : winnerItem?.name,
+                                                                image: index !== 35 ? item?.icon : winnerItem?.icon,
+                                                                isWinner: index === 35
+                                                            }}/>)
+                                                }
+
+                                            </div>
+
+                                        </div>
+                                    </div>}
 
                                     <div className="roulette__users users">
 

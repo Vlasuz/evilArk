@@ -34,11 +34,10 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
         const hoursLeft = Math.floor((difference / (1000 * 60 * 60)) % 24);
         const minutesLeft = Math.floor((difference / 1000 / 60) % 60);
 
-        return { daysLeft, hoursLeft, minutesLeft };
+        return {daysLeft, hoursLeft, minutesLeft};
     };
 
-    const { daysLeft, hoursLeft, minutesLeft } = getTimeLeftUTC(timeToSale);
-
+    const {daysLeft, hoursLeft, minutesLeft} = getTimeLeftUTC(timeToSale);
 
 
     const isTimerExpired = (endTime: string) => {
@@ -60,7 +59,7 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
                         {data.name}
                     </span>
                 <span className="item-cards-categories__image">
-                        <LazyLoadImage src={data.icon} alt="PvP Simple Kit"/>
+                        <LazyLoadImage src={!!data.icon ? data.icon : data.module[0].products[0].icon} alt="PvP Simple Kit"/>
                     </span>
                 <div className="item-cards-categories__bottom bottom-item-cards-categories">
                     <div className="bottom-item-cards-categories__row">
@@ -77,9 +76,17 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
                         </div>
                         <div className="bottom-item-cards-categories__price">
 
-                            {data?.price_without_sales !== data.price && <div
-                                className="bottom-item-cards-categories__price_old">{data?.price_without_sales} EC</div>}
-                            <div className="bottom-item-cards-categories__price_now">{data.price} EC</div>
+                            {data?.module?.length ? <div
+                                    className="bottom-item-cards-categories__price_now">From {data?.module[0]?.products[0].price} EC</div>
+                                :
+                                <>
+                                    {data?.price_without_sales && data?.price_without_sales !== data.price && <div
+                                        className="bottom-item-cards-categories__price_old">{data?.price_without_sales} EC</div>}
+                                    <div
+                                        className="bottom-item-cards-categories__price_now">{data.price} {data.is_price_bonus && "Bonus"} EC
+                                    </div>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>

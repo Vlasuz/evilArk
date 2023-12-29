@@ -25,7 +25,7 @@ export const HistoryDonate: React.FC<IHistoryDonateProps> = ({data}) => {
                 <Translate>donates_history</Translate>
             </div>
 
-            {!data.length && <p>Тут ничего нет!</p>}
+            {!data.length && <p><Translate>not_found</Translate></p>}
 
             {!!data.length && isLoad && <Swiper
                 slidesPerView={1}

@@ -35,7 +35,7 @@ export const Header: React.FC<IHeaderProps> = () => {
     const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false)
     const [categories, setCategories] = useState<IServer[]>([])
     const [isOpenSelectClusters, setIsOpenSelectClusters] = useState(false)
-    const userBalance = useUserBalance()
+    const {bonusBalance, balance} = useUserBalance()
 
     const dispatch = useDispatch()
 
@@ -97,7 +97,7 @@ export const Header: React.FC<IHeaderProps> = () => {
                             </NavLink>
                             <div className="top-up-balance-header__message">Top up your account</div>
                         </div>
-                        <div className="balance-header__value">{userBalance} EC</div>
+                        <div className="balance-header__value">{balance} EC</div>
                     </div>}
                 </div>
                 <div className="mobile-header__body">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {useImages} from "../../../../hooks/images";
 import {ServersItem} from "./components/serversItem";
 import axios from "axios";
@@ -6,6 +6,7 @@ import {apiLink} from "../../../../hooks/apiLink";
 import {IServer} from "../../../../models";
 import {useSelector} from "react-redux";
 import ReactHtmlParser from "html-react-parser";
+import {isOpenPopupContext} from "../../Main";
 
 interface IServersProps {
 
@@ -25,6 +26,19 @@ export const Servers:React.FC<IServersProps> = () => {
     useEffect(() => {
         axios.get(apiLink('api/home/servers?language='+lang)).then(({data}) => setServersText(data.data))
     }, [lang])
+
+    const isOpenPopup: any = useContext(isOpenPopupContext)
+
+    const handleReadNews = (id: string | number) => {
+        axios.get(apiLink(`api/servers/${id}`)).then(({data}) => {
+            console.log(data)
+
+            isOpenPopup({
+                isOpen: true,
+                news: data.data
+            })
+        })
+    }
 
     return (
         <section id={"servers"} className="servidores" data-aos="fade" data-aos-duration="750" data-aos-offset="200">
@@ -47,7 +61,7 @@ export const Servers:React.FC<IServersProps> = () => {
                     <div className="servidores__row">
 
                         {
-                            servers?.map((server: IServer) => <ServersItem key={server.id} data={server} />)
+                            servers?.map((server: IServer) => <ServersItem handleReadNews={handleReadNews} key={server.id} data={server} />)
                         }
 
                     </div>

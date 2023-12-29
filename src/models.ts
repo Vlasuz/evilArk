@@ -55,6 +55,7 @@ export interface IBalance {
     balance: number
     id: number | string
     server: IServer
+    balance_bonus: number
 }
 
 export interface IFilterShop {
@@ -73,6 +74,9 @@ export interface INews {
     created_at: string
     server: IServer
     tags: INewsTag[]
+    cluster_settings_en?: string
+    cluster_settings_ru?: string
+    cluster_settings_ua?: string
 }
 
 export interface INewsTag {
@@ -153,10 +157,13 @@ export interface IModule {
 export interface IProduct {
     id: string | number
     name: string
+    module: IModule[]
     description: string
+    is_price_bonus: boolean
     category: ICategory[]
     icon: string
     price: string
+    size: number
     price_without_sales: string
     amount: number
     sales: number
@@ -178,6 +185,7 @@ export interface IProductSingle {
     category: ICategory[]
     icon: string
     price: string
+    is_price_bonus: boolean
     amount: string
     sales: string
     sex: string
@@ -186,7 +194,7 @@ export interface IProductSingle {
     level: string
     quality: string
     server: IServer
-    modules: IModule[]
+    module: IModule[]
     damage: null
     price_without_sales: string
     durability: any
@@ -204,6 +212,9 @@ export interface IProductSingle {
     name_ua: string
     description_en: string
     description_ua: string
+    is_proposal: boolean
+    is_module: boolean
+    proposal: IProduct[]
 }
 
 export interface IUserDiscount {
@@ -213,4 +224,22 @@ export interface IUserDiscount {
     user: string
     user_id: number
     server: IServer
+}
+
+export interface IPromoCode {
+    id: number | string
+    referral: string
+    server: IServer
+    type: string
+    user: IUser
+}
+
+export interface IPromoStatistic {
+    avatar: string
+    id: string | number
+    name: string
+    profile_url: string
+    real_name: string
+    referrals: IPromoCode
+    steam_id: number
 }

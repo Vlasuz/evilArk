@@ -2,7 +2,7 @@
   "website_development": "Разработка сайтов",
   "text_home": "Главная",
   "text_shop": "Магазин",
-  "text_roulette": "Колесо Рилай",
+  "text_roulette": "Кейсы",
   "menu_servers": "Серверы",
   "menu_contacts": "Контакты",
   "menu_faq": "Faq",
@@ -34,6 +34,7 @@
   "payment_amount": "Сумма пополнения:",
   "level": "Уровень:",
   "balance": "Баланс:",
+  "balance_bonus": "Бонус баланс:",
   "donates_history": "История пожертвований",
   "purchase_history": "История покупок в магазине",
   "roulette_history": "История выигрышей в колесо Рилай",
@@ -68,5 +69,31 @@
   "filter_by_name_placeholder": "Фильтр по имени",
   "are_you_sure_to_buy": "Вы подтверждаете покупку?",
   "yes": "Да",
-  "no": "Нет"
+  "no": "Нет",
+
+  "read_the_news": "Прочитать новость",
+  "connect_asa": "Привязать аккаунт ASA",
+  "calculator": "Калькулятор",
+  "not_found": "Ничего не найдено",
+
+  "promo_codes": "Промокоды",
+  "promo_code": "Промокод",
+  "your_promo_code": "Ваш промокод:",
+  "enter_promo_code": "Ввести промокод:",
+  "active_promo_code": "Активировать промокод",
+
+  "success_copy_promo": "Вы успешно скопировали промокод",
+  "you_dont_input_promo": "Вы не ввели промокод",
+  "you_cannot_enter_your_promo": "Нельзя применить свой же промокод!",
+  "promo_not_found": "Промокод не найден",
+  "promo_code_successfully_active": "Промокод успешно активирован!",
+  "error_500": "Неизвестная ошибка - 500",
+  "cases_products": "Продукты в кейсе",
+  "close_instruction": "Скрыть инструкцию",
+  "open_instruction": "Открыть инструкцию",
+  "next_discount": "До следующей скидки осталось:",
+  "status": "Статус",
+  "payment": "Пополнение",
+
+  "products_case": "Предметы из кейса:"
 }

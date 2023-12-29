@@ -11,6 +11,7 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 import {apiLink} from "../../hooks/apiLink";
 import {useSelector} from "react-redux";
+import HTMLReactParser from "html-react-parser";
 
 interface ITextProps {
 
@@ -34,9 +35,9 @@ export const Text: React.FC<ITextProps> = () => {
     const [doc, setDoc] = useState<IDoc | undefined>()
 
     useEffect(() => {
-        axios.get(apiLink(`/api/home/${docsId}`)).then(({data}) => {
+        axios.get(apiLink(`api/home/${docsId}`)).then(({data}) => {
             setDoc(data.data)
-        }).catch(er => console.log(apiLink("/api/home/privacy-policy"), er))
+        }).catch(er => console.log(apiLink(`api/home/${docsId}`), er))
     }, [])
 
     const docTitle: any = {
@@ -65,7 +66,7 @@ export const Text: React.FC<ITextProps> = () => {
                         <div className="categories__inner">
                             <p>
                                 {
-                                    docText[language]
+                                    HTMLReactParser(docText[language] ?? "")
                                 }
                             </p>
                         </div>

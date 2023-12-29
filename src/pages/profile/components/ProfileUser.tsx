@@ -13,6 +13,7 @@ import {useUserBalance} from "../../../hooks/userBalance";
 import {ProfileStyled} from "../Profile.styled";
 import { Popup } from '../../../components/popup/Popup';
 import {PopupContext, topUpContext} from "../../../context/topUpContext";
+import {ProfilePromo} from "./ProfilePromo";
 
 interface IProfileUserProps {
 
@@ -22,7 +23,7 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
 
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
     const category: IServer = useSelector((state: any) => state.toolkit.category)
-    const userBalance = useUserBalance()
+    const {bonusBalance, balance} = useUserBalance()
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -69,7 +70,7 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                         </button>
                     </div>
                     <button onClick={_ => isPopupOpen(true)} className={"replenishment-bonuses__btn connect-to-asa"}>
-                        Привязать аккаунт ASA
+                        <Translate>connect_asa</Translate>
                     </button>
                     <div className="profile__info info-profile">
                         <div className="info-profile__id" data-da="user-profile__body, 2, 600">
@@ -83,7 +84,15 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                                 <Translate>balance</Translate>
                             </div>
                             <div className="balance-info-profile__value">
-                                {userBalance} EC
+                                {balance} EC
+                            </div>
+                        </div>
+                        <div className="info-profile__balance balance-info-profile">
+                            <div className="balance-info-profile__text">
+                                <Translate>balance_bonus</Translate>
+                            </div>
+                            <div className="balance-info-profile__value">
+                                {bonusBalance} EC
                             </div>
                         </div>
                         <button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>
@@ -92,7 +101,10 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                     </div>
                 </div>
 
-                <Calculator/>
+                <div className="profile__promo">
+                    <Calculator/>
+                    <ProfilePromo/>
+                </div>
                 <HistoryDonate data={donateHistory.filter((item: any) => item.server.id === category.id)}/>
             </div>
         </ProfileStyled>

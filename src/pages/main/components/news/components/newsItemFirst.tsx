@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import ReactHtmlParser from "html-react-parser";
 import {useImages} from "../../../../../hooks/images";
 import {INews} from "../../../../../models";
+import {Translate} from "../../../../../components/translate/Translate";
 
 interface INewsItemFirstProps {
     handleReadNews: any,
@@ -26,7 +27,9 @@ export const NewsItemFirst:React.FC<INewsItemFirstProps> = ({data, handleReadNew
                             ReactHtmlParser(data?.text ?? '')
                         }
                     </div>
-                    <button onClick={handleReadNews} className="today-news__btn news-open-btn">Read the news</button>
+                    <button onClick={handleReadNews} className="today-news__btn news-open-btn">
+                        <Translate>read_the_news</Translate>
+                    </button>
                 </div>
                 <div className="today-news__date date-today-news">
                     <div className="date-today-news__icon">

@@ -56,7 +56,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                     <div className="content-inner__body">
                                         <div className="purchases__items">
                                             {!inventory.filter(item => item?.server?.id === category?.id).length && isLoad &&
-                                                <p>Ничего нет!</p>}
+                                                <p><Translate>not_found</Translate></p>}
 
 
                                             {isLoad && <Swiper

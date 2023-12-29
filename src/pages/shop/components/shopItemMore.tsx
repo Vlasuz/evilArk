@@ -24,6 +24,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     const {arrowWhite} = useImages()
 
     const [product, setProduct] = useState<IProductSingle>()
+    const [chosenProduct, setChosenProduct] = useState<IProductSingle | undefined>()
     const [count, setCount] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
@@ -31,16 +32,23 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
     const [isWantToBuy, setIsWantToBuy] = useState(false)
     const [isShowDescription, setIsShowDescription] = useState(false)
 
+    const [chosenProposalProducts, setChosenProposalProducts] = useState<IProduct[]>([])
+
     const dispatch = useDispatch()
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
     const category: ICategory = useSelector((state: any) => state.toolkit.category)
     const language = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
-        isActive && axios.get(apiLink(`api/products/${isActive}?user_id=${userInfo.id ?? ""}`)).then(({data}) => {
+        isActive && axios.get(apiLink(`api/products/${isActive}?user_id=${userInfo.id ?? ""}&language=${language}`)).then(({data}) => {
             setProduct(data.data)
-            setProductModule(data.data?.modules.length && data.data?.modules[0].id)
+            setProductModule(data.data?.module?.length && data.data?.module[0].id)
+
+            setChosenProduct(data.data?.module?.length && data.data?.module[0].products[0])
         })
+
+        setChosenProposalProducts([])
+
     }, [isActive])
 
     const isActivePopup: any = useContext(isOpenPopupContext)
@@ -55,11 +63,15 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
         setError('')
 
         axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
-        axios.post(apiLink('api/products/buy/' + product?.id), {
+        axios.post(apiLink(`api/products/buy`), {
             "server_id": category.id,
             "amount": count,
-            "module_id": productModule
+            "module_id": productModule,
+            "isModule": product?.is_module,
+            "ids": [chosenProduct?.id ?? product?.id, ...chosenProposalProducts.map(item => item.id)]
         }).then(({data}) => {
+
+            console.log(data)
 
             notifications(data.data.message)
 
@@ -67,12 +79,9 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
             setIsWantToBuy(false)
             if (!data.data.success) return;
 
-            // console.log({
-            //     balance: product?.price && +product?.price * count,
-            //     cluster: category.id
-            // })
             dispatch(changeUserBalance({
-                balance: product?.price && +product?.price * count,
+                balance: !product?.is_price_bonus && product?.price && (chosenProduct?.price ? +chosenProduct?.price * count : +product?.price * count),
+                balance_bonus: product?.is_price_bonus && product?.price && (chosenProduct?.price ? +chosenProduct?.price * count : +product?.price * count),
                 cluster: category.id
             }))
         }).catch(er => {
@@ -92,18 +101,28 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
         setIsShowDescription(false)
     }, [isActive])
 
+    console.log(product)
+
     const isAnyoneHave = !!product?.damage || !!product?.durability || !!product?.food || !!product?.health || !!product?.movement_speed || !!product?.neuter || !!product?.oxygen || !!product?.stamina || !!product?.torpidity || !!product?.weight || (!!product?.sex && product?.sex !== "product");
 
-    const productName: any = {
-        'ru': product?.name,
-        'en': product?.name_en,
-        'ua': product?.name_ua,
+    const [priceForPropose, setPriceForPropose] = useState(0)
+
+    const handleChooseProposalProduct = (prod: IProduct) => {
+        if (chosenProposalProducts.some(item => item.id === prod.id)) {
+            setChosenProposalProducts(prev => prev.filter(item => item.id !== prod.id))
+        } else {
+            setChosenProposalProducts((prev: any) => [...prev, prod])
+        }
+
     }
-    const productDescription: any = {
-        'ru': product?.description,
-        'en': product?.description_en,
-        'ua': product?.description_ua,
-    }
+
+    useEffect(() => {
+        const amount = chosenProposalProducts.reduce((sum, item) => {
+            return sum + +(item.price || 0);
+        }, 0)
+
+        setPriceForPropose(amount)
+    }, [chosenProposalProducts])
 
     return (
         <ProductModule.Provider value={setProductModule}>
@@ -114,29 +133,51 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                     </button>
                     <div className="select-product__form">
                         <h4 className="select-product__title title-h4">
-                            <Translate>selected_product</Translate>
+                            {/*<Translate>selected_product</Translate>*/}
+                            {chosenProduct?.name ?? product?.name}
                         </h4>
                         <div className="select-product__control-panel control-panel-select-product">
                         </div>
                         <div className="select-product__about-product">
-                            <div className="select-product__name">
-                                {
-                                    productName[language]
-                                }
-                            </div>
-                        <img width="250" height="250" src={product?.icon} alt=""/>
-                            <div className="select-product__description">
-                                {isShowDescription && ReactHtmlParser(productDescription[language] ?? "")}
-                                <button onClick={_ => setIsShowDescription(prev => !prev)} className={"show-more-description"}>
-                                    {isShowDescription ? "Скрыть инструкцию" : "Открыть инструкцию"}
-                                </button>
-                            </div>
+
+                            <img width="250" height="250" src={chosenProduct?.icon ?? product?.icon} alt=""/>
+                            {isAnyoneHave && <div className="select-product__parameters parameters-select-product">
+                                <div className="parameters-select-product__body">
+                                    {!!product?.damage && <ShopItemTableItem value={product?.damage} name={"damage"}/>}
+                                    {!!product?.durability &&
+                                        <ShopItemTableItem value={product?.durability} name={"durability"}/>}
+                                    {!!product?.food && <ShopItemTableItem value={product?.food} name={"food"}/>}
+                                    {!!product?.health && <ShopItemTableItem value={product?.health} name={"health"}/>}
+                                    {!!product?.movement_speed &&
+                                        <ShopItemTableItem value={product?.movement_speed} name={"movement speed"}/>}
+                                    {!!product?.neuter && <ShopItemTableItem value={product?.neuter} name={"neuter"}/>}
+                                    {!!product?.oxygen && <ShopItemTableItem value={product?.oxygen} name={"oxygen"}/>}
+                                    {!!product?.stamina &&
+                                        <ShopItemTableItem value={product?.stamina} name={"stamina"}/>}
+                                    {!!product?.torpidity &&
+                                        <ShopItemTableItem value={product?.torpidity} name={"torpidity"}/>}
+                                    {!!product?.weight && <ShopItemTableItem value={product?.weight} name={"weight"}/>}
+                                    {!!product?.sex && product?.sex !== "product" &&
+                                        <ShopItemTableItem value={product?.sex ?? ""} name={"sex"}/>}
+
+                                </div>
+                            </div>}
+
+                        </div>
+
+                        <div className="select-product__description">
+                            {isShowDescription && ReactHtmlParser(product?.description ?? "")}
+                            <button onClick={_ => setIsShowDescription(prev => !prev)}
+                                    className={"show-more-description"}>
+                                {isShowDescription ? <Translate>close_instruction</Translate> :
+                                    <Translate>open_instruction</Translate>}
+                            </button>
                         </div>
 
                         {!!product?.is_case && <div className="select-product__rare rare-select-product">
                             <div className="rare-select-product__options">
                                 <div className="rare-select-product__title">
-                                    Продукты в кейсе
+                                    <Translate>cases_products</Translate>
                                 </div>
 
                                 {
@@ -147,7 +188,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                                     <img src={item.icon} alt="organic"/>
                                                 </div>
                                                 <div className="label-rare-select-product__name">
-                                                    {item.name}
+                                                    {item.name} <b>x{item?.size}</b>
                                                 </div>
                                                 {/*<div className="label-rare-select-product__price">*/}
                                                 {/*    <span>{item.price} EC</span>*/}
@@ -163,32 +204,12 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                             </div>
                         </div>}
 
-                        {isAnyoneHave && <div className="select-product__parameters parameters-select-product">
-                            <div className="parameters-select-product__body">
-                                {!!product?.damage && <ShopItemTableItem value={product?.damage} name={"damage"}/>}
-                                {!!product?.durability &&
-                                    <ShopItemTableItem value={product?.durability} name={"durability"}/>}
-                                {!!product?.food && <ShopItemTableItem value={product?.food} name={"food"}/>}
-                                {!!product?.health && <ShopItemTableItem value={product?.health} name={"health"}/>}
-                                {!!product?.movement_speed &&
-                                    <ShopItemTableItem value={product?.movement_speed} name={"movement speed"}/>}
-                                {!!product?.neuter && <ShopItemTableItem value={product?.neuter} name={"neuter"}/>}
-                                {!!product?.oxygen && <ShopItemTableItem value={product?.oxygen} name={"oxygen"}/>}
-                                {!!product?.stamina && <ShopItemTableItem value={product?.stamina} name={"stamina"}/>}
-                                {!!product?.torpidity &&
-                                    <ShopItemTableItem value={product?.torpidity} name={"torpidity"}/>}
-                                {!!product?.weight && <ShopItemTableItem value={product?.weight} name={"weight"}/>}
-                                {!!product?.sex && product?.sex !== "product" &&
-                                    <ShopItemTableItem value={product?.sex ?? ""} name={"sex"}/>}
-
-                            </div>
-                        </div>}
-
                         <div
                             className="select-product__characteristics characteristics-select-product characteristics-select-product_no-authorization">
                             <div className="characteristics-select-product__row">
-                                {!!product?.modules.length && <div className="characteristics-select-product__column">
-                                    <ShopItemMoreSelect modules={product?.modules}/>
+                                {!!product?.module?.length && <div className="characteristics-select-product__column">
+                                    <ShopItemMoreSelect setProduct={setChosenProduct}
+                                                        modules={product?.module[0].products}/>
                                 </div>}
                                 <div
                                     className="characteristics-select-product__column characteristics-select-product__column_quatity">
@@ -218,41 +239,66 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
 
                                             {product?.price_without_sales !== product?.price && <div
                                                 className="bottom-item-cards-categories__price_old">{product?.price_without_sales && (+product?.price_without_sales * +count).toFixed(2)} EC</div>}
-                                            <div className="bottom-item-cards-categories__price_now">{product?.price && (+product?.price * +count).toFixed(2)} EC</div>
+                                            <div
+                                                className="bottom-item-cards-categories__price_now">{chosenProduct?.price ? chosenProduct?.price && (+chosenProduct?.price * +count).toFixed(2) : product?.price && (+product?.price * +count + priceForPropose).toFixed(2)} {product?.is_price_bonus && "Bonus"} EC
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div
+                                    className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
+                                    {isWantToBuy && <h3><Translate>are_you_sure_to_buy</Translate></h3>}
+                                    <div className="bottom-select-product__row">
+                                        {
+                                            !isWantToBuy && <button onClick={handleClickButtonBuy}
+                                                                    className={'bottom-select-product__btn'}>
+                                                <Translate>buy_title</Translate>
+                                            </button>
+                                        }
+
+                                        {
+                                            isWantToBuy && <div style={{display: "flex"}}>
+                                                <button onClick={handleBuy}
+                                                        className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
+                                                    <Translate>yes</Translate>
+                                                </button>
+                                                <button style={{background: "dimgrey", marginLeft: "15px"}}
+                                                        onClick={_ => setIsWantToBuy(false)}
+                                                        className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
+                                                    <Translate>no</Translate>
+                                                </button>
+                                            </div>
+                                        }
+
+                                        {
+                                            <p className={'error'}>{error}</p>
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div
-                            className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
-                            {isWantToBuy && <h3><Translate>are_you_sure_to_buy</Translate></h3>}
-                            <div className="bottom-select-product__row">
-                                {
-                                    !isWantToBuy && <button onClick={handleClickButtonBuy}
-                                                            className={'bottom-select-product__btn'}>
-                                        <Translate>buy_title</Translate>
-                                    </button>
-                                }
-
-                                {
-                                    isWantToBuy && <div style={{display: "flex"}}>
-                                        <button onClick={handleBuy}
-                                                className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
-                                            <Translate>yes</Translate>
-                                        </button>
-                                        <button style={{background: "dimgrey", marginLeft: "15px"}}
-                                                onClick={_ => setIsWantToBuy(false)}
-                                                className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
-                                            <Translate>no</Translate>
-                                        </button>
-                                    </div>
-                                }
-
-                                {
-                                    <p className={'error'}>{error}</p>
-                                }
+                        <div className="proposal">
+                            <div className="characteristics-select-product__label">
+                                Предложенные продукты
                             </div>
+                            <ul>
+
+                                {
+                                    product?.proposal.map(prop => {
+                                        return (
+                                            <li>
+                                                <input checked={chosenProposalProducts.some(item => item.id === prop.id)} type="checkbox" id={`${prop.id}`}
+                                                       onChange={_ => handleChooseProposalProduct(prop)}/>
+                                                <label htmlFor={`${prop.id}`}>
+                                                    <p>{prop.name}</p>
+                                                    <img src={prop.icon} alt=""/>
+                                                </label>
+                                            </li>
+                                        )
+                                    })
+                                }
+
+                            </ul>
                         </div>
                     </div>
                 </div>

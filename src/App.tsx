@@ -12,16 +12,16 @@ import {
     CSSTransition
 } from "react-transition-group";
 import {IRoutes, IUser} from "./models";
-import { Header } from './components/header/Header';
-import { donateInfo } from './api/donateInfo';
-import { routes } from './functions/routes';
+import {Header} from './components/header/Header';
+import {donateInfo} from './api/donateInfo';
+import {routes} from './functions/routes';
 import {generalInfo} from "./api/generalInfo";
 import {servers} from "./api/servers";
 import {PageNotFound} from "./pages/pageNotFound/pageNotFound";
 import {setCategory} from "./redux/toolkitSlice";
-import { toast, ToastContainer } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { TechnicalTime } from './pages/technicalTime/TechnicalTime';
+import {TechnicalTime} from './pages/technicalTime/TechnicalTime';
 import getCookies from "./functions/getCookie";
 import axios from "axios";
 import {apiLink} from "./hooks/apiLink";
@@ -43,7 +43,7 @@ function App() {
         generalInfo({dispatch})
         donateInfo({dispatch})
 
-        if(window.location.href.includes("?payment=true")) {
+        if (window.location.href.includes("?payment=true")) {
             toast.success('Оплата прошла успешно!')
             navigate('/')
         } else if (window.location.href.includes("?payment=false")) {
@@ -62,31 +62,46 @@ function App() {
         })
     }, [])
 
-    if(isTechnicalTime) return <TechnicalTime setIsTechnicalTime={setIsTechnicalTime}/>
+
+    const [font, setFont] = useState<string>("")
+    useEffect(() => {
+        axios.get(apiLink("api/tech-valid")).then(({data}) => {
+            console.log(data)
+            setFont(data.data.font)
+        })
+    }, [])
+
+
+
+    if (isTechnicalTime) return <TechnicalTime setIsTechnicalTime={setIsTechnicalTime}/>
 
     return (
-        <AppStyled className="wrapper">
-            <SvgIcons/>
+        <div className="wrapper" style={{fontFamily: font}}>
+            <AppStyled>
+                <SvgIcons/>
 
-            <Header/>
-            <Sidebar/>
+                <Header/>
+                <Sidebar/>
 
-            <TransitionGroup component={null}>
-                <CSSTransition key={location.pathname} classNames="fade" timeout={300}>
-                    <Routes location={location}>
+                <TransitionGroup component={null}>
+                    <CSSTransition key={location.pathname} classNames="fade" timeout={300}>
+                        <Routes location={location}>
 
-                        {
-                            routes.map((item: IRoutes) => <Route key={item.path} element={item.isPublic ? item.element : userInfo.id ? item.element : <PageNotFound/>} path={item.path} />)
-                        }
+                            {
+                                routes.map((item: IRoutes) => <Route key={item.path}
+                                                                     element={item.isPublic ? item.element : userInfo.id ? item.element :
+                                                                         <PageNotFound/>} path={item.path}/>)
+                            }
 
-                    </Routes>
+                        </Routes>
 
-                </CSSTransition>
-            </TransitionGroup>
+                    </CSSTransition>
+                </TransitionGroup>
 
-            <ToastContainer />
+                <ToastContainer/>
 
-        </AppStyled>
+            </AppStyled>
+        </div>
     );
 }
 

@@ -4707,8 +4707,9 @@ body.lock::before {
 }
 .cards-categories__column {
   padding: 0 8px;
-  flex: 0 1 20%;
+  flex: 0 1 19%;
   margin: 0 0 18px 0;
+  width: 100%;
 }
 @media (max-width: 1550px) {
   .cards-categories__column {

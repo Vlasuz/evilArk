@@ -5,6 +5,7 @@ import ReactHtmlParser from "html-react-parser"
 import {apiLink} from "../../../../../hooks/apiLink";
 import { isOpenPopupContext } from '../../../Main';
 import {useNavigate} from "react-router-dom";
+import {Translate} from "../../../../../components/translate/Translate";
 
 
 interface INewsItemProps {
@@ -51,7 +52,9 @@ export const NewsItem:React.FC<INewsItemProps> = ({data}) => {
                         ReactHtmlParser(data?.text ?? "")
                     }
                 </div>
-                <button onClick={handleReadNews} className="slide-news__link news-open-btn">Read the news</button>
+                <button onClick={handleReadNews} className="slide-news__link news-open-btn">
+                    <Translate>read_the_news</Translate>
+                </button>
             </div>
         </div>
     )

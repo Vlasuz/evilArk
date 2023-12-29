@@ -25,9 +25,12 @@ const toolkitSlice = createSlice({
         changeUserBalance(state, action) {
             let user = state.user
             const userClusterBalance = user.balance.filter(item => item.server.id === action.payload.cluster)[0]
-            const actionSum = state.user.balance.filter(item => item.server.id === action.payload.cluster)[0].balance
+            const userClusterBonusBalance = user.balance.filter(item => item.server.id === action.payload.cluster)[0]
+            const actionBalance = state.user.balance.filter(item => item.server.id === action.payload.cluster)[0].balance
+            const actionBonusBalance = state.user.balance.filter(item => item.server.id === action.payload.cluster)[0].balance_bonus
 
-            userClusterBalance.balance = actionSum - action.payload.balance
+            userClusterBalance.balance = actionBalance - action.payload.balance
+            userClusterBonusBalance.balance_bonus = actionBonusBalance - action.payload.balance_bonus
 
             state.user = user
         },

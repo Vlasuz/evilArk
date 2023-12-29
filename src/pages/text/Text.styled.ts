@@ -6,6 +6,10 @@ export const TextStyled = styled.main`
     color: #fff;
     line-height: 1.5;
   }
+
+  .title-h2 {
+    font-size: 60px;
+  }
   
   .categories__inner {
     max-width: 1200px;

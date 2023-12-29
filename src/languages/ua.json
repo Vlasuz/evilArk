@@ -2,7 +2,7 @@
   "website_development": "Розробка сайтів",
   "text_home": "Головна",
   "text_shop": "Магазин",
-  "text_roulette": "Колесо Рілаї",
+  "text_roulette": "Кейси",
   "menu_servers": "Сервери",
   "menu_contacts": "Контакти",
   "menu_faq": "FAQ",
@@ -29,11 +29,12 @@
 
   "you_are_not_login": "Ви повинні увійти в систему",
   "login_text": "Вхід",
-  "exit_from_site": "Виїзд з місця події",
+  "exit_from_site": "Вийти з сайту",
   "date": "Дата:",
   "payment_amount": "Сума поповнення:",
   "level": "Рівень:",
   "balance": "Баланс:",
+  "balance_bonus": "Бонус баланс:",
   "donates_history": "Історія пожертвувань",
   "purchase_history": "Історія покупок в магазині",
   "roulette_history": "Історія виграшів в колесо Рілаї",
@@ -69,5 +70,24 @@
   "filter_by_name_placeholder": "Фільтрувати за назвою",
   "are_you_sure_to_buy": "Ви підтверджуєте покупку?",
   "yes": "Так",
-  "no": "Ні"
+  "no": "Ні",
+
+  "read_the_news": "Прочитати новину",
+  "connect_asa": "Прив'язати акаунт ASA",
+  "calculator": "Калькулятор",
+  "not_found": "Нічого не знайдено",
+
+  "promo_codes": "Промокоди",
+  "promo_code": "Промокод",
+  "your_promo_code": "Ваш промокод:",
+  "enter_promo_code": "Ввести промокод:",
+  "active_promo_code": "Активувати промокод",
+  "cases_products": "Продукти в кейсі",
+  "close_instruction": "Приховати інструкцію",
+  "open_instruction": "Відкрити інструкцію",
+  "next_discount": "До наступної знижки залишилося:",
+  "status": "Статус",
+  "payment": "Поповнення",
+
+  "products_case": "Предмети з кейсу:"
 }

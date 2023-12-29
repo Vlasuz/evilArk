@@ -37,15 +37,17 @@ export const Main: React.FC<IMainProps> = () => {
     const newsPopup: any = useRef(null)
     const newsPopupBody: any = useRef(null)
 
-    const [singleNews, setSingleNews] = useState<INewsSingle>({})
+    const [singleNews, setSingleNews] = useState<any>()
     const navigate = useNavigate()
     const location = useLocation()
+
+    const language = useSelector((state: any) => state.toolkit.language)
     const news = useSelector((state: any) => state.toolkit.news)
 
     useEffect(() => {
 
         setTimeout(() => {
-            singleNews.isOpen && newsPopup.current?.classList.add('active')
+            singleNews?.isOpen && newsPopup.current?.classList.add('active')
         }, 10)
 
     }, [singleNews])
@@ -79,6 +81,13 @@ export const Main: React.FC<IMainProps> = () => {
     }, [])
 
 
+    const clusterSettingsLang: any = {
+        "en": "cluster_settings_en",
+        "ua": "cluster_settings_ua",
+        "ru": "cluster_settings_ru",
+    }
+
+
     return (
         <isOpenPopupContext.Provider value={setSingleNews}>
             {singleNews?.isOpen && <div ref={newsPopup} className="news-open">
@@ -90,13 +99,13 @@ export const Main: React.FC<IMainProps> = () => {
                     </div>
                     <div className="news-open__content">
                         <h4 className="news-open__title title-h4">
-                            {singleNews.news?.title}
+                            {singleNews.news?.title ?? singleNews.news?.name}
                         </h4>
                         <div className="news-open__tegs tegs-news-open">
                             <div className="tegs-news-open__items">
 
                                 {
-                                    singleNews.news?.tags.map(tag => <a href={tag.slug} key={tag.id} className="tegs-news-open__item">@{tag.name}</a>)
+                                    singleNews?.news?.tags && singleNews?.news?.tags?.map((tag: any) => <a href={tag.slug} key={tag.id} className="tegs-news-open__item">@{tag.name}</a>)
                                 }
 
                             </div>
@@ -104,22 +113,23 @@ export const Main: React.FC<IMainProps> = () => {
                         <div className="news-open__image">
                             <img src={singleNews.news?.image} alt=""/>
                         </div>
-                        <div className="news-open__date date-news-open">
+                        {singleNews.news?.created_at && <div className="news-open__date date-news-open">
                             <div className="date-news-open__icon">
                                 <img src={calendar} alt="calendar"/>
                             </div>
                             <div className="date-news-open__text">
-                                {singleNews.news?.created_at.slice(0, singleNews.news?.created_at.indexOf(' ')).replaceAll('-', '.')}
+                                {singleNews.news?.created_at && singleNews.news?.created_at?.slice(0, singleNews.news?.created_at.indexOf(' ')).replaceAll('-', '.')}
                             </div>
-                        </div>
+                        </div>}
                         <div className="news-open__text">
                             {ReactHtmlParser(singleNews.news?.text ?? '')}
+                            {singleNews?.news?.cluster_settings_en && ReactHtmlParser(singleNews?.news[clusterSettingsLang[language]] ?? '')}
                         </div>
                     </div>
                 </div>
             </div>}
 
-            <MainStyled onClick={_ => singleNews.isOpen && handleCloseNews()} className={"home" + (singleNews.isOpen ? " product-select" : "")}>
+            <MainStyled onClick={_ => singleNews?.isOpen && handleCloseNews()} className={"home" + (singleNews?.isOpen ? " product-select" : "")}>
 
                 <Banner/>
                 <About/>

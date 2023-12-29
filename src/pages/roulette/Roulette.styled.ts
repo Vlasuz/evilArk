@@ -151,6 +151,63 @@ export const RouletteStyled = styled.div`
 
   .categories-filter-roulette__link {
     font-weight: normal;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding-left: 0;
+    padding-right: 0;
+    padding: 0;
+    p {
+      padding: 10px;
+    }
+  }
+  
+  .games-filter-roulette__items_in {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+
+    .item-games-filter-roulette__name {
+      padding: 15px 5px;
+    }
+    
+    @media screen and (max-width: 992px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media screen and (max-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .games-filter-roulette__slider_in {
+      -webkit-transform: translate(0);-moz-transform: translate(0);-ms-transform: translate(0);-o-transform: translate(0);transform: translate(0);
+      width: 100%;
+      -webkit-border-radius: 20px;-moz-border-radius: 20px;border-radius: 20px;
+      
+      .title-games-filter-roulette__text {
+        font-size: 16px;
+      }
+    }
+  }
+  
+  .categories-filter-roulette__item {
+    .item__image {
+      display: block;
+      width: 100%;
+      height: 150px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 
   .categories-filter-roulette__item button {

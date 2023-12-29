@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import arrowBtnIcon from './../../assets/img/icons/arrow-white.svg'
+import check from './../../assets/img/icons/checkOrange.svg'
 
 export const ShopStyled = styled.main`
   .LoadingProducts,
@@ -9,7 +10,7 @@ export const ShopStyled = styled.main`
     text-align: center;
     margin: 0 auto;
   }
-  
+
   .select-product__bottom h3 {
     text-align: right;
     color: #fff;
@@ -47,23 +48,24 @@ export const ShopStyled = styled.main`
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
     margin: 0 4px;
-    
+
     &:hover {
       border: 1px solid rgba(255, 108, 61, 0.4);
       background: linear-gradient(0deg, rgba(255, 108, 61, 0.1), rgba(255, 108, 61, 0.1));
     }
-    
+
     &._active {
       border: 1px solid rgba(255, 108, 61, 0.4);
       background: linear-gradient(0deg, rgba(255, 108, 61, 0.1), rgba(255, 108, 61, 0.1));
     }
   }
-  
+
   .shop__pagination {
     display: flex;
     justify-content: center;
     margin-top: 15px;
   }
+
   .shop__pagination button:first-child,
   .shop__pagination button:last-child {
     display: -webkit-box;
@@ -88,7 +90,7 @@ export const ShopStyled = styled.main`
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
     cursor: pointer;
-    
+
     &:hover {
       background-color: #e76134;
     }
@@ -98,6 +100,7 @@ export const ShopStyled = styled.main`
     transform: rotate(-90deg);
     margin: 0 6px 0 0;
   }
+
   .shop__pagination button:last-child {
     transform: rotate(90deg);
     margin: 0 0 0 6px;
@@ -111,12 +114,13 @@ export const ShopStyled = styled.main`
     //max-width: 100%;
     width: fit-content;
   }
+
   .parameters-select-product__body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     max-width: 516px;
     width: fit-content;
-    
+
     .parameters-select-product__item {
       flex: 0 1 50%;
 
@@ -131,10 +135,12 @@ export const ShopStyled = styled.main`
           height: 100%;
         }
       }
-      
+
     }
+
     .label-parameters-select-product__item {
     }
+
     .value-parameters-select-product__column {
       display: -webkit-box;
       display: -moz-box;
@@ -147,6 +153,7 @@ export const ShopStyled = styled.main`
       color: #DFDFDF;
       padding: 11px 38px;
     }
+
     .label-parameters-select-product__column {
       padding: 24px 38px;
       width: 100%;
@@ -165,19 +172,22 @@ export const ShopStyled = styled.main`
     background: rgba(0, 0, 0, .1);
     border-color: #ffffff80;
   }
+
   .item-cards-categories__image {
     margin: 0 auto;
     margin-bottom: 10px;
     margin-top: auto;
   }
+
   .item-cards-categories__name {
     line-height: 1.2;
   }
+
   .bottom-item-cards-categories__price_now {
     width: 100%;
   }
-  
-  
+
+
   .show-more-description {
     display: inline-flex;
     align-items: center;
@@ -194,12 +204,13 @@ export const ShopStyled = styled.main`
     color: #FFFFFF;
     transition: all 0.3s ease 0s;
     margin-top: 10px;
+
     &:hover {
       background: #e76134;
     }
   }
-  
-  
+
+
   .time-to-sales-end {
     margin-right: auto;
     display: block;
@@ -209,9 +220,25 @@ export const ShopStyled = styled.main`
     font-weight: 400;
     font-size: 14px;
   }
-  
+
+  .select-product__title {
+    font-size: 40px;
+  }
+
+  .select-product__about-product {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .select-product__bottom {
+    margin-left: auto;
+  }
+
   .select-product__rare.rare-select-product {
     margin-top: 20px;
+
     .rare-select-product__title {
       margin-left: 0;
       grid-column-end: 4;
@@ -220,7 +247,7 @@ export const ShopStyled = styled.main`
     .rare-select-product__options {
       grid-template-columns: repeat(3, 1fr);
     }
-    
+
     .label-rare-select-product__row {
       flex-direction: column;
     }
@@ -229,19 +256,107 @@ export const ShopStyled = styled.main`
       margin-top: 10px;
       margin-right: 0;
     }
-    
+
     .label-rare-select-product__image {
       flex: 0 0 140px;
       width: 140px;
       height: 140px;
       padding: 10px;
+
       img {
         width: 100%;
         height: 100%;
       }
     }
   }
-  
+
+  .placeholder {
+    margin-bottom: 20px;
+  }
+
+
+  .proposal {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+  }
+
+  .proposal ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    li {
+      padding: 20px;
+    }
+
+    label {
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      
+      img {
+        margin-top: auto;
+      }
+
+      &:before {
+        content: '';
+        width: 50px;
+        height: 50px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 1px solid #FF6C3D;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, .8);
+      }
+    }
+    
+    input:checked + label:before {
+      background-image: url(${check});
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 25px;
+    }
+
+    p {
+      color: #fff;
+      font-size: 22px;
+      text-align: center;
+      padding-bottom: 20px;
+    }
+
+    input {
+      display: none;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    @media screen and (max-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: 576px) {
+      li {
+        padding: 10px;
+      }
+      p {
+        font-size: 15px;
+      }
+      label:before {
+        width: 30px;
+        height: 30px;
+      }
+      input:checked+label:before {
+        -webkit-background-size: 15px;background-size: 15px;
+      }
+    }
+  }
+
 
   @media (max-width: 767.98px) {
     .value-parameters-select-product__item img {
@@ -272,9 +387,11 @@ export const ShopStyled = styled.main`
     .bottom-item-cards-categories__row {
       flex-direction: column;
     }
+
     .value-parameters-select-product__item {
       font-size: 13px;
     }
+
     .bottom-item-cards-categories__price {
       //flex-direction: column;
       margin-top: 10px;

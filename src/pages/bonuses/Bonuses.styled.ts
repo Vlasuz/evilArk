@@ -48,7 +48,7 @@ export const BonusesStyled = styled.main`
   }
   
   .calculate__info {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
     color: #fff;
     max-width: 100%;

@@ -28,4 +28,16 @@ export const MainStyled = styled.main`
     justify-content: space-between;
   }
 
+  .today-news__btn {
+    max-width: 100%;
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .view-settings {
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
 `

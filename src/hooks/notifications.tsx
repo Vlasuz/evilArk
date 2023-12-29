@@ -8,6 +8,10 @@ export const notifications = (data: any) => {
             type: "error",
             message: <Translate>text_for_notify_1</Translate>,
         },
+        "500": {
+            type: "error",
+            message: <Translate>error_500</Translate>,
+        },
         "Product issued": {
             type: "success",
             message: <Translate>text_for_notify_2</Translate>,
@@ -106,17 +110,23 @@ export const notifications = (data: any) => {
         },
 
 
+        "Referral activated": {
+            type: "success",
+            message: <Translate>promo_code_successfully_active</Translate>,
+        },
+        "Referral not found": {
+            type: "error",
+            message: <Translate>promo_not_found</Translate>,
+        },
+        "Cannot use own referral": {
+            type: "error",
+            message: <Translate>you_cannot_enter_your_promo</Translate>,
+        },
+
+
 
 
     }
-    // 8) Incorrect blueprint
-    // не правильный bp
-    //
-    // 9) Cant spawn dino in this map
-    // не может заспаунить дино на этой карте
-    //
-    // 10) Failed spawn dino
-    // ошибка спауна дино
 
 
     if(notifies[data]?.type === "info") {

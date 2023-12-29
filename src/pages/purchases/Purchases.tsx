@@ -25,12 +25,12 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
 
     useEffect(() => {
         axios.get(apiLink("api/users/history")).then(({data}) => {
-            // setHistoryPurchases(data.data)
+            setHistoryPurchases(data.data)
             setIsLoad(true)
         })
 
         axios.get(apiLink("api/users/roulette-history")).then(({data}) => {
-            // setHistoryRoulette(data.data)
+            setHistoryRoulette(data.data)
         }).catch(er => console.log(er))
     }, [])
 
@@ -43,8 +43,9 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
         setIsHidePagination(document.querySelectorAll('.purchases-slider__pagination span').length <= 1)
         setIsHidePaginationRoulette(document.querySelectorAll('.roulette__users .purchases-slider__pagination span').length <= 1)
 
-
     }, [isLoad])
+
+    console.log(historyPurchases)
 
     return (
         <PurchasesStyled className="purchases">
@@ -64,7 +65,7 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                         </div>
                                         <div className="purchases__items">
 
-                                            {!historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <p>Ничего нет!</p>}
+                                            {!historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <p><Translate>not_found</Translate></p>}
 
                                             {isLoad && historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <Swiper
                                                 slidesPerView={6}

@@ -2,7 +2,7 @@
   "website_development": "Website development",
   "text_home": "Home",
   "text_shop": "Shop",
-  "text_roulette": "Rylai's Wheel",
+  "text_roulette": "Cases",
   "menu_servers": "Servers",
   "menu_contacts": "Contacts",
   "menu_faq": "Faq",
@@ -34,6 +34,7 @@
   "payment_amount": "Replenishment amount:",
   "level": "Level:",
   "balance": "Balance:",
+  "balance_bonus": "Bonus balance:",
   "donates_history": "History of donations",
   "purchase_history": "Store purchase history",
   "roulette_history": "Rylai's Wheel winning history",
@@ -69,5 +70,24 @@
   "filter_by_name_placeholder": "Filter by name",
   "are_you_sure_to_buy": "Are you confirming the purchase?",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+
+  "read_the_news": "Read the news",
+  "connect_asa": "Connect to ASA",
+  "calculator": "Calculator",
+  "not_found": "Not found",
+
+  "promo_codes": "Promo codes",
+  "promo_code": "Promo code",
+  "your_promo_code": "Your promo code:",
+  "enter_promo_code": "Enter promo code:",
+  "active_promo_code": "Activate promo code",
+  "cases_products": "Products in case",
+  "close_instruction": "Hide manual",
+  "open_instruction": "Open manual",
+  "next_discount": "It's just until the next discount:",
+  "status": "Status",
+  "payment": "Replenishment",
+
+  "products_case": "Case's items:"
 }
