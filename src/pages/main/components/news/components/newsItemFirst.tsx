@@ -12,13 +12,15 @@ interface INewsItemFirstProps {
 export const NewsItemFirst:React.FC<INewsItemFirstProps> = ({data, handleReadNews}) => {
     const {placeholder, calendar} = useImages()
 
+    console.log(data)
+
     return (
         <div className="news__today today-news">
-            <div onClick={handleReadNews} className="today-news__image news-open-btn">
+            <div onClick={_ => handleReadNews(data.id)} className="today-news__image news-open-btn">
                 <img src={data?.image ?? placeholder} alt="news"/>
             </div>
             <div className="today-news__body">
-                <div onClick={handleReadNews} className="today-news__content">
+                <div onClick={_ => handleReadNews(data.id)} className="today-news__content">
                     <h5 className="today-news__title title-h5 news-open-btn">
                         {data?.title}
                     </h5>
@@ -27,7 +29,7 @@ export const NewsItemFirst:React.FC<INewsItemFirstProps> = ({data, handleReadNew
                             ReactHtmlParser(data?.text ?? '')
                         }
                     </div>
-                    <button onClick={handleReadNews} className="today-news__btn news-open-btn">
+                    <button onClick={_ => handleReadNews(data.id)} className="today-news__btn news-open-btn">
                         <Translate>read_the_news</Translate>
                     </button>
                 </div>

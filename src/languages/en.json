@@ -82,6 +82,14 @@
   "your_promo_code": "Your promo code:",
   "enter_promo_code": "Enter promo code:",
   "active_promo_code": "Activate promo code",
+
+  "success_copy_promo": "You have successfully copied the promo code",
+  "you_dont_input_promo": "You have not entered the promo code",
+  "you_cannot_enter_your_promo": "You can't apply your own promo code!",
+  "promo_not_found": "Promo code not found",
+  "promo_code_successfully_active": "Promo code successfully activated!",
+  "error_500": "Unknown error - 500",
+
   "cases_products": "Products in case",
   "close_instruction": "Hide manual",
   "open_instruction": "Open manual",
@@ -89,5 +97,7 @@
   "status": "Status",
   "payment": "Replenishment",
 
-  "products_case": "Case's items:"
+  "products_case": "Case's items:",
+  "proposal_title": "Suggested products",
+  "loading": "Loading..."
 }

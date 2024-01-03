@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 
 import './assets/styles/style.css'
 import './assets/js/app.min'
@@ -27,7 +27,7 @@ import axios from "axios";
 import {apiLink} from "./hooks/apiLink";
 import setCookie from "./functions/setCookie";
 import {AppStyled} from "./App.styled";
-
+import {ShopItemMore} from "./pages/shop/components/shopItemMore";
 
 function App() {
 
@@ -71,37 +71,37 @@ function App() {
         })
     }, [])
 
-
-
     if (isTechnicalTime) return <TechnicalTime setIsTechnicalTime={setIsTechnicalTime}/>
 
     return (
-        <div className="wrapper" style={{fontFamily: font}}>
-            <AppStyled>
-                <SvgIcons/>
+            <div className="wrapper" style={{fontFamily: font}}>
+                <AppStyled>
 
-                <Header/>
-                <Sidebar/>
+                    <SvgIcons/>
 
-                <TransitionGroup component={null}>
-                    <CSSTransition key={location.pathname} classNames="fade" timeout={300}>
-                        <Routes location={location}>
+                    <Header/>
+                    <Sidebar/>
 
-                            {
-                                routes.map((item: IRoutes) => <Route key={item.path}
-                                                                     element={item.isPublic ? item.element : userInfo.id ? item.element :
-                                                                         <PageNotFound/>} path={item.path}/>)
-                            }
+                    <TransitionGroup component={null}>
+                        <CSSTransition key={location.pathname} classNames="fade" timeout={300}>
+                            <Routes location={location}>
 
-                        </Routes>
+                                {
+                                    routes.map((item: IRoutes) => <Route key={item.path}
+                                                                         element={item.isPublic ? item.element : userInfo.id ? item.element :
+                                                                             <PageNotFound/>} path={item.path}/>)
+                                }
 
-                    </CSSTransition>
-                </TransitionGroup>
+                            </Routes>
 
-                <ToastContainer/>
+                        </CSSTransition>
+                    </TransitionGroup>
 
-            </AppStyled>
-        </div>
+                    <ToastContainer/>
+
+                </AppStyled>
+            </div>
+
     );
 }
 

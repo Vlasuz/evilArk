@@ -27,16 +27,18 @@ export const Servers:React.FC<IServersProps> = () => {
         axios.get(apiLink('api/home/servers?language='+lang)).then(({data}) => setServersText(data.data))
     }, [lang])
 
-    const isOpenPopup: any = useContext(isOpenPopupContext)
+    const setIsOpenPopup: any = useContext(isOpenPopupContext)
 
     const handleReadNews = (id: string | number) => {
-        axios.get(apiLink(`api/servers/${id}`)).then(({data}) => {
+
+        return axios.get(apiLink(`api/servers/${id}`)).then(({data}) => {
             console.log(data)
 
-            isOpenPopup({
+            setIsOpenPopup({
                 isOpen: true,
                 news: data.data
             })
+
         })
     }
 
@@ -61,7 +63,9 @@ export const Servers:React.FC<IServersProps> = () => {
                     <div className="servidores__row">
 
                         {
-                            servers?.map((server: IServer) => <ServersItem handleReadNews={handleReadNews} key={server.id} data={server} />)
+                            servers
+                                ?.filter(item => item.is_active)
+                                ?.map((server: IServer) => <ServersItem handleReadNews={handleReadNews} key={server.id} data={server} />)
                         }
 
                     </div>

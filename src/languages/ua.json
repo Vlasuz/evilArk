@@ -82,6 +82,14 @@
   "your_promo_code": "Ваш промокод:",
   "enter_promo_code": "Ввести промокод:",
   "active_promo_code": "Активувати промокод",
+
+  "success_copy_promo": "Ви успішно скопіювали промокод",
+  "you_dont_input_promo": "Ви не ввели промокод",
+  "you_cannot_enter_your_promo": "Не можна застосувати свій же промокод!",
+  "promo_not_found": "Промокод не знайдено",
+  "promo_code_successfully_active": "Промокод успішно активовано!",
+  "error_500": "Невідома помилка - 500",
+
   "cases_products": "Продукти в кейсі",
   "close_instruction": "Приховати інструкцію",
   "open_instruction": "Відкрити інструкцію",
@@ -89,5 +97,7 @@
   "status": "Статус",
   "payment": "Поповнення",
 
-  "products_case": "Предмети з кейсу:"
+  "products_case": "Предмети з кейсу:",
+  "proposal_title": "Запропоновані продукти",
+  "loading": "Завантаження..."
 }

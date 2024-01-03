@@ -14,12 +14,14 @@ import {apiLink} from "../../hooks/apiLink";
 import ReactHtmlParser from "html-react-parser";
 import {Translate} from "../../components/translate/Translate";
 import {ShopStyled} from "./Shop.styled";
+import {retry} from "@reduxjs/toolkit/query";
 
 interface IShopProps {
 
 }
 
 export const isOpenPopupContext: any = createContext(null);
+export const ProductProposeContext: any = createContext(null)
 
 export const Shop: React.FC<IShopProps> = () => {
 
@@ -68,51 +70,64 @@ export const Shop: React.FC<IShopProps> = () => {
         asyncLoading()
     }, [language])
 
+    const [productPropose, setProductPropose] = useState('')
+
+    const handleClosePopup = () => {
+        if(!activeProduct) return;
+
+         setActiveProduct('')
+        setProductPropose('')
+    }
+
     return (
-        <isOpenPopupContext.Provider value={setActiveProduct}>
-            <ShopStyled>
-                <main onClick={_ => activeProduct && setActiveProduct('')}
-                      className={"categories" + (activeProduct ? " product-select" : "")}>
-                    <section className="categories__main">
-                        <div className="categories__container container">
-                            <div className="categories__body">
-                                <h2 className="categories__title title-h2">
-                                    <Translate>text_shop</Translate>
-                                </h2>
-                                <div className="categories__inner">
-                                    <ShopTop/>
-                                    {!!Object.keys(userInfo).length && <ShopAccount userInfo={userInfo}/>}
-                                    <div className="categories__cards cards-categories">
-                                        <ShopFilter filter={filter} setFilter={setFilter}/>
-                                        <div className="cards-categories__body">
-                                            {!isLoading ? <div className="cards-categories__row">
-                                                {
-                                                    !!shop.length ? shop.map((item: IProduct, index: number) =>
-                                                            <ShopItem key={index} data={item}/>) :
-                                                        <p className={"NotFound"}>Not found</p>
-                                                }
-                                            </div> : <p className={"LoadingProducts"}>Loading...</p>}
+        <ProductProposeContext.Provider value={setProductPropose}>
+            <isOpenPopupContext.Provider value={setActiveProduct}>
+                <ShopStyled>
+                    <main onClick={handleClosePopup}
+                          className={"categories" + (activeProduct ? " product-select" : "")}>
+                        <section className="categories__main">
+                            <div className="categories__container container">
+                                <div className="categories__body">
+                                    <h2 className="categories__title title-h2">
+                                        <Translate>text_shop</Translate>
+                                    </h2>
+                                    <div className="categories__inner">
+                                        <ShopTop/>
+                                        {!!Object.keys(userInfo).length && <ShopAccount userInfo={userInfo}/>}
+                                        <div className="categories__cards cards-categories">
+                                            <ShopFilter filter={filter} setFilter={setFilter}/>
+                                            <div className="cards-categories__body">
+                                                {!isLoading ? <div className="cards-categories__row">
+                                                        {
+                                                            !!shop.length ? shop.map((item: IProduct, index: number) =>
+                                                                    <ShopItem key={index} data={item}/>) :
+                                                                <p className={"NotFound"}>Not found</p>
+                                                        }
+                                                    </div> :
+                                                    <p className={"LoadingProducts"}><Translate>loading</Translate></p>}
+                                            </div>
                                         </div>
+
+                                        <div className="shop__pagination">
+
+                                            {
+                                                pagination.length > 3 && pagination.map((pag: any, index: any) =>
+                                                    <button key={pag.url + index} className={pag.active ? " _active" : ""}
+                                                            onClick={_ => asyncLoading(pag.url)}>{pag.label}</button>
+                                                )
+                                            }
+                                        </div>
+
                                     </div>
-
-                                    <div className="shop__pagination">
-
-                                        {
-                                            pagination.length > 3 && pagination.map((pag: any, index: any) =>
-                                                <button key={pag.url + index} className={pag.active ? " _active" : ""}
-                                                        onClick={_ => asyncLoading(pag.url)}>{pag.label}</button>
-                                            )
-                                        }
-                                    </div>
-
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                    <Footer/>
-                </main>
-                <ShopItemMore isActive={activeProduct}/>
-            </ShopStyled>
-        </isOpenPopupContext.Provider>
+                        </section>
+                        <Footer/>
+                    </main>
+                    <ShopItemMore isActive={activeProduct}/>
+                    <ShopItemMore isActive={productPropose} isPropose={true}/>
+                </ShopStyled>
+            </isOpenPopupContext.Provider>
+        </ProductProposeContext.Provider>
     )
 }

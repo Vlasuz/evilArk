@@ -38,6 +38,23 @@ export const MainStyled = styled.main`
   .view-settings {
     margin-left: auto;
     margin-right: 10px;
+    
+    &.is-loading {
+      animation: loadRotate 3s linear infinite;
+      
+      path {
+        stroke: #FF6C3D;
+      }
+    }
+  }
+  
+  @keyframes loadRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
 `

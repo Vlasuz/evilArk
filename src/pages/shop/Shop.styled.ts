@@ -286,6 +286,7 @@ export const ShopStyled = styled.main`
 
     li {
       padding: 20px;
+      position: relative;
     }
 
     label {
@@ -321,6 +322,15 @@ export const ShopStyled = styled.main`
       background-position: center;
       background-size: 25px;
     }
+    
+    button {
+      background: transparent;
+      width: 100%;
+      height: 75%;
+      top: 0;
+      left: 0;
+      position: absolute;
+    }
 
     p {
       color: #fff;
@@ -331,6 +341,15 @@ export const ShopStyled = styled.main`
 
     input {
       display: none;
+    }
+    
+    .price {
+      margin-left: auto;
+      font-size: 18px;
+      padding-bottom: 0;
+      height: 50px;
+      display: flex;
+      align-items: center;
     }
 
     img {

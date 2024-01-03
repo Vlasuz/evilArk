@@ -88,6 +88,7 @@
   "promo_not_found": "Промокод не найден",
   "promo_code_successfully_active": "Промокод успешно активирован!",
   "error_500": "Неизвестная ошибка - 500",
+
   "cases_products": "Продукты в кейсе",
   "close_instruction": "Скрыть инструкцию",
   "open_instruction": "Открыть инструкцию",
@@ -95,5 +96,7 @@
   "status": "Статус",
   "payment": "Пополнение",
 
-  "products_case": "Предметы из кейса:"
+  "products_case": "Предметы из кейса:",
+  "proposal_title": "Предложенные продукты",
+  "loading": "Загрузка..."
 }

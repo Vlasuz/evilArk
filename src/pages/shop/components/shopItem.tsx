@@ -49,6 +49,9 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
 
     const timerExpired = isTimerExpired(timeToSale);
 
+    const isProductModule = data?.module[0] && data.module[0].products.length
+    const moduleProduct: IProduct = data?.module[0] && data.module[0].products[0]
+
     return (
         <div className="cards-categories__column">
             <a href={""} onClick={e => handleOpenProduct(e)}
@@ -56,10 +59,10 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
                 {/*<div className="item-cards-categories__body">*/}
                 {/*</div>*/}
                 <span className="item-cards-categories__name">
-                        {data.name}
+                        {isProductModule ? moduleProduct?.name : data.name}
                     </span>
                 <span className="item-cards-categories__image">
-                        <LazyLoadImage src={!!data.icon ? data.icon : data.module[0].products[0].icon} alt="PvP Simple Kit"/>
+                        <LazyLoadImage src={isProductModule ? moduleProduct.icon : data.icon} alt="PvP Simple Kit"/>
                     </span>
                 <div className="item-cards-categories__bottom bottom-item-cards-categories">
                     <div className="bottom-item-cards-categories__row">

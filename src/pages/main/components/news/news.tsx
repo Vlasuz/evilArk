@@ -45,12 +45,13 @@ export const News: React.FC<INewsProps> = () => {
         setServer(category)
     }, [category])
 
-    const handleReadNews = () => {
-        navigate("?news_id=" + news.filter(item => item.server?.id === server?.id)[0]?.id)
+    const handleReadNews = (id: string | number) => {
+        // navigate("?news_id=" + news.filter(item => item.server?.id === server?.id)[0]?.id)
+        navigate("?news_id=" + id)
 
         isOpenPopup({
             isOpen: true,
-            news: news.filter(item => item.server?.id === server?.id)[0]
+            news: news.filter(item => item?.id === id)[0]
         })
     }
 

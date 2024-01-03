@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useEffect, useState} from 'react'
 import axios from "axios";
 import {apiLink} from "../../../hooks/apiLink";
-import {isOpenPopupContext} from "../Shop";
+import {isOpenPopupContext, ProductProposeContext} from "../Shop";
 import {useImages} from "../../../hooks/images";
 import {ICategory, IProduct, IProductSingle, IUser} from "../../../models";
 import getCookies from "../../../functions/getCookie";
@@ -16,11 +16,12 @@ import ReactHtmlParser from "html-react-parser";
 
 interface IShopItemMoreProps {
     isActive: number | string
+    isPropose?: boolean
 }
 
 export const ProductModule: any = createContext(null)
 
-export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
+export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive, isPropose}) => {
     const {arrowWhite} = useImages()
 
     const [product, setProduct] = useState<IProductSingle>()
@@ -124,11 +125,22 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
         setPriceForPropose(amount)
     }, [chosenProposalProducts])
 
+    const setProposeProduct: any = useContext(ProductProposeContext)
+
+    const chosenProductPrice = chosenProduct?.price && (+chosenProduct?.price * +count + priceForPropose).toFixed(2)
+    const defaultProductPrice = product?.price && (+product?.price * +count + priceForPropose).toFixed(2)
+
+    const chosenProductSalesPrice = chosenProduct?.price_without_sales && (+chosenProduct?.price_without_sales * +count).toFixed(2)
+    const defaultProductSalesPrice = product?.price_without_sales && (+product?.price_without_sales * +count).toFixed(2)
+
+    const isHaveDefaultProductSales = product?.price_without_sales && product?.price_without_sales !== product?.price
+    const isHaveChosenProductSales = chosenProduct?.price_without_sales && chosenProduct?.price_without_sales !== chosenProduct?.price
+
     return (
         <ProductModule.Provider value={setProductModule}>
             <div className={"categories__select-product select-product" + (!!isActive ? " active" : "")}>
                 <div className="select-product__body">
-                    <button onClick={_ => isActivePopup(false)} className="select-product__btn-close">
+                    <button onClick={_ => isPropose ? setProposeProduct("") : isActivePopup(false)} className="select-product__btn-close">
                         <img src={arrowWhite} alt="arrow"/>
                     </button>
                     <div className="select-product__form">
@@ -235,12 +247,22 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                     <div
                                         className="characteristics-select-product__item characteristics-select-product__price">
                                         <div className="characteristics-select-product__price">
-                                            {/*{product?.price && (+product?.price * count).toFixed(2)} EC*/}
 
-                                            {product?.price_without_sales !== product?.price && <div
-                                                className="bottom-item-cards-categories__price_old">{product?.price_without_sales && (+product?.price_without_sales * +count).toFixed(2)} EC</div>}
-                                            <div
-                                                className="bottom-item-cards-categories__price_now">{chosenProduct?.price ? chosenProduct?.price && (+chosenProduct?.price * +count).toFixed(2) : product?.price && (+product?.price * +count + priceForPropose).toFixed(2)} {product?.is_price_bonus && "Bonus"} EC
+                                            {
+                                                isHaveDefaultProductSales && <div
+                                                    className="bottom-item-cards-categories__price_old">
+                                                    {defaultProductSalesPrice} EC
+                                                </div>
+                                            }
+                                            {
+                                                isHaveChosenProductSales && <div
+                                                    className="bottom-item-cards-categories__price_old">
+                                                    {chosenProductSalesPrice} EC
+                                                </div>
+                                            }
+
+                                            <div className="bottom-item-cards-categories__price_now">
+                                                {chosenProduct?.price ? chosenProductPrice : defaultProductPrice} {product?.is_price_bonus && "Bonus"} EC
                                             </div>
                                         </div>
                                     </div>
@@ -277,9 +299,9 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="proposal">
+                        {!!product?.proposal?.length && <div className="proposal">
                             <div className="characteristics-select-product__label">
-                                Предложенные продукты
+                                <Translate>proposal_title</Translate>
                             </div>
                             <ul>
 
@@ -287,19 +309,27 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive}) => {
                                     product?.proposal.map(prop => {
                                         return (
                                             <li>
-                                                <input checked={chosenProposalProducts.some(item => item.id === prop.id)} type="checkbox" id={`${prop.id}`}
-                                                       onChange={_ => handleChooseProposalProduct(prop)}/>
+                                                <input
+                                                    checked={chosenProposalProducts.some(item => item.id === prop.id)}
+                                                    type="checkbox" id={`${prop.id}`}
+                                                    onChange={_ => handleChooseProposalProduct(prop)}/>
                                                 <label htmlFor={`${prop.id}`}>
                                                     <p>{prop.name}</p>
                                                     <img src={prop.icon} alt=""/>
+                                                    <p className={"price"}>
+                                                        {prop.price} EC
+                                                    </p>
                                                 </label>
+                                                <button onClick={_ => setProposeProduct(prop.id)}>
+
+                                                </button>
                                             </li>
                                         )
                                     })
                                 }
 
                             </ul>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>

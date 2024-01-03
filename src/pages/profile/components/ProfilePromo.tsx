@@ -86,7 +86,7 @@ export const ProfilePromo: React.FC<IProfilePromoProps> = () => {
                     <Translate>promo_codes</Translate>
                 </div>
                 <div className="your-promo">
-                    <p><Translate>your_promo_code</Translate> </p> {loading ? <b>Loading...</b> : <b onClick={handleCopy}>{promoCode?.referral}</b>}
+                    <p><Translate>your_promo_code</Translate> </p> {loading ? <b><Translate>loading</Translate></b> : <b onClick={handleCopy}>{promoCode?.referral}</b>}
                 </div>
 
                 <label>

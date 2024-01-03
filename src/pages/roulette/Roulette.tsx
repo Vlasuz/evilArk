@@ -149,7 +149,9 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                     <div className="select-category__row">
 
                                         {
-                                            servers?.map((item: IServer) =>
+                                            servers
+                                                ?.filter(item => item.is_active)
+                                                ?.map((item: IServer) =>
                                                 <div onClick={_ => dispatch(setCategory(item))} key={item.id}
                                                      className={"select-category__column" + (category.name === item.name ? " _active" : "")}>
                                                     <div className="select-category__item item-select-category">
