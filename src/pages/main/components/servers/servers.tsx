@@ -32,7 +32,7 @@ export const Servers:React.FC<IServersProps> = () => {
     const handleReadNews = (id: string | number) => {
 
         return axios.get(apiLink(`api/servers/${id}`)).then(({data}) => {
-            console.log(data)
+            console.log(apiLink(`api/servers/${id}`), data)
 
             setIsOpenPopup({
                 isOpen: true,

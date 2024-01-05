@@ -14,6 +14,7 @@ import {IProduct, IServer} from "../../models";
 import {Translate} from "../../components/translate/Translate";
 import {useSelector} from 'react-redux';
 import {InventoryStyled} from './Inventory.styled';
+import {ShopItemMore} from "../shop/components/shopItemMore";
 
 interface IInventoryProps {
 
@@ -34,6 +35,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
     }, [])
 
     const [isHidePagination, setIsHidePagination] = useState(false)
+    const [activeProduct, setActiveProduct]: any = useState('')
 
     useEffect(() => {
         if (!isLoad) return;
@@ -41,80 +43,89 @@ export const Inventory: React.FC<IInventoryProps> = () => {
         setIsHidePagination(document.querySelectorAll('.purchases-slider__pagination span').length <= 1)
     }, [isLoad])
 
+    const handleClosePopup = () => {
+        if(!activeProduct) return;
+
+        setActiveProduct('')
+    }
+
     return (
-        <InventoryStyled className="inventory">
-            <section className="inventory__main">
-                <div className="inventory__container container">
-                    <div className="inventory__body">
-                        <h2 className="inventory__title title-h2">
-                            <Translate>my_inventory</Translate>
-                        </h2>
-                        <div className="inventory__inner inner">
-                            <div className="inner__row">
-                                <ProfileSidebar/>
-                                <div className="inner__content content-inner">
-                                    <div className="content-inner__body">
-                                        <div className="purchases__items">
-                                            {!inventory.filter(item => item?.server?.id === category?.id).length && isLoad &&
-                                                <p><Translate>not_found</Translate></p>}
+        <InventoryStyled>
+            <main style={{minHeight: "100vh"}} className={"inventory" + (activeProduct?.product_id ? " product-select" : "")} onClick={handleClosePopup}>
+                <section className="inventory__main">
+                    <div className="inventory__container container">
+                        <div className="inventory__body">
+                            <h2 className="inventory__title title-h2">
+                                <Translate>my_inventory</Translate>
+                            </h2>
+                            <div className="inventory__inner inner">
+                                <div className="inner__row">
+                                    <ProfileSidebar/>
+                                    <div className="inner__content content-inner">
+                                        <div className="content-inner__body">
+                                            <div className="purchases__items">
+                                                {!inventory.filter(item => item?.server?.id === category?.id).length && isLoad &&
+                                                    <p><Translate>not_found</Translate></p>}
 
 
-                                            {isLoad && <Swiper
-                                                slidesPerView={6}
-                                                spaceBetween={37}
-                                                slidesPerGroup={5}
-                                                modules={[Grid, Pagination]}
-                                                navigation={{
-                                                    prevEl: ".purchases-slider__navigation .purchases-slider__btn_prev",
-                                                    nextEl: ".purchases-slider__navigation .purchases-slider__btn_next",
-                                                }}
-                                                pagination={{
-                                                    clickable: true,
-                                                    el: '.purchases-slider__navigation .purchases-slider__pagination'
-                                                }}
-                                                grid={{rows: 2, fill: "row"}}
-                                                breakpoints={{
-                                                    768: {
-                                                        slidesPerView: 5,
-                                                    },
-                                                    700: {
-                                                        slidesPerView: 4,
-                                                    },
-                                                    540: {
-                                                        slidesPerView: 3,
-                                                    },
-                                                    320: {
-                                                        spaceBetween: 15,
-                                                        slidesPerView: 2,
+                                                {isLoad && <Swiper
+                                                    slidesPerView={6}
+                                                    spaceBetween={37}
+                                                    slidesPerGroup={5}
+                                                    modules={[Grid, Pagination]}
+                                                    navigation={{
+                                                        prevEl: ".purchases-slider__navigation .purchases-slider__btn_prev",
+                                                        nextEl: ".purchases-slider__navigation .purchases-slider__btn_next",
+                                                    }}
+                                                    pagination={{
+                                                        clickable: true,
+                                                        el: '.purchases-slider__navigation .purchases-slider__pagination'
+                                                    }}
+                                                    grid={{rows: 2, fill: "row"}}
+                                                    breakpoints={{
+                                                        768: {
+                                                            slidesPerView: 5,
+                                                        },
+                                                        700: {
+                                                            slidesPerView: 4,
+                                                        },
+                                                        540: {
+                                                            slidesPerView: 3,
+                                                        },
+                                                        320: {
+                                                            spaceBetween: 15,
+                                                            slidesPerView: 2,
+                                                        }
+                                                    }}
+                                                >
+                                                    {
+                                                        inventory.filter(item => item?.server?.id === category?.id).map((item: IProduct, index: number) =>
+                                                            <SwiperSlide key={index}>
+                                                                <Product product={item} setProductMore={setActiveProduct} setInventory={setInventory}
+                                                                         isCanGet={true}/>
+                                                            </SwiperSlide>
+                                                        )
                                                     }
-                                                }}
-                                            >
-                                                {
-                                                    inventory.filter(item => item?.server?.id === category?.id).map((item: IProduct, index: number) =>
-                                                        <SwiperSlide key={index}>
-                                                            <Product product={item} setInventory={setInventory}
-                                                                     isCanGet={true}/>
-                                                        </SwiperSlide>
-                                                    )
-                                                }
-                                            </Swiper>}
+                                                </Swiper>}
 
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    {!(isLoad && isHidePagination) &&
-                                        <div className="purchases-slider__navigation">
-                                            <div className="purchases-slider__btn purchases-slider__btn_prev"/>
-                                            <div className="purchases-slider__pagination"/>
-                                            <div className="purchases-slider__btn purchases-slider__btn_next"/>
-                                        </div>}
+                                        {!(isLoad && isHidePagination) &&
+                                            <div className="purchases-slider__navigation">
+                                                <div className="purchases-slider__btn purchases-slider__btn_prev"/>
+                                                <div className="purchases-slider__pagination"/>
+                                                <div className="purchases-slider__btn purchases-slider__btn_next"/>
+                                            </div>}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <Footer/>
+                </section>
+                <Footer/>
+            </main>
+            <ShopItemMore isActive={activeProduct?.product_id} isInventory={true}/>
         </InventoryStyled>
     )
 }

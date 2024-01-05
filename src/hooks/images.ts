@@ -13,7 +13,7 @@ import servers_2 from './../assets/img/servidores/02.jpg'
 import servers_3 from './../assets/img/servidores/03.jpg'
 import servers_4 from './../assets/img/servidores/04.jpg'
 import servers_5 from './../assets/img/servidores/05.jpg'
-import servers_6 from './../assets/img/servidores/06.gif'
+// import servers_6 from './../assets/img/servidores/06.gif'
 import servers_image_link from './../assets/img/servidores/links/01.jpg'
 import news_image from './../assets/img/news/01.jpg'
 import calendar from './../assets/img/icons/calendar.svg'
@@ -51,7 +51,7 @@ export const useImages = () => {
         servers_3,
         servers_4,
         servers_5,
-        servers_6,
+        // servers_6,
         servers_image_link,
         news_image,
         calendar,

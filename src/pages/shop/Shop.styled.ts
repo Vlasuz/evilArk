@@ -181,6 +181,7 @@ export const ShopStyled = styled.main`
 
   .item-cards-categories__name {
     line-height: 1.2;
+    font-size: 18px;
   }
 
   .bottom-item-cards-categories__price_now {

@@ -14,9 +14,10 @@ interface IProductProps {
     isCanGet: boolean
     product: IProduct
     setInventory?: any
+    setProductMore?: any
 }
 
-export const Product: React.FC<IProductProps> = ({isCanGet, product, setInventory}) => {
+export const Product: React.FC<IProductProps> = ({isCanGet, product, setInventory, setProductMore}) => {
 
     const [isLoadingToGive, setIsLoadingToGive] = useState(false)
     const category: IServer = useSelector((state: any) => state.toolkit.category)
@@ -49,7 +50,7 @@ export const Product: React.FC<IProductProps> = ({isCanGet, product, setInventor
         <div className="purchases__column">
             <div className="purchases__item item-purchases">
                 <div className="item-purchases__image-block">
-                    <div className="item-purchases__image">
+                    <div className="item-purchases__image" onClick={_ => setProductMore && setProductMore(product)}>
                         <div className="loader">
                             {isLoadingToGive && <Blocks
                                 visible={true}
@@ -64,10 +65,10 @@ export const Product: React.FC<IProductProps> = ({isCanGet, product, setInventor
 
                     </div>
                 </div>
-                <div className="item-purchases__name">
+                <div className="item-purchases__name" onClick={_ => setProductMore && setProductMore(product)}>
                     {product?.name}
                 </div>
-                <div className="item-purchases__bottom">
+                <div className="item-purchases__bottom" onClick={_ => setProductMore && setProductMore(product)}>
                     <div className="item-purchases__number">
                         X<span>{product?.amount}</span>
                     </div>

@@ -17,11 +17,14 @@ import ReactHtmlParser from "html-react-parser";
 interface IShopItemMoreProps {
     isActive: number | string
     isPropose?: boolean
+    isInventory?: boolean
 }
 
 export const ProductModule: any = createContext(null)
 
-export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive, isPropose}) => {
+export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive, isPropose, isInventory}) => {
+    console.log(isActive)
+
     const {arrowWhite} = useImages()
 
     const [product, setProduct] = useState<IProductSingle>()
@@ -41,7 +44,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive, isPropose}
     const language = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
-        isActive && axios.get(apiLink(`api/products/${isActive}?user_id=${userInfo.id ?? ""}&language=${language}`)).then(({data}) => {
+        isActive && axios.get(apiLink(`api/products/${isActive}?user_id=${userInfo.id ?? ""}&language=${language}&is_inventory=${isInventory}`)).then(({data}) => {
             setProduct(data.data)
             setProductModule(data.data?.module?.length && data.data?.module[0].id)
 
@@ -101,8 +104,6 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive, isPropose}
         setIsWantToBuy(false)
         setIsShowDescription(false)
     }, [isActive])
-
-    console.log(product)
 
     const isAnyoneHave = !!product?.damage || !!product?.durability || !!product?.food || !!product?.health || !!product?.movement_speed || !!product?.neuter || !!product?.oxygen || !!product?.stamina || !!product?.torpidity || !!product?.weight || (!!product?.sex && product?.sex !== "product");
 
@@ -216,120 +217,123 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive, isPropose}
                             </div>
                         </div>}
 
-                        <div
-                            className="select-product__characteristics characteristics-select-product characteristics-select-product_no-authorization">
-                            <div className="characteristics-select-product__row">
-                                {!!product?.module?.length && <div className="characteristics-select-product__column">
-                                    <ShopItemMoreSelect setProduct={setChosenProduct}
-                                                        modules={product?.module[0].products}/>
+                        {!isInventory &&
+                            <>
+                                <div
+                                    className="select-product__characteristics characteristics-select-product characteristics-select-product_no-authorization">
+                                    <div className="characteristics-select-product__row">
+                                        {!!product?.module?.length && <div className="characteristics-select-product__column">
+                                            <ShopItemMoreSelect setProduct={setChosenProduct}
+                                                                modules={product?.module[0].products}/>
+                                        </div>}
+                                        <div
+                                            className="characteristics-select-product__column characteristics-select-product__column_quatity">
+                                            <div
+                                                className="characteristics-select-product__item characteristics-select-product__item_quantity">
+                                                <div className="characteristics-select-product__label">
+                                                    <Translate>quantity</Translate>
+                                                </div>
+                                                <div className="characteristics-select-product__input-block">
+                                                    <button className="characteristics-select-product__minus"
+                                                            onClick={_ => setCount(prev => prev > 1 ? prev - 1 : prev)}>-
+                                                    </button>
+                                                    <input readOnly value={count} autoComplete='off' type='text'
+                                                           className='characteristics-select-product__input characteristics-select-product__input_quantity'/>
+                                                    <button className="characteristics-select-product__plus"
+                                                            onClick={_ => setCount(prev => prev + 1)}>+
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className="characteristics-select-product__column characteristics-select-product__column_price">
+                                            <div
+                                                className="characteristics-select-product__item characteristics-select-product__price">
+                                                <div className="characteristics-select-product__price">
+
+                                                    {
+                                                        isHaveDefaultProductSales && <div
+                                                            className="bottom-item-cards-categories__price_old">
+                                                            {defaultProductSalesPrice} EC
+                                                        </div>
+                                                    }
+                                                    {
+                                                        isHaveChosenProductSales && <div
+                                                            className="bottom-item-cards-categories__price_old">
+                                                            {chosenProductSalesPrice} EC
+                                                        </div>
+                                                    }
+
+                                                    <div className="bottom-item-cards-categories__price_now">
+                                                        {chosenProduct?.price ? chosenProductPrice : defaultProductPrice} {product?.is_price_bonus && "Bonus"} EC
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
+                                            {isWantToBuy && <h3><Translate>are_you_sure_to_buy</Translate></h3>}
+                                            <div className="bottom-select-product__row">
+                                                {
+                                                    !isWantToBuy && <button onClick={handleClickButtonBuy}
+                                                                            className={'bottom-select-product__btn'}>
+                                                        <Translate>buy_title</Translate>
+                                                    </button>
+                                                }
+
+                                                {
+                                                    isWantToBuy && <div style={{display: "flex"}}>
+                                                        <button onClick={handleBuy}
+                                                                className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
+                                                            <Translate>yes</Translate>
+                                                        </button>
+                                                        <button style={{background: "dimgrey", marginLeft: "15px"}}
+                                                                onClick={_ => setIsWantToBuy(false)}
+                                                                className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
+                                                            <Translate>no</Translate>
+                                                        </button>
+                                                    </div>
+                                                }
+
+                                                {
+                                                    <p className={'error'}>{error}</p>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {!!product?.proposal?.length && <div className="proposal">
+                                    <div className="characteristics-select-product__label">
+                                        <Translate>proposal_title</Translate>
+                                    </div>
+                                    <ul>
+
+                                        {
+                                            product?.proposal.map(prop => {
+                                                return (
+                                                    <li>
+                                                        <input
+                                                            checked={chosenProposalProducts.some(item => item.id === prop.id)}
+                                                            type="checkbox" id={`${prop.id}`}
+                                                            onChange={_ => handleChooseProposalProduct(prop)}/>
+                                                        <label htmlFor={`${prop.id}`}>
+                                                            <p>{prop.name}</p>
+                                                            <img src={prop.icon} alt=""/>
+                                                            <p className={"price"}>
+                                                                {prop.price} EC
+                                                            </p>
+                                                        </label>
+                                                        <button onClick={_ => setProposeProduct(prop.id)} />
+                                                    </li>
+                                                )
+                                            })
+                                        }
+
+                                    </ul>
                                 </div>}
-                                <div
-                                    className="characteristics-select-product__column characteristics-select-product__column_quatity">
-                                    <div
-                                        className="characteristics-select-product__item characteristics-select-product__item_quantity">
-                                        <div className="characteristics-select-product__label">
-                                            <Translate>quantity</Translate>
-                                        </div>
-                                        <div className="characteristics-select-product__input-block">
-                                            <button className="characteristics-select-product__minus"
-                                                    onClick={_ => setCount(prev => prev > 1 ? prev - 1 : prev)}>-
-                                            </button>
-                                            <input readOnly value={count} autoComplete='off' type='text'
-                                                   className='characteristics-select-product__input characteristics-select-product__input_quantity'/>
-                                            <button className="characteristics-select-product__plus"
-                                                    onClick={_ => setCount(prev => prev + 1)}>+
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    className="characteristics-select-product__column characteristics-select-product__column_price">
-                                    <div
-                                        className="characteristics-select-product__item characteristics-select-product__price">
-                                        <div className="characteristics-select-product__price">
+                            </>
+                        }
 
-                                            {
-                                                isHaveDefaultProductSales && <div
-                                                    className="bottom-item-cards-categories__price_old">
-                                                    {defaultProductSalesPrice} EC
-                                                </div>
-                                            }
-                                            {
-                                                isHaveChosenProductSales && <div
-                                                    className="bottom-item-cards-categories__price_old">
-                                                    {chosenProductSalesPrice} EC
-                                                </div>
-                                            }
-
-                                            <div className="bottom-item-cards-categories__price_now">
-                                                {chosenProduct?.price ? chosenProductPrice : defaultProductPrice} {product?.is_price_bonus && "Bonus"} EC
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    className="select-product__bottom bottom-select-product bottom-select-product_no-authorization">
-                                    {isWantToBuy && <h3><Translate>are_you_sure_to_buy</Translate></h3>}
-                                    <div className="bottom-select-product__row">
-                                        {
-                                            !isWantToBuy && <button onClick={handleClickButtonBuy}
-                                                                    className={'bottom-select-product__btn'}>
-                                                <Translate>buy_title</Translate>
-                                            </button>
-                                        }
-
-                                        {
-                                            isWantToBuy && <div style={{display: "flex"}}>
-                                                <button onClick={handleBuy}
-                                                        className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
-                                                    <Translate>yes</Translate>
-                                                </button>
-                                                <button style={{background: "dimgrey", marginLeft: "15px"}}
-                                                        onClick={_ => setIsWantToBuy(false)}
-                                                        className={'bottom-select-product__btn' + (isLoading ? " loading" : "")}>
-                                                    <Translate>no</Translate>
-                                                </button>
-                                            </div>
-                                        }
-
-                                        {
-                                            <p className={'error'}>{error}</p>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {!!product?.proposal?.length && <div className="proposal">
-                            <div className="characteristics-select-product__label">
-                                <Translate>proposal_title</Translate>
-                            </div>
-                            <ul>
-
-                                {
-                                    product?.proposal.map(prop => {
-                                        return (
-                                            <li>
-                                                <input
-                                                    checked={chosenProposalProducts.some(item => item.id === prop.id)}
-                                                    type="checkbox" id={`${prop.id}`}
-                                                    onChange={_ => handleChooseProposalProduct(prop)}/>
-                                                <label htmlFor={`${prop.id}`}>
-                                                    <p>{prop.name}</p>
-                                                    <img src={prop.icon} alt=""/>
-                                                    <p className={"price"}>
-                                                        {prop.price} EC
-                                                    </p>
-                                                </label>
-                                                <button onClick={_ => setProposeProduct(prop.id)}>
-
-                                                </button>
-                                            </li>
-                                        )
-                                    })
-                                }
-
-                            </ul>
-                        </div>}
                     </div>
                 </div>
             </div>

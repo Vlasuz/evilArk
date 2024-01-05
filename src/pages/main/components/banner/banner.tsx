@@ -24,7 +24,7 @@ export const Banner: React.FC<IBannerProps> = () => {
     const lang = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
-        axios.get(apiLink('api/home/banner?language='+lang)).then(({data}) => {
+        axios.get(apiLink('api/home/banner?language=' + lang)).then(({data}) => {
             setBannerInfo(data.data)
         })
     }, [lang])

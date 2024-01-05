@@ -1,6 +1,5 @@
 import React, {createContext, useEffect, useRef, useState} from 'react'
 import {MainStyled} from "./Main.styled";
-import video from './../../assets/img/media/VideoEvilArk.mp4'
 import {Banner} from "./components/banner/banner";
 import {About} from "./components/about/about";
 import {Servers} from "./components/servers/servers";
@@ -123,7 +122,7 @@ export const Main: React.FC<IMainProps> = () => {
                         </div>}
                         <div className="news-open__text">
                             {ReactHtmlParser(singleNews.news?.text ?? '')}
-                            {singleNews?.news?.cluster_settings_en && ReactHtmlParser(singleNews?.news[clusterSettingsLang[language]] ?? '')}
+                            {ReactHtmlParser(singleNews?.news[clusterSettingsLang[language]] ?? '')}
                         </div>
                     </div>
                 </div>

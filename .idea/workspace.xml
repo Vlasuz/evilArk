@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="FiX">
+    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="Залил обнову на сайт.&#10;&#10;Из сделаного:&#10;1) Показываются пропоузы&#10;2) Перевел еще несколько фраз/слов&#10;3) Исправил продукт внутри&#10;4) Добавил лоадер на шестеренку&#10;5) Исправил показ новостей&#10;&#10;Из оставшегося:&#10;1) Рулетка рисуется дизайн (2-4 дня и будет готова). Постепенно буду скидывать на осмотр&#10;2) Показ информации про товар в инвентаре. Даня сделает запрос для показа товара чисто название + описание + прайс&#10;3) Рарность в рулетке">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/languages/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/languages/ua.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ua.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/Main.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/Main.styled.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/components/newsItemFirst.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/components/newsItemFirst.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/news.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/news.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/product/Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/Products.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/images.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/images.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/inventory/Inventory.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/inventory/Inventory.styled.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/Main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/banner/banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/banner/banner.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/main/components/servers/servers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/servers/servers.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile/components/ProfilePromo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/components/ProfilePromo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.styled.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +164,10 @@
       <workItem from="1703322045439" duration="3815000" />
       <workItem from="1703578132872" duration="11235000" />
       <workItem from="1703851836143" duration="9466000" />
-      <workItem from="1704278968051" duration="7887000" />
+      <workItem from="1704278968051" duration="7915000" />
+      <workItem from="1704303744367" duration="1773000" />
+      <workItem from="1704365976388" duration="2689000" />
+      <workItem from="1704451767531" duration="3055000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1695910913707</created>
@@ -305,7 +302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703864768290</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Залил обнову на сайт.&#10;&#10;Из сделаного:&#10;1) Показываются пропоузы&#10;2) Перевел еще несколько фраз/слов&#10;3) Исправил продукт внутри&#10;4) Добавил лоадер на шестеренку&#10;5) Исправил показ новостей&#10;&#10;Из оставшегося:&#10;1) Рулетка рисуется дизайн (2-4 дня и будет готова). Постепенно буду скидывать на осмотр&#10;2) Показ информации про товар в инвентаре. Даня сделает запрос для показа товара чисто название + описание + прайс&#10;3) Рарность в рулетке">
+      <created>1704288002461</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1704288002461</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,6 +325,7 @@
     <MESSAGE value="News" />
     <MESSAGE value="Dann file" />
     <MESSAGE value="FiX" />
-    <option name="LAST_COMMIT_MESSAGE" value="FiX" />
+    <MESSAGE value="Залил обнову на сайт.&#10;&#10;Из сделаного:&#10;1) Показываются пропоузы&#10;2) Перевел еще несколько фраз/слов&#10;3) Исправил продукт внутри&#10;4) Добавил лоадер на шестеренку&#10;5) Исправил показ новостей&#10;&#10;Из оставшегося:&#10;1) Рулетка рисуется дизайн (2-4 дня и будет готова). Постепенно буду скидывать на осмотр&#10;2) Показ информации про товар в инвентаре. Даня сделает запрос для показа товара чисто название + описание + прайс&#10;3) Рарность в рулетке" />
+    <option name="LAST_COMMIT_MESSAGE" value="Залил обнову на сайт.&#10;&#10;Из сделаного:&#10;1) Показываются пропоузы&#10;2) Перевел еще несколько фраз/слов&#10;3) Исправил продукт внутри&#10;4) Добавил лоадер на шестеренку&#10;5) Исправил показ новостей&#10;&#10;Из оставшегося:&#10;1) Рулетка рисуется дизайн (2-4 дня и будет готова). Постепенно буду скидывать на осмотр&#10;2) Показ информации про товар в инвентаре. Даня сделает запрос для показа товара чисто название + описание + прайс&#10;3) Рарность в рулетке" />
   </component>
 </project>
