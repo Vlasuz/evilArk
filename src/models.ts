@@ -157,6 +157,7 @@ export interface IModule {
 export interface IProduct {
     id: string | number
     name: string
+    product_percent: number
     module: IModule[]
     description: string
     is_price_bonus: boolean

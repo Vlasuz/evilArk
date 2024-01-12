@@ -122,6 +122,14 @@ export const notifications = (data: any) => {
             type: "error",
             message: <Translate>you_cannot_enter_your_promo</Translate>,
         },
+        "dont_have_balance": {
+            type: "error",
+            message: "You don't have enough money"
+        },
+        "you_need_to_login": {
+            type: "error",
+            message: "You need to login!"
+        }
 
 
 

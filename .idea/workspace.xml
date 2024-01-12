@@ -4,17 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="Залил обнову на сайт.&#10;&#10;Из сделаного:&#10;1) Показываются пропоузы&#10;2) Перевел еще несколько фраз/слов&#10;3) Исправил продукт внутри&#10;4) Добавил лоадер на шестеренку&#10;5) Исправил показ новостей&#10;&#10;Из оставшегося:&#10;1) Рулетка рисуется дизайн (2-4 дня и будет готова). Постепенно буду скидывать на осмотр&#10;2) Показ информации про товар в инвентаре. Даня сделает запрос для показа товара чисто название + описание + прайс&#10;3) Рарность в рулетке">
+    <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="Some changes">
+      <change afterPath="$PROJECT_DIR$/src/assets/img/roulette/rouletteBgd.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/functions/rarities.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.styled.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainInfo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainMultipleLine.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainMultipleSpin.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainSingleSpin.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/product/Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/Products.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/images.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/images.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/inventory/Inventory.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/inventory/Inventory.styled.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/Main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/banner/banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/banner/banner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/servers/servers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/servers/servers.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.styled.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItemMore.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functions/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/routes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/notifications.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/notifications.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/languages/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/languages/ua.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ua.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/roulette/Roulette.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/Roulette.styled.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +61,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/vlaszubenko/Desktop/evil_ark/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -67,6 +75,8 @@
       <recent name="$PROJECT_DIR$/src/redux" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets/img/roulette" />
+      <recent name="$PROJECT_DIR$/src/assets/img/raritiesLogo" />
       <recent name="$PROJECT_DIR$/public/font" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/src/assets/img" />
@@ -167,7 +177,10 @@
       <workItem from="1704278968051" duration="7915000" />
       <workItem from="1704303744367" duration="1773000" />
       <workItem from="1704365976388" duration="2689000" />
-      <workItem from="1704451767531" duration="3055000" />
+      <workItem from="1704451767531" duration="3214000" />
+      <workItem from="1704809694008" duration="427000" />
+      <workItem from="1704888014367" duration="31310000" />
+      <workItem from="1705061551979" duration="6630000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1695910913707</created>
@@ -309,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704288002461</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Some changes">
+      <created>1704456510850</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1704456510850</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,6 +346,7 @@
     <MESSAGE value="Dann file" />
     <MESSAGE value="FiX" />
     <MESSAGE value="Залил обнову на сайт.&#10;&#10;Из сделаного:&#10;1) Показываются пропоузы&#10;2) Перевел еще несколько фраз/слов&#10;3) Исправил продукт внутри&#10;4) Добавил лоадер на шестеренку&#10;5) Исправил показ новостей&#10;&#10;Из оставшегося:&#10;1) Рулетка рисуется дизайн (2-4 дня и будет готова). Постепенно буду скидывать на осмотр&#10;2) Показ информации про товар в инвентаре. Даня сделает запрос для показа товара чисто название + описание + прайс&#10;3) Рарность в рулетке" />
-    <option name="LAST_COMMIT_MESSAGE" value="Залил обнову на сайт.&#10;&#10;Из сделаного:&#10;1) Показываются пропоузы&#10;2) Перевел еще несколько фраз/слов&#10;3) Исправил продукт внутри&#10;4) Добавил лоадер на шестеренку&#10;5) Исправил показ новостей&#10;&#10;Из оставшегося:&#10;1) Рулетка рисуется дизайн (2-4 дня и будет готова). Постепенно буду скидывать на осмотр&#10;2) Показ информации про товар в инвентаре. Даня сделает запрос для показа товара чисто название + описание + прайс&#10;3) Рарность в рулетке" />
+    <MESSAGE value="Some changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some changes" />
   </component>
 </project>

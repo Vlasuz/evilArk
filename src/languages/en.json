@@ -99,5 +99,16 @@
 
   "products_case": "Case's items:",
   "proposal_title": "Suggested products",
-  "loading": "Loading..."
+  "loading": "Loading...",
+
+
+  "opening": "Opening ...",
+  "fast_open": "Quick opening",
+  "demo_open": "Demo Spin",
+  "case_contains": "Case contents",
+  "buy_case": "Buy case",
+  "count_case_to_buy": "Number of cases to buy",
+  "open_for": "Open for"
+
+
 }

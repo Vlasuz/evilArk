@@ -19,6 +19,7 @@ import {Translate} from "../../components/translate/Translate";
 import {RouletteCaseInfo} from "./components/RouletteCaseInfo";
 import Echo from "laravel-echo";
 import socketio from "socket.io-client";
+import {NavLink} from "react-router-dom";
 
 interface IRouletteProps {
 
@@ -42,68 +43,58 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
     const [roulettesCases, setRoulettesCases] = useState([])
     const [activeCase, setActiveCase]: any = useState({})
-    const [itemsForRoll, setItemsForRoll]: any = useState([])
     const [winnerItem, setWinnerItem] = useState<IProduct | null>(null)
     const [rouletteHistory, setRouletteHistory] = useState<any>([])
     const [isStartRoulette, setIsStartRoulette] = useState(false)
     const [isActive, setIsActive] = useState(false)
 
-    useEffect(() => {
-        setItemsForRoll([])
-        if (!activeCase || !Object.keys(activeCase).length) return
-
-        for (let i = 0; i < 50; i++) {
-            const randomIndex = Math.floor(Math.random() * activeCase.products.length);
-            const randomItem = activeCase.products[randomIndex];
-            setItemsForRoll((prev: any) => [...prev, randomItem])
-        }
-    }, [activeCase])
-
     const handleSelectCase = (caseData: any) => {
-        if (caseData.id === activeCase.id) return
 
-        axios.get(apiLink("api/roulette/" + caseData.id)).then(({data}) => {
-            setActiveCase(data.data)
-        }).catch(er => console.log(er))
+
+        // if (caseData.id === activeCase.id) return
+        //
+        // axios.get(apiLink("api/roulette/" + caseData.id)).then(({data}) => {
+        //     setActiveCase(data.data)
+        // }).catch(er => console.log(er))
     }
 
-    const handleStartRoulette = () => {
-        if (isStartRoulette) {
-            notifications('Wait to rolling game')
-            return
-        }
-
-        if (Object.keys(userInfo).length && userInfo.balance.filter(item => item.server.id === category.id)[0].balance >= activeCase.cost) {
-            setIsStartRoulette(true)
-        }
-
-        axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
-        axios.post(apiLink("api/roulettes/play/" + activeCase.id), {
-            "server_id": category.id
-        }).then(({data}) => {
-            if (data.data?.success === false) {
-                notifications(data.data.message)
-                return;
-            }
-
-            dispatch(changeUserBalance({
-                balance: activeCase.cost,
-                cluster: category.id
-            }))
-
-            setTimeout(() => {
-                toast.success("Поздравляем! Вы выиграли " + data.data?.name)
-            }, 10300)
-
-            setTimeout(() => {
-                setIsStartRoulette(false)
-            }, 12000)
-
-            setWinnerItem(data.data)
-        }).catch(er => {
-            er.response?.status === 401 && notifications(er.response.status)
-        })
-    }
+    // const handleStartRoulette = () => {
+    //     if (isStartRoulette) {
+    //         notifications('Wait to rolling game')
+    //         return
+    //     }
+    //
+    //     if (Object.keys(userInfo).length && userInfo.balance.filter(item => item.server.id === category.id)[0].balance >= activeCase.cost) {
+    //         setIsStartRoulette(true)
+    //     }
+    //
+    //     axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
+    //     axios.post(apiLink("api/roulettes/play/" + activeCase.id), {
+    //         "server_id": category.id
+    //     }).then(({data}) => {
+    //         if (data.data?.success === false) {
+    //             notifications(data.data.message)
+    //             return;
+    //         }
+    //
+    //         dispatch(changeUserBalance({
+    //             balance: activeCase.cost,
+    //             cluster: category.id
+    //         }))
+    //
+    //         setTimeout(() => {
+    //             toast.success("Поздравляем! Вы выиграли " + data.data?.name)
+    //         }, 10300)
+    //
+    //         setTimeout(() => {
+    //             setIsStartRoulette(false)
+    //         }, 12000)
+    //
+    //         setWinnerItem(data.data)
+    //     }).catch(er => {
+    //         er.response?.status === 401 && notifications(er.response.status)
+    //     })
+    // }
 
     useEffect(() => {
         axios.get(apiLink("api/roulettes?server_id=" + category.id)).then(({data}) => {
@@ -138,7 +129,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                         <div className="roulette__container container">
                             <div className="roulette__body">
                                 <h2 className="roulette__title title-h2">
-                                    <Translate>text_roulette</Translate>
+                                    <Translate>menu_servers</Translate>
                                 </h2>
                                 {/*<div className="roulette__image-block">*/}
                                 {/*    <div className="roulette__image">*/}
@@ -170,6 +161,9 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
                                     </div>
                                 </div>
+                                <h2 className="roulette__title title-h2">
+                                    <Translate>text_roulette</Translate>
+                                </h2>
                                 {category && <div className="roulette__inner">
                                     <div className="roulette__filter filter-roulette">
                                         <div className="filter-roulette__categories categories-filter-roulette">
@@ -177,7 +171,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
 
                                                 {
                                                     roulettesCases.map((item: any) =>
-                                                        <div key={item.id} onClick={_ => handleSelectCase(item)}
+                                                        <NavLink to={`/roulette/${item.id}`} key={item.id} onClick={_ => handleSelectCase(item)}
                                                              className={"categories-filter-roulette__item"}>
                                                             <div className={"categories-filter-roulette__link categories-filter-roulette__link_blue" + (activeCase.id === item.id ? " active" : "")}>
                                                                 <div className="item__image">
@@ -185,73 +179,71 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                                 </div>
                                                                 <p>
                                                                     {item.name}
-                                                                    <br/>
-                                                                    <br/>
-                                                                    <b>{item.cost} EC</b>
+                                                                    <span>{item.cost} EC</span>
                                                                 </p>
 
                                                                 {/*<button onClick={_ => setIsActive(true)}>*/}
                                                                 {/*    i*/}
                                                                 {/*</button>*/}
                                                             </div>
-                                                        </div>
+                                                        </NavLink>
                                                     )
                                                 }
 
                                             </div>
                                         </div>
-                                        {!!itemsForRoll.length &&
-                                            <div className="filter-roulette__games games-filter-roulette">
-                                                {/*<div*/}
-                                                {/*    className="games-filter-roulette__title title-games-filter-roulette">*/}
-                                                {/*    <div className="title-games-filter-roulette__icon">*/}
-                                                {/*        <img src={profit} alt="profit"/>*/}
-                                                {/*    </div>*/}
-                                                {/*    <div className="title-games-filter-roulette__text">*/}
-                                                {/*        <Translate>game_cost_title</Translate> {activeCase?.cost} ec*/}
-                                                {/*    </div>*/}
-                                                {/*</div>*/}
-                                                <div className="games-filter-roulette__slider">
+                                        {/*{!!itemsForRoll.length &&*/}
+                                        {/*    <div className="filter-roulette__games games-filter-roulette">*/}
+                                        {/*        /!*<div*!/*/}
+                                        {/*        /!*    className="games-filter-roulette__title title-games-filter-roulette">*!/*/}
+                                        {/*        /!*    <div className="title-games-filter-roulette__icon">*!/*/}
+                                        {/*        /!*        <img src={profit} alt="profit"/>*!/*/}
+                                        {/*        /!*    </div>*!/*/}
+                                        {/*        /!*    <div className="title-games-filter-roulette__text">*!/*/}
+                                        {/*        /!*        <Translate>game_cost_title</Translate> {activeCase?.cost} ec*!/*/}
+                                        {/*        /!*    </div>*!/*/}
+                                        {/*        /!*</div>*!/*/}
+                                        {/*        <div className="games-filter-roulette__slider">*/}
 
-                                                    <div className="games-filter-roulette__items">
+                                        {/*            <div className="games-filter-roulette__items">*/}
 
-                                                        {
-                                                            itemsForRoll?.map((item: IProduct, index: number) =>
-                                                                <RouletteItem
-                                                                    key={index}
-                                                                    isStart={index === 0 ? isStartRoulette : null}
-                                                                    data={{
-                                                                        name: index !== 35 ? item?.name : winnerItem?.name,
-                                                                        image: index !== 35 ? item?.icon : winnerItem?.icon,
-                                                                        isWinner: index === 35
-                                                                    }}/>)
-                                                        }
+                                        {/*                {*/}
+                                        {/*                    itemsForRoll?.map((item: IProduct, index: number) =>*/}
+                                        {/*                        <RouletteItem*/}
+                                        {/*                            key={index}*/}
+                                        {/*                            isStart={index === 0 ? isStartRoulette : null}*/}
+                                        {/*                            data={{*/}
+                                        {/*                                name: index !== 35 ? item?.name : winnerItem?.name,*/}
+                                        {/*                                image: index !== 35 ? item?.icon : winnerItem?.icon,*/}
+                                        {/*                                isWinner: index === 35*/}
+                                        {/*                            }}/>)*/}
+                                        {/*                }*/}
 
-                                                    </div>
+                                        {/*            </div>*/}
 
-                                                    <div className="games-filter-roulette__row">
-                                                        <div className="games-filter-roulette__element"/>
-                                                        <div
-                                                            className="games-filter-roulette__column games-filter-roulette__column_hide"/>
-                                                        <div className="games-filter-roulette__column"/>
-                                                        <div
-                                                            className="games-filter-roulette__column games-filter-roulette__column_border">
-                                                            <span/>
-                                                        </div>
-                                                        <div className="games-filter-roulette__column"/>
-                                                        <div
-                                                            className="games-filter-roulette__column games-filter-roulette__column_hide"/>
-                                                    </div>
-                                                </div>
-                                                <div className="filter-roulette__btn-block">
-                                                    <button onClick={handleStartRoulette}
-                                                            className="filter-roulette__btn btn btn_small">
-                                                        <Translate>play_title</Translate>
-                                                        <br/>
-                                                        {activeCase?.cost} EC
-                                                    </button>
-                                                </div>
-                                            </div>}
+                                        {/*            <div className="games-filter-roulette__row">*/}
+                                        {/*                <div className="games-filter-roulette__element"/>*/}
+                                        {/*                <div*/}
+                                        {/*                    className="games-filter-roulette__column games-filter-roulette__column_hide"/>*/}
+                                        {/*                <div className="games-filter-roulette__column"/>*/}
+                                        {/*                <div*/}
+                                        {/*                    className="games-filter-roulette__column games-filter-roulette__column_border">*/}
+                                        {/*                    <span/>*/}
+                                        {/*                </div>*/}
+                                        {/*                <div className="games-filter-roulette__column"/>*/}
+                                        {/*                <div*/}
+                                        {/*                    className="games-filter-roulette__column games-filter-roulette__column_hide"/>*/}
+                                        {/*            </div>*/}
+                                        {/*        </div>*/}
+                                        {/*        <div className="filter-roulette__btn-block">*/}
+                                        {/*            <button onClick={handleStartRoulette}*/}
+                                        {/*                    className="filter-roulette__btn btn btn_small">*/}
+                                        {/*                <Translate>play_title</Translate>*/}
+                                        {/*                <br/>*/}
+                                        {/*                {activeCase?.cost} EC*/}
+                                        {/*            </button>*/}
+                                        {/*        </div>*/}
+                                        {/*    </div>}*/}
                                     </div>
 
                                     {activeCase?.products && <div className="filter-roulette__games games-filter-roulette">

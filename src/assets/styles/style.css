@@ -8172,49 +8172,6 @@ body.lock::before {
     border: 1px solid rgba(255, 255, 255, 0.7568627451);
 }
 
-.categories-filter-roulette__link {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 50px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.3019607843);
-    padding: 5px 20px;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 122.2222222222%;
-    color: #FFFFFF;
-    position: relative;
-    z-index: 1;
-    cursor: pointer;
-    -webkit-transition: all 0.3s ease 0s;
-    -moz-transition: all 0.3s ease 0s;
-    -ms-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
-}
-
-.categories-filter-roulette__link:hover {
-    -webkit-transform: scale(1.03);
-    -moz-transform: scale(1.03);
-    -ms-transform: scale(1.03);
-    -o-transform: scale(1.03);
-    transform: scale(1.03);
-}
-.categories-filter-roulette__link:active {
-    -webkit-transform: scale(0.97);
-    -moz-transform: scale(0.97);
-    -ms-transform: scale(0.97);
-    -o-transform: scale(0.97);
-    transform: scale(0.97);
-}
-
 .categories-filter-roulette__link::before {
     position: absolute;
     content: "";

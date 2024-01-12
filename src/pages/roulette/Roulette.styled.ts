@@ -148,19 +148,6 @@ export const RouletteStyled = styled.div`
   .label-rare-select-product__row {
     margin-top: 20px;
   }
-
-  .categories-filter-roulette__link {
-    font-weight: normal;
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    padding-left: 0;
-    padding-right: 0;
-    padding: 0;
-    p {
-      padding: 10px;
-    }
-  }
   
   .games-filter-roulette__items_in {
     display: grid;
@@ -195,31 +182,6 @@ export const RouletteStyled = styled.div`
         font-size: 16px;
       }
     }
-  }
-  
-  .categories-filter-roulette__item {
-    .item__image {
-      display: block;
-      width: 100%;
-      height: 150px;
-
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-
-  .categories-filter-roulette__item button {
-    width: 19px;
-    height: 19px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: bold;
-    border: 2px solid #fff;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
   }
 
 
@@ -262,5 +224,76 @@ export const RouletteStyled = styled.div`
     margin-bottom: 10px;
   }
 
+
+  .categories-filter-roulette__items {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .categories-filter-roulette__link {
+    display: block;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .categories-filter-roulette__item:hover {
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+    transform: scale(1.03);
+  }
+
+  .categories-filter-roulette__item:active {
+    -webkit-transform: scale(0.97);
+    -moz-transform: scale(0.97);
+    -ms-transform: scale(0.97);
+    -o-transform: scale(0.97);
+    transform: scale(0.97);
+  }
+  
+  .categories-filter-roulette__item {
+    border-radius: 25px;
+    background: #042148;
+    width: 100%;
+    border: none;
+    padding: 20px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    
+    .item__image {
+      width: 100%;
+      height: 100%;
+    }
+    
+    img {
+      width: 100%;
+      height: 100%;
+      -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;
+    }
+    
+    p {
+      color: #FFF;
+      margin-top: 6px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    span {
+      display: block;
+      margin-top: 11px;
+      color: #FFF;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+  
 
 `
