@@ -3,6 +3,7 @@ import {INews, IServer} from "../../../../../models";
 import {useSelector} from "react-redux";
 import getCookies from "../../../../../functions/getCookie";
 import {setCategory} from "../../../../../redux/toolkitSlice";
+import {Translate} from "../../../../../components/translate/Translate";
 
 interface ICategoriesProps {
     setServer: any
@@ -14,12 +15,21 @@ interface ICategoriesProps {
 export const Categories:React.FC<ICategoriesProps> = ({setServer, server, setIsStartCat, isStartCat}) => {
 
     const servers: IServer[] = useSelector((state: any) => state.toolkit.servers)
+    const category = useSelector((state: any) => state.toolkit.category)
     const news: INews[] = useSelector((state: any) => state.toolkit.news)
 
     useEffect(() => {
-        const selectedClusterID: any = getCookies("cluster")
-        setServer(selectedClusterID ? servers.filter((item: any) => String(item.id) === String(selectedClusterID))[0] : servers[0])
-    }, [servers])
+
+        const isCurrentServerWithNews = news?.some(item => item.server?.id === category?.id)
+        const getServersWithNews = servers?.filter((item: IServer) => news?.some(item2 => item2.server?.id === item?.id))
+        setServer(isCurrentServerWithNews ? category : getServersWithNews[0])
+
+    }, [category])
+
+    const handleChooseServer = (item: any) => {
+        setServer(item)
+        setIsStartCat(false)
+    }
 
     return (
         <div className="filter-top-cards-categories__items">
@@ -27,15 +37,14 @@ export const Categories:React.FC<ICategoriesProps> = ({setServer, server, setIsS
 
             <div onClick={_ => setIsStartCat(true)} className={"filter-top-cards-categories__item" + (isStartCat ? " active" : "")}>
                 <div className="filter-top-cards-categories__link filter-top-cards-categories__orange">
-                    Ближайший страт
+                    <Translate>coming_start</Translate>
                 </div>
             </div>
             {
-                servers.map((item: IServer) => news?.some(item2 => item2.server?.id === item?.id) &&
-                    <div key={item?.id} onClick={_ => {
-                        setServer(item)
-                        setIsStartCat(false)
-                    }} className={"filter-top-cards-categories__item" + (item?.id === server?.id && !isStartCat ? " active" : "")}>
+                servers
+                    ?.filter((item: IServer) => news?.some(item2 => item2.server?.id === item?.id))
+                    ?.map((item: IServer) =>
+                    <div key={item?.id} onClick={_ => handleChooseServer(item)} className={"filter-top-cards-categories__item" + (item?.id === server?.id && !isStartCat ? " active" : "")}>
                         <div className="filter-top-cards-categories__link filter-top-cards-categories__orange">
                             {item?.name}
                         </div>

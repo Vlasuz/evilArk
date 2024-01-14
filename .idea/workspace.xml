@@ -5,22 +5,139 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="Some changes">
-      <change afterPath="$PROJECT_DIR$/src/assets/img/roulette/rouletteBgd.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/functions/rarities.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.styled.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainMultipleLine.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainMultipleSpin.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainSingleSpin.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.styled.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/bonuses.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/categories.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/categories_authorization.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/css/style.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Barlow-Medium.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Barlow-Medium.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Barlow-Regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Barlow-Regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Barlow-SemiBold.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Barlow-SemiBold.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardH-Regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardH-Regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardM-Light.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardM-Light.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardM-Medium.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardM-Medium.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardM-Regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardM-Regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardM-SemiBold.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/MazzardM-SemiBold.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Oswald-Bold.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Oswald-Bold.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Poppins-Medium.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Poppins-Medium.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Poppins-SemiBold.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/fonts/Poppins-SemiBold.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/categories/01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/categories/user-icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/contacto/cloud.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/contacto/dragon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/donaciones/bizum.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/donaciones/bizum.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/donaciones/links/01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/donaciones/paypal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/donaciones/paypal.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/donaciones/paysafe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/donaciones/paysafe.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/free-kassa.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/arrow-breadcrumbs.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/arrow-orange.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/arrow-up.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/arrow-white.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/bonuses-bg.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/calendar.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/cart.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/check.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/close.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/colored.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/copy.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/domestication.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/edit.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/email.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/face.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/gender.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/gift.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/inventory.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/level.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/login-icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/neutered.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/organic.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/profit.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/question.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/saddle.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/settings.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/steam-icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/top-up-bg.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/user-icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/icons/wallet.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/login-bg.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/main-block/bird.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/main-block/cloud-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/main-block/cloud-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/main-block/dragon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/media/VideoEvilArk.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/news/01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/paypal.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/purchases/01.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/roulette/games/01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/roulette/games/02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/roulette/games/03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/roulette/games/04.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/roulette/games/05.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/roulette/games/06.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/roulette/main-img.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/roulette/points-img.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/roulette/snow-owl.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/servidores/01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/servidores/02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/servidores/03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/servidores/04.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/servidores/05.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/servidores/06.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/servidores/links/01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/sidebar/home.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/sidebar/roulette.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/sidebar/shop.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/sobre-nosotros/01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/sobre-nosotros/02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/sobre-nosotros/03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/socials/email.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/socials/face.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/socials/facebook.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/socials/instagram.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/socials/twitter.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/stripe.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/title-o.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/img/wepay.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/inventory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/js/app.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/purchases.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/roulette.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/select_category.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/evilHtml/user_page.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/routes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/notifications.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/notifications.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/languages/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ru.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/languages/ua.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/ua.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/inventory/Inventory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/Main.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/Main.styled.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/Main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/donate/donate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/donate/donate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/components/categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/components/categories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/news.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/News.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/servers/components/serversItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/purchases/Purchases.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/purchases/Purchases.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/roulette/Roulette.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/Roulette.styled.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" afterDir="false" />
     </list>
@@ -180,7 +297,10 @@
       <workItem from="1704451767531" duration="3214000" />
       <workItem from="1704809694008" duration="427000" />
       <workItem from="1704888014367" duration="31310000" />
-      <workItem from="1705061551979" duration="6630000" />
+      <workItem from="1705061551979" duration="6677000" />
+      <workItem from="1705139852213" duration="423000" />
+      <workItem from="1705226551395" duration="123000" />
+      <workItem from="1705226830415" duration="3003000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1695910913707</created>
@@ -329,7 +449,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704456510850</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Some changes">
+      <created>1705069713438</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1705069713438</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

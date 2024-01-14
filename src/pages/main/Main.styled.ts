@@ -56,5 +56,11 @@ export const MainStyled = styled.main`
       transform: rotate(360deg);
     }
   }
+  
+  
+  .item-servidores__links p {
+    font-size: 14px;
+    color: #fff;
+  }
 
 `

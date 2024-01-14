@@ -3,7 +3,7 @@ import {MainStyled} from "./Main.styled";
 import {Banner} from "./components/banner/banner";
 import {About} from "./components/about/about";
 import {Servers} from "./components/servers/servers";
-import {News} from "./components/news/news";
+import {News} from "./components/news/News";
 import {Faq} from "./components/faq/faq";
 import {Donate} from "./components/donate/donate";
 import {Contacts} from "./components/contacts/contacts";
@@ -104,7 +104,7 @@ export const Main: React.FC<IMainProps> = () => {
                             <div className="tegs-news-open__items">
 
                                 {
-                                    singleNews?.news?.tags && singleNews?.news?.tags?.map((tag: any) => <a href={tag.slug} key={tag.id} className="tegs-news-open__item">@{tag.name}</a>)
+                                    singleNews?.news?.tags && singleNews?.news?.tags?.map((tag: any) => <div key={tag.id} className="tegs-news-open__item">@{tag.name}</div>)
                                 }
 
                             </div>
@@ -121,8 +121,8 @@ export const Main: React.FC<IMainProps> = () => {
                             </div>
                         </div>}
                         <div className="news-open__text">
-                            {ReactHtmlParser(singleNews.news?.text ?? '')}
-                            {ReactHtmlParser(singleNews?.news[clusterSettingsLang[language]] ?? '')}
+                            {singleNews?.news && ReactHtmlParser(singleNews?.news?.text ?? '')}
+                            {singleNews?.news && ReactHtmlParser(singleNews?.news[clusterSettingsLang[language]] ?? '')}
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import {apiLink} from "../../../../../hooks/apiLink";
 import {ICluster, IServer} from "../../../../../models";
 import ReactHtmlParser from "html-react-parser";
 import {ServersServer} from "./serversServer";
+import {Translate} from "../../../../../components/translate/Translate";
 
 interface IServersItemProps {
     data: IServer
@@ -52,9 +53,11 @@ export const ServersItem: React.FC<IServersItemProps> = ({data, handleReadNews})
                         </div>
                         <div className="item-servidores__links">
                             {
-                                data.clusters?.map((server: ICluster) =>
+                                data.clusters?.length ? data.clusters?.map((server: ICluster) =>
                                     <ServersServer key={server.id} server={server}/>
-                                )
+                                ) : <p>
+                                    <Translate>servers_not_found</Translate>
+                                </p>
                             }
                         </div>
                     </div>

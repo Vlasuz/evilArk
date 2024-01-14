@@ -108,7 +108,8 @@
   "case_contains": "Case contents",
   "buy_case": "Buy case",
   "count_case_to_buy": "Number of cases to buy",
-  "open_for": "Open for"
-
-
+  "open_for": "Open for",
+  "cases_not_found": "Cases not found",
+  "coming_start": "Start coming",
+  "servers_not_found": "Servers not found"
 }

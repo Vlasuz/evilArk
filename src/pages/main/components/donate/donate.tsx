@@ -34,7 +34,7 @@ export const Donate: React.FC<IDonateProps> = () => {
                         {ReactHtmlParser(pageInfo?.sub_title ?? "")}
                     </h3>
                     <div className="donaciones__sibtitle">
-                        {ReactHtmlParser(pageInfo?.text ?? "")}
+                        {ReactHtmlParser(pageInfo?.text?.replace('["Discord link"]', "Discord") ?? "")}
                     </div>
                     <div className="donaciones__row">
 

@@ -65,9 +65,9 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                         </div>
                                         <div className="purchases__items">
 
-                                            {!historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <p><Translate>not_found</Translate></p>}
+                                            {isLoad && !historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <p><Translate>not_found</Translate></p>}
 
-                                            {isLoad && historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <Swiper
+                                            {isLoad ? historyPurchases.filter((item: any) => item?.server?.id === category?.id).length && <Swiper
                                                 slidesPerView={6}
                                                 spaceBetween={37}
                                                 slidesPerGroup={6}
@@ -113,7 +113,9 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
                                                     )
                                                 }
 
-                                            </Swiper>}
+                                            </Swiper> : <p className="loading"><Translate>loading</Translate></p>
+                                            }
+
 
                                         </div>
                                     </div>

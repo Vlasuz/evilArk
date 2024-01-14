@@ -12635,6 +12635,7 @@ body.lock::before {
     border: 1.5px solid #FF6C3D;
     padding: 6px 4.5px 22px 4.5px;
     overflow: hidden;
+    /*height: 100%;*/
 }
 
 @media (max-width: 767.98px) {
@@ -14747,45 +14748,45 @@ body.lock::before {
 }
 
 .contacto__content {
-    margin-left: 210px;
+    /*margin-left: 210px;*/
 }
 
 
-@media (max-width: 1700px) {
-    .contacto__content {
-        margin-left: 160px;
-    }
-}
+/*@media (max-width: 1700px) {*/
+/*    .contacto__content {*/
+/*        margin-left: 160px;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 1550px) {
-    .contacto__content {
-        margin-left: 100px;
-    }
-}
+/*@media (max-width: 1550px) {*/
+/*    .contacto__content {*/
+/*        margin-left: 100px;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 1300px) {
-    .contacto__content {
-        margin-left: 70px;
-    }
-}
+/*@media (max-width: 1300px) {*/
+/*    .contacto__content {*/
+/*        margin-left: 70px;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 1200px) {
-    .contacto__content {
-        margin-left: 50px;
-    }
-}
+/*@media (max-width: 1200px) {*/
+/*    .contacto__content {*/
+/*        margin-left: 50px;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 479.98px) {
-    .contacto__content {
-        margin-left: 30px;
-    }
-}
+/*@media (max-width: 479.98px) {*/
+/*    .contacto__content {*/
+/*        margin-left: 30px;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 350px) {
-    .contacto__content {
-        margin-left: 10px;
-    }
-}
+/*@media (max-width: 350px) {*/
+/*    .contacto__content {*/
+/*        margin-left: 10px;*/
+/*    }*/
+/*}*/
 
 .contacto__btn:first-child img {
     width: 36px;
@@ -15025,6 +15026,10 @@ body.lock::before {
     line-height: 160%;
     letter-spacing: -0.01em;
     color: #FFFFFF;
+}
+
+.donaciones__sibtitle a {
+    color: #7289da;
 }
 
 .donaciones__sibtitle:not(:last-child) {

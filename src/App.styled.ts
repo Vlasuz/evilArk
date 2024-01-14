@@ -25,4 +25,15 @@ export const AppStyled = styled.div`
       transition: all .3s ease;
     }
   }
+
+
+  .tegs-news-open__items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .purchases__items .loading {
+    font-size: 20px;
+    color: #fff;
+  }
 `

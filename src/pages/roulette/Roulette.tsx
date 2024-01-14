@@ -167,10 +167,10 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                 {category && <div className="roulette__inner">
                                     <div className="roulette__filter filter-roulette">
                                         <div className="filter-roulette__categories categories-filter-roulette">
-                                            <div className="categories-filter-roulette__items">
+                                            <div className={roulettesCases.length ? `categories-filter-roulette__items` : ""}>
 
                                                 {
-                                                    roulettesCases.map((item: any) =>
+                                                    roulettesCases.length ? roulettesCases.map((item: any) =>
                                                         <NavLink to={`/roulette/${item.id}`} key={item.id} onClick={_ => handleSelectCase(item)}
                                                              className={"categories-filter-roulette__item"}>
                                                             <div className={"categories-filter-roulette__link categories-filter-roulette__link_blue" + (activeCase.id === item.id ? " active" : "")}>
@@ -187,7 +187,9 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                                                 {/*</button>*/}
                                                             </div>
                                                         </NavLink>
-                                                    )
+                                                    ) : <h5 className="title-h5">
+                                                        <Translate>cases_not_found</Translate>
+                                                    </h5>
                                                 }
 
                                             </div>
@@ -246,31 +248,31 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                         {/*    </div>}*/}
                                     </div>
 
-                                    {activeCase?.products && <div className="filter-roulette__games games-filter-roulette">
-                                        <div className="games-filter-roulette__slider games-filter-roulette__slider_in">
-                                            <div className="games-filter-roulette__title title-games-filter-roulette">
-                                                <div className="title-games-filter-roulette__text">
-                                                    Предметы из кейса:
-                                                </div>
-                                            </div>
-                                            <div className="games-filter-roulette__items_in">
+                                    {/*{activeCase?.products && <div className="filter-roulette__games games-filter-roulette">*/}
+                                    {/*    <div className="games-filter-roulette__slider games-filter-roulette__slider_in">*/}
+                                    {/*        <div className="games-filter-roulette__title title-games-filter-roulette">*/}
+                                    {/*            <div className="title-games-filter-roulette__text">*/}
+                                    {/*                Предметы из кейса:*/}
+                                    {/*            </div>*/}
+                                    {/*        </div>*/}
+                                    {/*        <div className="games-filter-roulette__items_in">*/}
 
-                                                {
-                                                    activeCase?.products?.map((item: IProduct, index: number) =>
-                                                        <RouletteItem
-                                                            key={index}
-                                                            isStart={index === 0 ? isStartRoulette : null}
-                                                            data={{
-                                                                name: index !== 35 ? item?.name : winnerItem?.name,
-                                                                image: index !== 35 ? item?.icon : winnerItem?.icon,
-                                                                isWinner: index === 35
-                                                            }}/>)
-                                                }
+                                    {/*            {*/}
+                                    {/*                activeCase?.products?.map((item: IProduct, index: number) =>*/}
+                                    {/*                    <RouletteItem*/}
+                                    {/*                        key={index}*/}
+                                    {/*                        isStart={index === 0 ? isStartRoulette : null}*/}
+                                    {/*                        data={{*/}
+                                    {/*                            name: index !== 35 ? item?.name : winnerItem?.name,*/}
+                                    {/*                            image: index !== 35 ? item?.icon : winnerItem?.icon,*/}
+                                    {/*                            isWinner: index === 35*/}
+                                    {/*                        }}/>)*/}
+                                    {/*            }*/}
 
-                                            </div>
+                                    {/*        </div>*/}
 
-                                        </div>
-                                    </div>}
+                                    {/*    </div>*/}
+                                    {/*</div>}*/}
 
                                     <div className="roulette__users users">
 

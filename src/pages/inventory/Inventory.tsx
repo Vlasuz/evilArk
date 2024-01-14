@@ -64,11 +64,11 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                     <div className="inner__content content-inner">
                                         <div className="content-inner__body">
                                             <div className="purchases__items">
-                                                {!inventory.filter(item => item?.server?.id === category?.id).length && isLoad &&
+                                                {isLoad && !inventory.filter(item => item?.server?.id === category?.id).length && isLoad &&
                                                     <p><Translate>not_found</Translate></p>}
 
 
-                                                {isLoad && <Swiper
+                                                {isLoad ? <Swiper
                                                     slidesPerView={6}
                                                     spaceBetween={37}
                                                     slidesPerGroup={5}
@@ -106,7 +106,7 @@ export const Inventory: React.FC<IInventoryProps> = () => {
                                                             </SwiperSlide>
                                                         )
                                                     }
-                                                </Swiper>}
+                                                </Swiper> : <p className="loading"><Translate>loading</Translate></p>}
 
                                             </div>
                                         </div>

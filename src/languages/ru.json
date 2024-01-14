@@ -106,5 +106,8 @@
   "case_contains": "Содержимое кейса",
   "buy_case": "Приобрести кейс",
   "count_case_to_buy": "Количество кейсов к покупке",
-  "open_for": "Открыть за"
+  "open_for": "Открыть за",
+  "cases_not_found": "Кейсов нет",
+  "coming_start": "Ближайший страт",
+  "servers_not_found": "Серверов нет..."
 }

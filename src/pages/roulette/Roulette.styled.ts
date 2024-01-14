@@ -295,5 +295,16 @@ export const RouletteStyled = styled.div`
     }
   }
   
+  
+  .filter-roulette__categories.categories-filter-roulette {
+    .title-h5 {
+      font-weight: 300;
+      font-size: 30px;
+      
+      @media screen and (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
+  }
 
 `
