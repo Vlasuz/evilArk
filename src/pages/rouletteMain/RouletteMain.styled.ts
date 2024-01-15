@@ -593,6 +593,39 @@ export const RouletteMainStyled = styled.div`
     overflow: hidden;
     margin-top: -30px;
     margin-bottom: -30px;
+    gap: 15px;
+    
+    @media screen and (max-width: 1150px) {
+      margin-left: -20px;
+      margin-right: -20px;
+      width: calc(100% + 40px);
+    }
+    @media screen and (max-width: 1100px) {
+      gap: 5px;
+      .multiple__line .spin__card {
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+
+      .card__top span,
+      .card__bottom {
+        font-size: 10px;
+      }
+    }
+    @media screen and (max-width: 576px) {
+      .multiple__line .spin__card .rarity svg {
+        width: 14px; 
+      }
+      .card__bottom {
+        opacity: 0;
+        font-size: 2px;
+      }
+      .multiple__line .spin__card {
+        padding-left: 1px;
+        padding-right: 1px;
+        -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;
+      }
+    }
 
     .multiple__line {
       animation: spinVertical 10s ease forwards;
