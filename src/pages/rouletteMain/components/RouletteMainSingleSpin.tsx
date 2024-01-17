@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { IProduct } from '../../../models'
 import {useNavigate} from "react-router-dom";
 import { rarities } from '../../../functions/rarities';
+import {RouletteMainArrows} from "./RouletteMainArrows";
 
 interface IRouletteMainSingleSpinProps {
     caseData: any
@@ -42,6 +43,8 @@ export const RouletteMainSingleSpin: React.FC<IRouletteMainSingleSpinProps> = ({
 
     return (
         <div className={`spin-single ${isSpinStart && "spin-single__spin"} ${isFastOpen && "spin-single__fast"}`}>
+
+            <RouletteMainArrows/>
 
             {
                 itemsForRoll.length && itemsForRoll.map((item: IProduct, index: number) =>

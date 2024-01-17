@@ -107,7 +107,7 @@ export const RouletteMain: React.FC<IRouletteMainProps> = () => {
     }
 
     const caseCount = [1, 3, 5]
-    const [casesAmount, setCasesAmount] = useState(caseCount[0])
+    const [casesAmount, setCasesAmount] = useState(caseCount[2])
     const [isSpinStart, setIsSpinStart] = useState(false)
 
     return (

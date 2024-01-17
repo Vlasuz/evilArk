@@ -807,4 +807,63 @@ export const RouletteMainStyled = styled.div`
       }
     }
   }
+  
+  .roulette__case {
+    position: relative;
+  }
+  .arrow {
+    position: absolute;
+    top: -10px;
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    &__bottom {
+      top: auto;
+      bottom: -10px;
+      transform: translateX(-50%) rotateX(180deg);
+    }
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+  
+  .multiple__block {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    height: 448px;
+    overflow: hidden;
+    margin-top: -0px;
+    margin-bottom: -0px;
+    gap: 15px;
+    width: fit-content;
+    .arrow {
+      position: absolute;
+      transform: rotate(90deg);
+      right: -516px;
+      top: 0;
+      left: auto;
+      width: 1050px;
+      height: auto;
+      z-index: 2;
+      svg {
+        width: auto;
+        height: auto;
+      }
+      
+      &__bottom {
+        position: absolute;
+        transform: rotate(-90deg);
+        left: -924px;
+        right: auto;
+        top: 0;
+        width: 1865px;
+        height: auto;
+        z-index: 2;
+        bottom: auto;
+      }
+    }
+  }
 `
