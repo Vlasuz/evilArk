@@ -47,7 +47,6 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
     const userStatusColor = isCategoryPve ? userInfo?.level?.filter(item => item.server.id === category.id)[0].color_PVE : userInfo?.level?.filter(item => item.server.id === category.id)[0]?.color
     const userStatusName = isCategoryPve ? userInfo.level?.filter(item => item.server.id === category.id)[0].level_name_PVE : userInfo.level?.filter(item => item.server.id === category.id)[0]?.level_name ?? "Newbie"
 
-
     const isPopupOpen: any = useContext(PopupContext)
 
     return (
@@ -56,29 +55,19 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
             <div className="content-inner__body">
                 <div className="profile__row">
                     <div className="profile__user user-profile">
+                        <div className="user-profile__name">{userInfo.name}</div>
                         <div className="user-profile__image" style={{borderColor: userStatusColor ?? "#000"}}>
                             <img src={userInfo.avatar} alt="user-icon.svg"/>
                         </div>
-                        <div className="user-profile__body">
-                            <div className="user-profile__name">{userInfo.name}</div>
-                            <div className="user-profile__level" data-da="info-profile, 2, 600">
-                                <Translate>level</Translate> <span>{userStatusName}</span>
-                            </div>
-                        </div>
-                        <button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>
-                            <Translate>exit_from_site</Translate>
-                        </button>
-                    </div>
-                    <button onClick={_ => isPopupOpen(true)} className={"replenishment-bonuses__btn connect-to-asa"}>
-                        <Translate>connect_asa</Translate>
-                    </button>
-                    <div className="profile__info info-profile">
                         <div className="info-profile__id" data-da="user-profile__body, 2, 600">
                             SteamID: <span>{userInfo.steam_id}</span>
                         </div>
                         {userInfo.eos_id && <div className="info-profile__id" data-da="user-profile__body, 2, 600">
                             EOS ID: <span>{userInfo.eos_id}</span>
                         </div>}
+                        <div className="user-profile__level" data-da="info-profile, 2, 600">
+                            <Translate>level</Translate> <span>{userStatusName}</span>
+                        </div>
                         <div className="info-profile__balance balance-info-profile">
                             <div className="balance-info-profile__text">
                                 <Translate>balance</Translate>
@@ -95,16 +84,22 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                                 {bonusBalance} EC
                             </div>
                         </div>
+                        {/*<button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>*/}
+                        {/*    <Translate>exit_from_site</Translate>*/}
+                        {/*</button>*/}
+                        <button onClick={_ => isPopupOpen(true)} className={"replenishment-bonuses__btn connect-to-asa"}>
+                            <Translate>connect_asa</Translate>
+                        </button>
+                    </div>
+                    <div className="right-block">
                         <button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>
                             <Translate>exit_from_site</Translate>
                         </button>
+                        <ProfilePromo/>
+                        <Calculator/>
                     </div>
                 </div>
 
-                <div className="profile__promo">
-                    <Calculator/>
-                    <ProfilePromo/>
-                </div>
                 <HistoryDonate data={donateHistory.filter((item: any) => item.server.id === category.id)}/>
             </div>
         </ProfileStyled>

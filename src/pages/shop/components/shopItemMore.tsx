@@ -195,7 +195,7 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive, isPropose,
 
                                 {
                                     product?.case?.map((item: IProduct) =>
-                                        <div key={item.id} className="rare-select-product__item">
+                                        <div onClick={_ => setProposeProduct(item.id)} key={item.id} className="rare-select-product__item">
                                             <div className="label-rare-select-product__row">
                                                 <div className="label-rare-select-product__image">
                                                     <img src={item.icon} alt="organic"/>

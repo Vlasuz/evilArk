@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useImages} from "../../../../../hooks/images";
 import {apiLink} from "../../../../../hooks/apiLink";
 import {ICluster, IServer} from "../../../../../models";
@@ -16,6 +16,7 @@ export const ServersItem: React.FC<IServersItemProps> = ({data, handleReadNews})
     const {arrowWhite, placeholder} = useImages()
 
     const [isClickToOpen, setIsClickToOpen] = useState(false)
+    const [isShowServers, setIsShowServers] = useState(false)
 
     const clickToSettings = (id: string | number) => {
         setIsClickToOpen(true)
@@ -25,9 +26,17 @@ export const ServersItem: React.FC<IServersItemProps> = ({data, handleReadNews})
         })
     }
 
+    const handleShowServers = () => {
+        setIsShowServers(prev => !prev)
+    }
+
+    const serverBlock: any = useRef(null)
+
+    console.log(serverBlock.current?.clientHeight)
+
     return (
         <div className="servidores__column">
-            <div className="servidores__item item-servidores">
+            <div className={`servidores__item item-servidores ${isShowServers && "servidores__item_active"}`}>
                 <div className="item-servidores__body">
                     <div className="item-servidores__image">
                         <img src={data.image ?? placeholder} alt="4 MAN Cluster"/>
@@ -47,14 +56,14 @@ export const ServersItem: React.FC<IServersItemProps> = ({data, handleReadNews})
                                     </g>
                                 </svg>
                             </div>
-                            <div className="item-servidores__btn">
+                            <div className="item-servidores__btn" onClick={handleShowServers}>
                                 <img src={arrowWhite} alt="arrow"/>
                             </div>
                         </div>
-                        <div className="item-servidores__links">
+                        <div className="item-servidores__links" style={{height: isShowServers ? ((data?.clusters?.length ? data?.clusters?.length : 1) * serverBlock.current?.clientHeight) + "px" : "0px"}}>
                             {
                                 data.clusters?.length ? data.clusters?.map((server: ICluster) =>
-                                    <ServersServer key={server.id} server={server}/>
+                                    <ServersServer key={server.id} serverBlock={serverBlock} server={server}/>
                                 ) : <p>
                                     <Translate>servers_not_found</Translate>
                                 </p>

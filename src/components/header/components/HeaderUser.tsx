@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {IServer, IUser} from "../../../models";
 import {NavLink} from "react-router-dom";
 import {toast} from "react-toastify";
+import {Translate} from "../../translate/Translate";
 
 interface IUserProps {
 
@@ -28,7 +29,9 @@ export const HeaderUser: React.FC<IUserProps> = () => {
                             <use xlinkHref="#inventory"></use>
                         </svg>
                     </NavLink>
-                    <div className="bonuses-balance-header__message">Invenroty</div>
+                    <div className="bonuses-balance-header__message">
+                        <Translate>my_inventory</Translate>
+                    </div>
                 </div>
                 <div className="balance-header__top-up top-up-balance-header">
                     <NavLink to={'/profile'} className="top-up-balance-header__icon">
@@ -36,7 +39,9 @@ export const HeaderUser: React.FC<IUserProps> = () => {
                             <use xlinkHref="#wallet" />
                         </svg>
                     </NavLink>
-                    <div className="top-up-balance-header__message">Top up your account</div>
+                    <div className="top-up-balance-header__message">
+                        <Translate>top_up_your_account</Translate>
+                    </div>
                 </div>
                 <div className="balance-header__value">{userInfo.balance?.filter(item => item.server.id === category.id)[0]?.balance.toFixed(2)} EC</div>
             </div>

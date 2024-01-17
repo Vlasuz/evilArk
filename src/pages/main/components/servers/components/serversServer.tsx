@@ -6,9 +6,10 @@ import {toast} from "react-toastify";
 
 interface IServersServerProps {
     server: ICluster
+    serverBlock: any
 }
 
-export const ServersServer:React.FC<IServersServerProps> = ({server}) => {
+export const ServersServer:React.FC<IServersServerProps> = ({server, serverBlock}) => {
 
     const {placeholder} = useImages()
 
@@ -24,7 +25,7 @@ export const ServersServer:React.FC<IServersServerProps> = ({server}) => {
     }
 
     return (
-        <div className={"server_ip"}>
+        <div ref={serverBlock} className={"server_ip"}>
             <a href={server.url} target={"_blank"} className="item-servidores__link">
                 <img src={server.image ?? placeholder} alt=""/>
                 <span>{

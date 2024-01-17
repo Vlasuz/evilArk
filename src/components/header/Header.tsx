@@ -87,7 +87,9 @@ export const Header: React.FC<IHeaderProps> = () => {
                                     <use xlinkHref="#bonuses" />
                                 </svg>
                             </NavLink>
-                            <div className="bonuses-balance-header__message">Bonuses</div>
+                            <div className="bonuses-balance-header__message">
+                                <Translate>bonuses_title</Translate>
+                            </div>
                         </div>
                         <div className="balance-header__top-up top-up-balance-header">
                             <NavLink to={'/profile'} className="top-up-balance-header__icon">
@@ -95,7 +97,9 @@ export const Header: React.FC<IHeaderProps> = () => {
                                     <use xlinkHref="#wallet"/>
                                 </svg>
                             </NavLink>
-                            <div className="top-up-balance-header__message">Top up your account</div>
+                            <div className="top-up-balance-header__message">
+                                <Translate>top_up_your_account</Translate>
+                            </div>
                         </div>
                         <div className="balance-header__value">{balance} EC</div>
                     </div>}

@@ -12705,13 +12705,20 @@ body.lock::before {
     cursor: pointer;
 }
 
-.servidores__item:hover .item-servidores__links {
-    height: 50%;
+.servidores__item .item-servidores__links{
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.servidores__item.servidores__item_active .item-servidores__links {
     margin: 17px 0 0 0;
     padding: 13px 0 0 0;
     border-top: 1.5px solid #051E3D;
 }
-.servidores__item:hover .item-servidores__info .item-servidores__btn img {
+.servidores__item.servidores__item_active .item-servidores__info .item-servidores__btn img {
     transform: rotateX(-180deg);
 }
 

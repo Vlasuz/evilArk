@@ -14,7 +14,9 @@ export const ShopItemMoreSelect: React.FC<IShopItemMoreSelectProps> = ({modules,
     const [isOpen, setIsOpen] = useState(false)
     const [moduleActive, setModuleActive] = useState<IProduct | undefined>(modules && modules[0])
 
-    console.log(modules)
+    useEffect(() => {
+        setModuleActive(modules && modules[0])
+    }, [modules])
 
     const handleChooseModule = (item: IProduct) => {
         setIsOpen(false)

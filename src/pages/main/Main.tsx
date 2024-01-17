@@ -2,7 +2,7 @@ import React, {createContext, useEffect, useRef, useState} from 'react'
 import {MainStyled} from "./Main.styled";
 import {Banner} from "./components/banner/banner";
 import {About} from "./components/about/about";
-import {Servers} from "./components/servers/servers";
+import {Servers} from "./components/servers/Servers";
 import {News} from "./components/news/News";
 import {Faq} from "./components/faq/faq";
 import {Donate} from "./components/donate/donate";

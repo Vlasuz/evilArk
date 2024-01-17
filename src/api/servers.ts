@@ -4,6 +4,7 @@ import {apiLink} from "../hooks/apiLink";
 import {IServer} from "../models";
 import {setCategory, setServers} from "../redux/toolkitSlice";
 import getCookies from "../functions/getCookie";
+import setCookie from "../functions/setCookie";
 
 interface serversProps {
     dispatch: any
@@ -17,8 +18,11 @@ export const servers = ({dispatch}: serversProps) => {
         dispatch(setServers(axiosData))
         dispatch(setCategory(selectedClusterID ? axiosData.filter((item: any) => String(item.id) === String(selectedClusterID))[0] : axiosData?.filter(item => item.is_active)[0]))
         if(window.location.href.includes("?cluster")) {
+
             const clusterId = window.location.href.slice(window.location.href.indexOf("?cluster") + 9, window.location.href.indexOf("&") > 0 ? window.location.href.indexOf("&") : undefined)
             dispatch(setCategory(axiosData.filter(item => item.is_active)?.filter((item: any) => String(item.id) === String(clusterId))[0]))
+            setCookie("cluster", clusterId)
+
         }
 
     })

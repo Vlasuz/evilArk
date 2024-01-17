@@ -298,13 +298,15 @@ export const ShopStyled = styled.main`
       height: 100%;
       
       img {
+        width: 170px;
+        margin: 0 auto;
         margin-top: auto;
       }
 
       &:before {
         content: '';
-        width: 50px;
-        height: 50px;
+        width: 35px;
+        height: 35px;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
@@ -321,7 +323,7 @@ export const ShopStyled = styled.main`
       background-image: url(${check});
       background-repeat: no-repeat;
       background-position: center;
-      background-size: 25px;
+      background-size: 20px;
     }
     
     button {
@@ -335,9 +337,9 @@ export const ShopStyled = styled.main`
 
     p {
       color: #fff;
-      font-size: 22px;
+      font-size: 20px;
       text-align: center;
-      padding-bottom: 20px;
+      padding-bottom: 10px;
     }
 
     input {
@@ -416,5 +418,16 @@ export const ShopStyled = styled.main`
       //flex-direction: column;
       margin-top: 10px;
     }
+  }
+  
+  .rare-select-product__item {
+    transition: all .3s ease;
+  }
+  .rare-select-product__item:hover {
+    -webkit-transform: scale(1.1);-moz-transform: scale(1.1);-ms-transform: scale(1.1);-o-transform: scale(1.1);transform: scale(1.1);
+    cursor: pointer;
+  }
+  .rare-select-product__item:active {
+    -webkit-transform: scale(0.98);-moz-transform: scale(0.98);-ms-transform: scale(0.98);-o-transform: scale(0.98);transform: scale(0.98);
   }
 `

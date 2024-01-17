@@ -130,8 +130,75 @@ export const ProfileStyled = styled.div`
     }
   }
   
+  .exit-button {
+    font-size: 24px;
+  }
+  .replenishment-bonuses {
+    margin-top: 20px;
+  }
+  .promo__form {
+    padding-top: 15px;
+    margin-top: auto;
+  }
   .balance-info-profile {
     margin-bottom: 10px;
+  }
+
+  .profile__row {
+    align-items: normal;
+    height: 100%;
+  }
+  
+  .right-block {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-profile__image {
+    width: 300px;
+    flex: 0 0 300px;
+    margin: 15px 0;
+  }
+  .user-profile__name {
+    margin: 0;
+    font-weight: 600;
+    font-size: 40px;
+  }
+  .info-profile__id {
+    margin: 5px 0;
+  }
+  .user-profile__level {
+    margin: 15px 0;
+  }
+  .connect-to-asa {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .user-profile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  
+  @media screen and (max-width: 1400px) {
+    .profile__row {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  @media screen and (max-width: 576px) {
+    .user-profile__image {
+      width: 100%;
+      flex: 0 0 100%;
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .exit-button {
+      font-size: 18px;
+    }
   }
 
 
