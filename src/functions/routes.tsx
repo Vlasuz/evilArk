@@ -12,6 +12,7 @@ import { PageNotFound } from "../pages/pageNotFound/pageNotFound";
 import {User} from "../pages/user/User";
 import {Text} from "../pages/text/Text";
 import {RouletteMain} from "../pages/rouletteMain/RouletteMain";
+import {BalanceInfo} from "../pages/balanceInfo/BalanceInfo";
 
 export const routes: IRoutes[] = [
     {
@@ -72,6 +73,11 @@ export const routes: IRoutes[] = [
     {
         path: '/docs/:docsId',
         element: <Text/>,
+        isPublic: true,
+    },
+    {
+        path: '/balance-info',
+        element: <BalanceInfo/>,
         isPublic: true,
     },
 ]

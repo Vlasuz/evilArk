@@ -54,11 +54,10 @@ export const Shop: React.FC<IShopProps> = () => {
             ...filter
         }).then(({data}) => {
 
-            console.log(data)
-
             setShop(data.data)
             setPagination(data.meta.links)
             setIsLoading(false)
+
         }).catch(er => console.log(er))
     }
 
@@ -111,7 +110,7 @@ export const Shop: React.FC<IShopProps> = () => {
                                         <div className="shop__pagination">
 
                                             {
-                                                pagination.length > 3 && pagination.map((pag: any, index: any) =>
+                                                pagination.length > 3 && pagination?.map((pag: any, index: any) =>
                                                     <button key={pag.url + index} className={pag.active ? " _active" : ""}
                                                             onClick={_ => asyncLoading(pag.url)}>{pag.label}</button>
                                                 )

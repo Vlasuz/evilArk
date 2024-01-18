@@ -101,7 +101,7 @@ export const Header: React.FC<IHeaderProps> = () => {
                                 <Translate>top_up_your_account</Translate>
                             </div>
                         </div>
-                        <div className="balance-header__value">{balance} EC</div>
+                        <div className="balance-header__value">{balance} EC <NavLink to={"/balance-info"}>i</NavLink></div>
                     </div>}
                 </div>
                 <div className="mobile-header__body">

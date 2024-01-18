@@ -43,7 +43,7 @@ export const HeaderUser: React.FC<IUserProps> = () => {
                         <Translate>top_up_your_account</Translate>
                     </div>
                 </div>
-                <div className="balance-header__value">{userInfo.balance?.filter(item => item.server.id === category.id)[0]?.balance.toFixed(2)} EC</div>
+                <div className="balance-header__value">{userInfo.balance?.filter(item => item.server.id === category.id)[0]?.balance.toFixed(2)} EC <NavLink to={"/balance-info"}>i</NavLink></div>
             </div>
             <div onClick={handleCopy} className="balance-header__id">
                 SteamID

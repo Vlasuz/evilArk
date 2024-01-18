@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="Some changes">
-      <change afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainArrows.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/balanceInfo/BalanceInfo.styled.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/balanceInfo/BalanceInfo.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.styled.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainMultipleLine.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainMultipleLine.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainSingleSpin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainSingleSpin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/img/media/VideoEvilArk.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/img/servidores/06.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/components/HeaderUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/components/HeaderUser.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functions/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/routes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +181,8 @@
       <workItem from="1705323334706" duration="638000" />
       <workItem from="1705326586916" duration="3583000" />
       <workItem from="1705473833058" duration="4630000" />
-      <workItem from="1705503580208" duration="1778000" />
+      <workItem from="1705503580208" duration="2079000" />
+      <workItem from="1705566869571" duration="4935000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1695910913707</created>
@@ -353,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705490399382</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Some changes">
+      <created>1705505632655</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1705505632655</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useImages} from "../../../hooks/images";
-import {IFilterShop, ISort} from "../../../models";
+import {IFilterShop, IServer, ISort} from "../../../models";
 import axios from "axios";
 import {apiLink} from "../../../hooks/apiLink";
 import {Translate} from "../../../components/translate/Translate";
@@ -58,16 +58,14 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
     }
 
     useEffect(() => {
+        setChosenCategory([])
+    }, [category])
+
+    useEffect(() => {
         setFilter({
             searchTerm: filter?.searchTerm,
             category: chosenCategory.map((item: any) => {
-                if (language === "en") {
-                    return item.name_en
-                } else if (language === "ua") {
-                    return item.name_ua
-                } else if (language === "ru") {
-                    return item.name_ru
-                }
+                return item.name_ru
             }),
             orderBy: filter?.orderBy,
             orderDirection: filter?.orderDirection
@@ -78,13 +76,7 @@ export const ShopFilter: React.FC<IShopFilterProps> = ({setFilter, filter}) => {
         setFilter({
             searchTerm: filter?.searchTerm,
             category: chosenCategory.map((item: any) => {
-                if (language === "en") {
-                    return item?.name_en
-                } else if (language === "ua") {
-                    return item?.name_ua
-                } else if (language === "ru") {
-                    return item?.name_ru
-                }
+                return item?.name_ru
             }),
             orderBy: filter?.orderBy,
             orderDirection: filter?.orderDirection
