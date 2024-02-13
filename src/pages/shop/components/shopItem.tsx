@@ -59,7 +59,8 @@ export const ShopItem: React.FC<IShopItemProps> = ({data}) => {
                 {/*<div className="item-cards-categories__body">*/}
                 {/*</div>*/}
                 <span className="item-cards-categories__name">
-                        {isProductModule ? moduleProduct?.name : data.name}
+                        {/*{isProductModule ? moduleProduct?.name : data.name}*/}
+                        {data.name}
                     </span>
                 <span className="item-cards-categories__image">
                         <LazyLoadImage src={isProductModule ? moduleProduct.icon : data.icon} alt="PvP Simple Kit"/>

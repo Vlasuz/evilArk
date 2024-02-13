@@ -225,8 +225,14 @@ export const RouletteStyled = styled.div`
   }
 
 
+  .categories-filter-roulette__item {
+    margin: 0;
+    display: block;
+    height: 100%;
+  }
   .categories-filter-roulette__items {
     display: grid;
+    gap: 15px;
     grid-template-columns: repeat(5, 1fr);
   }
 
@@ -269,13 +275,14 @@ export const RouletteStyled = styled.div`
     
     .item__image {
       width: 100%;
-      height: 100%;
+      height: 80%;
+      display: flex;
+      align-items: center;
     }
     
     img {
       width: 100%;
-      height: 100%;
-      -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;
+      border-radius: 10px;
     }
     
     p {

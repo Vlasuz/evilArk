@@ -8187,15 +8187,15 @@ body.lock::before {
     border: 1px solid rgba(255, 255, 255, 0.7568627451);
 }
 
-.categories-filter-roulette__link::before {
-    position: absolute;
-    content: "";
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    top: 11px;
-    z-index: -1;
-}
+/*.categories-filter-roulette__link::before {*/
+/*    position: absolute;*/
+/*    content: "";*/
+/*    width: 80px;*/
+/*    height: 80px;*/
+/*    border-radius: 50%;*/
+/*    top: 11px;*/
+/*    z-index: -1;*/
+/*}*/
 
 @media (max-width: 1200px) {
     .categories-filter-roulette__link {

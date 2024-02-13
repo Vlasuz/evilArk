@@ -70,6 +70,7 @@ export const RouletteMain: React.FC<IRouletteMainProps> = () => {
 
     async function openCaseApi() {
 
+        setWinnerItems([])
         let countOfCheck = 0;
 
         for(let i = 1; i <= casesAmount; i++) {

@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="Some changes">
-      <change afterPath="$PROJECT_DIR$/src/pages/balanceInfo/BalanceInfo.styled.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/balanceInfo/BalanceInfo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/media/VideoEvilArk.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/servidores/06.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/img/media/VideoEvilArk.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/img/servidores/06.gif" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/components/HeaderUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/components/HeaderUser.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/routes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopFilter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/profile/components/ProfileUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/components/ProfileUser.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/roulette/Roulette.styled.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/Roulette.styled.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/roulette/Roulette.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/rouletteMain/RouletteMain.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopItem.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +180,10 @@
       <workItem from="1705326586916" duration="3583000" />
       <workItem from="1705473833058" duration="4630000" />
       <workItem from="1705503580208" duration="2079000" />
-      <workItem from="1705566869571" duration="4935000" />
+      <workItem from="1705566869571" duration="4971000" />
+      <workItem from="1705680334396" duration="160000" />
+      <workItem from="1706597903359" duration="2264000" />
+      <workItem from="1707808844632" duration="458000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1695910913707</created>
@@ -366,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705505632655</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Some changes">
+      <created>1705589807536</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1705589807536</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

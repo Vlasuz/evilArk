@@ -47,6 +47,7 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     const [rouletteHistory, setRouletteHistory] = useState<any>([])
     const [isStartRoulette, setIsStartRoulette] = useState(false)
     const [isActive, setIsActive] = useState(false)
+    const [isLoad, setIsLoad] = useState(false)
 
     const handleSelectCase = (caseData: any) => {
 
@@ -97,10 +98,11 @@ export const Roulette: React.FC<IRouletteProps> = () => {
     // }
 
     useEffect(() => {
+        setIsLoad(false)
         axios.get(apiLink("api/roulettes?server_id=" + category.id)).then(({data}) => {
             setRoulettesCases(data.data)
-            // setActiveCase(data.data[0])
             console.log(data.data)
+            setIsLoad(true)
         }).catch(er => console.log(er))
     }, [category])
 
@@ -170,27 +172,35 @@ export const Roulette: React.FC<IRouletteProps> = () => {
                                             <div className={roulettesCases.length ? `categories-filter-roulette__items` : ""}>
 
                                                 {
-                                                    roulettesCases.length ? roulettesCases.map((item: any) =>
-                                                        <NavLink to={`/roulette/${item.id}`} key={item.id} onClick={_ => handleSelectCase(item)}
-                                                             className={"categories-filter-roulette__item"}>
-                                                            <div className={"categories-filter-roulette__link categories-filter-roulette__link_blue" + (activeCase.id === item.id ? " active" : "")}>
-                                                                <div className="item__image">
-                                                                    <img src={item.image} alt=""/>
-                                                                </div>
-                                                                <p>
-                                                                    {item.name}
-                                                                    <span>{item.cost} EC</span>
-                                                                </p>
+                                                    !isLoad ? <h5 className="title-h5">
+                                                        <Translate>loading</Translate>
+                                                    </h5> :
+                                                        <>
+                                                            {
+                                                                roulettesCases.length ? roulettesCases.map((item: any) =>
+                                                                    <NavLink to={`/roulette/${item.id}`} key={item.id} onClick={_ => handleSelectCase(item)}
+                                                                             className={"categories-filter-roulette__item"}>
+                                                                        <div className={"categories-filter-roulette__link categories-filter-roulette__link_blue" + (activeCase.id === item.id ? " active" : "")}>
+                                                                            <div className="item__image">
+                                                                                <img src={item.image} alt=""/>
+                                                                            </div>
+                                                                            <p>
+                                                                                {item.name}
+                                                                                <span>{item.cost} EC</span>
+                                                                            </p>
 
-                                                                {/*<button onClick={_ => setIsActive(true)}>*/}
-                                                                {/*    i*/}
-                                                                {/*</button>*/}
-                                                            </div>
-                                                        </NavLink>
-                                                    ) : <h5 className="title-h5">
-                                                        <Translate>cases_not_found</Translate>
-                                                    </h5>
+                                                                            {/*<button onClick={_ => setIsActive(true)}>*/}
+                                                                            {/*    i*/}
+                                                                            {/*</button>*/}
+                                                                        </div>
+                                                                    </NavLink>
+                                                                ) : <h5 className="title-h5">
+                                                                    <Translate>cases_not_found</Translate>
+                                                                </h5>
+                                                            }
+                                                        </>
                                                 }
+
 
                                             </div>
                                         </div>

@@ -65,6 +65,9 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                         {userInfo.eos_id && <div className="info-profile__id" data-da="user-profile__body, 2, 600">
                             EOS ID: <span>{userInfo.eos_id}</span>
                         </div>}
+                        <button onClick={_ => isPopupOpen(true)} className={"replenishment-bonuses__btn connect-to-asa"}>
+                            <Translate>connect_asa</Translate>
+                        </button>
                         <div className="user-profile__level" data-da="info-profile, 2, 600">
                             <Translate>level</Translate> <span>{userStatusName}</span>
                         </div>
@@ -87,9 +90,6 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                         {/*<button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>*/}
                         {/*    <Translate>exit_from_site</Translate>*/}
                         {/*</button>*/}
-                        <button onClick={_ => isPopupOpen(true)} className={"replenishment-bonuses__btn connect-to-asa"}>
-                            <Translate>connect_asa</Translate>
-                        </button>
                     </div>
                     <div className="right-block">
                         <button onClick={handleExit} className={"replenishment-bonuses__btn exit-button"}>
