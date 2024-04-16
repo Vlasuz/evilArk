@@ -33,7 +33,7 @@ export const News: React.FC<INewsProps> = () => {
     const [isStartCat, setIsStartCat] = useState(false)
 
     useEffect(() => {
-        axios.get(apiLink('api/news?language=' + lang)).then(({data}) => {
+        axios.get(apiLink('api/news?revert&language=' + lang)).then(({data}) => {
             dispatch(setNews(data.data.length ? data.data : []))
         })
     }, [lang])

@@ -59,7 +59,7 @@ body {
 			left: 0;
 			top: 0;
 			background: #00000066;
-			backdrop-filter: blur(2px);
+			// backdrop-filter: blur(2px);
 			z-index: 150;
 		}	
 	}
@@ -91,7 +91,7 @@ body {
 		// left: 84px;
 		left: 110px;
 		background: rgba(0, 55, 128, 0.8);
-		filter: blur(350px);
+		// filter: blur(350px);
 		z-index: 20;
 	}
 }
@@ -192,7 +192,7 @@ body {
 			bottom: -306px;
 			right: -252px;
 			background: #051223;
-			filter: blur(125px);
+			// filter: blur(125px);
 			@media (min-width: ($md2+px)) {
 				animation: circle 6s linear infinite;
 			}
@@ -224,7 +224,7 @@ body {
 			bottom: -244px;
 			left: -141px;
 			background-color: #051223;
-			filter: blur(100px);
+			// filter: blur(100px);
 			@media (min-width: ($md2+px)) {
 				animation: circle 6s linear infinite;
 			}
@@ -1199,7 +1199,7 @@ body {
 		background: #0060DE80;
 		right: -200px;
 		top: -250px;
-		filter: blur(500px);
+		// filter: blur(500px);
 		pointer-events: none;
 		@media (min-width: ($md2+px)) {
 			animation: circle 6s linear infinite;
@@ -1217,17 +1217,17 @@ body {
 		background: #0060DE;
 		right: 150px;
 		bottom: -200px;
-		filter: blur(250px);
+		// filter: blur(250px);
 		pointer-events: none;
 		@media (min-width: ($md2+px)) {
 			animation: circle 6s linear infinite;
 		}
 		@media (max-width: ($md2+px)) {
-			filter: blur(400px);
+			// filter: blur(400px);
 			right: 0;
 		}
 		@media (max-width: ($md4+px)) {
-			filter: blur(600px);
+			// filter: blur(600px);
 			display: none;
 		}
 	}
@@ -1507,7 +1507,7 @@ body {
 			background: #FF6C3D;
 			z-index: -1;
 			pointer-events: none;
-			filter: blur(40px);
+			// filter: blur(40px);
 		}
 	}
 	// .today-news__date
@@ -2058,12 +2058,12 @@ body {
 		top: -50%;
 		left: -155px;
 		background: #003780CC;
-		filter: blur(250px);
+		// filter: blur(250px);
 		@media (min-width: ($md2+px)) {
 			animation: circle 5s linear infinite;
 		}
 		@media (max-width: ($md4+px)) {
-			filter: blur(350px);
+			// filter: blur(350px);
 		}
 	}
 	&::after{
@@ -2075,7 +2075,7 @@ body {
 		bottom: -278px;
 		right: 0px;
 		background: #FF6C3D4D;
-		filter: blur(300px);
+		// filter: blur(300px);
 		@media (min-width: ($md2+px)) {
 			animation: circle 6s linear infinite;
 		}

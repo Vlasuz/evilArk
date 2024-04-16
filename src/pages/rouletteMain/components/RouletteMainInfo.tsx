@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Translate} from "../../../components/translate/Translate";
+import {useSelector} from "react-redux";
+import HTMLReactParser from "html-react-parser";
 
 interface IRouletteMainInfoProps {
     caseData: any
@@ -12,9 +14,12 @@ interface IRouletteMainInfoProps {
 
 export const RouletteMainInfo: React.FC<IRouletteMainInfoProps> = ({caseData, handleOpen, casesAmount, setCasesAmount, caseCount, isClicked}) => {
 
+    const language = useSelector((state: any) => state.toolkit.language)
+
     const handleChooseCount = (item: number) => {
         setCasesAmount(item)
     }
+    console.log(language)
 
     return (
         <>
@@ -22,9 +27,9 @@ export const RouletteMainInfo: React.FC<IRouletteMainInfoProps> = ({caseData, ha
                 <div className="case__title">
                     {caseData?.name}
                 </div>
-                <div className="case__description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias amet aperiam aspernatur commodi culpa dolorem doloremque harum hic natus necessitatibus quam quas recusandae, sequi tempora ullam voluptatum. Aliquam, quis!
-                </div>
+                {caseData[`description_${language}`] && <div className="case__description">
+                    {HTMLReactParser(caseData[`description_${language}`] ?? "")}
+                </div>}
             </div>
             <div className="case__image">
                 <img src={caseData?.image} alt=""/>

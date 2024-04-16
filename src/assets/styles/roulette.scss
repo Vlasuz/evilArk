@@ -9,13 +9,13 @@
 		top: -54px;
 		right: -111px;
 		background: #003780CC;
-		filter: blur(250px);
+		// filter: blur(250px);
         pointer-events: none;
 		@media (min-width: ($md2+px)) {
 			animation: circle 5s linear infinite;
 		}
 		@media (max-width: ($md4+px)) {
-			filter: blur(350px);
+			// filter: blur(350px);
 		}
 	}
     // .roulette__main
@@ -181,13 +181,13 @@
             top: -184px;
             right: -140px;
             background: #003780CC;
-            filter: blur(250px);
+            // filter: blur(250px);
             pointer-events: none;
             @media (min-width: ($md2+px)) {
                 animation: circle 5s linear infinite;
             }
             @media (max-width: ($md4+px)) {
-                filter: blur(350px);
+                // filter: blur(350px);
             }
         }
     }
@@ -350,7 +350,7 @@
             &::before{
                 background: #003780CC;
                 left: 15px;
-                filter: blur(10px);
+                // filter: blur(10px);
             }
         }
         // .categories-filter-roulette__link_orange
@@ -358,7 +358,7 @@
             &::before{
                 background: #FF6C3D4D;
                 right: 20px;
-                filter: blur(16px);
+                // filter: blur(16px);
             }
         }
     }
@@ -408,7 +408,7 @@
             left: 41%;
             top: 18px;
             background: #FF6C3D;
-            filter: blur(50px);
+            // filter: blur(50px);
         }
         &::after{
             position: absolute;
@@ -419,7 +419,7 @@
             right: 41%;
             top: 18px;
             background: #FF6C3D;
-            filter: blur(50px);
+            // filter: blur(50px);
         }
         @media (max-width: 1200px) {
             padding: 15px;
@@ -442,7 +442,7 @@
             left: 41%;
             bottom: 18px;
             background: #FF6C3D;
-            filter: blur(50px);
+            // filter: blur(50px);
         }
         &::after{
             position: absolute;
@@ -453,7 +453,7 @@
             right: 41%;
             bottom: 18px;
             background: #FF6C3D;
-            filter: blur(50px);
+            // filter: blur(50px);
         }
 	}
     // .games-filter-roulette__column
@@ -748,7 +748,7 @@
             height: 100%;
             background: #FFFFFF;
             border-radius: 11px;
-            filter: blur(45px);
+            // filter: blur(45px);
         }
         span{
             position: relative;

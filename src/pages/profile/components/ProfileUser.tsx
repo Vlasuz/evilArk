@@ -100,7 +100,7 @@ export const ProfileUser:React.FC<IProfileUserProps> = () => {
                     </div>
                 </div>
 
-                <HistoryDonate data={donateHistory.filter((item: any) => item.server.id === category.id)}/>
+                <HistoryDonate data={donateHistory.filter((item: any) => item?.server?.id === category?.id)}/>
             </div>
         </ProfileStyled>
     )

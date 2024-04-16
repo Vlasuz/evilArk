@@ -685,7 +685,7 @@
 	transition: all 0.8s ease 0s;
 	overflow-y: auto;
 	z-index: 1000;
-	backdrop-filter: blur(2px);
+	// backdrop-filter: blur(2px);
 	&.open{
 		opacity: 1;
 		visibility: visible;
@@ -1200,7 +1200,7 @@
             top: 12px;
             left: -27px;
             background: #005CD3CC;
-            filter: blur(50px);
+            // filter: blur(50px);
             z-index: 2;
         }
         &::after{
@@ -1212,7 +1212,7 @@
             bottom: 15px;
             left: 2px;
             background: #FF6C3D;
-            filter: blur(50px);
+            // filter: blur(50px);
             z-index: 1;
         }
         @media (max-width: 1550px) {
@@ -1245,7 +1245,7 @@
             top: 2px;
             left: 333px;
             background: #005CD3CC;
-            filter: blur(50px);
+            // filter: blur(50px);
             z-index: 2;
             @media (max-width: ($md3+px)) {
                 left: 300px;
@@ -1254,7 +1254,7 @@
                 left: auto;
                 top: -90%;
                 right: 0px;
-                filter: blur(80px);
+                // filter: blur(80px);
             }
         }
         &::after{
@@ -1266,7 +1266,7 @@
             bottom: 25px;
             left: 362px;
             background: #FF6C3D;
-            filter: blur(50px);
+            // filter: blur(50px);
             z-index: 1;
             @media (max-width: ($md3+px)) {
                 left: 330px;

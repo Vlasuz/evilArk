@@ -9,13 +9,13 @@
 		top: -54px;
 		right: -111px;
 		background: #003780CC;
-		filter: blur(250px);
+		// filter: blur(250px);
         pointer-events: none;
 		@media (min-width: ($md2+px)) {
 			animation: circle 5s linear infinite;
 		}
 		@media (max-width: ($md4+px)) {
-			filter: blur(350px);
+			// filter: blur(350px);
 		}
 	}
     // .user-page__main

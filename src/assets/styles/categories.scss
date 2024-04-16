@@ -9,13 +9,13 @@
 		top: -54px;
 		right: -111px;
 		background: #003780CC;
-		filter: blur(250px);
+		// filter: blur(250px);
         pointer-events: none;
 		@media (min-width: ($md2+px)) {
 			animation: circle 5s linear infinite;
 		}
 		@media (max-width: ($md4+px)) {
-			filter: blur(350px);
+			// filter: blur(350px);
 		}
 	}
     // .categories__main
@@ -703,7 +703,7 @@
         &::before{
             background: #003780CC;
             left: 15px;
-            filter: blur(10px);
+            // filter: blur(10px);
         }
     }
     // .filter-top-cards-categories__orange
@@ -711,7 +711,7 @@
         &::before{
             background: #FF6C3D4D;
             right: 20px;
-            filter: blur(16px);
+            // filter: blur(16px);
         }
     }
 }
@@ -828,7 +828,7 @@
         width: 319px;
         height: 319px;
         border-radius: 50%;
-        filter: blur(100px);
+        // filter: blur(100px);
     }
     &::before{
         background: rgba(0, 55, 128, 0.8);
@@ -2186,7 +2186,7 @@
             top: 12px;
             border-radius: 50%;
             background: #E1481780;
-            filter: blur(20px);
+            // filter: blur(20px);
             z-index: -1;
         }
     }

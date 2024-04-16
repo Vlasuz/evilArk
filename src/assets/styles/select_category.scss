@@ -10,7 +10,7 @@
         top: -50px;
         right: -150px;
         background: #003780CC;
-        filter: blur(300px);
+        // filter: blur(300px);
         pointer-events: none;
         @media (min-width: ($md2+px)) {
 			animation: circle 6s linear infinite;
@@ -131,7 +131,7 @@
             border-radius: 50%;
             background: #E1481780;
             top: 50%;
-            filter: blur(60px);
+            // filter: blur(60px);
             pointer-events: none;
             @media (min-width: ($md2+px)) {
                 animation: circle 6s linear infinite;

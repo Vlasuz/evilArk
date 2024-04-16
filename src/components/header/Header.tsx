@@ -73,7 +73,7 @@ export const Header: React.FC<IHeaderProps> = () => {
                     <div className="header__servers">
                         <div className="characteristics-select-product__dropdown dropdown">
                             <button onClick={_ => setIsOpenSelectClusters(prev => !prev)} className="dropdown__button">
-                                {category.name}
+                                <span>{category.name}</span>
                             </button>
                             <ul className={"dropdown__list" + (isOpenSelectClusters ? " visible" : "")}>
                                 {categories.length && categories?.filter(item => item.is_active)?.map(item => <li key={item.id} onClick={_ => item.name !== category.name && handleClusterChange(JSON.stringify(item))} className="dropdown__list-item" data-dropdown="module 2 - 125 lvl">{item.name}</li>)}
@@ -132,7 +132,7 @@ export const Header: React.FC<IHeaderProps> = () => {
 
                             <div className="characteristics-select-product__dropdown dropdown">
                                 <button onClick={_ => setIsOpenSelectClusters(prev => !prev)} className="dropdown__button">
-                                    {category.name}
+                                    <span>{category.name}</span>
                                 </button>
                                 <ul className={"dropdown__list" + (isOpenSelectClusters ? " visible" : "")}>
                                     {categories.length && categories?.filter(item => item.is_active)?.map(item => <li key={item.id} onClick={_ => item.name !== category.name && handleClusterChange(JSON.stringify(item))} className="dropdown__list-item" data-dropdown="module 2 - 125 lvl">{item.name}</li>)}

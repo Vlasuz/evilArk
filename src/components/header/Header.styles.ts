@@ -53,4 +53,11 @@ export const HeaderStyled = styled.header`
     background-size: cover;
     transform: rotate(180deg);
   }
+  
+  
+  .header__inner .dropdown__button span {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `
