@@ -2,7 +2,6 @@
   "name": "evil_ark",
   "version": "0.2.0",
   "private": true,
-  "homepage": "https://www.evilarkcluster.com/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",
