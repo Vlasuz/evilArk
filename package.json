@@ -2,7 +2,7 @@
   "name": "evil_ark",
   "version": "0.4.0",
   "private": false,
-  "homepage": "https://www.evilarkcluster.com/",
+  "homepage": "https://www.evilarkcluster.com",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",
@@ -52,5 +52,17 @@
   "devDependencies": {
     "@types/aos": "^3.0.4",
     "@types/react-transition-group": "^4.4.6"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
