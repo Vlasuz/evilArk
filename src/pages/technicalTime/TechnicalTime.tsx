@@ -28,7 +28,7 @@ export const TechnicalTime: React.FC<ITechnicalTimeProps> = ({setIsTechnicalTime
 
     return (
         <TechnicalTimeStyled>
-            <h1>Технические <button onClick={_ => setIsAdmin(prev => !prev)}>работы</button></h1>
+            <h1>Технические <button onClick={_ => setIsAdmin(prev => !prev)}>работы!</button></h1>
             <h2>К сожалению сайт на данный момент на технических работах, в скором времени мы возобновим работу сайта.
                 Администрация просит прощения за неудобство</h2>
 
