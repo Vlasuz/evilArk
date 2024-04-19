@@ -10,8 +10,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <Provider store={store}>
-        <HashRouter>
+        <BrowserRouter basename={'/'}>
             <App/>
-        </HashRouter>
+        </BrowserRouter>
     </Provider>
 );
