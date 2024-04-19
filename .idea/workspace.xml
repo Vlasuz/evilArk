@@ -6,25 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="Some changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/bonuses.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/bonuses.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/categories.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/categories.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/inventory.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/inventory.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/profile.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/purchases.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/purchases.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/roulette.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/roulette.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/select_category.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/select_category.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/ui.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/ui.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/user_page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/user_page.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Header.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/topUp/TopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/topUp/TopUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/setCookie.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/setCookie.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/bonuses/Bonuses.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/bonuses/Bonuses.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/main/components/news/News.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main/components/news/News.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile/components/ProfileUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/components/ProfileUser.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/rouletteMain/components/RouletteMainInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,24 +33,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/vlaszubenko/Desktop/evil_ark/src/assets/img/icons&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/vlaszubenko/Desktop/evil_ark/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/vlaszubenko/Desktop/evil_ark/src/assets/img/icons",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "ts.external.directory.path": "/Users/vlaszubenko/Desktop/evil_ark/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/assets/img/icons" />
@@ -195,7 +178,8 @@
       <workItem from="1705680334396" duration="160000" />
       <workItem from="1706597903359" duration="2264000" />
       <workItem from="1707808844632" duration="488000" />
-      <workItem from="1713257677357" duration="2793000" />
+      <workItem from="1713257677357" duration="2834000" />
+      <workItem from="1713542982983" duration="1598000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <created>1695910913707</created>
@@ -393,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1707809313885</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Some changes">
+      <created>1713260508378</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1713260508378</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
