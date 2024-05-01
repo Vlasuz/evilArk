@@ -25,11 +25,11 @@ interface IRouletteProps {
 
 }
 
-const echo = new Echo({
-    host: "ws://evilarkcluster.com:6001",
-    broadcaster: "socket.io",
-    client: socketio
-});
+// const echo = new Echo({
+//     host: "ws://evilarkcluster.com:6001",
+//     broadcaster: "socket.io",
+//     client: socketio
+// });
 
 export const isOpenPopupContext: any = createContext(null);
 
