@@ -28,8 +28,6 @@ export const RouletteMain: React.FC<IRouletteMainProps> = () => {
     const userData: IUser = useSelector((state: any) => state.toolkit.user)
     const language = useSelector((state: any) => state.toolkit.language)
 
-    console.log('language', language)
-
     const dispatch = useDispatch()
 
     const [caseData, setCaseData] = useState<any>()
@@ -39,7 +37,6 @@ export const RouletteMain: React.FC<IRouletteMainProps> = () => {
 
         axios.get(apiLink(`api/roulette/${rouletteId}?server_id=${category.id}?language=${language}`)).then(({data}) => {
             setCaseData(data.data)
-            console.log(data)
         }).catch(er => console.log(er))
     }, [category])
 
@@ -85,8 +82,6 @@ export const RouletteMain: React.FC<IRouletteMainProps> = () => {
                     notifications(data.data.message)
                     return;
                 }
-
-                console.log(data.data)
 
                 setWinnerItems((prev: any) => [...prev, data.data])
 

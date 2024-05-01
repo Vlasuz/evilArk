@@ -66,7 +66,6 @@ function App() {
     const [font, setFont] = useState<string>("")
     useEffect(() => {
         axios.get(apiLink("api/tech-valid")).then(({data}) => {
-            console.log(data)
             setFont(data.data.font)
         })
     }, [])

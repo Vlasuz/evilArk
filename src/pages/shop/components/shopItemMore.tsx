@@ -23,7 +23,6 @@ interface IShopItemMoreProps {
 export const ProductModule: any = createContext(null)
 
 export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive, isPropose, isInventory}) => {
-    console.log(isActive)
 
     const {arrowWhite} = useImages()
 
@@ -74,8 +73,6 @@ export const ShopItemMore: React.FC<IShopItemMoreProps> = ({isActive, isPropose,
             "isModule": product?.is_module,
             "ids": [chosenProduct?.id ?? product?.id, ...chosenProposalProducts.map(item => item.id)]
         }).then(({data}) => {
-
-            console.log(data)
 
             notifications(data.data.message)
 

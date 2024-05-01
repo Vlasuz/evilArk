@@ -32,8 +32,6 @@ export const ServersItem: React.FC<IServersItemProps> = ({data, handleReadNews})
 
     const serverBlock: any = useRef(null)
 
-    console.log(serverBlock.current?.clientHeight)
-
     return (
         <div className="servidores__column">
             <div className={`servidores__item item-servidores ${isShowServers && "servidores__item_active"}`}>

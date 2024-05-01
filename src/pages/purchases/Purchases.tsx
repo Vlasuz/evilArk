@@ -45,8 +45,6 @@ export const Purchases: React.FC<IPurchasesProps> = () => {
 
     }, [isLoad])
 
-    console.log(historyPurchases)
-
     return (
         <PurchasesStyled className="purchases">
             <section className="purchases__main">

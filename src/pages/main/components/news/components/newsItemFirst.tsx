@@ -12,8 +12,6 @@ interface INewsItemFirstProps {
 export const NewsItemFirst:React.FC<INewsItemFirstProps> = ({data, handleReadNews}) => {
     const {placeholder, calendar} = useImages()
 
-    console.log(data)
-
     return (
         <div className="news__today today-news">
             <div onClick={_ => handleReadNews(data.id)} className="today-news__image news-open-btn">

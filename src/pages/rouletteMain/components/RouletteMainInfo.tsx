@@ -19,15 +19,14 @@ export const RouletteMainInfo: React.FC<IRouletteMainInfoProps> = ({caseData, ha
     const handleChooseCount = (item: number) => {
         setCasesAmount(item)
     }
-    console.log(language)
 
     return (
         <>
             <div className="case__info">
                 <div className="case__title">
-                    {caseData?.name}
+                    {caseData && caseData?.name}
                 </div>
-                {caseData[`description_${language}`] && <div className="case__description">
+                {caseData && caseData[`description_${language}`] && <div className="case__description">
                     {HTMLReactParser(caseData[`description_${language}`] ?? "")}
                 </div>}
             </div>

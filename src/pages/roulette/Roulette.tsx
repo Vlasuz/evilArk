@@ -101,7 +101,6 @@ export const Roulette: React.FC<IRouletteProps> = () => {
         setIsLoad(false)
         axios.get(apiLink("api/roulettes?server_id=" + category.id)).then(({data}) => {
             setRoulettesCases(data.data)
-            console.log(data.data)
             setIsLoad(true)
         }).catch(er => console.log(er))
     }, [category])

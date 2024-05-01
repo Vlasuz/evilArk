@@ -30,22 +30,16 @@ export const ProfilePromo: React.FC<IProfilePromoProps> = () => {
             server_id: category.id,
             type: "promocode"
         }).then(({data}) => {
-            console.log(data)
             setPromoCode(data.data)
             setLoading(false)
-        }).catch(er => {
-            console.log(er)
-        })
+        }).catch(er => console.log(er))
     }, [category])
 
     useEffect(() => {
         axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.get(apiLink("api/users/referrals/statistic")).then(({data}) => {
-            console.log(data)
             setPromoStatistic(data.data)
-        }).catch(er => {
-            console.log(er)
-        })
+        }).catch(er => console.log(er))
     }, [])
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,15 +55,12 @@ export const ProfilePromo: React.FC<IProfilePromoProps> = () => {
             type: "promocode",
             referral: promoValue
         }).then(({data}) => {
-            console.log(data)
             if (data.data.success === true) {
                 notifications(data.data.message)
             } else if (data.data.success === false) {
                 notifications(data.data.message)
             }
-        }).catch(er => {
-            console.log(er)
-        })
+        }).catch(er => console.log(er))
 
         setPromoValue("")
     }
