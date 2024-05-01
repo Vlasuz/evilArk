@@ -111,13 +111,13 @@ export const Roulette: React.FC<IRouletteProps> = () => {
             setRouletteHistory(data.data)
         }).catch(er => console.log(er))
 
-        echo.channel("evilark_database_roulette-history").listen('EventRouletteHistory', (event: any) => {
-
-            setTimeout(() => {
-                setRouletteHistory((prev: any) => [...prev, event])
-            }, 10500)
-
-        });
+        // echo.channel("evilark_database_roulette-history").listen('EventRouletteHistory', (event: any) => {
+        //
+        //     setTimeout(() => {
+        //         setRouletteHistory((prev: any) => [...prev, event])
+        //     }, 10500)
+        //
+        // });
 
     }, [])
 
