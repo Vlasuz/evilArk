@@ -26,7 +26,9 @@ export const Calculator: React.FC<ICalculatorProps> = () => {
             <div className="replenishment-bonuses__text">
                 <Translate>calculator</Translate>
             </div>
+
             <CalculatorForm/>
+
             <button onClick={handleOpenPopup} type="submit" className="replenishment-bonuses__btn top-up-btn">
                 <Translate>top_up_balance</Translate>
             </button>

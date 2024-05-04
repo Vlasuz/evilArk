@@ -114,8 +114,8 @@ export const Bonuses: React.FC<IBonusesProps> = () => {
 
                                                 <TableNextBonuses/>
                                                 <div className="bonuses__calculate">
-                                                    {Object.keys(description).length && <div className="calculate__info">
-                                                        {ReactHtmlParser(Object.keys(description).length ? description[`text_${language}`] : "")}
+                                                    {description && Object.keys(description)?.length && <div className="calculate__info">
+                                                        {ReactHtmlParser(description && Object.keys(description).length ? description[`text_${language}`] : "")}
                                                     </div>}
                                                 </div>
 

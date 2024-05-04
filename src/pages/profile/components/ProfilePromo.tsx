@@ -99,7 +99,7 @@ export const ProfilePromo: React.FC<IProfilePromoProps> = () => {
 
                     {
                         promoStatistic.map((item, index) =>
-                            <tr>
+                            <tr key={item.id}>
                                 <td>
                                     {index + 1}
                                 </td>

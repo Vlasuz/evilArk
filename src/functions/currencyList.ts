@@ -1,12 +1,12 @@
 export const currencyList: any = [
     {
         icon: "$",
-        value: 0.95,
+        value: 1,
         currency: "USD"
     },
     {
         icon: "€",
-        value: 1.02,
+        value: 1.08,
         currency: "EUR"
     },
     {
@@ -15,13 +15,13 @@ export const currencyList: any = [
         currency: "UAH"
     },
     {
-        icon: "₸",
-        value: 0.00216,
-        currency: "KZT"
+        icon: "£",
+        value: 1.19,
+        currency: "GBR"
     },
     {
         icon: "₽",
-        value: 0.01,
+        value: 0.01054,
         currency: "RUB"
     }
 ]
