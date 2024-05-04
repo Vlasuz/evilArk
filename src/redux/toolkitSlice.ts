@@ -15,7 +15,7 @@ const toolkitSlice = createSlice({
         language: <string>'',
         infoForPay: {
             value: 0,
-            currency: "dollar"
+            currency: "USD"
         },
     },
     reducers: {
