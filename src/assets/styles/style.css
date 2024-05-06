@@ -1121,10 +1121,10 @@ body.lock::before {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    font-size: 0;
     align-items: center;
     position: relative;
-    height: 53px;
+    height: fit-content;
+    min-height: 53px;
     width: 100%;
     border-radius: 7px;
     padding: 5px 41px 5px 17px;
@@ -1196,8 +1196,8 @@ body.lock::before {
     display: none;
     position: absolute;
     width: 100%;
-    top: 58px;
-    left: 0;
+    top: 100%;
+    right: 0;
     border-radius: 7px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     background: #1D2A3E;
@@ -1224,7 +1224,8 @@ body.lock::before {
 .dropdown__list-item {
     display: flex;
     align-items: center;
-    height: 53px;
+    height: fit-content;
+    min-height: 53px;
     padding: 5px 20px;
     cursor: pointer;
     -webkit-transition: all 0.3s ease 0s;
