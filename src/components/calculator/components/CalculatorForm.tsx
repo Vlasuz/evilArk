@@ -45,34 +45,11 @@ export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
     const [currencyList, setCurrencyList] = useState<ICurrency[]>([]);
     const [isSelectOpen, setIsSelectOpen] = useState(false)
     const [activeCurrency, setActiveCurrency] = useState<ICurrency>(currencyList?.filter(item => item?.currency === infoForPay?.currency)[0] ?? currencyList[0])
-    const [valueCurrency, setValueCurrency] = useState(+infoForPay.value)
-    const [valueEvilCoin, setValueEvilCoin] = useState((+infoForPay.value / activeCurrency?.real_price) * activeCurrency?.unit_price)
+    const [valueCurrency, setValueCurrency] = useState("")
+    const [valueEvilCoin, setValueEvilCoin] = useState("")
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        setActiveCurrency(currencyList?.filter(item => item?.currency === infoForPay?.currency)[0] ?? currencyList[0])
-    }, [currencyList])
 
-    const handleChangeCurrency = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
-        console.log((+infoForPay.value / activeCurrency?.real_price) * activeCurrency?.unit_price)
-        setValueCurrency(+e.target.value)
-        setValueEvilCoin((+e.target.value / activeCurrency?.real_price) * activeCurrency?.unit_price)
-        dispatch(setInfoForPay({
-            currency: activeCurrency?.currency,
-            value: +e.target.value,
-            icon: typeOfCurrency.filter(item => item.type.toLowerCase() === activeCurrency?.currency.toLowerCase())[0]?.icon,
-        }))
-    }
-    const handleChangeEvilCoin = (e: ChangeEvent<HTMLInputElement>) => {
-        setValueEvilCoin(+e.target.value)
-        setValueCurrency(prev => (+e.target.value / activeCurrency?.real_price) * activeCurrency?.unit_price)
-        dispatch(setInfoForPay({
-            currency: activeCurrency?.currency,
-            value: (+infoForPay.value / activeCurrency?.real_price) * activeCurrency?.unit_price,
-            icon: typeOfCurrency.filter(item => item.type.toLowerCase() === activeCurrency?.currency.toLowerCase())[0]?.icon,
-        }))
-    }
     const handleSwitchCurrency = (currencyData: ICurrency) => {
         setIsSelectOpen(false)
 
@@ -82,7 +59,7 @@ export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
             value: valueCurrency,
             icon: typeOfCurrency.filter(item => item.type.toLowerCase() === currencyData?.currency.toLowerCase())[0]?.icon
         }))
-        setValueEvilCoin((valueCurrency / currencyData?.real_price) * currencyData?.unit_price)
+        setValueEvilCoin(String((+valueCurrency / currencyData?.real_price) * currencyData?.unit_price))
     }
 
     useEffect(() => {
@@ -95,11 +72,27 @@ export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
             });
     }, [])
 
+    useEffect(() => {
+        setActiveCurrency(currencyList?.filter(item => item?.currency === infoForPay?.currency)[0] ?? currencyList[0])
+    }, [currencyList])
+
+
+    const handleChangeCurrency = (e: any) => {
+        setValueCurrency(e.target.value)
+
+        setValueEvilCoin(String((+e.target.value / activeCurrency?.real_price) * activeCurrency?.unit_price))
+    }
+    const handleChangeEvilCoin = (e: any) => {
+        setValueEvilCoin(e.target.value)
+
+        setValueCurrency(String((+e.target.value * activeCurrency?.real_price) / activeCurrency?.unit_price))
+    }
+
     return (
         <div
             className="replenishment-bonuses__calculator calculator-replenishment-bonuses">
             <div className="calculator-replenishment-bonuses__item ">
-                <input value={valueCurrency > 0 ? Math.ceil(valueCurrency) : ""} onChange={e => handleChangeCurrency(e)}
+                <input value={valueCurrency} onChange={e => handleChangeCurrency(e)}
                        placeholder="0"
                        autoComplete='off' type='number' name='form[]'
                        className='calculator-replenishment-bonuses__input calculator-replenishment-bonuses__input_give'/>
@@ -116,14 +109,15 @@ export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
                             {
                                 currencyList.map(item =>
                                     <li key={item.currency} className="dropdown__list-item"
-                                        onClick={_ => handleSwitchCurrency(item)}>
+                                        onClick={_ => handleSwitchCurrency(item)}
+                                    >
                                         {typeOfCurrency.filter(item2 => item2.type.toLowerCase() === item?.currency.toLowerCase())[0]?.icon}
                                     </li>
                                 )
                             }
 
                         </ul>
-                        <input value={valueEvilCoin} onChange={e => setValueEvilCoin(+e.target.value)} type='tel'
+                        <input value={valueEvilCoin} onChange={e => setValueEvilCoin(e.target.value)} type='tel'
                                name='form[]'
                                className='dropdown__input-hidden dropdown__input-hidden_valuta'/>
                     </div>
@@ -131,7 +125,7 @@ export const CalculatorForm: React.FC<ICalculatorFormProps> = () => {
             </div>
             <div className="calculator-replenishment-bonuses__equal">=</div>
             <div className="calculator-replenishment-bonuses__item">
-                <input value={valueEvilCoin > 0 ? valueEvilCoin.toFixed(2) : ""} onChange={e => handleChangeEvilCoin(e)}
+                <input value={valueEvilCoin} onChange={e => handleChangeEvilCoin(e)}
                        placeholder="0.00"
                        autoComplete='off' type='number' name='form[]'
                        className='calculator-replenishment-bonuses__input calculator-replenishment-bonuses__input_get'/>

@@ -7,14 +7,12 @@ import {ShopItem} from "./components/shopItem";
 import {ShopItemMore} from "./components/shopItemMore";
 import {ICategory, IFilterShop, IProduct, IUser} from "../../models";
 import axios from "axios";
-import {useLocation, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {setPage} from "../../redux/toolkitSlice";
+import {useSelector} from "react-redux";
 import {apiLink} from "../../hooks/apiLink";
-import ReactHtmlParser from "html-react-parser";
 import {Translate} from "../../components/translate/Translate";
 import {ShopStyled} from "./Shop.styled";
-import {retry} from "@reduxjs/toolkit/query";
+import {toast} from "react-toastify";
+import loading = toast.loading;
 
 interface IShopProps {
 
@@ -35,6 +33,7 @@ export const Shop: React.FC<IShopProps> = () => {
     const [activeProduct, setActiveProduct] = useState('')
     const [shop, setShop] = useState<IProduct[]>([])
     const [isLoading, setIsLoading] = useState(true)
+    const [isCanUseFilter, setIsCanUseFilter] = useState(false);
     const [pagination, setPagination] = useState<any>([])
 
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
@@ -42,14 +41,15 @@ export const Shop: React.FC<IShopProps> = () => {
     const language = useSelector((state: any) => state.toolkit.language)
 
     useEffect(() => {
+        if(!isCanUseFilter) return
+        setIsLoading(true)
         asyncLoading("")
-    }, [category, filter])
+    }, [filter])
 
     const asyncLoading = (url?: string) => {
-        const axiosUrl = url ? url : apiLink(`api/products?user_id=${userInfo.id ?? ""}&language=${language}`)
+        const axiosUrl = url ? url : apiLink(`api/products?user_id=${userInfo.id ?? ""}`)
 
-        setIsLoading(true)
-        axios.post(axiosUrl, {
+        axios.post(`${axiosUrl}&language=${language}`, {
             server_id: category.id,
             ...filter
         }).then(({data}) => {
@@ -57,6 +57,7 @@ export const Shop: React.FC<IShopProps> = () => {
             setShop(data.data)
             setPagination(data.meta.links)
             setIsLoading(false)
+            setIsCanUseFilter(true)
 
         }).catch(er => console.log(er))
     }
@@ -66,8 +67,11 @@ export const Shop: React.FC<IShopProps> = () => {
     }, [category])
 
     useEffect(() => {
-        asyncLoading()
-    }, [language])
+        if(!language) return;
+        if(!userInfo?.id) return;
+
+        asyncLoading("")
+    }, [language, userInfo, category])
 
     const [productPropose, setProductPropose] = useState('')
 
@@ -76,6 +80,11 @@ export const Shop: React.FC<IShopProps> = () => {
 
          setActiveProduct('')
         setProductPropose('')
+    }
+
+    const handleSwitchPage = (url: string) => {
+        setIsLoading(true)
+        asyncLoading(url)
     }
 
     return (
@@ -112,7 +121,7 @@ export const Shop: React.FC<IShopProps> = () => {
                                             {
                                                 pagination.length > 3 && pagination?.map((pag: any, index: any) =>
                                                     <button key={pag.url + index} className={pag.active ? " _active" : ""}
-                                                            onClick={_ => asyncLoading(pag.url)}>{pag.label}</button>
+                                                            onClick={_ => handleSwitchPage(pag.url)}>{pag.label}</button>
                                                 )
                                             }
                                         </div>

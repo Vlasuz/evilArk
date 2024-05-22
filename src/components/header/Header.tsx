@@ -31,6 +31,7 @@ export const Header: React.FC<IHeaderProps> = () => {
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
     const generalInfo: IGeneralInfo = useSelector((state: any) => state.toolkit.generalInfo)
     const category: IServer = useSelector((state: any) => state.toolkit.category)
+    const servers: IServer[] = useSelector((state: any) => state.toolkit.servers)
 
     const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false)
     const [categories, setCategories] = useState<IServer[]>([])
@@ -48,10 +49,8 @@ export const Header: React.FC<IHeaderProps> = () => {
     }, [isOpenMobileMenu])
 
     useEffect(() => {
-        axios.get(apiLink("api/servers")).then(({data}) => {
-            setCategories(data.data)
-        }).catch(er => console.log(er))
-    }, [])
+        setCategories(servers)
+    }, [servers])
 
     useEffect(() => {
         setCategory(category)
@@ -80,6 +79,7 @@ export const Header: React.FC<IHeaderProps> = () => {
                             </ul>
                         </div>
                     </div>
+                    <HeaderLanguages/>
                     {!!Object.keys(userInfo).length && <div className="balance-header__body" data-da="top-mobile-header, 1, 480">
                         <div className="balance-header__bonuses bonuses-balance-header">
                             <NavLink to={'/bonuses'} className="bonuses-balance-header__icon">

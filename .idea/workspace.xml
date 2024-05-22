@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="d87b62d5-6389-4122-866a-70165dea8498" name="Changes" comment="Some changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/servers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/servers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/calculator/components/CalculatorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculator/components/CalculatorForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Header.styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/Shop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shop/components/shopTop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shop/components/shopTop.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,14 +192,9 @@
       <workItem from="1714570093123" duration="555000" />
       <workItem from="1714810897573" duration="1030000" />
       <workItem from="1714817587281" duration="5113000" />
-      <workItem from="1714976215018" duration="784000" />
-    </task>
-    <task id="LOCAL-00003" summary="fixed">
-      <created>1696863922151</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1696863922151</updated>
+      <workItem from="1714976215018" duration="1714000" />
+      <workItem from="1714979881351" duration="93000" />
+      <workItem from="1716377366693" duration="6748000" />
     </task>
     <task id="LOCAL-00004" summary="fixed">
       <created>1696868484623</created>
@@ -528,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714822485533</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Some changes">
+      <created>1714977242533</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1714977242533</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -60,4 +60,12 @@ export const HeaderStyled = styled.header`
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  
+  @media screen and (max-width: 576px) {
+    .mobile-header__top.top-mobile-header {
+      .languages-header__list {
+        display: flex;
+      }
+    }
+  }
 `

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useImages} from "../../../hooks/images";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {IServer, IUser, IUserDiscount} from "../../../models";
 import {useSteamLogin} from "../../../hooks/steamLogin";
@@ -16,7 +16,15 @@ interface IShopTopProps {
 export const ShopTop: React.FC<IShopTopProps> = () => {
     const {sidebarHome, sidebarRolette} = useImages()
 
-    const {auth_params} = useSteamLogin()
+    const location = useLocation()
+    const auth_params = {
+        'openid.ns': 'http://specs.openid.net/auth/2.0',
+        'openid.mode': 'checkid_setup',
+        'openid.return_to': window.location.origin + location.pathname,
+        'openid.realm': window.location.origin + location.pathname,
+        'openid.identity': 'http://specs.openid.net/auth/2.0/identifier_select',
+        'openid.claimed_id': 'http://specs.openid.net/auth/2.0/identifier_select'
+    }
 
     const userInfo: IUser = useSelector((state: any) => state.toolkit.user)
 

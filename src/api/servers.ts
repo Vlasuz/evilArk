@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 import axios from "axios";
 import {apiLink} from "../hooks/apiLink";
 import {IServer} from "../models";
