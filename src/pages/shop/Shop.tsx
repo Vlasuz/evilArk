@@ -13,6 +13,7 @@ import {Translate} from "../../components/translate/Translate";
 import {ShopStyled} from "./Shop.styled";
 import {toast} from "react-toastify";
 import loading = toast.loading;
+import getCookies from "../../functions/getCookie";
 
 interface IShopProps {
 
@@ -68,7 +69,7 @@ export const Shop: React.FC<IShopProps> = () => {
 
     useEffect(() => {
         if(!language) return;
-        if(!userInfo?.id) return;
+        if(!userInfo?.id && getCookies("access_token")) return;
 
         asyncLoading("")
     }, [language, userInfo, category])
