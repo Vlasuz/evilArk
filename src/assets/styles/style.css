@@ -15433,3 +15433,69 @@ main {
     margin-left: 20px;
 }
 
+
+.kassa_methods li:hover {
+    background: #ff6d3d54;
+}
+.kassa_methods li {
+    border: 1px solid #000;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+.inner-popup__payment-kassa_methods legend {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+.inner-popup__payment-kassa_methods label {
+    width: 100%;
+    display: block;
+    max-width: 120px;
+}
+.minmaxlimits {
+    font-size: 16px;
+    width: 100%;
+    line-height: 1.5;
+}
+.inner-popup__payment-kassa_methods input,
+.inner-popup__payment-kassa_methods legend {
+    width: 100%;
+    max-width: 100% !important;
+}
+.inner-popup__payment-kassa_methods {
+    margin-bottom: 20px;
+}
+.error-kassa-phone {
+    color: red;
+    font-size: 16px;
+}
+.inner-popup__payment-kassa_methods select {
+    border: 1px solid #000;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+.kassa_methods li.kassa_method_item.active {
+    background: #FF6C3D;
+    color: #fff;
+}
+.inner-popup__payment-kassa_methods h3 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.kassa_methods {
+    /* display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+}
+
+.inner-popup__payment-kassa_methods {
+    display: block;
+}

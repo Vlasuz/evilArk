@@ -19,6 +19,18 @@ interface ITopUpProps {
     isOpen: boolean
 }
 
+interface IKassaNetwork {
+    id: number
+    commission: {merchant: number, user: number, default: number}
+    currency: string
+    fields: {
+        email: {type: string, placeholder: string, value: string, required: boolean, validate: string}
+        tel: {type: string, placeholder: string, value: string, required: boolean, validate: string}
+    }
+    limit: {min: number, max: number}
+    network: string
+}
+
 export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
 
     const isPopupOpen: any = useContext(topUpContext)
@@ -32,7 +44,7 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
     const [selectedCryptoNetwork, setSelectedCryptoNetwork]: any = useState<string>("")
     const [selectedCryptoLimit, setSelectedCryptoLimit]: any = useState({})
     const [selectedFiat, setSelectedFiat] = useState<any>(currencyList[0])
-    const [selectedMethod, setSelectedMethod] = useState("")
+    const [selectedMethod, setSelectedMethod] = useState<any>("")
 
     const [isOpenFiatCurrenciesSelect, setIsOpenFiatCurrenciesSelect] = useState(false)
     const [isPressed, setIsPressed] = useState(false)
@@ -40,9 +52,21 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
     const [cryptoAllMethods, setCryptoAllMethods]: any = useState([])
     const [cryptoCurrencies, setCryptoCurrencies]: any = useState([])
 
+    const [chosenKassaMethod, setChosenKassaMethod] = useState<string | number>()
+
+    const [kassaEmail, setKassaEmail] = useState<string>('')
+    const [kassaPhone, setKassaPhone] = useState<string>('')
+
+    const [kassaAllMethods, setKassaAllMethods] = useState<IKassaNetwork[]>([])
+    const [kassaCurrencies, setKassaCurrencies]: any = useState([])
+
     useEffect(() => {
         setServer(category)
     }, [category])
+
+    useEffect(() => {
+        setChosenKassaMethod(kassaAllMethods[0]?.id)
+    }, [kassaAllMethods])
 
     useEffect(() => {
         axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
@@ -52,10 +76,22 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
             setCryptoCurrencies([...new Set(data.data.map((item: any) => item.currency))])
 
         }).catch(er => console.log(er))
+
+
+        axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('access_token')}`
+        axios.get(apiLink("api/payment/networks?type=kassa")).then(({data}) => {
+
+            setKassaAllMethods(data.data)
+            setKassaCurrencies([...new Set(data.data.map((item: any) => item.currency))])
+
+        }).catch(er => console.log(er))
     }, [])
 
     const handlePay = (e: React.MouseEvent<HTMLButtonElement>, payMethod: string) => {
         e.preventDefault()
+        if(amountForPayment < selectedMethod2.limit.min || amountForPayment > selectedMethod2.limit.max) return toast.error('Error!');
+        if(selectedMethod2.fields?.tel?.type && !isCorrectPhone) return toast.error('Error!');
+        if(selectedMethod2.fields?.email?.type && !kassaEmail) return toast.error('Error!');
         const isNotCrypto = Object.values(currencyList).some((item: any) => item.currency === (selectedFiat?.currency ?? selectedFiat))
 
         if (payMethod === "kassa" && !isNotCrypto) {
@@ -72,11 +108,29 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
 
         setIsPressed(true)
 
+        let kassaFields = {}
+
+        if(kassaEmail) {
+            kassaFields = {
+                ...kassaFields,
+                email: kassaEmail
+            }
+        }
+        if(kassaPhone) {
+            kassaFields = {
+                ...kassaFields,
+                phone_number: kassaPhone
+            }
+        }
+
         const dataToPaymentKassa = {
-            "currency": selectedFiat.currency,
+            // "currency": selectedFiat.currency,
+            "currency": selectedMethod2.currency,
             "amount": amountForPayment,
             "server_id": server.id,
             "payment_method": payMethod,
+            "payment_system_id": chosenKassaMethod,
+            "fields": kassaFields
         }
         const dataToPaymentCrypto = {
             "currency": selectedCryptoCurrency,
@@ -95,6 +149,7 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
         axios.defaults.headers.post['Authorization'] = `Bearer ${getCookies('access_token')}`
         axios.post(apiLink("api/payment"), dataBody[payMethod]).then(({data}) => {
             if (data.data.success) {
+                if(!!data.data.url?.url || !data.data.url) return toast.error('Error!')
                 window.location.href = data.data.url?.url ?? data.data.url
                 setIsPressed(false)
             } else {
@@ -120,6 +175,149 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
         setIsOpenFiatCurrenciesSelect(false)
         setSelectedFiat(fiatCurrency)
     }
+
+    const handleChooseKassaMethod = (itemId: string) => {
+        setChosenKassaMethod(itemId)
+    }
+
+    const kassaLayout = () => (
+        <div className='money-payment'>
+        <div className="inner-popup__payment">
+            {/* <Translate>amount_for_payment</Translate> */}
+            Money*
+            <input
+                type="number"
+                onChange={e => setAmountForPayment(+e.target.value)}
+                placeholder={"0"}
+                value={amountForPayment === 0 ? "" : amountForPayment}
+            />
+
+            {/* <div className="characteristics-select-product__dropdown dropdown">
+                <button className='dropdown__button' onClick={_ => setIsOpenFiatCurrenciesSelect(prev => !prev)}>
+                    {selectedFiat.icon}
+                </button>
+                <ul className={"dropdown__list" + (isOpenFiatCurrenciesSelect ? " visible" : "")}>
+
+                    {
+                        currencyList.map((item: any) =>
+                            <li key={item.currency} className="dropdown__list-item"
+                                onClick={_ => switchFiatCurrency(item)}>
+                                {item.icon}
+                            </li>
+                        )
+                    }
+
+                </ul>
+            </div> */}
+
+            
+        </div>
+        <span className='minmaxlimits'>
+                Minimum: {selectedMethod2.limit.min} {selectedMethod2.currency}
+                <br />
+                Maximum: {selectedMethod2.limit.max} {selectedMethod2.currency}
+            </span>
+        </div>
+    )
+    
+    const [selectedMethod2, setSelectedMethod2] = useState<any>()
+    
+    useEffect(() => {
+        const selectedMethod = kassaAllMethods.find(item => item.id == chosenKassaMethod);
+        
+        setSelectedMethod2(selectedMethod)
+    }, [chosenKassaMethod]);
+
+    const [isCorrectPhone, setIsCorrectPhone] = useState(false)
+    
+    
+    const kassaNetwork = () => (
+        <div className="inner-popup__payment inner-popup__payment-kassa_methods">
+            <h3>Choose Network</h3>
+
+            {/* <ul className="kassa_methods">
+                {
+                    kassaAllMethods.length && kassaAllMethods.map((item: IKassaNetwork) => (
+                        <li key={item.id} onClick={_ => setChosenKassaMethod(item.id)} className={`kassa_method_item ${chosenKassaMethod === item.id ? "active" : ""}`}>
+                            <p>
+                                {item.network}
+                            </p>
+                        </li>
+                    ))
+                }
+            </ul> */}
+
+            <legend>
+                <label htmlFor="kassa-phone">Method*</label>
+                &nbsp;&nbsp;
+                <select name="" id="" onChange={e => handleChooseKassaMethod(e.target.value)}>
+                    {
+                        kassaAllMethods.length && kassaAllMethods.map((item: IKassaNetwork) => (
+                            <option value={item.id} key={item.id} className={`kassa_method_item ${chosenKassaMethod === item.id ? "active" : ""}`}>
+                                    {item.network}
+                            </option>
+                        ))
+                    }
+                </select>
+            </legend>
+
+
+            {selectedMethod2.fields?.email?.type && <legend>
+                <label htmlFor="kassa-email">Email*</label>
+                <input
+                    type="email"
+                    id='kassa-email'
+                    onChange={e => setKassaEmail(e.target.value)}
+                    placeholder={"Email"}
+                    value={kassaEmail}
+                />
+            </legend>}
+            {selectedMethod2.fields?.tel?.type && <legend>
+                <label htmlFor="kassa-phone">Phone*</label>
+                <input
+                    type="tel"
+                    maxLength={12}
+                    id='kassa-phone'
+                    onChange={e => {
+                        setKassaPhone(e.target.value)
+                        const phoneNumber = e.target.value;
+                        const phonePattern = /^\+7\d{10}$/;
+
+                        // Проверяем, соответствует ли введенный номер паттерну
+                        const isCorrectPhone = phonePattern.test(phoneNumber);
+                        
+                        setIsCorrectPhone(isCorrectPhone);
+                    }}
+                    placeholder={"+7*********"}
+                    value={kassaPhone}
+                />
+            </legend>}
+            {selectedMethod2.fields?.tel?.type && !isCorrectPhone && <p className="error-kassa-phone">Write correct phone number</p>}
+            
+
+            {/* <div className="characteristics-select-product__dropdown dropdown"> */}
+            
+                {/* <div className="characteristics-select-product__dropdown dropdown"> */}
+                    {/* <button className='dropdown__button' onClick={_ => setIsOpenFiatCurrenciesSelect(prev => !prev)}>
+                        {selectedFiat.icon}
+                    </button> */}
+                    {/* <ul className={"dropdown__list" + (isOpenFiatCurrenciesSelect ? " visible" : "")}>
+
+                        {
+                            kassaAllMethods.length && kassaAllMethods.map((item: IKassaNetwork) =>
+                                <li key={item.id} className="dropdown__list-item"
+                                    onSelect={_ => setChosenKassaMethod(item.id)}>
+                                    {item.network}
+                                </li>
+                            )
+                        }
+
+                    </ul> */}
+                {/* </div> */}
+                
+            {/* </div> */}
+        </div>
+    )
 
     return (
         <TopUpStyled ref={popupBlock} className={"popup popup-top-up" + (isOpen ? " open" : "")}>
@@ -180,32 +378,11 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
                                 </p>}
                             </div>}
 
-                        {selectedMethod === "kassa" && <div className="inner-popup__payment">
-                            <Translate>amount_for_payment</Translate>
-                            <input
-                                type="number"
-                                onChange={e => setAmountForPayment(+e.target.value)}
-                                placeholder={"0"}
-                                value={amountForPayment === 0 ? "" : amountForPayment}
-                            />
-                            <div className="characteristics-select-product__dropdown dropdown">
-                                <button className='dropdown__button' onClick={_ => setIsOpenFiatCurrenciesSelect(prev => !prev)}>
-                                    {selectedFiat.icon}
-                                </button>
-                                <ul className={"dropdown__list" + (isOpenFiatCurrenciesSelect ? " visible" : "")}>
 
-                                    {
-                                        currencyList.map((item: any) =>
-                                            <li key={item.currency} className="dropdown__list-item"
-                                                onClick={_ => switchFiatCurrency(item)}>
-                                                {item.icon}
-                                            </li>
-                                        )
-                                    }
 
-                                </ul>
-                            </div>
-                        </div>}
+                        
+                        {selectedMethod === "kassa" && kassaNetwork()}
+                        {selectedMethod === "kassa" && kassaLayout()}
 
                         {selectedMethod !== "" && <button
                             disabled={isPressed}
