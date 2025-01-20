@@ -134,7 +134,7 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
             "amount": amountForPayment,
             "server_id": server.id,
             "payment_method": payMethod,
-            "payment_system_id": chosenKassaMethod,
+            "payment_system_id": chosenKassaMethod?.id,
             "fields": kassaFields
         }
         const dataToPaymentCrypto = {
@@ -155,7 +155,7 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
         axios.post(apiLink("api/payment"), dataBody[payMethod]).then(({data}) => {
             if (data.data.success) {
                 if(!!data.data.url?.url || !data.data.url) return toast.error('Error!')
-                window.location.href = data.data.url?.url ?? data.data.url
+                // window.location.href = data.data.url?.url ?? data.data.url
                 setIsPressed(false)
             } else {
                 setIsPressed(false)
