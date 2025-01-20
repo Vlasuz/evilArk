@@ -49,24 +49,40 @@ export const TopUpStyled = styled.div`
 
 
   .inner-popup__payment .dropdown__button {
-    font-size: 25px;
+    font-size: 18px;
     font-weight: 600;
     color: #2B2B2B;
+  }
+
+  .inner-popup__payment-kassa_methods legend {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+  .money-payment {
+    margin-top: 40px;
+  }
+  .inner-popup__payment-kassa_methods {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
   }
 
   .inner-popup__payment input,
   .inner-popup__payment-method input {
     border: 2px solid #bebebe;
     padding: 5px 10px;
-    margin: 0 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    font-size: 30px;
+    /* margin: 0 10px; */
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    font-size: 18px;
     font-weight: 600;
     color: #2B2B2B;
-    max-width: 200px;
-    text-align: center;
+    max-width: 400px;
+    /* text-align: center; */
     width: 100%;
     height: 50px;
     appearance: none;
@@ -107,7 +123,7 @@ export const TopUpStyled = styled.div`
   }
 
   .dropdown__list {
-    max-height: 150px;
+    max-height: 250px;
     overflow: auto;
   }
 
@@ -116,8 +132,10 @@ export const TopUpStyled = styled.div`
     max-width: 100%;
   }
 
+  .dropdown__list-item.active,
   .dropdown__list-item:hover {
-    background: grey;
+    background: #FF6C3D;
+    color: #fff;
   }
 
   .dropdown__list,
@@ -148,7 +166,8 @@ export const TopUpStyled = styled.div`
 
   .inner-popup__payment .dropdown__button,
   .inner-popup__payment .characteristics-select-product__dropdown {
-    width: 150px;
+    max-width: 400px;
+    width: 100%;
     height: 50px;
     border-width: 2px;
   }
@@ -178,7 +197,7 @@ export const TopUpStyled = styled.div`
   }
 
   .inner-popup__payment {
-    border-bottom: none;
+    border: none;
   }
 
   .papayment-method-inner-popup__item {

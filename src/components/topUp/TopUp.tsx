@@ -49,10 +49,12 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
     const [isOpenFiatCurrenciesSelect, setIsOpenFiatCurrenciesSelect] = useState(false)
     const [isPressed, setIsPressed] = useState(false)
 
+    const [isSentForm, setIsSentForm] = useState(false)
+
     const [cryptoAllMethods, setCryptoAllMethods]: any = useState([])
     const [cryptoCurrencies, setCryptoCurrencies]: any = useState([])
 
-    const [chosenKassaMethod, setChosenKassaMethod] = useState<string | number>()
+    const [chosenKassaMethod, setChosenKassaMethod] = useState<IKassaNetwork>()
 
     const [kassaEmail, setKassaEmail] = useState<string>('')
     const [kassaPhone, setKassaPhone] = useState<string>('')
@@ -65,7 +67,7 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
     }, [category])
 
     useEffect(() => {
-        setChosenKassaMethod(kassaAllMethods[0]?.id)
+        setChosenKassaMethod(kassaAllMethods[0])
     }, [kassaAllMethods])
 
     useEffect(() => {
@@ -89,9 +91,12 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
 
     const handlePay = (e: React.MouseEvent<HTMLButtonElement>, payMethod: string) => {
         e.preventDefault()
-        if(amountForPayment < selectedMethod2.limit.min || amountForPayment > selectedMethod2.limit.max) return toast.error('Error!');
-        if(selectedMethod2.fields?.tel?.type && !isCorrectPhone) return toast.error('Error!');
-        if(selectedMethod2.fields?.email?.type && !kassaEmail) return toast.error('Error!');
+
+        setIsSentForm(true)
+
+        if(amountForPayment < selectedMethod2.limit.min || amountForPayment > selectedMethod2.limit.max) {return toast.error('Error with count!');}
+        if(selectedMethod2.fields?.tel?.type && !isCorrectPhone) return toast.error('Error with phone!');
+        if(selectedMethod2.fields?.email?.type && !kassaEmail) return toast.error('Error with email!');
         const isNotCrypto = Object.values(currencyList).some((item: any) => item.currency === (selectedFiat?.currency ?? selectedFiat))
 
         if (payMethod === "kassa" && !isNotCrypto) {
@@ -176,43 +181,14 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
         setSelectedFiat(fiatCurrency)
     }
 
-    const handleChooseKassaMethod = (itemId: string) => {
-        setChosenKassaMethod(itemId)
+    const handleChooseKassaMethod = (item: IKassaNetwork) => {
+        setChosenKassaMethod(item)
+        setIsOpenFiatCurrenciesSelect(false);
     }
 
     const kassaLayout = () => (
         <div className='money-payment'>
-        <div className="inner-popup__payment">
-            {/* <Translate>amount_for_payment</Translate> */}
-            Money*
-            <input
-                type="number"
-                onChange={e => setAmountForPayment(+e.target.value)}
-                placeholder={"0"}
-                value={amountForPayment === 0 ? "" : amountForPayment}
-            />
-
-            {/* <div className="characteristics-select-product__dropdown dropdown">
-                <button className='dropdown__button' onClick={_ => setIsOpenFiatCurrenciesSelect(prev => !prev)}>
-                    {selectedFiat.icon}
-                </button>
-                <ul className={"dropdown__list" + (isOpenFiatCurrenciesSelect ? " visible" : "")}>
-
-                    {
-                        currencyList.map((item: any) =>
-                            <li key={item.currency} className="dropdown__list-item"
-                                onClick={_ => switchFiatCurrency(item)}>
-                                {item.icon}
-                            </li>
-                        )
-                    }
-
-                </ul>
-            </div> */}
-
-            
-        </div>
-        <span className='minmaxlimits'>
+            <span className='minmaxlimits'>
                 Minimum: {selectedMethod2.limit.min} {selectedMethod2.currency}
                 <br />
                 Maximum: {selectedMethod2.limit.max} {selectedMethod2.currency}
@@ -223,7 +199,7 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
     const [selectedMethod2, setSelectedMethod2] = useState<any>()
     
     useEffect(() => {
-        const selectedMethod = kassaAllMethods.find(item => item.id == chosenKassaMethod);
+        const selectedMethod = kassaAllMethods.find(item => item.id == chosenKassaMethod?.id);
         
         setSelectedMethod2(selectedMethod)
     }, [chosenKassaMethod]);
@@ -233,35 +209,29 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
     
     const kassaNetwork = () => (
         <div className="inner-popup__payment inner-popup__payment-kassa_methods">
-            <h3>Choose Network</h3>
-
-            {/* <ul className="kassa_methods">
-                {
-                    kassaAllMethods.length && kassaAllMethods.map((item: IKassaNetwork) => (
-                        <li key={item.id} onClick={_ => setChosenKassaMethod(item.id)} className={`kassa_method_item ${chosenKassaMethod === item.id ? "active" : ""}`}>
-                            <p>
-                                {item.network}
-                            </p>
-                        </li>
-                    ))
-                }
-            </ul> */}
+            {/* <h3>Choose Network</h3> */}
 
             <legend>
                 <label htmlFor="kassa-phone">Method*</label>
-                &nbsp;&nbsp;
-                <select name="" id="" onChange={e => handleChooseKassaMethod(e.target.value)}>
-                    {
-                        kassaAllMethods.length && kassaAllMethods.map((item: IKassaNetwork) => (
-                            <option value={item.id} key={item.id} className={`kassa_method_item ${chosenKassaMethod === item.id ? "active" : ""}`}>
+                <div className={"characteristics-select-product__dropdown dropdown" + (isOpenFiatCurrenciesSelect ? " active" : "")}>
+                    <button className='dropdown__button' onClick={_ => setIsOpenFiatCurrenciesSelect(prev => !prev)}>
+                        {chosenKassaMethod?.network}
+                    </button>
+                    <ul className={"dropdown__list" + (isOpenFiatCurrenciesSelect ? " visible" : "")}>
+
+                        {
+                            kassaAllMethods.length && kassaAllMethods.map((item: IKassaNetwork) =>
+                                <li key={item.id} className={"dropdown__list-item" + (chosenKassaMethod?.id == item.id ? " active" : "")}
+                                    onClick={_ => handleChooseKassaMethod(item)}>
                                     {item.network}
-                            </option>
-                        ))
-                    }
-                </select>
+                                </li>
+                            )
+                        }
+
+                    </ul>
+                </div>
             </legend>
-
-
+            
             {selectedMethod2.fields?.email?.type && <legend>
                 <label htmlFor="kassa-email">Email*</label>
                 <input
@@ -282,40 +252,24 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
                         setKassaPhone(e.target.value)
                         const phoneNumber = e.target.value;
                         const phonePattern = /^\+7\d{10}$/;
-
-                        // Проверяем, соответствует ли введенный номер паттерну
                         const isCorrectPhone = phonePattern.test(phoneNumber);
-                        
                         setIsCorrectPhone(isCorrectPhone);
                     }}
                     placeholder={"+7*********"}
                     value={kassaPhone}
                 />
+                {isSentForm && selectedMethod2.fields?.tel?.type && !isCorrectPhone && <p className="error-kassa-phone">Write correct phone number</p>}
             </legend>}
-            {selectedMethod2.fields?.tel?.type && !isCorrectPhone && <p className="error-kassa-phone">Write correct phone number</p>}
-            
-
-            {/* <div className="characteristics-select-product__dropdown dropdown"> */}
-            
-                {/* <div className="characteristics-select-product__dropdown dropdown"> */}
-                    {/* <button className='dropdown__button' onClick={_ => setIsOpenFiatCurrenciesSelect(prev => !prev)}>
-                        {selectedFiat.icon}
-                    </button> */}
-                    {/* <ul className={"dropdown__list" + (isOpenFiatCurrenciesSelect ? " visible" : "")}>
-
-                        {
-                            kassaAllMethods.length && kassaAllMethods.map((item: IKassaNetwork) =>
-                                <li key={item.id} className="dropdown__list-item"
-                                    onSelect={_ => setChosenKassaMethod(item.id)}>
-                                    {item.network}
-                                </li>
-                            )
-                        }
-
-                    </ul> */}
-                {/* </div> */}
-                
-            {/* </div> */}
+            <legend>
+                <label htmlFor="kassa-phone">Count*</label>
+                <input
+                    type="number"
+                    onChange={e => setAmountForPayment(+e.target.value)}
+                    placeholder={"0"}
+                    value={amountForPayment === 0 ? "" : amountForPayment}
+                />
+            </legend>
+        
         </div>
     )
 
@@ -371,10 +325,10 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
                                        value={amountForPayment === 0 ? "" : amountForPayment}
                                 />
                                 {+selectedCryptoLimit?.min_amount && <p className={"amountLimit"}>
-                                    Минимальное значение: {+selectedCryptoLimit?.min_amount ?? 0}
+                                    Минимальное значение: {selectedCryptoLimit?.min_amount ? +selectedCryptoLimit?.min_amount : 0}
                                 </p>}
                                 {+selectedCryptoLimit?.max_amount && <p className={"amountLimit"}>
-                                    Максимальное значение: {+selectedCryptoLimit?.max_amount ?? 99999}
+                                    Максимальное значение: {selectedCryptoLimit?.max_amount ? +selectedCryptoLimit?.max_amount : 99999}
                                 </p>}
                             </div>}
 

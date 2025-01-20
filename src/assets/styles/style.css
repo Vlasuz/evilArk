@@ -1645,7 +1645,7 @@ body.lock::before {
     font-size: 0;
     align-items: center;
     justify-content: center;
-    padding: 35px 0;
+    /* padding: 35px 0; */
     font-size: 24px;
     font-weight: 600;
     color: #2B2B2B;
@@ -15448,7 +15448,7 @@ main {
 .inner-popup__payment-kassa_methods legend {
     display: flex;
     align-items: center;
-    margin: 15px 0;
+    /* margin: 15px 0; */
 }
 .inner-popup__payment-kassa_methods label {
     width: 100%;
@@ -15463,7 +15463,7 @@ main {
 .inner-popup__payment-kassa_methods input,
 .inner-popup__payment-kassa_methods legend {
     width: 100%;
-    max-width: 100% !important;
+    position: relative;
 }
 .inner-popup__payment-kassa_methods {
     margin-bottom: 20px;
@@ -15471,9 +15471,11 @@ main {
 .error-kassa-phone {
     color: red;
     font-size: 16px;
+    position: absolute;
+    bottom: -20px;
 }
 .inner-popup__payment-kassa_methods select {
-    border: 1px solid #000;
+    border: 2px solid #bebebe;
     padding: 10px 15px;
     border-radius: 6px;
     font-size: 16px;
@@ -15499,3 +15501,9 @@ main {
 .inner-popup__payment-kassa_methods {
     display: block;
 }
+
+.inner-popup__payment-kassa_methods .characteristics-select-product__dropdown.dropdown.active .dropdown__button::before {
+    transform: rotate(0deg);
+}
+
+
