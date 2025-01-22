@@ -232,7 +232,7 @@ export const TopUp: React.FC<ITopUpProps> = ({isOpen}) => {
                 </div>
             </legend>
             
-            {selectedMethod2.fields?.email?.type && <legend>
+            {selectedMethod2 && selectedMethod2?.fields?.email?.type && <legend>
                 <label htmlFor="kassa-email">Email*</label>
                 <input
                     type="email"
